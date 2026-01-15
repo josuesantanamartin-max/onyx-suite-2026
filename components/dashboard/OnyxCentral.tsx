@@ -8,8 +8,10 @@ import {
     Home, Wallet, Heart, ShoppingCart, Utensils,
     ArrowRight, TrendingUp, TrendingDown, Clock,
     Sparkles, AlertTriangle, Zap, Coffee, Sunset, Moon, Activity,
-    ChevronLeft, ChevronRight, PieChart as PieChartIcon
+    ChevronLeft, ChevronRight, PieChart as PieChartIcon, Loader2, X
 } from 'lucide-react';
+
+import { analyzeFinances } from '../../services/geminiService';
 
 // Finance Widget Imports
 import NetWorthCard from '../features/finance/dashboard/widgets/NetWorthCard';
@@ -30,6 +32,11 @@ const GREETINGS = {
 const OnyxCentral: React.FC = () => {
     const [isEditingLayout, setIsEditingLayout] = useState(false);
 
+    // AI Analysis State
+    const [analysis, setAnalysis] = useState<string | null>(null);
+    const [isAnalyzing, setIsAnalyzing] = useState(false);
+    const [isAnalysisVisible, setIsAnalysisVisible] = useState(false);
+
     // NEW: Time navigation state (like FinanceSummary)
     const [timeMode, setTimeMode] = useState<'MONTH' | 'YEAR'>('MONTH');
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
@@ -37,7 +44,7 @@ const OnyxCentral: React.FC = () => {
     // Store Data
     const { transactions, accounts, debts, goals, categories, budgets } = useFinanceStore();
     const { weeklyPlan, pantryItems, shoppingList, familyMembers } = useLifeStore();
-    const { setActiveApp, setFinanceActiveTab, setLifeActiveTab } = useUserStore();
+    const { setActiveApp, setFinanceActiveTab, setLifeActiveTab, language, currency } = useUserStore();
 
     // Navigation Handler
     const handleNavigate = (app: string, tab?: string) => {
@@ -111,6 +118,21 @@ const OnyxCentral: React.FC = () => {
         // The filter will be applied via onViewTransactions or similar mechanism
     };
 
+    const handleGeminiAnalysis = async () => {
+        setIsAnalyzing(true);
+        // Clean previous analysis to allow re-run effect
+        setAnalysis(null);
+        try {
+            const result = await analyzeFinances(transactions, accounts, debts, budgets, goals, language, currency);
+            setAnalysis(result);
+            setIsAnalysisVisible(true);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsAnalyzing(false);
+        }
+    };
+
     return (
         <div className="h-full overflow-y-auto custom-scrollbar p-6 md:p-10 pb-32">
             <header className="flex justify-between items-end mb-12">
@@ -122,6 +144,10 @@ const OnyxCentral: React.FC = () => {
                     <p className="text-sm font-medium text-onyx-400 mt-1">{greeting.text}, Josué. {greeting.sub}</p>
                 </div>
                 <div className="flex gap-2">
+                    <button onClick={handleGeminiAnalysis} disabled={isAnalyzing} className="flex items-center gap-2 bg-onyx-950 text-white hover:bg-onyx-800 px-5 py-3 rounded-2xl transition-all shadow-lg font-bold text-sm">
+                        {isAnalyzing ? <Loader2 className="w-4 h-4 animate-spin text-white" /> : <Sparkles className="w-4 h-4 text-yellow-300" />}
+                        {isAnalyzing ? 'Analizando...' : 'Análisis AI'}
+                    </button>
                     <button onClick={() => setIsEditingLayout(!isEditingLayout)} className={`p-3 rounded-2xl transition-all ${isEditingLayout ? 'bg-indigo-soft text-indigo-primary' : 'bg-white text-onyx-400 hover:text-onyx-900 border border-onyx-100 shadow-sm hover:shadow-md'}`}>
                         <Settings className="w-5 h-5" />
                     </button>
@@ -329,6 +355,34 @@ const OnyxCentral: React.FC = () => {
                 <QuickActionsFooter onNavigate={handleNavigate} />
 
             </div>
+
+            {/* AI ANALYSIS MODAL/DRAWER */}
+            {isAnalysisVisible && analysis && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fade-in" onClick={() => setIsAnalysisVisible(false)}>
+                    <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden max-h-[85vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
+                        <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-white">
+                            <h3 className="text-lg font-black text-blue-950 flex items-center gap-2">
+                                <Sparkles className="w-5 h-5 text-yellow-500" />
+                                {language === 'ES' ? 'Análisis Financiero IA' : 'AI Financial Analysis'}
+                            </h3>
+                            <button onClick={() => setIsAnalysisVisible(false)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                                <X className="w-5 h-5 text-gray-400" />
+                            </button>
+                        </div>
+                        <div className="p-6 overflow-y-auto custom-scrollbar bg-gray-50/50">
+                            <div
+                                className="prose prose-sm prose-blue max-w-none text-gray-600 bg-white p-6 rounded-2xl shadow-sm border border-gray-100"
+                                dangerouslySetInnerHTML={{ __html: analysis }}
+                            />
+                        </div>
+                        <div className="p-4 bg-gray-50 border-t border-gray-100 flex justify-end">
+                            <button onClick={() => setIsAnalysisVisible(false)} className="px-5 py-2.5 bg-gray-900 text-white text-xs font-bold uppercase tracking-widest rounded-xl hover:bg-gray-800 transition-colors">
+                                {language === 'ES' ? 'Cerrar' : 'Close'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

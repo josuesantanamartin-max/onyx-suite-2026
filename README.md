@@ -2,19 +2,25 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Run# Onyx Suite <!-- trigger vercel deploy -->ploy your AI Studio app
+# Onyx Suite 2026
+*>_ The ultimate personal operating system.*
 
-This contains everything you need to run your app locally.
+[![Vercel Deployment](https://deploy.vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fjosuesantanamartin-max%2Fonyx-suite-2026)
 
-View your app in AI Studio: https://ai.studio/apps/drive/1BykirR5NqOealVbDYePucTEJ8vXSzGjY
+## Overview
+Onyx Suite 2026 is a premium, AI-powered personal management dashboard that unifies:
+- **Finance**: Advanced transaction tracking, budgeting, and net worth analysis.
+- **Life**: Meal planning, pantry management, and home organization.
+- **Goals**: Long-term asset tracking and financial forecasting.
 
-## Run Locally
+## Tech Stack
+- **Core**: React 19, TypeScript, Vite
+- **State**: Zustand
+- **Styling**: Vanilla CSS (Premium Design System)
+- **AI**: Google Gemini Pro
+- **Backend/Auth**: Supabase
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Setup
+1. `npm install`
+2. Configure `.env` with Gemini & Supabase keys.
+3. `npm run dev`
