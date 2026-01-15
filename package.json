@@ -1,0 +1,66 @@
+{
+  "name": "onyx-suite",
+  "private": true,
+  "version": "1.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "type-check": "tsc --noEmit",
+    "setup": "node setup.js || sh setup.sh",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@google/genai": "^1.34.0",
+    "@stripe/stripe-js": "^8.6.0",
+    "@supabase/supabase-js": "^2.89.0",
+    "@types/papaparse": "^5.5.2",
+    "lucide-react": "^0.562.0",
+    "papaparse": "^5.5.3",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "recharts": "^3.6.0",
+    "zustand": "^5.0.9"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^5.1.2",
+    "@vitest/ui": "^1.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.0.0",
+    "playwright": "^1.40.0",
+    "prettier": "^3.1.0",
+    "typescript": "~5.8.2",
+    "vite": "^5.4.14",
+    "vite-plugin-pwa": "^0.20.5",
+    "vitest": "^1.0.0",
+    "workbox-window": "^7.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
+  },
+  "overrides": {
+    "vite": "^5.4.14"
+  }
+}
