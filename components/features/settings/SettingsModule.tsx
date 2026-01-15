@@ -4,7 +4,8 @@ import { useLifeStore } from '../../../store/useLifeStore';
 import { useFinanceStore } from '../../../store/useFinanceStore';
 import {
   User, CreditCard, Shield, Globe, Lock,
-  Check, Coins, Star, Download, Smartphone, Plus, Trash2, Camera, Upload, Layers, Zap, ArrowRight, Pencil, Menu, ExternalLink
+  Check, Coins, Star, Download, Smartphone, Plus, Trash2, Camera, Upload, Layers, Zap, ArrowRight, Pencil, Menu, ExternalLink,
+  Calendar, FileJson
 } from 'lucide-react';
 import { FamilyMember, CategoryStructure, AutomationRule } from '../../../types';
 import PricingSection from './PricingSection';
@@ -187,6 +188,48 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({ onMenuClick }) => {
 
   const { familyMembers, setFamilyMembers } = useLifeStore();
   const { categories, setCategories } = useFinanceStore();
+
+  // NEW: Calculate Stats for Profile
+  const totalTransactions = useFinanceStore(state => state.transactions.length);
+  const totalGoals = useFinanceStore(state => state.goals.length);
+  const totalRecipes = useLifeStore(state => Object.values(state.weeklyPlan).flat().length); // Approx activity
+  const joinDate = userProfile?.id ? 'Enero 2025' : 'Oct 2024'; // Mock for now or from DB
+
+  const handleExportData = () => {
+    const data = {
+      userProfile: useUserStore.getState().userProfile,
+      finance: {
+        transactions: useFinanceStore.getState().transactions,
+        accounts: useFinanceStore.getState().accounts,
+        budgets: useFinanceStore.getState().budgets,
+        goals: useFinanceStore.getState().goals,
+        debts: useFinanceStore.getState().debts,
+        categories: useFinanceStore.getState().categories,
+      },
+      life: {
+        pantryItems: useLifeStore.getState().pantryItems,
+        shoppingList: useLifeStore.getState().shoppingList,
+        familyMembers: useLifeStore.getState().familyMembers,
+        weeklyPlan: useLifeStore.getState().weeklyPlan,
+      },
+      settings: {
+        language: useUserStore.getState().language,
+        currency: useUserStore.getState().currency,
+        automationRules: useUserStore.getState().automationRules,
+      },
+      timestamp: new Date().toISOString()
+    };
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `onyx_backup_${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   // Family Form
   const [isFamilyFormOpen, setIsFamilyFormOpen] = useState(false);
@@ -413,128 +456,192 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({ onMenuClick }) => {
     switch (activeSection) {
       case 'profile':
         return (
-          <div className="max-w-2xl space-y-10 animate-fade-in">
-            <div>
-              <h3 className="text-lg font-bold text-gray-900">{t.menu.profile}</h3>
-              <p className="text-sm text-gray-500">{t.sections.profileDesc}</p>
+          <div className="max-w-3xl space-y-8 animate-fade-in pb-12">
+
+            {/* 1. MINIMALIST HEADER (No Banner) */}
+            <div className="flex flex-col md:flex-row items-center md:items-end gap-6 mb-12 animate-fade-in">
+              <div className="relative group cursor-pointer" onClick={handleOpenProfileEdit}>
+                <div className="w-32 h-32 md:w-40 md:h-40 bg-white p-1 rounded-full shadow-lg border border-gray-100 relative">
+                  <div className="w-full h-full rounded-full bg-gray-200 overflow-hidden relative">
+                    {userProfile?.avatar_url ? (
+                      <img src={userProfile.avatar_url} alt="Profile" className="w-full h-full object-cover transition-transform group-hover:scale-110" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gray-50 text-gray-300">
+                        <User className="w-16 h-16" />
+                      </div>
+                    )}
+
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Camera className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+                </div>
+                <div className="absolute bottom-1 right-1 p-2 bg-black border-4 border-white rounded-full text-white shadow-lg">
+                  <Pencil className="w-4 h-4" />
+                </div>
+              </div>
+
+              <div className="text-center md:text-left mb-2">
+                <h2 className="text-4xl font-black text-gray-900 tracking-tight leading-none mb-2">{userProfile?.full_name || 'Usuario Onyx'}</h2>
+                <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-gray-500 font-medium text-sm">
+                  <span className="text-indigo-600 font-bold bg-indigo-50 px-2 py-0.5 rounded-md">@josue_onyx</span>
+                  <span className="hidden md:inline text-gray-300">•</span>
+                  <span>{userProfile?.email || 'user@onyxsuite.com'}</span>
+                </div>
+              </div>
             </div>
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-6">
-              <div className="w-20 h-20 bg-gray-200 rounded-full overflow-hidden flex items-center justify-center text-gray-400 border-4 border-white shadow-sm">
-                {userProfile?.avatar_url ? (
-                  <img src={userProfile.avatar_url} alt="Profile" className="w-full h-full object-cover" />
-                ) : (
-                  <User className="w-10 h-10" />
+
+            {/* 2. STATS ROW */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
+              <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center hover:border-indigo-100 transition-all">
+                <span className="text-2xl font-black text-gray-900">{totalTransactions}</span>
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Transacciones</span>
+              </div>
+              <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center hover:border-indigo-100 transition-all">
+                <span className="text-2xl font-black text-gray-900">{totalGoals}</span>
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Metas</span>
+              </div>
+              <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center hover:border-indigo-100 transition-all">
+                <span className="text-2xl font-black text-gray-900">{familyMembers.length}</span>
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Familia</span>
+              </div>
+              <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center hover:border-indigo-100 transition-all">
+                <Calendar className="w-6 h-6 text-gray-300 mb-1" />
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{joinDate}</span>
+              </div>
+            </div>
+
+            <hr className="border-gray-100" />
+
+            {/* 3. PROFILE ACTIONS & FORMS */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Left Col: Edit & Export */}
+              <div className="lg:col-span-1 space-y-6">
+                <div className="bg-indigo-50 p-6 rounded-3xl border border-indigo-100 space-y-4">
+                  <h4 className="font-bold text-indigo-900 flex items-center gap-2">
+                    <Shield className="w-5 h-5" /> Datos y Privacidad
+                  </h4>
+                  <p className="text-xs text-indigo-700/80 leading-relaxed">
+                    Eres dueño de tus datos. Exporta una copia completa de tu actividad financiera y familiar en formato JSON seguro.
+                  </p>
+                  <button onClick={handleExportData} className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-indigo-200 transition-all flex items-center justify-center gap-2">
+                    <FileJson className="w-4 h-4" /> Exportar Datos
+                  </button>
+                </div>
+              </div>
+
+              {/* Right Col: Family Management */}
+              <div className="lg:col-span-2 space-y-6">
+                <div className="flex justify-between items-end">
+                  <div>
+                    <h4 className="font-bold text-gray-900 text-lg">Unidad Familiar</h4>
+                    <p className="text-sm text-gray-500 mt-1">Miembros que componen el hogar y sus roles.</p>
+                  </div>
+                  <button onClick={() => setIsFamilyFormOpen(true)} className="flex items-center gap-2 text-xs font-black bg-gray-900 text-white px-4 py-2 rounded-xl uppercase tracking-widest hover:bg-black transition-colors shadow-lg">
+                    <Plus className="w-3 h-3" /> Añadir
+                  </button>
+                </div>
+
+                {isFamilyFormOpen && (
+                  <form onSubmit={handleAddMember} className="bg-white p-6 rounded-3xl border border-blue-100 shadow-lg space-y-6 relative overflow-hidden animate-fade-in-up">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-blue-500"></div>
+                    <h5 className="font-bold text-gray-900">Nuevo Miembro</h5>
+                    <div className="flex gap-6">
+                      <div className="shrink-0">
+                        <div onClick={() => fileInputRef.current?.click()} className="w-24 h-24 rounded-full bg-gray-100 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-400 cursor-pointer hover:bg-gray-50 hover:border-blue-400 hover:text-blue-500 transition-all overflow-hidden relative group">
+                          {newMemberImage ? (<img src={newMemberImage} className="w-full h-full object-cover" alt="Preview" />) : (<><Camera className="w-6 h-6 mb-1" /><span className="text-[9px] font-bold uppercase">Foto</span></>)}
+                          <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><Upload className="w-6 h-6 text-white" /></div>
+                        </div>
+                        <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageUpload} />
+                      </div>
+                      <div className="flex-1 space-y-4">
+                        <div><label className="block text-[10px] font-black text-gray-400 uppercase mb-1">Nombre</label><input type="text" value={newMemberName} onChange={e => setNewMemberName(e.target.value)} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl font-bold focus:ring-2 focus:ring-blue-500 outline-none" required placeholder="Ej: Samuel" /></div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div><label className="block text-[10px] font-black text-gray-400 uppercase mb-1">Rol</label><select value={newMemberRole} onChange={e => setNewMemberRole(e.target.value as any)} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl font-bold outline-none"><option value="PARENT">Padre/Madre</option><option value="CHILD">Hijo/a</option></select></div>
+                          <div><label className="block text-[10px] font-black text-gray-400 uppercase mb-1">Fecha Nacimiento</label><input type="date" value={newMemberBirth} onChange={e => setNewMemberBirth(e.target.value)} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl font-bold outline-none" /></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex justify-end gap-3 pt-2">
+                      <button type="button" onClick={() => { setIsFamilyFormOpen(false); setNewMemberImage(''); }} className="px-4 py-2 text-xs font-bold text-gray-500 hover:text-gray-900">Cancelar</button>
+                      <button type="submit" className="px-6 py-3 bg-blue-600 text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-lg hover:bg-blue-700 transition-all">Guardar Miembro</button>
+                    </div>
+                  </form>
                 )}
-              </div>
-              <div>
-                <h4 className="text-lg font-bold text-gray-900">{userProfile?.full_name || 'Cuenta Principal'}</h4>
-                <p className="text-sm text-gray-500">{userProfile?.email || 'user@onyxsuite.com'}</p>
-                <button
-                  onClick={handleOpenProfileEdit}
-                  className="text-xs font-bold text-blue-600 hover:underline mt-2"
-                >
-                  Editar datos personales
-                </button>
+
+                <div className="grid grid-cols-1 gap-3">
+                  {familyMembers.map(member => (
+                    <div key={member.id} className="flex items-center justify-between p-4 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all group">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-xl shadow-inner border-2 border-white overflow-hidden">
+                          {member.avatar.startsWith('data:') || member.avatar.startsWith('http') ? <img src={member.avatar} className="w-full h-full object-cover" /> : <span className="text-2xl">{member.avatar}</span>}
+                        </div>
+                        <div><p className="font-bold text-gray-900">{member.name}</p><p className="text-xs text-gray-500 font-medium flex items-center gap-2"><span className={`px-2 py-0.5 rounded-md text-[9px] font-black uppercase ${member.role === 'PARENT' ? 'bg-blue-50 text-blue-700' : 'bg-yellow-50 text-yellow-700'}`}>{member.role === 'PARENT' ? 'Admin' : 'Junior'}</span>{member.birthDate && <span>{calculateAge(member.birthDate)} años</span>}</p></div>
+                      </div>
+                      <button onClick={() => handleDeleteMember(member.id)} className="p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><Trash2 className="w-5 h-5" /></button>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
+            {/* EDIT PROFILE MODAL (Styled) */}
             {isProfileEditOpen && (
-              <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-                <form onSubmit={handleUpdateProfile} className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl animate-fade-in relative">
-                  <h3 className="text-xl font-bold text-gray-900 mb-6">Editar Perfil</h3>
+              <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                <form onSubmit={handleUpdateProfile} className="bg-white rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl animate-fade-in-up relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-indigo-500 to-purple-600"></div>
+                  <div className="relative z-10 -mt-2">
+                    <div className="w-24 h-24 mx-auto bg-white rounded-full p-2 shadow-lg mb-4">
+                      <div className="w-full h-full rounded-full bg-gray-100 overflow-hidden relative">
+                        {editProfileAvatar ? <img src={editProfileAvatar} className="w-full h-full object-cover" /> : <User className="w-full h-full p-4 text-gray-300" />}
+                      </div>
+                    </div>
+                    <h3 className="text-xl font-black text-center text-gray-900 mb-6">Editar Tu Perfil</h3>
+                  </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-5 relative z-10">
                     <div>
-                      <label className="block text-[10px] font-black text-gray-400 uppercase mb-1">Nombre Completo</label>
+                      <label className="block text-[10px] font-black text-gray-400 uppercase mb-1 ml-1">Nombre Completo</label>
                       <input
                         type="text"
                         value={editProfileName}
                         onChange={e => setEditProfileName(e.target.value)}
-                        className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl font-bold focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl font-bold focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                        placeholder="Tu nombre"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black text-gray-400 uppercase mb-1">URL Avatar (Imagen)</label>
+                      <label className="block text-[10px] font-black text-gray-400 uppercase mb-1 ml-1">URL Avatar</label>
                       <input
                         type="text"
                         value={editProfileAvatar}
                         onChange={e => setEditProfileAvatar(e.target.value)}
-                        placeholder="https://pagina.com/foto.jpg"
-                        className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl font-medium focus:ring-2 focus:ring-blue-500 outline-none"
+                        placeholder="https://..."
+                        className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl font-medium focus:ring-2 focus:ring-indigo-500 outline-none transition-all text-xs"
                       />
-                      <p className="text-[10px] text-gray-400 mt-1">Introduce una URL de imagen válida.</p>
                     </div>
                   </div>
 
-                  <div className="flex justify-end gap-3 mt-8">
+                  <div className="grid grid-cols-2 gap-3 mt-8 relative z-10">
                     <button
                       type="button"
                       onClick={() => setIsProfileEditOpen(false)}
-                      className="px-4 py-2 text-xs font-bold text-gray-500 hover:text-gray-900"
+                      className="px-4 py-3 text-xs font-bold text-gray-500 bg-gray-100 rounded-xl hover:bg-gray-200 transition-colors"
                     >
                       Cancelar
                     </button>
                     <button
                       type="submit"
-                      className="px-6 py-3 bg-black text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-lg hover:bg-gray-800 transition-all"
+                      className="px-4 py-3 bg-indigo-600 text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:scale-105 transition-all"
                     >
-                      Guardar Cambios
+                      Guardar
                     </button>
                   </div>
                 </form>
               </div>
             )}
-            <hr className="border-gray-100" />
-            <div className="space-y-6">
-              <div className="flex justify-between items-end">
-                <div>
-                  <h4 className="font-bold text-gray-900 text-lg">Unidad Familiar</h4>
-                  <p className="text-sm text-gray-500 mt-1">Miembros que componen el hogar y sus roles.</p>
-                </div>
-                <button onClick={() => setIsFamilyFormOpen(true)} className="flex items-center gap-2 text-xs font-black bg-blue-50 text-blue-600 px-4 py-2 rounded-xl uppercase tracking-widest hover:bg-blue-100 transition-colors">
-                  <Plus className="w-3 h-3" /> Añadir Miembro
-                </button>
-              </div>
-              {isFamilyFormOpen && (
-                <form onSubmit={handleAddMember} className="bg-white p-6 rounded-3xl border border-blue-100 shadow-lg space-y-6 relative overflow-hidden">
-                  <div className="absolute top-0 left-0 w-full h-1 bg-blue-500"></div>
-                  <h5 className="font-bold text-gray-900">Nuevo Miembro</h5>
-                  <div className="flex gap-6">
-                    <div className="shrink-0">
-                      <div onClick={() => fileInputRef.current?.click()} className="w-24 h-24 rounded-full bg-gray-100 border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-400 cursor-pointer hover:bg-gray-50 hover:border-blue-400 hover:text-blue-500 transition-all overflow-hidden relative group">
-                        {newMemberImage ? (<img src={newMemberImage} className="w-full h-full object-cover" alt="Preview" />) : (<><Camera className="w-6 h-6 mb-1" /><span className="text-[9px] font-bold uppercase">Foto</span></>)}
-                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><Upload className="w-6 h-6 text-white" /></div>
-                      </div>
-                      <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageUpload} />
-                    </div>
-                    <div className="flex-1 space-y-4">
-                      <div><label className="block text-[10px] font-black text-gray-400 uppercase mb-1">Nombre</label><input type="text" value={newMemberName} onChange={e => setNewMemberName(e.target.value)} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl font-bold focus:ring-2 focus:ring-blue-500 outline-none" required placeholder="Ej: Samuel" /></div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div><label className="block text-[10px] font-black text-gray-400 uppercase mb-1">Rol</label><select value={newMemberRole} onChange={e => setNewMemberRole(e.target.value as any)} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl font-bold outline-none"><option value="PARENT">Padre/Madre</option><option value="CHILD">Hijo/a</option></select></div>
-                        <div><label className="block text-[10px] font-black text-gray-400 uppercase mb-1">Fecha Nacimiento</label><input type="date" value={newMemberBirth} onChange={e => setNewMemberBirth(e.target.value)} className="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl font-bold outline-none" /></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex justify-end gap-3 pt-2">
-                    <button type="button" onClick={() => { setIsFamilyFormOpen(false); setNewMemberImage(''); }} className="px-4 py-2 text-xs font-bold text-gray-500 hover:text-gray-900">Cancelar</button>
-                    <button type="submit" className="px-6 py-3 bg-blue-600 text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-lg hover:bg-blue-700 transition-all">Guardar Miembro</button>
-                  </div>
-                </form>
-              )}
-              <div className="grid grid-cols-1 gap-3">
-                {familyMembers.map(member => (
-                  <div key={member.id} className="flex items-center justify-between p-4 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all group">
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-xl shadow-inner border-2 border-white overflow-hidden">
-                        {member.avatar.startsWith('data:') || member.avatar.startsWith('http') ? <img src={member.avatar} className="w-full h-full object-cover" /> : <span className="text-2xl">{member.avatar}</span>}
-                      </div>
-                      <div><p className="font-bold text-gray-900">{member.name}</p><p className="text-xs text-gray-500 font-medium flex items-center gap-2"><span className={`px-2 py-0.5 rounded-md text-[9px] font-black uppercase ${member.role === 'PARENT' ? 'bg-blue-50 text-blue-700' : 'bg-yellow-50 text-yellow-700'}`}>{member.role === 'PARENT' ? 'Admin' : 'Junior'}</span>{member.birthDate && <span>{calculateAge(member.birthDate)} años</span>}</p></div>
-                    </div>
-                    <button onClick={() => handleDeleteMember(member.id)} className="p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><Trash2 className="w-5 h-5" /></button>
-                  </div>
-                ))}
-              </div>
-            </div>
+
           </div>
         );
 

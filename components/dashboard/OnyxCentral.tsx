@@ -208,6 +208,14 @@ const OnyxCentral: React.FC = () => {
                         />
                     </div>
 
+                    {/* MOVED: Goals and Debts */}
+                    {(goals.length > 0 || debts.length > 0) && (
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                            {goals.length > 0 && <ActiveGoalsWidget goals={goals} onNavigate={handleNavigate} />}
+                            {debts.length > 0 && <ActiveDebtsWidget debts={debts} onNavigate={handleNavigate} />}
+                        </div>
+                    )}
+
                     <div className="space-y-6">
                         {/* Category Distribution Chart - Full Width */}
                         <CategoryDistributionChart
@@ -330,26 +338,6 @@ const OnyxCentral: React.FC = () => {
                         </div>
                     </div>
                 </section>
-
-                {/* 4. CONDITIONAL: Budget Status */}
-                {budgets.length > 0 && (
-                    <BudgetStatusWidget
-                        budgets={budgets}
-                        transactions={transactions}
-                        currentIncome={monthlyIncome}
-                        currency="EUR"
-                        selectedDate={selectedDate}
-                        timeMode={timeMode}
-                    />
-                )}
-
-                {/* 5. CONDITIONAL: Metas y Deudas */}
-                {(goals.length > 0 || debts.length > 0) && (
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        {goals.length > 0 && <ActiveGoalsWidget goals={goals} onNavigate={handleNavigate} />}
-                        {debts.length > 0 && <ActiveDebtsWidget debts={debts} onNavigate={handleNavigate} />}
-                    </div>
-                )}
 
                 {/* FOOTER DE ACCIONES RÁPIDAS */}
                 <QuickActionsFooter onNavigate={handleNavigate} />

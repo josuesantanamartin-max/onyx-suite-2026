@@ -121,8 +121,11 @@ const Sidebar: React.FC<SidebarProps> = ({ onLogout }) => {
 
         <div className="p-10 pt-0">
           <div className="h-px bg-onyx-100 w-full mb-8"></div>
-          <div className="flex items-center gap-4 px-2">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 border border-onyx-100 flex items-center justify-center overflow-hidden shadow-lg shadow-indigo-500/20">
+          <div
+            className="flex items-center gap-4 px-2 cursor-pointer group hover:bg-onyx-50 p-2 rounded-xl transition-all"
+            onClick={() => handleLinkClick('settings')}
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 border border-onyx-100 flex items-center justify-center overflow-hidden shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
               {userProfile?.avatar_url ? (
                 <img
                   src={userProfile.avatar_url}
@@ -136,7 +139,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onLogout }) => {
               )}
             </div>
             <div className={`flex flex-col transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 md:opacity-100'}`}>
-              <span className="text-sm font-bold text-onyx-950 truncate max-w-[140px]">
+              <span className="text-sm font-bold text-onyx-950 truncate max-w-[140px] group-hover:text-indigo-primary transition-colors">
                 {userProfile?.full_name || 'Usuario Onyx'}
               </span>
               <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-wider">

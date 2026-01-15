@@ -226,6 +226,15 @@ const Goals: React.FC<GoalsProps> = () => {
                   <label className="text-[10px] font-bold text-onyx-400 uppercase tracking-[0.2em] mb-3 block">Fecha Objetivo (Opcional)</label>
                   <input type="date" value={formDeadline} onChange={e => setFormDeadline(e.target.value)} className="w-full p-4 bg-onyx-50 border border-onyx-100 rounded-xl font-bold text-onyx-950 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-primary/20 transition-all cursor-pointer" />
                 </div>
+                <div>
+                  <label className="text-[10px] font-bold text-onyx-400 uppercase tracking-[0.2em] mb-3 block">Cuenta de Ahorro Asociada (Opcional)</label>
+                  <select value={formAccountId} onChange={e => setFormAccountId(e.target.value)} className="w-full p-4 bg-onyx-50 border border-onyx-100 rounded-xl font-bold text-onyx-950 outline-none focus:bg-white focus:ring-2 focus:ring-indigo-primary/20 transition-all cursor-pointer appearance-none">
+                    <option value="">-- Sin cuenta asociada --</option>
+                    {accounts.filter(a => a.type !== 'CREDIT').map(acc => (
+                      <option key={acc.id} value={acc.id}>{acc.name} ({formatEUR(acc.balance)})</option>
+                    ))}
+                  </select>
+                </div>
                 <div className="flex gap-4 pt-4">
                   <button type="button" onClick={resetForm} className="flex-1 py-4 rounded-xl font-bold text-xs uppercase tracking-widest text-onyx-500 hover:bg-onyx-50 transition-colors">Cancelar</button>
                   <button type="submit" className="flex-[2] bg-onyx-950 hover:bg-onyx-800 text-white py-4 rounded-xl font-bold text-xs uppercase tracking-widest shadow-xl shadow-onyx-950/20 transition-all active:scale-95">Guardar Meta</button>
@@ -243,7 +252,17 @@ const Goals: React.FC<GoalsProps> = () => {
                       <p className="text-xs font-bold text-onyx-400 uppercase tracking-[0.2em]">Meta Seleccionada</p>
                     </div>
                     <h3 className="text-5xl font-black text-onyx-950 tracking-tight mb-2">{selectedGoal.name}</h3>
-                    {selectedGoal.deadline && <p className="text-sm font-bold text-onyx-400 flex items-center gap-2"><Clock className="w-4 h-4" /> Objetivo: {new Date(selectedGoal.deadline).toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}</p>}
+                    <div className="flex flex-col gap-1">
+                      {selectedGoal.deadline && <p className="text-sm font-bold text-onyx-400 flex items-center gap-2"><Clock className="w-4 h-4" /> Objetivo: {new Date(selectedGoal.deadline).toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}</p>}
+                      {selectedGoal.accountId && (() => {
+                        const acc = accounts.find(a => a.id === selectedGoal.accountId);
+                        return acc ? (
+                          <p className="text-sm font-bold text-indigo-500 flex items-center gap-2 mt-1">
+                            <Banknote className="w-4 h-4" /> Vinculada a: {acc.name} ({formatEUR(acc.balance)})
+                          </p>
+                        ) : null;
+                      })()}
+                    </div>
                   </div>
                   <div className="flex gap-3">
                     <button onClick={() => handleEdit(selectedGoal)} className="p-3 bg-onyx-50 hover:bg-onyx-100 rounded-xl text-onyx-500 hover:text-onyx-950 transition-colors"><Pencil className="w-5 h-5" /></button>
@@ -260,7 +279,26 @@ const Goals: React.FC<GoalsProps> = () => {
                         <div className="absolute inset-0 bg-white/20 animate-[shimmer_2s_infinite]"></div>
                       </div>
                     </div>
-                    <p className="text-xs font-bold text-onyx-400 text-right">{((selectedGoal.currentAmount / selectedGoal.targetAmount) * 100).toFixed(0)}% Completado</p>
+                    <div className="flex justify-between items-center">
+                      <p className="text-xs font-bold text-onyx-400">{((selectedGoal.currentAmount / selectedGoal.targetAmount) * 100).toFixed(0)}% Completado</p>
+                      {selectedGoal.deadline && selectedGoal.currentAmount < selectedGoal.targetAmount && (() => {
+                        const today = new Date();
+                        const deadline = new Date(selectedGoal.deadline);
+                        const monthsDiff = (deadline.getFullYear() - today.getFullYear()) * 12 + (deadline.getMonth() - today.getMonth());
+                        const monthsRemaining = Math.max(1, monthsDiff); // Minimum 1 month to avoid division by zero or huge numbers
+                        const remainingAmount = selectedGoal.targetAmount - selectedGoal.currentAmount;
+                        const monthlyNeeded = remainingAmount / monthsRemaining;
+
+                        if (monthlyNeeded > 0) {
+                          return (
+                            <p className="text-xs font-bold text-indigo-500 bg-indigo-50 px-2 py-1 rounded-lg">
+                              Necesitas ahorrar: {formatEUR(monthlyNeeded)}/mes
+                            </p>
+                          );
+                        }
+                        return null;
+                      })()}
+                    </div>
                   </div>
                   <div className="flex flex-col justify-end items-end text-right">
                     <p className="text-[10px] font-bold text-onyx-400 uppercase tracking-widest mb-1">Meta Total</p>
