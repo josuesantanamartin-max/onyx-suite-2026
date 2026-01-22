@@ -1,9 +1,12 @@
 /**
  * Gemini API Proxy Wrapper
  * 
- * This module provides a drop-in replacement for GoogleGenAI that routes
- * all API calls through the serverless proxy to keep the API key secure.
+ * This module provides a smart client that:
+ * - In DEVELOPMENT: Uses GoogleGenAI directly with API key from env
+ * - In PRODUCTION: Routes through serverless proxy to keep API key secure
  */
+
+import { GoogleGenAI } from "@google/genai";
 
 interface GenerateContentRequest {
     model?: string;
@@ -16,16 +19,45 @@ interface GenerateContentResponse {
 }
 
 /**
- * Proxy class that mimics GoogleGenAI interface but uses the serverless proxy
+ * Proxy class that adapts based on environment
  */
 class GeminiProxy {
     private model: string;
+    private isDevelopment: boolean;
+    private directClient: any;
 
     constructor(model: string = 'gemini-2.0-flash-exp') {
         this.model = model;
+        this.isDevelopment = import.meta.env.DEV || import.meta.env.MODE === 'development';
+
+        // In development, create direct client
+        if (this.isDevelopment) {
+            const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+            if (apiKey) {
+                this.directClient = new GoogleGenAI({ apiKey });
+            }
+        }
     }
 
     async generateContent(request: GenerateContentRequest): Promise<GenerateContentResponse> {
+        // Development: Use direct API
+        if (this.isDevelopment && this.directClient) {
+            try {
+                const response = await this.directClient.models.generateContent({
+                    model: request.model || this.model,
+                    contents: request.contents,
+                    config: request.config,
+                });
+                return {
+                    text: response.text || '',
+                };
+            } catch (error) {
+                console.error('Gemini API Error (Direct):', error);
+                throw error;
+            }
+        }
+
+        // Production: Use serverless proxy
         const apiUrl = '/api/gemini';
 
         try {
@@ -35,7 +67,7 @@ class GeminiProxy {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    model: this.model,
+                    model: request.model || this.model,
                     contents: request.contents,
                     config: request.config,
                 }),
@@ -55,8 +87,6 @@ class GeminiProxy {
 
             const data = await response.json();
 
-            // Return an object that mimics the GoogleGenAI response structure
-            // text is a property, not a function
             return {
                 text: data.text || '',
             } as any;
@@ -74,7 +104,6 @@ class GeminiProxy {
  * This mimics the GoogleGenAI constructor interface
  */
 export function createGeminiClient(options?: { apiKey?: string }) {
-    // API key is ignored since we use the proxy
     const proxy = new GeminiProxy();
 
     return {
