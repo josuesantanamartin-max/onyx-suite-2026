@@ -1,5 +1,5 @@
 
-import { GoogleGenAI } from "@google/genai";
+import { createGeminiClient } from "./geminiProxy";
 import { Transaction, Account, Debt, Ingredient, Trip, Budget, Goal, Recipe } from '../types';
 
 // Gemini Model Configuration
@@ -135,7 +135,7 @@ export const analyzeFinances = async (
   language: 'ES' | 'EN' | 'FR' = 'ES',
   currency: 'EUR' | 'USD' | 'GBP' = 'EUR'
 ): Promise<string> => {
-  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string });
+  const ai = createGeminiClient();
   const t = LANG_PROMPTS[language];
   const currencySymbol = CURRENCY_MAP[currency];
 
@@ -243,7 +243,7 @@ export const planTripWithAI = async (
   userInput: string,
   language: 'ES' | 'EN' | 'FR'
 ): Promise<(Partial<Trip> & { imagePrompt?: string }) | null> => {
-  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string });
+  const ai = createGeminiClient();
   const today = new Date().toISOString().split('T')[0];
 
   const prompt = `
@@ -308,7 +308,7 @@ export const generateImage = async (prompt: string, aspectRatio: string = "4:3")
 
 // --- RECEIPT PARSING (Kitchen) ---
 export const parseReceiptImage = async (base64Image: string): Promise<Partial<Ingredient>[]> => {
-  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string });
+  const ai = createGeminiClient();
 
   // Increased compression for receipt scanning to ensure speed
   const compressedInput = await compressBase64Image(base64Image, 800, 0.5);
@@ -353,7 +353,7 @@ export const generateRecipesFromIngredients = async (
   ingredients: string[],
   language: string
 ): Promise<Recipe[]> => {
-  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string });
+  const ai = createGeminiClient();
 
   const prompt = `
     Act as a Michelin star chef.
@@ -398,7 +398,7 @@ export const generateRecipesFromImage = async (
   base64Image: string,
   language: string
 ): Promise<Recipe[]> => {
-  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string });
+  const ai = createGeminiClient();
 
   // Use the new efficient compression
   const compressedInput = await compressBase64Image(`data:image/jpeg;base64,${base64Image}`, 1024, 0.7);
@@ -460,7 +460,7 @@ export const generateMealPlan = async (
   pantryItems: Ingredient[],
   language: 'ES' | 'EN' | 'FR'
 ): Promise<any> => {
-  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string });
+  const ai = createGeminiClient();
 
   const pantrySummary = pantryItems.map(i => `${i.name} (${i.quantity} ${i.unit})`).join(', ');
   const mealsToGenerate = criteria.mealTypes && criteria.mealTypes.length > 0 ? criteria.mealTypes.join(', ') : 'breakfast, lunch, dinner';
@@ -537,7 +537,7 @@ export const generateMealPlan = async (
 
 // --- RECIPE HYDRATION (Lazy Loading) ---
 export const getRecipeDetails = async (recipeName: string, language: string): Promise<Partial<Recipe> | null> => {
-  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string });
+  const ai = createGeminiClient();
 
   const prompt = `
         Create a detailed recipe for: "${recipeName}".
@@ -564,7 +564,7 @@ export const getRecipeDetails = async (recipeName: string, language: string): Pr
 
 // --- GENERIC CHAT (Suite Wide) ---
 export const askAI = async (prompt: string): Promise<string> => {
-  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string });
+  const ai = createGeminiClient();
 
   try {
     const response = await ai.models.generateContent({
@@ -593,7 +593,7 @@ export const generateSmartInsight = async (
   savingsEstimate: string;
   actionableRecipe?: { name: string; matchReason: string };
 } | null> => {
-  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string });
+  const ai = createGeminiClient();
 
   const prompt = `
     ACT as a financial lifestyle optimizer.
@@ -635,7 +635,7 @@ export const suggestCategory = async (
   description: string,
   categories: string[]
 ): Promise<string | null> => {
-  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string });
+  const ai = createGeminiClient();
 
   const prompt = `
     Match this transaction description to the best available category.
@@ -668,7 +668,7 @@ export const analyzeLife = async (
   trips: Trip[],
   language: 'ES' | 'EN' | 'FR'
 ): Promise<string> => {
-  const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY as string });
+  const ai = createGeminiClient();
 
   if (!import.meta.env.VITE_GEMINI_API_KEY) {
     return language === 'ES'
