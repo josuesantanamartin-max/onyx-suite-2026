@@ -13,7 +13,7 @@ export const useDashboardSync = () => {
         isEditMode,
     } = useUserStore();
 
-    const syncTimeoutRef = useRef<NodeJS.Timeout>();
+    const syncTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
     const lastSyncedRef = useRef<string>('');
     const hasLoadedRef = useRef(false);
 

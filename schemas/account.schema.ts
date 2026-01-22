@@ -7,24 +7,15 @@ export const accountSchema = z
     .object({
         id: z.string().optional(),
         name: z
-            .string({
-                required_error: 'Account name is required',
-            })
+            .string()
             .min(1, 'Account name cannot be empty')
             .max(100, 'Account name must be less than 100 characters'),
         bankName: z.string().max(100, 'Bank name must be less than 100 characters').optional(),
-        type: z.enum(['BANK', 'INVESTMENT', 'CASH', 'CREDIT', 'DEBIT', 'WALLET', 'ASSET'], {
-            errorMap: () => ({ message: 'Invalid account type' }),
-        }),
+        type: z.enum(['BANK', 'INVESTMENT', 'CASH', 'CREDIT', 'DEBIT', 'WALLET', 'ASSET']),
         balance: z
-            .number({
-                required_error: 'Balance is required',
-                invalid_type_error: 'Balance must be a number',
-            })
+            .number()
             .finite('Balance must be a valid number'),
-        currency: z.enum(['EUR', 'USD', 'GBP'], {
-            errorMap: () => ({ message: 'Currency must be EUR, USD, or GBP' }),
-        }),
+        currency: z.enum(['EUR', 'USD', 'GBP']),
         isRemunerated: z.boolean().optional(),
         tae: z
             .number()

@@ -49,7 +49,7 @@ const CustomizableDashboard: React.FC = () => {
 
     const [timeMode, setTimeMode] = useState<'MONTH' | 'YEAR'>('MONTH');
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-    const [tempLayout, setTempLayout] = useState<Layout[]>([]);
+    const [tempLayout, setTempLayout] = useState<Layout>([]);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
     const activeLayout = useMemo(
@@ -130,7 +130,7 @@ const CustomizableDashboard: React.FC = () => {
         }));
     }, [activeLayout, isEditMode]);
 
-    const handleLayoutChange = (newLayout: Layout[]) => {
+    const handleLayoutChange = (newLayout: Layout) => {
         if (!isEditMode) return;
         setTempLayout(newLayout);
     };
@@ -338,15 +338,19 @@ const CustomizableDashboard: React.FC = () => {
                 <GridLayout
                     className="layout"
                     layout={gridLayout}
-                    cols={12}
-                    rowHeight={80}
                     width={1200}
-                    isDraggable={isEditMode}
-                    isResizable={isEditMode}
+                    gridConfig={{
+                        cols: 12,
+                        rowHeight: 80,
+                    }}
+                    dragConfig={{
+                        enabled: isEditMode,
+                        handle: ".drag-handle",
+                    }}
+                    resizeConfig={{
+                        enabled: isEditMode,
+                    }}
                     onLayoutChange={handleLayoutChange}
-                    draggableHandle=".drag-handle"
-                    compactType="vertical"
-                    preventCollision={false}
                 >
                     {gridLayout.map((item) => {
                         const WidgetComponent = WIDGET_REGISTRY[(item as any).i];
