@@ -1,0 +1,3184 @@
+﻿
+> onyx-suite@1.0.1 test
+> vitest --run
+
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mD:/Users/Josu├®/Desktop/Onyx Suite 2026[39m
+
+ [32mÔ£ô[39m schemas/__tests__/account.schema.test.ts [2m ([22m[2m29 tests[22m[2m)[22m[90m 24[2mms[22m[39m
+ [33mÔØ»[39m services/__tests__/syncService.test.ts [2m ([22m[2m9 tests[22m [2m|[22m [31m9 failed[39m[2m)[22m[90m 38[2mms[22m[39m
+[31m   [33mÔØ»[31m services/__tests__/syncService.test.ts[2m > [22mSyncService[2m > [22mfetchTransactions[2m > [22mshould fetch transactions from Supabase[39m
+[31m     ÔåÆ expected "spy" to be called with arguments: [ 'transactions' ][90m
+
+Received: 
+
+[1m  1st spy call:
+
+[22m[2m  Array [[22m
+[32m-   "transactions",[90m
+[31m+   "finance_transactions",[90m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[31m   [33mÔØ»[31m services/__tests__/syncService.test.ts[2m > [22mSyncService[2m > [22mfetchTransactions[2m > [22mshould return empty array on error[39m
+[31m     ÔåÆ expected undefined to deeply equal [][39m
+[31m   [33mÔØ»[31m services/__tests__/syncService.test.ts[2m > [22mSyncService[2m > [22msaveTransaction[2m > [22mshould save transaction to Supabase[39m
+[31m     ÔåÆ Cannot destructure property 'data' of '(intermediate value)' as it is undefined.[39m
+[31m   [33mÔØ»[31m services/__tests__/syncService.test.ts[2m > [22mSyncService[2m > [22msaveTransaction[2m > [22mshould handle save errors gracefully[39m
+[31m     ÔåÆ Cannot destructure property 'data' of '(intermediate value)' as it is undefined.[39m
+[31m   [33mÔØ»[31m services/__tests__/syncService.test.ts[2m > [22mSyncService[2m > [22mfetchBudgets[2m > [22mshould fetch budgets from Supabase[39m
+[31m     ÔåÆ expected "spy" to be called with arguments: [ 'budgets' ][90m
+
+Received: 
+
+[1m  1st spy call:
+
+[22m[2m  Array [[22m
+[32m-   "budgets",[90m
+[31m+   "finance_budgets",[90m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[31m   [33mÔØ»[31m services/__tests__/syncService.test.ts[2m > [22mSyncService[2m > [22msaveBudget[2m > [22mshould save budget to Supabase[39m
+[31m     ÔåÆ Cannot destructure property 'data' of '(intermediate value)' as it is undefined.[39m
+[31m   [33mÔØ»[31m services/__tests__/syncService.test.ts[2m > [22mSyncService[2m > [22mfetchRecipes[2m > [22mshould fetch recipes from Supabase[39m
+[31m     ÔåÆ expected "spy" to be called with arguments: [ 'recipes' ][90m
+
+Received: 
+
+[1m  1st spy call:
+
+[22m[2m  Array [[22m
+[32m-   "recipes",[90m
+[31m+   "life_recipes",[90m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[31m   [33mÔØ»[31m services/__tests__/syncService.test.ts[2m > [22mSyncService[2m > [22msaveRecipe[2m > [22mshould save recipe to Supabase[39m
+[31m     ÔåÆ Cannot destructure property 'data' of '(intermediate value)' as it is undefined.[39m
+[31m   [33mÔØ»[31m services/__tests__/syncService.test.ts[2m > [22mSyncService[2m > [22msyncAllFromCloud[2m > [22mshould sync all data from Supabase[39m
+[31m     ÔåÆ expected { ÔÇª(2) } to deeply equal { Object (accounts, transactions, ...) }[39m
+ [33mÔØ»[39m utils/__tests__/validation.test.ts [2m ([22m[2m20 tests[22m [2m|[22m [31m20 failed[39m[2m)[22m[90m 20[2mms[22m[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateEmail[2m > [22mshould validate correct email addresses[39m
+[31m     ÔåÆ validateEmail is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateEmail[2m > [22mshould reject invalid email addresses[39m
+[31m     ÔåÆ validateEmail is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidatePassword[2m > [22mshould validate strong passwords[39m
+[31m     ÔåÆ validatePassword is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidatePassword[2m > [22mshould reject weak passwords[39m
+[31m     ÔåÆ validatePassword is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidatePassword[2m > [22mshould require minimum length[39m
+[31m     ÔåÆ validatePassword is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateAmount[2m > [22mshould validate positive numbers[39m
+[31m     ÔåÆ validateAmount is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateAmount[2m > [22mshould reject invalid amounts[39m
+[31m     ÔåÆ validateAmount is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateAmount[2m > [22mshould handle decimal amounts[39m
+[31m     ÔåÆ validateAmount is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateDate[2m > [22mshould validate correct date formats[39m
+[31m     ÔåÆ validateDate is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateDate[2m > [22mshould reject invalid dates[39m
+[31m     ÔåÆ validateDate is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateDate[2m > [22mshould handle Date objects[39m
+[31m     ÔåÆ validateDate is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateRequired[2m > [22mshould validate non-empty values[39m
+[31m     ÔåÆ validateRequired is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateRequired[2m > [22mshould reject empty values[39m
+[31m     ÔåÆ validateRequired is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateIBAN[2m > [22mshould validate correct Spanish IBANs[39m
+[31m     ÔåÆ validateIBAN is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateIBAN[2m > [22mshould validate IBANs from other countries[39m
+[31m     ÔåÆ validateIBAN is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateIBAN[2m > [22mshould reject invalid IBANs[39m
+[31m     ÔåÆ validateIBAN is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateIBAN[2m > [22mshould handle IBANs with spaces[39m
+[31m     ÔåÆ validateIBAN is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateCadastralReference[2m > [22mshould validate correct cadastral references[39m
+[31m     ÔåÆ validateCadastralReference is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateCadastralReference[2m > [22mshould reject invalid cadastral references[39m
+[31m     ÔåÆ validateCadastralReference is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/validation.test.ts[2m > [22mvalidation utilities[2m > [22mvalidateCadastralReference[2m > [22mshould handle references with spaces or dashes[39m
+[31m     ÔåÆ validateCadastralReference is not a function[39m
+ [32mÔ£ô[39m schemas/__tests__/recipe.schema.test.ts [2m ([22m[2m38 tests[22m[2m)[22m[90m 35[2mms[22m[39m
+ [32mÔ£ô[39m store/__tests__/useFinanceStore.test.ts [2m ([22m[2m8 tests[22m[2m)[22m[90m 12[2mms[22m[39m
+ [33mÔØ»[39m components/features/finance/__tests__/Goals.test.tsx [2m ([22m[2m10 tests[22m [2m|[22m [31m10 failed[39m[2m)[22m[90m 18[2mms[22m[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Goals.test.tsx[2m > [22mGoals Component[2m > [22mshould render goals list[39m
+[31m     ÔåÆ useFinanceStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Goals.test.tsx[2m > [22mGoals Component[2m > [22mshould display goal progress correctly[39m
+[31m     ÔåÆ useFinanceStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Goals.test.tsx[2m > [22mGoals Component[2m > [22mshould show progress bar for each goal[39m
+[31m     ÔåÆ useFinanceStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Goals.test.tsx[2m > [22mGoals Component[2m > [22mshould display remaining amount[39m
+[31m     ÔåÆ useFinanceStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Goals.test.tsx[2m > [22mGoals Component[2m > [22mshould show deadline information[39m
+[31m     ÔåÆ useFinanceStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Goals.test.tsx[2m > [22mGoals Component[2m > [22mshould handle completed goals[39m
+[31m     ÔåÆ useFinanceStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Goals.test.tsx[2m > [22mGoals Component[2m > [22mshould handle empty goals list[39m
+[31m     ÔåÆ useFinanceStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Goals.test.tsx[2m > [22mGoals Component[2m > [22mshould calculate days remaining to deadline[39m
+[31m     ÔåÆ useFinanceStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Goals.test.tsx[2m > [22mGoals Component[2m > [22mshould show warning for overdue goals[39m
+[31m     ÔåÆ useFinanceStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Goals.test.tsx[2m > [22mGoals Component[2m > [22mshould display multiple goals correctly[39m
+[31m     ÔåÆ useFinanceStore.mockReturnValue is not a function[39m
+ [33mÔØ»[39m services/__tests__/dashboardSyncService.test.ts [2m ([22m[2m11 tests[22m [2m|[22m [31m2 failed[39m[2m)[22m[90m 66[2mms[22m[39m
+[31m   [33mÔØ»[31m services/__tests__/dashboardSyncService.test.ts[2m > [22mDashboardSyncService[2m > [22msetActiveLayout[2m > [22mshould set layout as active[39m
+[31m     ÔåÆ expected false to be true // Object.is equality[39m
+[31m   [33mÔØ»[31m services/__tests__/dashboardSyncService.test.ts[2m > [22mDashboardSyncService[2m > [22mdeleteLayout[2m > [22mshould delete layout from Supabase[39m
+[31m     ÔåÆ expected false to be true // Object.is equality[39m
+node.exe : [90mstderr[2m | services/__tests__/das
+hboardSyncService.test.ts[2m > 
+[22m[2mDashboardSyncService[2m > 
+[22m[2mloadUserLayouts[2m > [22m[2mshould 
+handle errors gracefully[22m[39m
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: 
+([90mst    derr[2m...fully[22m[39m:String) [], 
+RemoteExc    eption
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Error loading layouts from Supabase: Error: DB 
+Error
+    at Object.<anonymous> 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+services\__tests__\dashboardSyncService.test.ts:76:
+71[90m)[39m
+    at Object.mockCall [90m(file:///D:/Users/Josu%
+C3%A9/Desktop/Onyx%20Suite%202026/[39mnode_modules
+/[4m@vitest/spy[24m/dist/index.js:50:17[90m)[39
+m
+    at Object.spy [as from] [90m(file:///D:/Users/
+Josu%C3%A9/Desktop/Onyx%20Suite%202026/[39mnode_mo
+dules/[4mtinyspy[24m/dist/index.js:42:80[90m)[3
+9m
+    at DashboardSyncService.loadUserLayouts 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+services\dashboardSyncService.ts:14:18[90m)[39m
+    at [90mD:\Users\Josu├®\Desktop\Onyx Suite 2026
+\[39mservices\__tests__\dashboardSyncService.test.
+ts:81:55
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4m@vitest/runn
+er[24m/dist/index.js:135:14
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4m@vitest/runn
+er[24m/dist/index.js:60:26
+    at runTest [90m(file:///D:/Users/Josu%C3%A9/De
+sktop/Onyx%20Suite%202026/[39mnode_modules/[4m@vi
+test/runner[24m/dist/index.js:781:17[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+
+[90mstderr[2m | services/__tests__/dashboardSyncS
+ervice.test.ts[2m > 
+[22m[2mDashboardSyncService[2m > 
+[22m[2msaveLayout[2m > [22m[2mshould return 
+false on save error[22m[39m
+Error saving layout to Supabase: Error: Save failed
+    at Object.<anonymous> 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+services\__tests__\dashboardSyncService.test.ts:118
+:72[90m)[39m
+    at Object.mockCall [90m(file:///D:/Users/Josu%
+C3%A9/Desktop/Onyx%20Suite%202026/[39mnode_modules
+/[4m@vitest/spy[24m/dist/index.js:50:17[90m)[39
+m
+    at Object.spy [as from] [90m(file:///D:/Users/
+Josu%C3%A9/Desktop/Onyx%20Suite%202026/[39mnode_mo
+dules/[4mtinyspy[24m/dist/index.js:42:80[90m)[3
+9m
+    at DashboardSyncService.saveLayout 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+services\dashboardSyncService.ts:46:18[90m)[39m
+    at [90mD:\Users\Josu├®\Desktop\Onyx Suite 2026
+\[39mservices\__tests__\dashboardSyncService.test.
+ts:123:55
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4m@vitest/runn
+er[24m/dist/index.js:135:14
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4m@vitest/runn
+er[24m/dist/index.js:60:26
+    at runTest [90m(file:///D:/Users/Josu%C3%A9/De
+sktop/Onyx%20Suite%202026/[39mnode_modules/[4m@vi
+test/runner[24m/dist/index.js:781:17[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+
+[90mstderr[2m | services/__tests__/dashboardSyncS
+ervice.test.ts[2m > 
+[22m[2mDashboardSyncService[2m > 
+[22m[2msetActiveLayout[2m > [22m[2mshould set 
+layout as active[22m[39m
+Error setting active layout in Supabase: 
+TypeError: __vite_ssr_import_0__.supabase.from(...)
+.update(...).eq(...).eq is not a function
+    at DashboardSyncService.setActiveLayout 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+services\dashboardSyncService.ts:116:18[90m)[39m
+    at [90mD:\Users\Josu├®\Desktop\Onyx Suite 2026
+\[39mservices\__tests__\dashboardSyncService.test.
+ts:189:28
+    at runTest [90m(file:///D:/Users/Josu%C3%A9/De
+sktop/Onyx%20Suite%202026/[39mnode_modules/[4m@vi
+test/runner[24m/dist/index.js:781:11[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runFiles [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:958:5[90m)[39m
+    at startTests [90m(file:///D:/Users/Josu%C3%A9
+/Desktop/Onyx%20Suite%202026/[39mnode_modules/[4m
+@vitest/runner[24m/dist/index.js:967:3[90m)[39m
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4mvitest[24m/
+dist/chunks/runtime-runBaseTests.oAvMKtQC.js:116:7
+    at withEnv [90m(file:///D:/Users/Josu%C3%A9/De
+sktop/Onyx%20Suite%202026/[39mnode_modules/[4mvit
+est[24m/dist/chunks/runtime-runBaseTests.oAvMKtQC.
+js:83:5[90m)[39m
+
+[90mstderr[2m | services/__tests__/dashboardSyncS
+ervice.test.ts[2m > 
+[22m[2mDashboardSyncService[2m > 
+[22m[2mdeleteLayout[2m > [22m[2mshould delete 
+layout from Supabase[22m[39m
+Error deleting layout from Supabase: TypeError: __v
+ite_ssr_import_0__.supabase.from(...).delete(...).e
+q(...).eq is not a function
+    at DashboardSyncService.deleteLayout 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+services\dashboardSyncService.ts:135:18[90m)[39m
+    at [90mD:\Users\Josu├®\Desktop\Onyx Suite 2026
+\[39mservices\__tests__\dashboardSyncService.test.
+ts:205:55
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4m@vitest/runn
+er[24m/dist/index.js:135:14
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4m@vitest/runn
+er[24m/dist/index.js:60:26
+    at runTest [90m(file:///D:/Users/Josu%C3%A9/De
+sktop/Onyx%20Suite%202026/[39mnode_modules/[4m@vi
+test/runner[24m/dist/index.js:781:17[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runFiles [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:958:5[90m)[39m
+    at startTests [90m(file:///D:/Users/Josu%C3%A9
+/Desktop/Onyx%20Suite%202026/[39mnode_modules/[4m
+@vitest/runner[24m/dist/index.js:967:3[90m)[39m
+
+[90mstderr[2m | services/__tests__/dashboardSyncS
+ervice.test.ts[2m > 
+[22m[2mDashboardSyncService[2m > 
+[22m[2mgetActiveLayout[2m > [22m[2mshould 
+return null when no active layout exists[22m[39m
+Error getting active layout from Supabase: Error: 
+Not found
+    at Object.<anonymous> 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+services\__tests__\dashboardSyncService.test.ts:247
+:72[90m)[39m
+    at Object.mockCall [90m(file:///D:/Users/Josu%
+C3%A9/Desktop/Onyx%20Suite%202026/[39mnode_modules
+/[4m@vitest/spy[24m/dist/index.js:50:17[90m)[39
+m
+    at Object.spy [as from] [90m(file:///D:/Users/
+Josu%C3%A9/Desktop/Onyx%20Suite%202026/[39mnode_mo
+dules/[4mtinyspy[24m/dist/index.js:42:80[90m)[3
+9m
+    at DashboardSyncService.getActiveLayout 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+services\dashboardSyncService.ts:151:18[90m)[39m
+    at [90mD:\Users\Josu├®\Desktop\Onyx Suite 2026
+\[39mservices\__tests__\dashboardSyncService.test.
+ts:252:55
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4m@vitest/runn
+er[24m/dist/index.js:135:14
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4m@vitest/runn
+er[24m/dist/index.js:60:26
+    at runTest [90m(file:///D:/Users/Josu%C3%A9/De
+sktop/Onyx%20Suite%202026/[39mnode_modules/[4m@vi
+test/runner[24m/dist/index.js:781:17[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+
+ [32mÔ£ô[39m schemas/__tests__/transaction.schema.test.ts [2m ([22m[2m14 tests[22m[2m)[22m[90m 24[2mms[22m[39m
+ [32mÔ£ô[39m schemas/__tests__/budget.schema.test.ts [2m ([22m[2m20 tests[22m[2m)[22m[90m 28[2mms[22m[39m
+ [33mÔØ»[39m components/features/life/__tests__/MealPlanner.test.tsx [2m ([22m[2m20 tests[22m [2m|[22m [31m20 failed[39m[2m)[22m[90m 94[2mms[22m[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mRenderizaci├│n[2m > [22mdebe renderizar el componente correctamente[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mRenderizaci├│n[2m > [22mdebe mostrar los d├¡as de la semana[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mRenderizaci├│n[2m > [22mdebe mostrar las comidas del d├¡a (desayuno, almuerzo, cena)[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mRenderizaci├│n[2m > [22mdebe mostrar las recetas planificadas[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mNavegaci├│n de Semanas[2m > [22mdebe tener botones para navegar entre semanas[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mNavegaci├│n de Semanas[2m > [22mdebe cambiar de semana al hacer clic en siguiente[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mAgregar Recetas al Plan[2m > [22mdebe permitir agregar una receta r├ípidamente[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mDrag and Drop[2m > [22mdebe permitir arrastrar recetas entre d├¡as[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mCopiar y Pegar D├¡as[2m > [22mdebe tener opci├│n para copiar un d├¡a[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mCopiar y Pegar D├¡as[2m > [22mdebe tener opci├│n para pegar un d├¡a[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mLimpiar D├¡a[2m > [22mdebe permitir limpiar todas las comidas de un d├¡a[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mVer Detalles de Receta[2m > [22mdebe abrir los detalles al hacer clic en una receta[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mLista de Compras[2m > [22mdebe tener bot├│n para generar lista de compras[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mLista de Compras[2m > [22mdebe calcular ingredientes necesarios para la semana[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mGeneraci├│n de Men├║ con IA[2m > [22mdebe tener bot├│n para generar men├║ autom├íticamente[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mGeneraci├│n de Men├║ con IA[2m > [22mdebe mostrar opciones de preferencias para IA[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mEliminar Recetas del Plan[2m > [22mdebe permitir eliminar una receta del plan[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mCasos Extremos[2m > [22mdebe manejar plan vac├¡o[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mCasos Extremos[2m > [22mdebe manejar m├║ltiples recetas en una comida[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+[31m   [33mÔØ»[31m components/features/life/__tests__/MealPlanner.test.tsx[2m > [22mMealPlanner Component[2m > [22mCasos Extremos[2m > [22mdebe manejar recetas sin imagen[39m
+[31m     ÔåÆ Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.[39m
+ [33mÔØ»[39m services/__tests__/performanceService.test.ts [2m ([22m[2m12 tests[22m [2m|[22m [31m4 failed[39m[2m)[22m[90m 50[2mms[22m[39m
+[31m   [33mÔØ»[31m services/__tests__/performanceService.test.ts[2m > [22mPerformanceService[2m > [22mCustom Metrics[2m > [22mshould record custom metrics[39m
+[31m     ÔåÆ expected 0 to be greater than 0[39m
+[31m   [33mÔØ»[31m services/__tests__/performanceService.test.ts[2m > [22mPerformanceService[2m > [22mAPI Call Tracking[2m > [22mshould track API calls[39m
+[31m     ÔåÆ expected +0 to be 1 // Object.is equality[39m
+[31m   [33mÔØ»[31m services/__tests__/performanceService.test.ts[2m > [22mPerformanceService[2m > [22mAPI Call Tracking[2m > [22mshould warn on slow API calls[39m
+[31m     ÔåÆ expected "warn" to be called at least once[39m
+[31m   [33mÔØ»[31m services/__tests__/performanceService.test.ts[2m > [22mPerformanceService[2m > [22mMetrics Management[2m > [22mshould get average metric value[39m
+[31m     ÔåÆ expected null to be 200 // Object.is equality[39m
+ [33mÔØ»[39m components/features/finance/__tests__/Budgets.test.tsx [2m ([22m[2m17 tests[22m [2m|[22m [31m17 failed[39m[2m)[22m[90m 113[2mms[22m[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mRenderizaci├│n[2m > [22mdebe renderizar el componente correctamente[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mRenderizaci├│n[2m > [22mdebe mostrar los presupuestos existentes[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mRenderizaci├│n[2m > [22mdebe mostrar el gr├ífico de presupuestos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mC├ílculo de Gastos[2m > [22mdebe calcular correctamente el gasto en una categor├¡a[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mC├ílculo de Gastos[2m > [22mdebe calcular el porcentaje de uso del presupuesto[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mC├ílculo de Gastos[2m > [22mdebe mostrar advertencia cuando se supera el 80% del presupuesto[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mFormulario de Nuevo Presupuesto[2m > [22mdebe mostrar el formulario al hacer clic en "Nuevo Presupuesto"[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mFormulario de Nuevo Presupuesto[2m > [22mdebe crear un presupuesto fijo con datos v├ílidos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mFormulario de Nuevo Presupuesto[2m > [22mdebe validar que el presupuesto de porcentaje incluya el porcentaje[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mEdici├│n de Presupuestos[2m > [22mdebe abrir el formulario de edici├│n[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mEdici├│n de Presupuestos[2m > [22mdebe actualizar un presupuesto existente[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mEliminaci├│n de Presupuestos[2m > [22mdebe eliminar un presupuesto al confirmar[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mEliminaci├│n de Presupuestos[2m > [22mno debe eliminar si se cancela la confirmaci├│n[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mVer Transacciones[2m > [22mdebe llamar a onViewTransactions al hacer clic en ver detalles[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mPresupuestos de Porcentaje[2m > [22mdebe calcular el l├¡mite efectivo basado en el porcentaje de ingresos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mCasos Extremos[2m > [22mdebe manejar lista vac├¡a de presupuestos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mCasos Extremos[2m > [22mdebe manejar presupuesto sin gastos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+ [33mÔØ»[39m components/dashboard/__tests__/SmartInsightWidget.test.tsx [2m ([22m[2m7 tests[22m [2m|[22m [31m7 failed[39m[2m)[22m[90m 17[2mms[22m[39m
+[31m   [33mÔØ»[31m components/dashboard/__tests__/SmartInsightWidget.test.tsx[2m > [22mSmartInsightWidget Component[2m > [22mshould render widget with initial state[39m
+[31m     ÔåÆ useUserStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/dashboard/__tests__/SmartInsightWidget.test.tsx[2m > [22mSmartInsightWidget Component[2m > [22mshould display loading state while generating insights[39m
+[31m     ÔåÆ useUserStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/dashboard/__tests__/SmartInsightWidget.test.tsx[2m > [22mSmartInsightWidget Component[2m > [22mshould display generated insight[39m
+[31m     ÔåÆ useUserStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/dashboard/__tests__/SmartInsightWidget.test.tsx[2m > [22mSmartInsightWidget Component[2m > [22mshould handle navigation callback[39m
+[31m     ÔåÆ useUserStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/dashboard/__tests__/SmartInsightWidget.test.tsx[2m > [22mSmartInsightWidget Component[2m > [22mshould handle error state gracefully[39m
+[31m     ÔåÆ useUserStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/dashboard/__tests__/SmartInsightWidget.test.tsx[2m > [22mSmartInsightWidget Component[2m > [22mshould work with different languages[39m
+[31m     ÔåÆ useUserStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/dashboard/__tests__/SmartInsightWidget.test.tsx[2m > [22mSmartInsightWidget Component[2m > [22mshould display predictive analysis when available[39m
+[31m     ÔåÆ useUserStore.mockReturnValue is not a function[39m
+ [33mÔØ»[39m components/auth/__tests__/AuthGate.test.tsx [2m ([22m[2m5 tests[22m [2m|[22m [31m5 failed[39m[2m)[22m[90m 18[2mms[22m[39m
+[31m   [33mÔØ»[31m components/auth/__tests__/AuthGate.test.tsx[2m > [22mAuthGate Component[2m > [22mshould render landing page when not authenticated[39m
+[31m     ÔåÆ useUserStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/auth/__tests__/AuthGate.test.tsx[2m > [22mAuthGate Component[2m > [22mshould render onboarding when authenticated but not completed[39m
+[31m     ÔåÆ useUserStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/auth/__tests__/AuthGate.test.tsx[2m > [22mAuthGate Component[2m > [22mshould render children when authenticated and onboarding completed[39m
+[31m     ÔåÆ useUserStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/auth/__tests__/AuthGate.test.tsx[2m > [22mAuthGate Component[2m > [22mshould render children in demo mode with onboarding completed[39m
+[31m     ÔåÆ useUserStore.mockReturnValue is not a function[39m
+[31m   [33mÔØ»[31m components/auth/__tests__/AuthGate.test.tsx[2m > [22mAuthGate Component[2m > [22mshould handle multiple authentication states correctly[39m
+[31m     ÔåÆ useUserStore.mockReturnValue is not a function[39m
+ [33mÔØ»[39m components/features/finance/transactions/__tests__/Transactions.test.tsx [2m ([22m[2m16 tests[22m [2m|[22m [31m16 failed[39m[2m)[22m[33m 467[2mms[22m[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mRenderizaci├│n[2m > [22mdebe renderizar el componente correctamente[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mRenderizaci├│n[2m > [22mdebe mostrar las transacciones existentes[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mRenderizaci├│n[2m > [22mdebe mostrar los montos formateados correctamente[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mFiltros[2m > [22mdebe aplicar filtros iniciales cuando se proporcionan[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mFiltros[2m > [22mdebe limpiar filtros cuando se llama onClearFilters[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mFormulario de Nueva Transacci├│n[2m > [22mdebe mostrar el formulario cuando se hace clic en "Nueva Transacci├│n"[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mFormulario de Nueva Transacci├│n[2m > [22mdebe validar campos requeridos antes de enviar[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mFormulario de Nueva Transacci├│n[2m > [22mdebe crear una nueva transacci├│n con datos v├ílidos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mEdici├│n de Transacciones[2m > [22mdebe abrir el modal de edici├│n al hacer clic en editar[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mEdici├│n de Transacciones[2m > [22mdebe actualizar una transacci├│n existente[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mEliminaci├│n de Transacciones[2m > [22mdebe eliminar una transacci├│n al confirmar[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mEliminaci├│n de Transacciones[2m > [22mno debe eliminar si se cancela la confirmaci├│n[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mEstad├¡sticas[2m > [22mdebe calcular y mostrar el total de ingresos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mEstad├¡sticas[2m > [22mdebe calcular y mostrar el total de gastos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mCasos Extremos[2m > [22mdebe manejar lista vac├¡a de transacciones[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+[31m   [33mÔØ»[31m components/features/finance/transactions/__tests__/Transactions.test.tsx[2m > [22mTransactions Component[2m > [22mCasos Extremos[2m > [22mdebe manejar montos muy grandes[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'find')[39m
+ [33mÔØ»[39m services/__tests__/monitoringService.test.ts [2m ([22m[2m11 tests[22m [2m|[22m [31m2 failed[39m[2m)[22m[90m 29[2mms[22m[39m
+[31m   [33mÔØ»[31m services/__tests__/monitoringService.test.ts[2m > [22mMonitoringService[2m > [22mInitialization[2m > [22mshould not initialize twice[39m
+[31m     ÔåÆ expected "warn" to be called with arguments: [ Array(1) ][90m
+
+Received: 
+
+[31m[90m
+
+Number of calls: [1m0[22m
+[31m[39m
+[31m   [33mÔØ»[31m services/__tests__/monitoringService.test.ts[2m > [22mMonitoringService[2m > [22mInitialization[2m > [22mshould return correct initialization status[39m
+[31m     ÔåÆ expected false to be true // Object.is equality[39m
+[90mstdout[2m | services/__tests__/monitoringService.test.ts[2m > [22m[2mMonitoringService[2m > [22m[2mInitialization[2m > [22m[2mshould initialize successfully[22m[39m
+[Monitoring] Sentry disabled (development mode or no DSN)
+
+[90mstdout[2m | services/__tests__/monitoringService.test.ts[2m > [22m[2mMonitoringService[2m > [22m[2mInitialization[2m > [22m[2mshould not initialize twice[22m[39m
+[Monitoring] Sentry disabled (development mode or no DSN)
+[Monitoring] Sentry disabled (development mode or no DSN)
+
+[90mstderr[2m | 
+services/__tests__/monitoringService.test.ts[2m > 
+[22m[2mMonitoringService[2m > [22m[2mError 
+Tracking[2m > [22m[2mshould capture 
+errors[22m[39m
+[Monitoring] Error captured (not sent - service 
+not initialized): Error: Test error
+    at [90mD:\Users\Josu├®\Desktop\Onyx Suite 2026
+\[39mservices\__tests__\monitoringService.test.ts:
+55:27
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4m@vitest/runn
+er[24m/dist/index.js:135:14
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4m@vitest/runn
+er[24m/dist/index.js:60:26
+    at runTest [90m(file:///D:/Users/Josu%C3%A9/De
+sktop/Onyx%20Suite%202026/[39mnode_modules/[4m@vi
+test/runner[24m/dist/index.js:781:17[90m)[39m
+[90mstdout[2m | services/__tests__/monitoringService.test.ts[2m > [22m[2mMonitoringService[2m > [22m[2mError Tracking[2m > [22m[2mshould capture messages with different severity levels[22m[39m
+[Monitoring] Message captured (not sent): Info message
+[Monitoring] Message captured (not sent): Warning message
+[Monitoring] Message captured (not sent): Error message
+
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runFiles [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:958:5[90m)[39m
+    at startTests [90m(file:///D:/Users/Josu%C3%A9
+/Desktop/Onyx%20Suite%202026/[39mnode_modules/[4m
+@vitest/runner[24m/dist/index.js:967:3[90m)[39m
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4mvitest[24m/
+dist/chunks/runtime-runBaseTests.oAvMKtQC.js:116:7
+
+ [33mÔØ»[39m utils/__tests__/formatters.test.ts [2m ([22m[2m0 test[22m[2m)[22m
+ [32mÔ£ô[39m store/__tests__/useUserStore.test.ts [2m ([22m[2m12 tests[22m[2m)[22m[90m 14[2mms[22m[39m
+ [33mÔØ»[39m utils/__tests__/csvUtils.test.ts [2m ([22m[2m11 tests[22m [2m|[22m [31m11 failed[39m[2m)[22m[90m 13[2mms[22m[39m
+[31m   [33mÔØ»[31m utils/__tests__/csvUtils.test.ts[2m > [22mCSV utilities[2m > [22mparseCSV[2m > [22mshould parse basic CSV data[39m
+[31m     ÔåÆ parseCSV is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/csvUtils.test.ts[2m > [22mCSV utilities[2m > [22mparseCSV[2m > [22mshould handle CSV with quotes[39m
+[31m     ÔåÆ parseCSV is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/csvUtils.test.ts[2m > [22mCSV utilities[2m > [22mparseCSV[2m > [22mshould handle empty lines[39m
+[31m     ÔåÆ parseCSV is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/csvUtils.test.ts[2m > [22mCSV utilities[2m > [22mparseCSV[2m > [22mshould handle different delimiters[39m
+[31m     ÔåÆ parseCSV is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/csvUtils.test.ts[2m > [22mCSV utilities[2m > [22mdetectCSVFormat[2m > [22mshould detect comma-separated format[39m
+[31m     ÔåÆ detectCSVFormat is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/csvUtils.test.ts[2m > [22mCSV utilities[2m > [22mdetectCSVFormat[2m > [22mshould detect semicolon-separated format[39m
+[31m     ÔåÆ detectCSVFormat is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/csvUtils.test.ts[2m > [22mCSV utilities[2m > [22mdetectCSVFormat[2m > [22mshould detect tab-separated format[39m
+[31m     ÔåÆ detectCSVFormat is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/csvUtils.test.ts[2m > [22mCSV utilities[2m > [22mdetectCSVFormat[2m > [22mshould default to comma if unclear[39m
+[31m     ÔåÆ detectCSVFormat is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/csvUtils.test.ts[2m > [22mCSV utilities[2m > [22mmapCSVColumns[2m > [22mshould map columns correctly[39m
+[31m     ÔåÆ mapCSVColumns is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/csvUtils.test.ts[2m > [22mCSV utilities[2m > [22mmapCSVColumns[2m > [22mshould handle missing columns[39m
+[31m     ÔåÆ mapCSVColumns is not a function[39m
+[31m   [33mÔØ»[31m utils/__tests__/csvUtils.test.ts[2m > [22mCSV utilities[2m > [22mmapCSVColumns[2m > [22mshould preserve unmapped columns[39m
+[31m     ÔåÆ mapCSVColumns is not a function[39m
+ [33mÔØ»[39m services/__tests__/storageService.test.ts [2m ([22m[2m9 tests[22m [2m|[22m [31m9 failed[39m[2m)[22m[90m 11[2mms[22m[39m
+[31m   [33mÔØ»[31m services/__tests__/storageService.test.ts[2m > [22mStorageService[2m > [22msaveToLocalStorage[2m > [22mshould save data to localStorage[39m
+[31m     ÔåÆ saveToLocalStorage is not a function[39m
+[31m   [33mÔØ»[31m services/__tests__/storageService.test.ts[2m > [22mStorageService[2m > [22msaveToLocalStorage[2m > [22mshould handle complex objects[39m
+[31m     ÔåÆ saveToLocalStorage is not a function[39m
+[31m   [33mÔØ»[31m services/__tests__/storageService.test.ts[2m > [22mStorageService[2m > [22msaveToLocalStorage[2m > [22mshould overwrite existing data[39m
+[31m     ÔåÆ saveToLocalStorage is not a function[39m
+[31m   [33mÔØ»[31m services/__tests__/storageService.test.ts[2m > [22mStorageService[2m > [22mloadFromLocalStorage[2m > [22mshould load data from localStorage[39m
+[31m     ÔåÆ loadFromLocalStorage is not a function[39m
+[31m   [33mÔØ»[31m services/__tests__/storageService.test.ts[2m > [22mStorageService[2m > [22mloadFromLocalStorage[2m > [22mshould return null for non-existent key[39m
+[31m     ÔåÆ loadFromLocalStorage is not a function[39m
+[31m   [33mÔØ»[31m services/__tests__/storageService.test.ts[2m > [22mStorageService[2m > [22mloadFromLocalStorage[2m > [22mshould return null for invalid JSON[39m
+[31m     ÔåÆ loadFromLocalStorage is not a function[39m
+[31m   [33mÔØ»[31m services/__tests__/storageService.test.ts[2m > [22mStorageService[2m > [22mloadFromLocalStorage[2m > [22mshould handle empty string[39m
+[31m     ÔåÆ loadFromLocalStorage is not a function[39m
+[31m   [33mÔØ»[31m services/__tests__/storageService.test.ts[2m > [22mStorageService[2m > [22mclearLocalStorage[2m > [22mshould clear specific key[39m
+[31m     ÔåÆ clearLocalStorage is not a function[39m
+[31m   [33mÔØ»[31m services/__tests__/storageService.test.ts[2m > [22mStorageService[2m > [22mclearLocalStorage[2m > [22mshould clear all storage when no key provided[39m
+[31m     ÔåÆ clearLocalStorage is not a function[39m
+ [32mÔ£ô[39m services/__tests__/analyticsService.test.ts [2m ([22m[2m10 tests[22m[2m)[22m[90m 6[2mms[22m[39m
+ [33mÔØ»[39m services/__tests__/stripeService.test.ts [2m ([22m[2m7 tests[22m [2m|[22m [31m6 failed[39m[2m)[22m[90m 16[2mms[22m[39m
+[31m   [33mÔØ»[31m services/__tests__/stripeService.test.ts[2m > [22mStripeService[2m > [22mcreateCheckoutSession[2m > [22mshould create checkout session with correct parameters[39m
+[31m     ÔåÆ stripeService.createCheckoutSession is not a function[39m
+[31m   [33mÔØ»[31m services/__tests__/stripeService.test.ts[2m > [22mStripeService[2m > [22mcreateCheckoutSession[2m > [22mshould handle missing price ID[39m
+[31m     ÔåÆ stripeService.createCheckoutSession is not a function[39m
+[31m   [33mÔØ»[31m services/__tests__/stripeService.test.ts[2m > [22mStripeService[2m > [22mcreateCheckoutSession[2m > [22mshould include success and cancel URLs[39m
+[31m     ÔåÆ stripeService.createCheckoutSession is not a function[39m
+[31m   [33mÔØ»[31m services/__tests__/stripeService.test.ts[2m > [22mStripeService[2m > [22mredirectToCustomerPortal[2m > [22mshould redirect to customer portal[39m
+[31m     ÔåÆ Failed to create portal session[39m
+[31m   [33mÔØ»[31m services/__tests__/stripeService.test.ts[2m > [22mStripeService[2m > [22mvalidateWebhook[2m > [22mshould validate webhook signature[39m
+[31m     ÔåÆ stripeService.validateWebhook is not a function[39m
+[31m   [33mÔØ»[31m services/__tests__/stripeService.test.ts[2m > [22mStripeService[2m > [22mvalidateWebhook[2m > [22mshould reject invalid signature[39m
+[31m     ÔåÆ stripeService.validateWebhook is not a function[39m
+[90mstdout[2m | services/__tests__/stripeService.test.ts[2m > [22m[2mStripeService[2m > [22m[2mredirectToCustomerPortal[2m > [22m[2mshould redirect to customer portal[22m[39m
+Redirecting to portal for customer: cus_test_123
+
+[90mstderr[2m | 
+services/__tests__/stripeService.test.ts[2m > 
+[22m[2mStripeService[2m > 
+[22m[2mredirectToCustomerPortal[2m > 
+[22m[2mshould redirect to customer 
+portal[22m[39m
+Error invoking create-portal-session: TypeError: 
+Cannot read properties of undefined (reading 
+'headers')
+    at FunctionsClient.<anonymous> 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+node_modules\[4m@supabase\functions-js[24m\src\Fu
+nctionsClient.ts:164:37[90m)[39m
+[90mstdout[2m | services/__tests__/stripeService.test.ts[2m > [22m[2mStripeService[2m > [22m[2mredirectToCustomerPortal[2m > [22m[2mshould handle invalid customer ID[22m[39m
+Redirecting to portal for customer: current
+
+    at Generator.next (<anonymous>)
+    at fulfilled 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+node_modules\[4mtslib[24m\tslib.js:167:62[90m)[
+39m
+Portal Error: Error: Failed to create portal 
+session
+    at Object.redirectToCustomerPortal 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+services\stripeService.ts:67:23[90m)[39m
+    at [90mD:\Users\Josu├®\Desktop\Onyx Suite 2026
+\[39mservices\__tests__\stripeService.test.ts:45:2
+8
+    at runTest [90m(file:///D:/Users/Josu%C3%A9/De
+sktop/Onyx%20Suite%202026/[39mnode_modules/[4m@vi
+test/runner[24m/dist/index.js:781:11[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runFiles [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:958:5[90m)[39m
+    at startTests [90m(file:///D:/Users/Josu%C3%A9
+/Desktop/Onyx%20Suite%202026/[39mnode_modules/[4m
+@vitest/runner[24m/dist/index.js:967:3[90m)[39m
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4mvitest[24m/
+dist/chunks/runtime-runBaseTests.oAvMKtQC.js:116:7
+    at withEnv [90m(file:///D:/Users/Josu%C3%A9/De
+sktop/Onyx%20Suite%202026/[39mnode_modules/[4mvit
+est[24m/dist/chunks/runtime-runBaseTests.oAvMKtQC.
+js:83:5[90m)[39m
+
+[90mstderr[2m | 
+services/__tests__/stripeService.test.ts[2m > 
+[22m[2mStripeService[2m > 
+[22m[2mredirectToCustomerPortal[2m > 
+[22m[2mshould handle invalid customer 
+ID[22m[39m
+Error invoking create-portal-session: TypeError: 
+Cannot read properties of undefined (reading 
+'headers')
+    at FunctionsClient.<anonymous> 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+node_modules\[4m@supabase\functions-js[24m\src\Fu
+nctionsClient.ts:164:37[90m)[39m
+    at Generator.next (<anonymous>)
+    at fulfilled 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+node_modules\[4mtslib[24m\tslib.js:167:62[90m)[
+39m
+Portal Error: Error: Failed to create portal 
+session
+    at Object.redirectToCustomerPortal 
+[90m(D:\Users\Josu├®\Desktop\Onyx Suite 2026\[39m
+services\stripeService.ts:67:23[90m)[39m
+    at [90mD:\Users\Josu├®\Desktop\Onyx Suite 2026
+\[39mservices\__tests__\stripeService.test.ts:51:1
+3
+    at runTest [90m(file:///D:/Users/Josu%C3%A9/De
+sktop/Onyx%20Suite%202026/[39mnode_modules/[4m@vi
+test/runner[24m/dist/index.js:781:11[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runSuite [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:909:15[90m)[39m
+    at runFiles [90m(file:///D:/Users/Josu%C3%A9/D
+esktop/Onyx%20Suite%202026/[39mnode_modules/[4m@v
+itest/runner[24m/dist/index.js:958:5[90m)[39m
+    at startTests [90m(file:///D:/Users/Josu%C3%A9
+/Desktop/Onyx%20Suite%202026/[39mnode_modules/[4m
+@vitest/runner[24m/dist/index.js:967:3[90m)[39m
+    at [90mfile:///D:/Users/Josu%C3%A9/Desktop/Ony
+x%20Suite%202026/[39mnode_modules/[4mvitest[24m/
+dist/chunks/runtime-runBaseTests.oAvMKtQC.js:116:7
+    at withEnv [90m(file:///D:/Users/Josu%C3%A9/De
+sktop/Onyx%20Suite%202026/[39mnode_modules/[4mvit
+est[24m/dist/chunks/runtime-runBaseTests.oAvMKtQC.
+js:83:5[90m)[39m
+
+ [32mÔ£ô[39m services/__tests__/geminiService.test.ts [2m ([22m[2m3 tests[22m[2m)[22m[90m 4[2mms[22m[39m
+
+[31mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1m[7m Failed Suites 1 
+[27m[22mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/formatters.test.ts [2m[ 
+utils/__tests__/formatters.test.ts ][22m
+[31m[1mError[22m: Failed to resolve import 
+"../formatters" from 
+"utils/__tests__/formatters.test.ts". Does the 
+file exist?[39m
+[90m [2mÔØ»[22m 
+TransformPluginContext._formatError ../../../Josu%C
+3%A9/Desktop/Onyx%20Suite%202026/node_modules/vite/
+dist/node/chunks/dep-BK3b2jBa.js:[2m49258:41[22m
+[39m
+[90m [2mÔØ»[22m TransformPluginContext.error ../
+../../Josu%C3%A9/Desktop/Onyx%20Suite%202026/node_m
+odules/vite/dist/node/chunks/dep-BK3b2jBa.js:[2m49
+253:16[22m[39m
+[90m [2mÔØ»[22m normalizeUrl ../../../Josu%C3%A9
+/Desktop/Onyx%20Suite%202026/node_modules/vite/dist
+/node/chunks/dep-BK3b2jBa.js:[2m64307:23[22m[39m
+[90m [2mÔØ»[22m async file:/D:/Users/Josu%C3%A9/
+Desktop/Onyx%20Suite%202026/node_modules/vite/dist/
+node/chunks/dep-BK3b2jBa.js:[2m64439:39[22m[39m
+[90m [2mÔØ»[22m 
+TransformPluginContext.transform ../../../Josu%C3%A
+9/Desktop/Onyx%20Suite%202026/node_modules/vite/dis
+t/node/chunks/dep-BK3b2jBa.js:[2m64366:7[22m[39m
+[90m [2mÔØ»[22m PluginContainer.transform ../../
+../Josu%C3%A9/Desktop/Onyx%20Suite%202026/node_modu
+les/vite/dist/node/chunks/dep-BK3b2jBa.js:[2m49099
+:18[22m[39m
+[90m [2mÔØ»[22m loadAndTransform ../../../Josu%C
+3%A9/Desktop/Onyx%20Suite%202026/node_modules/vite/
+dist/node/chunks/dep-BK3b2jBa.js:[2m51978:27[22m
+[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1/139]ÔÄ»[22m[39m
+
+[31mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1m[7m Failed Tests 138 
+[27m[22mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[39m
+
+[31m[1m[7m FAIL [27m[22m[39m services/__tests
+__/dashboardSyncService.test.ts[2m > 
+[22mDashboardSyncService[2m > 
+[22msetActiveLayout[2m > [22mshould set layout 
+as active
+[31m[1mAssertionError[22m: expected false to be 
+true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2mÔØ»[22m services/__tests__/dashboardSync
+Service.test.ts:[2m191:28[22m[39m
+    [90m189| [39m            [35mconst[39m 
+result [33m=[39m [35mawait[39m dashboardSyncSer
+vice[33m.[39m[34msetActiveLayout[39m(ÔÇª
+    [90m190| [39m
+    [90m191| [39m            [34mexpect[39m(res
+ult)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;
+[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m192| [39m        })[33m;[39m
+    [90m193| [39m    })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[2/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m services/__tests
+__/dashboardSyncService.test.ts[2m > 
+[22mDashboardSyncService[2m > 
+[22mdeleteLayout[2m > [22mshould delete layout 
+from Supabase
+[31m[1mAssertionError[22m: expected false to be 
+true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2mÔØ»[22m services/__tests__/dashboardSync
+Service.test.ts:[2m208:28[22m[39m
+    [90m206| [39m
+    [90m207| [39m            [34mexpect[39m(moc
+kFrom)[33m.[39m[34mtoHaveBeenCalledWith[39m([3
+2m'user_dashboard_layo[39mÔÇª
+    [90m208| [39m            [34mexpect[39m(res
+ult)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;
+[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m209| [39m        })[33m;[39m
+    [90m210| [39m    })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[3/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/monitoringService.test.ts[2m > 
+[22mMonitoringService[2m > 
+[22mInitialization[2m > [22mshould not 
+initialize twice
+[31m[1mAssertionError[22m: expected "warn" to 
+be called with arguments: [ Array(1) ][90m
+
+Received: 
+
+[31m[90m
+
+Number of calls: [1m0[22m
+[31m[39m
+[36m [2mÔØ»[22m services/__tests__/monitoringSer
+vice.test.ts:[2m44:32[22m[39m
+    [90m 42| [39m            monitoringService[3
+3m.[39m[34minit[39m()[33m;[39m
+    [90m 43| [39m            monitoringService[3
+3m.[39m[34minit[39m()[33m;[39m
+    [90m 44| [39m            [34mexpect[39m(con
+soleSpy)[33m.[39m[34mtoHaveBeenCalledWith[39m(
+[32m'[Monitoring] Serv[39mÔÇª
+    [90m   | [39m                               
+[31m^[39m
+    [90m 45| [39m            consoleSpy[33m.[39
+m[34mmockRestore[39m()[33m;[39m
+    [90m 46| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[4/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/monitoringService.test.ts[2m > 
+[22mMonitoringService[2m > 
+[22mInitialization[2m > [22mshould return 
+correct initialization status
+[31m[1mAssertionError[22m: expected false to be 
+true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2mÔØ»[22m services/__tests__/monitoringSer
+vice.test.ts:[2m49:55[22m[39m
+    [90m 47| [39m
+    [90m 48| [39m        
+[34mit[39m([32m'should return correct 
+initialization status'[39m[33m,[39m () 
+[33m=>[39m {
+    [90m 49| [39m            [34mexpect[39m(mon
+itoringService[33m.[39m[34misInitialized[39m())
+[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39
+m
+    [90m   | [39m                                
+                      [31m^[39m
+    [90m 50| [39m        })[33m;[39m
+    [90m 51| [39m    })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[5/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/performanceService.test.ts[2m 
+> [22mPerformanceService[2m > [22mCustom 
+Metrics[2m > [22mshould record custom metrics
+[31m[1mAssertionError[22m: expected 0 to be 
+greater than 0[39m
+[36m [2mÔØ»[22m services/__tests__/performanceSe
+rvice.test.ts:[2m69:36[22m[39m
+    [90m 67| [39m            [35mconst[39m 
+metrics [33m=[39m performanceService[33m.[39m[
+34mgetMetrics[39m()[33m;[39m
+    [90m 68| [39m
+    [90m 69| [39m            [34mexpect[39m(met
+rics[33m.[39mlength)[33m.[39m[34mtoBeGreaterTh
+an[39m([34m0[39m)[33m;[39m
+    [90m   | [39m                                
+   [31m^[39m
+    [90m 70| [39m            [35mconst[39m 
+metric [33m=[39m 
+metrics[33m.[39m[34mfind[39m(m [33m=>[39m 
+m[33m.[39mname [33m===[39m 
+[32m'custom_metric[39mÔÇª
+    [90m 71| [39m            [34mexpect[39m(met
+ric)[33m.[39m[34mtoBeDefined[39m()[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[6/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/performanceService.test.ts[2m 
+> [22mPerformanceService[2m > [22mAPI Call 
+Tracking[2m > [22mshould track API calls
+[31m[1mAssertionError[22m: expected +0 to be 1 
+// Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 1[39m
+[31m+ 0[39m
+
+[36m [2mÔØ»[22m services/__tests__/performanceSe
+rvice.test.ts:[2m82:39[22m[39m
+    [90m 80| [39m            [35mconst[39m 
+apiMetrics [33m=[39m performanceService[33m.[39
+m[34mgetAPIMetrics[39m()[33m;[39m
+    [90m 81| [39m
+    [90m 82| [39m            [34mexpect[39m(api
+Metrics[33m.[39mlength)[33m.[39m[34mtoBe[39m(
+[34m1[39m)[33m;[39m
+    [90m   | [39m                                
+      [31m^[39m
+    [90m 83| [39m            [34mexpect[39m(api
+Metrics[[34m0[39m][33m.[39mendpoint)[33m.[39m
+[34mtoBe[39m([32m'/api/transactions'[39m)[33m;
+[39m
+    [90m 84| [39m            [34mexpect[39m(api
+Metrics[[34m0[39m][33m.[39mmethod)[33m.[39m[
+34mtoBe[39m([32m'GET'[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[7/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/performanceService.test.ts[2m 
+> [22mPerformanceService[2m > [22mAPI Call 
+Tracking[2m > [22mshould warn on slow API calls
+[31m[1mAssertionError[22m: expected "warn" to 
+be called at least once[39m
+[36m [2mÔØ»[22m services/__tests__/performanceSe
+rvice.test.ts:[2m94:32[22m[39m
+    [90m 92| [39m            performanceService[
+33m.[39m[34mtrackAPICall[39m([32m'/api/slow'[3
+9m[33m,[39m [32m'POST'[39m[33m,[39m 
+[34m5000[39m[33m,[39mÔÇª
+    [90m 93| [39m
+    [90m 94| [39m            [34mexpect[39m(con
+soleSpy)[33m.[39m[34mtoHaveBeenCalled[39m()[33
+m;[39m
+    [90m   | [39m                               
+[31m^[39m
+    [90m 95| [39m            consoleSpy[33m.[39
+m[34mmockRestore[39m()[33m;[39m
+    [90m 96| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[8/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/performanceService.test.ts[2m 
+> [22mPerformanceService[2m > [22mMetrics 
+Management[2m > [22mshould get average metric 
+value
+[31m[1mAssertionError[22m: expected null to be 
+200 // Object.is equality[39m
+
+[32m- Expected:[39m 
+200
+
+[31m+ Received:[39m 
+null
+
+[36m [2mÔØ»[22m services/__tests__/performanceSe
+rvice.test.ts:[2m106:29[22m[39m
+    [90m104| [39m
+    [90m105| [39m            [35mconst[39m 
+average [33m=[39m performanceService[33m.[39m[
+34mgetAverageMetric[39m([32m'test_[39mÔÇª
+    [90m106| [39m            [34mexpect[39m(ave
+rage)[33m.[39m[34mtoBe[39m([34m200[39m)[33m;
+[39m
+    [90m   | [39m                            
+[31m^[39m
+    [90m107| [39m        })[33m;[39m
+    [90m108| [39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[9/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/storageService.test.ts[2m > 
+[22mStorageService[2m > 
+[22msaveToLocalStorage[2m > [22mshould save 
+data to localStorage
+[31m[1mTypeError[22m: saveToLocalStorage is not 
+a function[39m
+[36m [2mÔØ»[22m services/__tests__/storageServic
+e.test.ts:[2m13:13[22m[39m
+    [90m 11| [39m        
+[34mit[39m([32m'should save data to 
+localStorage'[39m[33m,[39m () [33m=>[39m {
+    [90m 12| [39m            [35mconst[39m 
+testData [33m=[39m { name[33m:[39m 
+[32m'Test'[39m[33m,[39m value[33m:[39m 
+[34m123[39m }[33m;[39m
+    [90m 13| [39m            [34msaveToLocalStor
+age[39m([32m'test-key'[39m[33m,[39m 
+testData)[33m;[39m
+    [90m   | [39m            [31m^[39m
+    [90m 14| [39m
+    [90m 15| [39m            [35mconst[39m 
+stored [33m=[39m localStorage[33m.[39m[34mgetI
+tem[39m([32m'test-key'[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[10/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/storageService.test.ts[2m > 
+[22mStorageService[2m > 
+[22msaveToLocalStorage[2m > [22mshould handle 
+complex objects
+[31m[1mTypeError[22m: saveToLocalStorage is not 
+a function[39m
+[36m [2mÔØ»[22m services/__tests__/storageServic
+e.test.ts:[2m30:13[22m[39m
+    [90m 28| [39m            }[33m;[39m
+    [90m 29| [39m
+    [90m 30| [39m            [34msaveToLocalStor
+age[39m([32m'complex-key'[39m[33m,[39m 
+complexData)[33m;[39m
+    [90m   | [39m            [31m^[39m
+    [90m 31| [39m            [35mconst[39m 
+stored [33m=[39m [33mJSON[39m[33m.[39m[34mpa
+rse[39m(localStorage[33m.[39m[34mgetItem[39m(
+[32m'complex-ke[39mÔÇª
+    [90m 32| [39m            [34mexpect[39m(sto
+red)[33m.[39m[34mtoEqual[39m(complexData)[33m;
+[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[11/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/storageService.test.ts[2m > 
+[22mStorageService[2m > 
+[22msaveToLocalStorage[2m > [22mshould 
+overwrite existing data
+[31m[1mTypeError[22m: saveToLocalStorage is not 
+a function[39m
+[36m [2mÔØ»[22m services/__tests__/storageServic
+e.test.ts:[2m36:13[22m[39m
+    [90m 34| [39m
+    [90m 35| [39m        
+[34mit[39m([32m'should overwrite existing 
+data'[39m[33m,[39m () [33m=>[39m {
+    [90m 36| [39m            [34msaveToLocalStor
+age[39m([32m'key'[39m[33m,[39m { 
+value[33m:[39m [34m1[39m })[33m;[39m
+    [90m   | [39m            [31m^[39m
+    [90m 37| [39m            [34msaveToLocalStor
+age[39m([32m'key'[39m[33m,[39m { 
+value[33m:[39m [34m2[39m })[33m;[39m
+    [90m 38| [39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[12/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/storageService.test.ts[2m > 
+[22mStorageService[2m > 
+[22mloadFromLocalStorage[2m > [22mshould load 
+data from localStorage
+[31m[1mTypeError[22m: loadFromLocalStorage is 
+not a function[39m
+[36m [2mÔØ»[22m services/__tests__/storageServic
+e.test.ts:[2m49:28[22m[39m
+    [90m 47| [39m            localStorage[33m.[
+39m[34msetItem[39m([32m'load-key'[39m[33m,[39
+m [33mJSON[39m[33m.[39m[34mstringify[39m(test
+Data))[33m;[39m
+    [90m 48| [39m
+    [90m 49| [39m            [35mconst[39m 
+loaded [33m=[39m [34mloadFromLocalStorage[39m(
+[32m'load-key'[39m)[33m;[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m 50| [39m            [34mexpect[39m(loa
+ded)[33m.[39m[34mtoEqual[39m(testData)[33m;[3
+9m
+    [90m 51| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[13/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/storageService.test.ts[2m > 
+[22mStorageService[2m > 
+[22mloadFromLocalStorage[2m > [22mshould return 
+null for non-existent key
+[31m[1mTypeError[22m: loadFromLocalStorage is 
+not a function[39m
+[36m [2mÔØ»[22m services/__tests__/storageServic
+e.test.ts:[2m54:28[22m[39m
+    [90m 52| [39m
+    [90m 53| [39m        
+[34mit[39m([32m'should return null for 
+non-existent key'[39m[33m,[39m () [33m=>[39m {
+    [90m 54| [39m            [35mconst[39m 
+loaded [33m=[39m [34mloadFromLocalStorage[39m(
+[32m'non-existent'[39m)[33m;[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m 55| [39m            [34mexpect[39m(loa
+ded)[33m.[39m[34mtoBeNull[39m()[33m;[39m
+    [90m 56| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[14/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/storageService.test.ts[2m > 
+[22mStorageService[2m > 
+[22mloadFromLocalStorage[2m > [22mshould return 
+null for invalid JSON
+[31m[1mTypeError[22m: loadFromLocalStorage is 
+not a function[39m
+[36m [2mÔØ»[22m services/__tests__/storageServic
+e.test.ts:[2m60:28[22m[39m
+    [90m 58| [39m        
+[34mit[39m([32m'should return null for invalid 
+JSON'[39m[33m,[39m () [33m=>[39m {
+    [90m 59| [39m            localStorage[33m.[
+39m[34msetItem[39m([32m'invalid'[39m[33m,[39m
+ [32m'not-valid-json{'[39m)[33m;[39m
+    [90m 60| [39m            [35mconst[39m 
+loaded [33m=[39m [34mloadFromLocalStorage[39m(
+[32m'invalid'[39m)[33m;[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m 61| [39m            [34mexpect[39m(loa
+ded)[33m.[39m[34mtoBeNull[39m()[33m;[39m
+    [90m 62| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[15/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/storageService.test.ts[2m > 
+[22mStorageService[2m > 
+[22mloadFromLocalStorage[2m > [22mshould handle 
+empty string
+[31m[1mTypeError[22m: loadFromLocalStorage is 
+not a function[39m
+[36m [2mÔØ»[22m services/__tests__/storageServic
+e.test.ts:[2m66:28[22m[39m
+    [90m 64| [39m        
+[34mit[39m([32m'should handle empty 
+string'[39m[33m,[39m () [33m=>[39m {
+    [90m 65| [39m            localStorage[33m.[
+39m[34msetItem[39m([32m'empty'[39m[33m,[39m 
+[32m''[39m)[33m;[39m
+    [90m 66| [39m            [35mconst[39m 
+loaded [33m=[39m [34mloadFromLocalStorage[39m(
+[32m'empty'[39m)[33m;[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m 67| [39m            [34mexpect[39m(loa
+ded)[33m.[39m[34mtoBeNull[39m()[33m;[39m
+    [90m 68| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[16/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/storageService.test.ts[2m > 
+[22mStorageService[2m > 
+[22mclearLocalStorage[2m > [22mshould clear 
+specific key
+[31m[1mTypeError[22m: clearLocalStorage is not 
+a function[39m
+[36m [2mÔØ»[22m services/__tests__/storageServic
+e.test.ts:[2m76:13[22m[39m
+    [90m 74| [39m            localStorage[33m.[
+39m[34msetItem[39m([32m'key2'[39m[33m,[39m 
+[32m'value2'[39m)[33m;[39m
+    [90m 75| [39m
+    [90m 76| [39m            [34mclearLocalStora
+ge[39m([32m'key1'[39m)[33m;[39m
+    [90m   | [39m            [31m^[39m
+    [90m 77| [39m
+    [90m 78| [39m            [34mexpect[39m(loc
+alStorage[33m.[39m[34mgetItem[39m([32m'key1'[
+39m))[33m.[39m[34mtoBeNull[39m()[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[17/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/storageService.test.ts[2m > 
+[22mStorageService[2m > 
+[22mclearLocalStorage[2m > [22mshould clear all 
+storage when no key provided
+[31m[1mTypeError[22m: clearLocalStorage is not 
+a function[39m
+[36m [2mÔØ»[22m services/__tests__/storageServic
+e.test.ts:[2m86:13[22m[39m
+    [90m 84| [39m            localStorage[33m.[
+39m[34msetItem[39m([32m'key2'[39m[33m,[39m 
+[32m'value2'[39m)[33m;[39m
+    [90m 85| [39m
+    [90m 86| [39m            
+[34mclearLocalStorage[39m()[33m;[39m
+    [90m   | [39m            [31m^[39m
+    [90m 87| [39m
+    [90m 88| [39m            [34mexpect[39m(loc
+alStorage[33m.[39m[34mgetItem[39m([32m'key1'[
+39m))[33m.[39m[34mtoBeNull[39m()[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[18/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/stripeService.test.ts[2m > 
+[22mStripeService[2m > 
+[22mcreateCheckoutSession[2m > [22mshould 
+create checkout session with correct parameters
+[31m[1mTypeError[22m: 
+stripeService.createCheckoutSession is not a 
+function[39m
+[36m [2mÔØ»[22m services/__tests__/stripeService
+.test.ts:[2m21:48[22m[39m
+    [90m 19| [39m            [35mconst[39m 
+userId [33m=[39m [32m'user_456'[39m[33m;[39m
+    [90m 20| [39m
+    [90m 21| [39m            [35mconst[39m 
+result [33m=[39m [35mawait[39m stripeService[3
+3m.[39m[34mcreateCheckoutSession[39m(pÔÇª
+    [90m   | [39m                                
+               [31m^[39m
+    [90m 22| [39m
+    [90m 23| [39m            [34mexpect[39m(res
+ult)[33m.[39m[34mtoBeDefined[39m()[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[19/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/stripeService.test.ts[2m > 
+[22mStripeService[2m > 
+[22mcreateCheckoutSession[2m > [22mshould 
+handle missing price ID
+[31m[1mTypeError[22m: 
+stripeService.createCheckoutSession is not a 
+function[39m
+[36m [2mÔØ»[22m services/__tests__/stripeService
+.test.ts:[2m29:31[22m[39m
+    [90m 27| [39m        
+[34mit[39m([32m'should handle missing price 
+ID'[39m[33m,[39m [35masync[39m () 
+[33m=>[39m {
+    [90m 28| [39m            [35mawait[39m 
+[34mexpect[39m(
+    [90m 29| [39m                stripeService[3
+3m.[39m[34mcreateCheckoutSession[39m([32m''[39
+m[33m,[39m [32m'user_123'[39m)
+    [90m   | [39m                              
+[31m^[39m
+    [90m 30| [39m            )[33m.[39mrejects
+[33m.[39m[34mtoThrow[39m()[33m;[39m
+    [90m 31| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[20/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/stripeService.test.ts[2m > 
+[22mStripeService[2m > 
+[22mcreateCheckoutSession[2m > [22mshould 
+include success and cancel URLs
+[31m[1mTypeError[22m: 
+stripeService.createCheckoutSession is not a 
+function[39m
+[36m [2mÔØ»[22m services/__tests__/stripeService
+.test.ts:[2m34:48[22m[39m
+    [90m 32| [39m
+    [90m 33| [39m        
+[34mit[39m([32m'should include success and 
+cancel URLs'[39m[33m,[39m [35masync[39m () 
+[33m=>[39m {
+    [90m 34| [39m            [35mconst[39m 
+result [33m=[39m [35mawait[39m stripeService[3
+3m.[39m[34mcreateCheckoutSession[39m([32m'[39m
+ÔÇª
+    [90m   | [39m                                
+               [31m^[39m
+    [90m 35| [39m
+    [90m 36| [39m            [34mexpect[39m(res
+ult[33m.[39msuccessUrl)[33m.[39m[34mtoContain
+[39m([32m'success'[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[21/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/stripeService.test.ts[2m > 
+[22mStripeService[2m > 
+[22mredirectToCustomerPortal[2m > [22mshould 
+redirect to customer portal
+[31m[1mError[22m: Failed to create portal 
+session[39m
+[36m [2mÔØ»[22m Object.redirectToCustomerPortal 
+services/stripeService.ts:[2m67:23[22m[39m
+    [90m 65| [39m            [35mif[39m 
+(error) {
+    [90m 66| [39m                
+console[33m.[39m[34merror[39m([32m'Error 
+invoking create-portal-session:'[39m[33m,[39mÔÇª
+    [90m 67| [39m                [35mthrow[39m 
+[35mnew[39m [33mError[39m([32m"Failed to 
+create portal session"[39m)[33m;[39m
+    [90m   | [39m                      
+[31m^[39m
+    [90m 68| [39m            }
+    [90m 69| [39m
+[90m [2mÔØ»[22m services/__tests__/stripeService
+.test.ts:[2m45:28[22m[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[22/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/stripeService.test.ts[2m > 
+[22mStripeService[2m > [22mvalidateWebhook[2m 
+> [22mshould validate webhook signature
+[31m[1mTypeError[22m: 
+stripeService.validateWebhook is not a 
+function[39m
+[36m [2mÔØ»[22m services/__tests__/stripeService
+.test.ts:[2m62:43[22m[39m
+    [90m 60| [39m            [35mconst[39m 
+signature [33m=[39m 
+[32m'test_signature'[39m[33m;[39m
+    [90m 61| [39m
+    [90m 62| [39m            [35mconst[39m 
+isValid [33m=[39m stripeService[33m.[39m[34mva
+lidateWebhook[39m(payload[33m,[39m sigÔÇª
+    [90m   | [39m                                
+          [31m^[39m
+    [90m 63| [39m
+    [90m 64| [39m            
+[34mexpect[39m([35mtypeof[39m isValid)[33m.[3
+9m[34mtoBe[39m([32m'boolean'[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[23/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/stripeService.test.ts[2m > 
+[22mStripeService[2m > [22mvalidateWebhook[2m 
+> [22mshould reject invalid signature
+[31m[1mTypeError[22m: 
+stripeService.validateWebhook is not a 
+function[39m
+[36m [2mÔØ»[22m services/__tests__/stripeService
+.test.ts:[2m71:43[22m[39m
+    [90m 69| [39m            [35mconst[39m 
+signature [33m=[39m 
+[32m'invalid_signature'[39m[33m;[39m
+    [90m 70| [39m
+    [90m 71| [39m            [35mconst[39m 
+isValid [33m=[39m stripeService[33m.[39m[34mva
+lidateWebhook[39m(payload[33m,[39m sigÔÇª
+    [90m   | [39m                                
+          [31m^[39m
+    [90m 72| [39m
+    [90m 73| [39m            [34mexpect[39m(isV
+alid)[33m.[39m[34mtoBe[39m([35mfalse[39m)[33
+m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[24/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/syncService.test.ts[2m > 
+[22mSyncService[2m > [22mfetchTransactions[2m 
+> [22mshould fetch transactions from Supabase
+[31m[1mAssertionError[22m: expected "spy" to be 
+called with arguments: [ 'transactions' ][90m
+
+Received: 
+
+[1m  1st spy call:
+
+[22m[2m  Array [[22m
+[32m-   "transactions",[90m
+[31m+   "finance_transactions",[90m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[36m [2mÔØ»[22m services/__tests__/syncService.t
+est.ts:[2m44:30[22m[39m
+    [90m 42| [39m            [35mconst[39m 
+result [33m=[39m [35mawait[39m syncService[33m
+.[39m[34mfetchTransactions[39m()[33m;[39m
+    [90m 43| [39m
+    [90m 44| [39m            [34mexpect[39m(moc
+kFrom)[33m.[39m[34mtoHaveBeenCalledWith[39m([3
+2m'transactions'[39m)[33m;[39m
+    [90m   | [39m                             
+[31m^[39m
+    [90m 45| [39m            [34mexpect[39m(res
+ult)[33m.[39m[34mtoEqual[39m(mockTransactions)
+[33m;[39m
+    [90m 46| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[25/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/syncService.test.ts[2m > 
+[22mSyncService[2m > [22mfetchTransactions[2m 
+> [22mshould return empty array on error
+[31m[1mAssertionError[22m: expected undefined 
+to deeply equal [][39m
+
+[32m- Expected:[39m 
+Array []
+
+[31m+ Received:[39m 
+undefined
+
+[36m [2mÔØ»[22m services/__tests__/syncService.t
+est.ts:[2m58:28[22m[39m
+    [90m 56| [39m            [35mconst[39m 
+result [33m=[39m [35mawait[39m syncService[33m
+.[39m[34mfetchTransactions[39m()[33m;[39m
+    [90m 57| [39m
+    [90m 58| [39m            [34mexpect[39m(res
+ult)[33m.[39m[34mtoEqual[39m([])[33m;[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m 59| [39m        })[33m;[39m
+    [90m 60| [39m    })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[26/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/syncService.test.ts[2m > 
+[22mSyncService[2m > [22msaveTransaction[2m > 
+[22mshould save transaction to Supabase
+[31m[1mTypeError[22m: Cannot destructure 
+property 'data' of '(intermediate value)' as it is 
+undefined.[39m
+[36m [2mÔØ»[22m Object.saveTransaction 
+services/syncService.ts:[2m39:23[22m[39m
+    [90m 37| [39m    [35masync[39m 
+[34msaveTransaction[39m(transaction[33m:[39m 
+[33mTransaction[39m) {
+    [90m 38| [39m        [35mif[39m 
+([33m![39msupabase) [35mreturn[39m[33m;[39m
+    [90m 39| [39m        [35mconst[39m { 
+data[33m:[39m { user } } [33m=[39m 
+[35mawait[39m supabase[33m.[39mauth[33m.[39m
+[34mgetUser[39m()[33m;[39m
+    [90m   | [39m                      
+[31m^[39m
+    [90m 40| [39m        [35mif[39m 
+([33m![39muser) [35mreturn[39m[33m;[39m
+    [90m 41| [39m
+[90m [2mÔØ»[22m services/__tests__/syncService.t
+est.ts:[2m79:28[22m[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[27/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/syncService.test.ts[2m > 
+[22mSyncService[2m > [22msaveTransaction[2m > 
+[22mshould handle save errors gracefully
+[31m[1mTypeError[22m: Cannot destructure 
+property 'data' of '(intermediate value)' as it is 
+undefined.[39m
+[36m [2mÔØ»[22m Object.saveTransaction 
+services/syncService.ts:[2m39:23[22m[39m
+    [90m 37| [39m    [35masync[39m 
+[34msaveTransaction[39m(transaction[33m:[39m 
+[33mTransaction[39m) {
+    [90m 38| [39m        [35mif[39m 
+([33m![39msupabase) [35mreturn[39m[33m;[39m
+    [90m 39| [39m        [35mconst[39m { 
+data[33m:[39m { user } } [33m=[39m 
+[35mawait[39m supabase[33m.[39mauth[33m.[39m
+[34mgetUser[39m()[33m;[39m
+    [90m   | [39m                      
+[31m^[39m
+    [90m 40| [39m        [35mif[39m 
+([33m![39muser) [35mreturn[39m[33m;[39m
+    [90m 41| [39m
+[90m [2mÔØ»[22m services/__tests__/syncService.t
+est.ts:[2m101:28[22m[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[28/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/syncService.test.ts[2m > 
+[22mSyncService[2m > [22mfetchBudgets[2m > 
+[22mshould fetch budgets from Supabase
+[31m[1mAssertionError[22m: expected "spy" to be 
+called with arguments: [ 'budgets' ][90m
+
+Received: 
+
+[1m  1st spy call:
+
+[22m[2m  Array [[22m
+[32m-   "budgets",[90m
+[31m+   "finance_budgets",[90m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[36m [2mÔØ»[22m services/__tests__/syncService.t
+est.ts:[2m122:30[22m[39m
+    [90m120| [39m            [35mconst[39m 
+result [33m=[39m [35mawait[39m syncService[33m
+.[39m[34mfetchBudgets[39m()[33m;[39m
+    [90m121| [39m
+    [90m122| [39m            [34mexpect[39m(moc
+kFrom)[33m.[39m[34mtoHaveBeenCalledWith[39m([3
+2m'budgets'[39m)[33m;[39m
+    [90m   | [39m                             
+[31m^[39m
+    [90m123| [39m            [34mexpect[39m(res
+ult)[33m.[39m[34mtoEqual[39m(mockBudgets)[33m;
+[39m
+    [90m124| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[29/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/syncService.test.ts[2m > 
+[22mSyncService[2m > [22msaveBudget[2m > 
+[22mshould save budget to Supabase
+[31m[1mTypeError[22m: Cannot destructure 
+property 'data' of '(intermediate value)' as it is 
+undefined.[39m
+[36m [2mÔØ»[22m Object.saveBudget 
+services/syncService.ts:[2m59:23[22m[39m
+    [90m 57| [39m    [35masync[39m 
+[34msaveBudget[39m(budget[33m:[39m 
+[33mBudget[39m) {
+    [90m 58| [39m        [35mif[39m 
+([33m![39msupabase) [35mreturn[39m[33m;[39m
+    [90m 59| [39m        [35mconst[39m { 
+data[33m:[39m { user } } [33m=[39m 
+[35mawait[39m supabase[33m.[39mauth[33m.[39m
+[34mgetUser[39m()[33m;[39m
+    [90m   | [39m                      
+[31m^[39m
+    [90m 60| [39m        [35mif[39m 
+([33m![39muser) [35mreturn[39m[33m;[39m
+    [90m 61| [39m
+[90m [2mÔØ»[22m services/__tests__/syncService.t
+est.ts:[2m143:28[22m[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[30/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/syncService.test.ts[2m > 
+[22mSyncService[2m > [22mfetchRecipes[2m > 
+[22mshould fetch recipes from Supabase
+[31m[1mAssertionError[22m: expected "spy" to be 
+called with arguments: [ 'recipes' ][90m
+
+Received: 
+
+[1m  1st spy call:
+
+[22m[2m  Array [[22m
+[32m-   "recipes",[90m
+[31m+   "life_recipes",[90m
+[2m  ][22m
+[31m[90m
+
+Number of calls: [1m1[22m
+[31m[39m
+[36m [2mÔØ»[22m services/__tests__/syncService.t
+est.ts:[2m164:30[22m[39m
+    [90m162| [39m            [35mconst[39m 
+result [33m=[39m [35mawait[39m syncService[33m
+.[39m[34mfetchRecipes[39m()[33m;[39m
+    [90m163| [39m
+    [90m164| [39m            [34mexpect[39m(moc
+kFrom)[33m.[39m[34mtoHaveBeenCalledWith[39m([3
+2m'recipes'[39m)[33m;[39m
+    [90m   | [39m                             
+[31m^[39m
+    [90m165| [39m            [34mexpect[39m(res
+ult)[33m.[39m[34mtoEqual[39m(mockRecipes)[33m;
+[39m
+    [90m166| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[31/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/syncService.test.ts[2m > 
+[22mSyncService[2m > [22msaveRecipe[2m > 
+[22mshould save recipe to Supabase
+[31m[1mTypeError[22m: Cannot destructure 
+property 'data' of '(intermediate value)' as it is 
+undefined.[39m
+[36m [2mÔØ»[22m Object.saveRecipe 
+services/syncService.ts:[2m147:23[22m[39m
+    [90m145| [39m    [35masync[39m 
+[34msaveRecipe[39m(recipe[33m:[39m 
+[33mRecipe[39m) {
+    [90m146| [39m        [35mif[39m 
+([33m![39msupabase) [35mreturn[39m[33m;[39m
+    [90m147| [39m        [35mconst[39m { 
+data[33m:[39m { user } } [33m=[39m 
+[35mawait[39m supabase[33m.[39mauth[33m.[39m
+[34mgetUser[39m()[33m;[39m
+    [90m   | [39m                      
+[31m^[39m
+    [90m148| [39m        [35mif[39m 
+([33m![39muser) [35mreturn[39m[33m;[39m
+    [90m149| [39m
+[90m [2mÔØ»[22m services/__tests__/syncService.t
+est.ts:[2m187:28[22m[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[32/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/syncService.test.ts[2m > 
+[22mSyncService[2m > [22msyncAllFromCloud[2m > 
+[22mshould sync all data from Supabase
+[31m[1mAssertionError[22m: expected { ÔÇª(2) } 
+to deeply equal { Object (accounts, transactions, 
+...) }[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  Object {[22m
+[31m+   "finance": Object {[39m
+[2m      "accounts": Array [],[22m
+[2m      "budgets": Array [],[22m
+[2m      "debts": Array [],[22m
+[32m-   "familyMembers": Array [],[39m
+[2m      "goals": Array [],[22m
+[31m+     "transactions": Array [],[39m
+[31m+   },[39m
+[31m+   "life": Object {[39m
+[31m+     "familyMembers": Array [],[39m
+[2m      "pantry": Array [],[22m
+[2m      "recipes": Array [],[22m
+[2m      "shoppingList": Array [],[22m
+[32m-   "transactions": Array [],[39m
+[32m-   "weeklyPlan": Array [],[39m
+[31m+     "weeklyPlans": Array [],[39m
+[31m+   },[39m
+[2m  }[22m
+
+[36m [2mÔØ»[22m services/__tests__/syncService.t
+est.ts:[2m222:28[22m[39m
+    [90m220| [39m            [35mconst[39m 
+result [33m=[39m [35mawait[39m syncService[33m
+.[39m[34msyncAllFromCloud[39m()[33m;[39m
+    [90m221| [39m
+    [90m222| [39m            [34mexpect[39m(res
+ult)[33m.[39m[34mtoEqual[39m(mockData)[33m;[3
+9m
+    [90m   | [39m                           
+[31m^[39m
+    [90m223| [39m        })[33m;[39m
+    [90m224| [39m    })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[33/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+components/auth/__tests__/AuthGate.test.tsx[2m > 
+[22mAuthGate Component[2m > [22mshould render 
+landing page when not authenticated
+[31m[1mTypeError[22m: 
+useUserStore.mockReturnValue is not a function[39m
+[36m [2mÔØ»[22m components/auth/__tests__/AuthGa
+te.test.tsx:[2m60:31[22m[39m
+    [90m 58| [39m
+    [90m 59| [39m    [34mit[39m([32m'should 
+render landing page when not 
+authenticated'[39m[33m,[39m () [33m=>[39m {
+    [90m 60| [39m        (useUserStore 
+[35mas[39m 
+any)[33m.[39m[34mmockReturnValue[39m({
+    [90m   | [39m                              
+[31m^[39m
+    [90m 61| [39m            
+isAuthenticated[33m:[39m 
+[35mfalse[39m[33m,[39m
+    [90m 62| [39m            
+isDemoMode[33m:[39m [35mfalse[39m[33m,[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[34/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+components/auth/__tests__/AuthGate.test.tsx[2m > 
+[22mAuthGate Component[2m > [22mshould render 
+onboarding when authenticated but not completed
+[31m[1mTypeError[22m: 
+useUserStore.mockReturnValue is not a function[39m
+[36m [2mÔØ»[22m components/auth/__tests__/AuthGa
+te.test.tsx:[2m79:31[22m[39m
+    [90m 77| [39m
+    [90m 78| [39m    [34mit[39m([32m'should 
+render onboarding when authenticated but not 
+completed'[39mÔÇª
+    [90m 79| [39m        (useUserStore 
+[35mas[39m 
+any)[33m.[39m[34mmockReturnValue[39m({
+    [90m   | [39m                              
+[31m^[39m
+    [90m 80| [39m            
+isAuthenticated[33m:[39m 
+[35mtrue[39m[33m,[39m
+    [90m 81| [39m            
+isDemoMode[33m:[39m [35mfalse[39m[33m,[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[35/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+components/auth/__tests__/AuthGate.test.tsx[2m > 
+[22mAuthGate Component[2m > [22mshould render 
+children when authenticated and onboarding 
+completed
+[31m[1mTypeError[22m: 
+useUserStore.mockReturnValue is not a function[39m
+[36m [2mÔØ»[22m components/auth/__tests__/AuthGa
+te.test.tsx:[2m98:31[22m[39m
+    [90m 96| [39m
+    [90m 97| [39m    [34mit[39m([32m'should 
+render children when authenticated and onboarding 
+compl[39mÔÇª
+    [90m 98| [39m        (useUserStore 
+[35mas[39m 
+any)[33m.[39m[34mmockReturnValue[39m({
+    [90m   | [39m                              
+[31m^[39m
+    [90m 99| [39m            
+isAuthenticated[33m:[39m 
+[35mtrue[39m[33m,[39m
+    [90m100| [39m            
+isDemoMode[33m:[39m [35mfalse[39m[33m,[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[36/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+components/auth/__tests__/AuthGate.test.tsx[2m > 
+[22mAuthGate Component[2m > [22mshould render 
+children in demo mode with onboarding completed
+[31m[1mTypeError[22m: 
+useUserStore.mockReturnValue is not a function[39m
+[36m [2mÔØ»[22m components/auth/__tests__/AuthGa
+te.test.tsx:[2m118:31[22m[39m
+    [90m116| [39m
+    [90m117| [39m    [34mit[39m([32m'should 
+render children in demo mode with onboarding 
+completed'[39mÔÇª
+    [90m118| [39m        (useUserStore 
+[35mas[39m 
+any)[33m.[39m[34mmockReturnValue[39m({
+    [90m   | [39m                              
+[31m^[39m
+    [90m119| [39m            
+isAuthenticated[33m:[39m 
+[35mtrue[39m[33m,[39m
+    [90m120| [39m            
+isDemoMode[33m:[39m [35mtrue[39m[33m,[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[37/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+components/auth/__tests__/AuthGate.test.tsx[2m > 
+[22mAuthGate Component[2m > [22mshould handle 
+multiple authentication states correctly
+[31m[1mTypeError[22m: 
+useUserStore.mockReturnValue is not a function[39m
+[36m [2mÔØ»[22m components/auth/__tests__/AuthGa
+te.test.tsx:[2m148:31[22m[39m
+    [90m146| [39m        }[33m;[39m
+    [90m147| [39m
+    [90m148| [39m        (useUserStore 
+[35mas[39m any)[33m.[39m[34mmockReturnValue[3
+9m(mockStore)[33m;[39m
+    [90m   | [39m                              
+[31m^[39m
+    [90m149| [39m
+    [90m150| [39m        [35mconst[39m { 
+rerender } [33m=[39m [34mrender[39m([33m<[39m
+[33mAuthGate[39m[33m>[39m[33m<[39m[33mdiv[3
+9m[33m>[39mContent[33m<[39m[33m/[39m[33mdiv
+[39m[33m>[39m[33m<[39m[33m/[39m[33mAuth[39m
+ÔÇª
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[38/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/csvUtils.test.ts[2m > [22mCSV 
+utilities[2m > [22mparseCSV[2m > [22mshould 
+parse basic CSV data
+[31m[1mTypeError[22m: parseCSV is not a 
+function[39m
+[36m [2mÔØ»[22m 
+utils/__tests__/csvUtils.test.ts:[2m8:28[22m[39m
+    [90m  6| [39m        
+[34mit[39m([32m'should parse basic CSV 
+data'[39m[33m,[39m () [33m=>[39m {
+    [90m  7| [39m            [35mconst[39m csv 
+[33m=[39m [32m'name,amount,date\nGroceries,50.00
+,2026-01-27\[39mÔÇª
+    [90m  8| [39m            [35mconst[39m 
+result [33m=[39m 
+[34mparseCSV[39m(csv)[33m;[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m  9| [39m
+    [90m 10| [39m            [34mexpect[39m(res
+ult)[33m.[39m[34mtoHaveLength[39m([34m2[39m)
+[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[39/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/csvUtils.test.ts[2m > [22mCSV 
+utilities[2m > [22mparseCSV[2m > [22mshould 
+handle CSV with quotes
+[31m[1mTypeError[22m: parseCSV is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/csvUtils.test.ts
+:[2m20:28[22m[39m
+    [90m 18| [39m        
+[34mit[39m([32m'should handle CSV with 
+quotes'[39m[33m,[39m () [33m=>[39m {
+    [90m 19| [39m            [35mconst[39m csv 
+[33m=[39m [32m'name,description\n"Test, 
+Inc","Description wi[39mÔÇª
+    [90m 20| [39m            [35mconst[39m 
+result [33m=[39m 
+[34mparseCSV[39m(csv)[33m;[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m 21| [39m
+    [90m 22| [39m            [34mexpect[39m(res
+ult[[34m0[39m][33m.[39mname)[33m.[39m[34mtoB
+e[39m([32m'Test, Inc'[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[40/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/csvUtils.test.ts[2m > [22mCSV 
+utilities[2m > [22mparseCSV[2m > [22mshould 
+handle empty lines
+[31m[1mTypeError[22m: parseCSV is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/csvUtils.test.ts
+:[2m28:28[22m[39m
+    [90m 26| [39m        
+[34mit[39m([32m'should handle empty 
+lines'[39m[33m,[39m () [33m=>[39m {
+    [90m 27| [39m            [35mconst[39m csv 
+[33m=[39m [32m'name,amount\nTest,100\n\nTest2,20
+0'[39m[33m;[39m
+    [90m 28| [39m            [35mconst[39m 
+result [33m=[39m 
+[34mparseCSV[39m(csv)[33m;[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m 29| [39m
+    [90m 30| [39m            [34mexpect[39m(res
+ult)[33m.[39m[34mtoHaveLength[39m([34m2[39m)
+[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[41/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/csvUtils.test.ts[2m > [22mCSV 
+utilities[2m > [22mparseCSV[2m > [22mshould 
+handle different delimiters
+[31m[1mTypeError[22m: parseCSV is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/csvUtils.test.ts
+:[2m35:28[22m[39m
+    [90m 33| [39m        
+[34mit[39m([32m'should handle different 
+delimiters'[39m[33m,[39m () [33m=>[39m {
+    [90m 34| [39m            [35mconst[39m csv 
+[33m=[39m [32m'name;amount;date\nTest;100;2026-0
+1-27'[39m[33m;[39m
+    [90m 35| [39m            [35mconst[39m 
+result [33m=[39m 
+[34mparseCSV[39m(csv[33m,[39m 
+[32m';'[39m)[33m;[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m 36| [39m
+    [90m 37| [39m            [34mexpect[39m(res
+ult[[34m0[39m])[33m.[39m[34mtoEqual[39m({
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[42/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/csvUtils.test.ts[2m > [22mCSV 
+utilities[2m > [22mdetectCSVFormat[2m > 
+[22mshould detect comma-separated format
+[31m[1mTypeError[22m: detectCSVFormat is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/csvUtils.test.ts
+:[2m48:20[22m[39m
+    [90m 46| [39m        
+[34mit[39m([32m'should detect comma-separated 
+format'[39m[33m,[39m () [33m=>[39m {
+    [90m 47| [39m            [35mconst[39m csv 
+[33m=[39m [32m'name,amount,date\nTest,100,2026-0
+1-27'[39m[33m;[39m
+    [90m 48| [39m            [34mexpect[39m([3
+4mdetectCSVFormat[39m(csv))[33m.[39m[34mtoBe[3
+9m([32m','[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 49| [39m        })[33m;[39m
+    [90m 50| [39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[43/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/csvUtils.test.ts[2m > [22mCSV 
+utilities[2m > [22mdetectCSVFormat[2m > 
+[22mshould detect semicolon-separated format
+[31m[1mTypeError[22m: detectCSVFormat is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/csvUtils.test.ts
+:[2m53:20[22m[39m
+    [90m 51| [39m        
+[34mit[39m([32m'should detect 
+semicolon-separated format'[39m[33m,[39m () 
+[33m=>[39m {
+    [90m 52| [39m            [35mconst[39m csv 
+[33m=[39m [32m'name;amount;date\nTest;100;2026-0
+1-27'[39m[33m;[39m
+    [90m 53| [39m            [34mexpect[39m([3
+4mdetectCSVFormat[39m(csv))[33m.[39m[34mtoBe[3
+9m([32m';'[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 54| [39m        })[33m;[39m
+    [90m 55| [39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[44/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/csvUtils.test.ts[2m > [22mCSV 
+utilities[2m > [22mdetectCSVFormat[2m > 
+[22mshould detect tab-separated format
+[31m[1mTypeError[22m: detectCSVFormat is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/csvUtils.test.ts
+:[2m58:20[22m[39m
+    [90m 56| [39m        
+[34mit[39m([32m'should detect tab-separated 
+format'[39m[33m,[39m () [33m=>[39m {
+    [90m 57| [39m            [35mconst[39m csv 
+[33m=[39m [32m'name\tamount\tdate\nTest\t100\t20
+26-01-27'[39m[33m;[39m
+    [90m 58| [39m            [34mexpect[39m([3
+4mdetectCSVFormat[39m(csv))[33m.[39m[34mtoBe[3
+9m([32m'\t'[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 59| [39m        })[33m;[39m
+    [90m 60| [39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[45/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/csvUtils.test.ts[2m > [22mCSV 
+utilities[2m > [22mdetectCSVFormat[2m > 
+[22mshould default to comma if unclear
+[31m[1mTypeError[22m: detectCSVFormat is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/csvUtils.test.ts
+:[2m63:20[22m[39m
+    [90m 61| [39m        
+[34mit[39m([32m'should default to comma if 
+unclear'[39m[33m,[39m () [33m=>[39m {
+    [90m 62| [39m            [35mconst[39m csv 
+[33m=[39m [32m'name amount date\nTest 100 
+2026-01-27'[39m[33m;[39m
+    [90m 63| [39m            [34mexpect[39m([3
+4mdetectCSVFormat[39m(csv))[33m.[39m[34mtoBe[3
+9m([32m','[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 64| [39m        })[33m;[39m
+    [90m 65| [39m    })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[46/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/csvUtils.test.ts[2m > [22mCSV 
+utilities[2m > [22mmapCSVColumns[2m > 
+[22mshould map columns correctly
+[31m[1mTypeError[22m: mapCSVColumns is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/csvUtils.test.ts
+:[2m79:28[22m[39m
+    [90m 77| [39m            }[33m;[39m
+    [90m 78| [39m
+    [90m 79| [39m            [35mconst[39m 
+result [33m=[39m 
+[34mmapCSVColumns[39m(data[33m,[39m 
+mapping)[33m;[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m 80| [39m
+    [90m 81| [39m            [34mexpect[39m(res
+ult[[34m0[39m])[33m.[39m[34mtoEqual[39m({
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[47/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/csvUtils.test.ts[2m > [22mCSV 
+utilities[2m > [22mmapCSVColumns[2m > 
+[22mshould handle missing columns
+[31m[1mTypeError[22m: mapCSVColumns is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/csvUtils.test.ts
+:[2m99:28[22m[39m
+    [90m 97| [39m            }[33m;[39m
+    [90m 98| [39m
+    [90m 99| [39m            [35mconst[39m 
+result [33m=[39m 
+[34mmapCSVColumns[39m(data[33m,[39m 
+mapping)[33m;[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m100| [39m
+    [90m101| [39m            [34mexpect[39m(res
+ult[[34m0[39m][33m.[39mdate)[33m.[39m[34mtoB
+e[39m([32m'2026-01-27'[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[48/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/csvUtils.test.ts[2m > [22mCSV 
+utilities[2m > [22mmapCSVColumns[2m > 
+[22mshould preserve unmapped columns
+[31m[1mTypeError[22m: mapCSVColumns is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/csvUtils.test.ts
+:[2m115:28[22m[39m
+    [90m113| [39m            }[33m;[39m
+    [90m114| [39m
+    [90m115| [39m            [35mconst[39m 
+result [33m=[39m 
+[34mmapCSVColumns[39m(data[33m,[39m 
+mapping[33m,[39m [35mtrue[39m)[33m;[39m
+    [90m   | [39m                           
+[31m^[39m
+    [90m116| [39m
+    [90m117| [39m            [34mexpect[39m(res
+ult[[34m0[39m][33m.[39mdate)[33m.[39m[34mtoB
+e[39m([32m'2026-01-27'[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[49/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateEmail[2m > [22mshould validate 
+correct email addresses
+[31m[1mTypeError[22m: validateEmail is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m15:20[22m[39m
+    [90m 13| [39m    [34mdescribe[39m([32m'val
+idateEmail'[39m[33m,[39m () [33m=>[39m {
+    [90m 14| [39m        
+[34mit[39m([32m'should validate correct email 
+addresses'[39m[33m,[39m () [33m=>[39m {
+    [90m 15| [39m            [34mexpect[39m([3
+4mvalidateEmail[39m([32m'test@example.com'[39m))
+[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39
+m
+    [90m   | [39m                   [31m^[39m
+    [90m 16| [39m            [34mexpect[39m([3
+4mvalidateEmail[39m([32m'user.name+tag@example.co
+.uk'[39m))[33m.[39m[34mtoBe[39m(ÔÇª
+    [90m 17| [39m            [34mexpect[39m([3
+4mvalidateEmail[39m([32m'user_123@test-domain.com
+'[39m))[33m.[39m[34mtoBe[39m([35mtru[39mÔÇª
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[50/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateEmail[2m > [22mshould reject 
+invalid email addresses
+[31m[1mTypeError[22m: validateEmail is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m21:20[22m[39m
+    [90m 19| [39m
+    [90m 20| [39m        
+[34mit[39m([32m'should reject invalid email 
+addresses'[39m[33m,[39m () [33m=>[39m {
+    [90m 21| [39m            [34mexpect[39m([3
+4mvalidateEmail[39m([32m'invalid'[39m))[33m.[3
+9m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 22| [39m            [34mexpect[39m([3
+4mvalidateEmail[39m([32m'test@'[39m))[33m.[39m
+[34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m 23| [39m            [34mexpect[39m([3
+4mvalidateEmail[39m([32m'@example.com'[39m))[33
+m.[39m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[51/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidatePassword[2m > [22mshould validate 
+strong passwords
+[31m[1mTypeError[22m: validatePassword is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m31:20[22m[39m
+    [90m 29| [39m    [34mdescribe[39m([32m'val
+idatePassword'[39m[33m,[39m () [33m=>[39m {
+    [90m 30| [39m        
+[34mit[39m([32m'should validate strong 
+passwords'[39m[33m,[39m () [33m=>[39m {
+    [90m 31| [39m            [34mexpect[39m([3
+4mvalidatePassword[39m([32m'MyP@ssw0rd'[39m))[3
+3m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 32| [39m            [34mexpect[39m([3
+4mvalidatePassword[39m([32m'Secure123!'[39m))[3
+3m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m 33| [39m            [34mexpect[39m([3
+4mvalidatePassword[39m([32m'C0mpl3x!Pass'[39m))
+[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[52/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidatePassword[2m > [22mshould reject 
+weak passwords
+[31m[1mTypeError[22m: validatePassword is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m37:20[22m[39m
+    [90m 35| [39m
+    [90m 36| [39m        
+[34mit[39m([32m'should reject weak 
+passwords'[39m[33m,[39m () [33m=>[39m {
+    [90m 37| [39m            [34mexpect[39m([3
+4mvalidatePassword[39m([32m'short'[39m))[33m.[
+39m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 38| [39m            [34mexpect[39m([3
+4mvalidatePassword[39m([32m'alllowercase'[39m))
+[33m.[39m[34mtoBe[39m([35mfalse[39m)[33m;[39
+m
+    [90m 39| [39m            [34mexpect[39m([3
+4mvalidatePassword[39m([32m'ALLUPPERCASE'[39m))
+[33m.[39m[34mtoBe[39m([35mfalse[39m)[33m;[39
+m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[53/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidatePassword[2m > [22mshould require 
+minimum length
+[31m[1mTypeError[22m: validatePassword is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m46:20[22m[39m
+    [90m 44| [39m
+    [90m 45| [39m        
+[34mit[39m([32m'should require minimum 
+length'[39m[33m,[39m () [33m=>[39m {
+    [90m 46| [39m            [34mexpect[39m([3
+4mvalidatePassword[39m([32m'Ab1!'[39m))[33m.[3
+9m[34mtoBe[39m([35mfalse[39m)[33m;[39m 
+[90m// Too short[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 47| [39m            [34mexpect[39m([3
+4mvalidatePassword[39m([32m'Abcd1234!'[39m))[33
+m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m 
+[90m// Long [39mÔÇª
+    [90m 48| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[54/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateAmount[2m > [22mshould validate 
+positive numbers
+[31m[1mTypeError[22m: validateAmount is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m53:20[22m[39m
+    [90m 51| [39m    [34mdescribe[39m([32m'val
+idateAmount'[39m[33m,[39m () [33m=>[39m {
+    [90m 52| [39m        
+[34mit[39m([32m'should validate positive 
+numbers'[39m[33m,[39m () [33m=>[39m {
+    [90m 53| [39m            [34mexpect[39m([3
+4mvalidateAmount[39m([34m100[39m))[33m.[39m[3
+4mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 54| [39m            [34mexpect[39m([3
+4mvalidateAmount[39m([34m0.01[39m))[33m.[39m[
+34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m 55| [39m            [34mexpect[39m([3
+4mvalidateAmount[39m([34m1000000[39m))[33m.[39
+m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[55/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateAmount[2m > [22mshould reject 
+invalid amounts
+[31m[1mTypeError[22m: validateAmount is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m59:20[22m[39m
+    [90m 57| [39m
+    [90m 58| [39m        
+[34mit[39m([32m'should reject invalid 
+amounts'[39m[33m,[39m () [33m=>[39m {
+    [90m 59| [39m            [34mexpect[39m([3
+4mvalidateAmount[39m([33m-[39m[34m100[39m))[3
+3m.[39m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 60| [39m            [34mexpect[39m([3
+4mvalidateAmount[39m([34m0[39m))[33m.[39m[34m
+toBe[39m([35mfalse[39m)[33m;[39m
+    [90m 61| [39m            [34mexpect[39m([3
+4mvalidateAmount[39m([33mNaN[39m))[33m.[39m[3
+4mtoBe[39m([35mfalse[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[56/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateAmount[2m > [22mshould handle 
+decimal amounts
+[31m[1mTypeError[22m: validateAmount is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m65:20[22m[39m
+    [90m 63| [39m
+    [90m 64| [39m        
+[34mit[39m([32m'should handle decimal 
+amounts'[39m[33m,[39m () [33m=>[39m {
+    [90m 65| [39m            [34mexpect[39m([3
+4mvalidateAmount[39m([34m99.99[39m))[33m.[39m
+[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 66| [39m            [34mexpect[39m([3
+4mvalidateAmount[39m([34m0.5[39m))[33m.[39m[3
+4mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m 67| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[57/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateDate[2m > [22mshould validate 
+correct date formats
+[31m[1mTypeError[22m: validateDate is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m72:20[22m[39m
+    [90m 70| [39m    [34mdescribe[39m([32m'val
+idateDate'[39m[33m,[39m () [33m=>[39m {
+    [90m 71| [39m        
+[34mit[39m([32m'should validate correct date 
+formats'[39m[33m,[39m () [33m=>[39m {
+    [90m 72| [39m            [34mexpect[39m([3
+4mvalidateDate[39m([32m'2026-01-27'[39m))[33m.
+[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 73| [39m            [34mexpect[39m([3
+4mvalidateDate[39m([32m'2025-12-31'[39m))[33m.
+[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m 74| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[58/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateDate[2m > [22mshould reject invalid 
+dates
+[31m[1mTypeError[22m: validateDate is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m77:20[22m[39m
+    [90m 75| [39m
+    [90m 76| [39m        
+[34mit[39m([32m'should reject invalid 
+dates'[39m[33m,[39m () [33m=>[39m {
+    [90m 77| [39m            [34mexpect[39m([3
+4mvalidateDate[39m([32m'invalid'[39m))[33m.[39
+m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 78| [39m            [34mexpect[39m([3
+4mvalidateDate[39m([32m'2026-13-01'[39m))[33m.
+[39m[34mtoBe[39m([35mfalse[39m)[33m;[39m 
+[90m// Invalid[39mÔÇª
+    [90m 79| [39m            [34mexpect[39m([3
+4mvalidateDate[39m([32m'2026-01-32'[39m))[33m.
+[39m[34mtoBe[39m([35mfalse[39m)[33m;[39m 
+[90m// Invalid[39mÔÇª
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[59/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateDate[2m > [22mshould handle Date 
+objects
+[31m[1mTypeError[22m: validateDate is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m84:20[22m[39m
+    [90m 82| [39m
+    [90m 83| [39m        
+[34mit[39m([32m'should handle Date 
+objects'[39m[33m,[39m () [33m=>[39m {
+    [90m 84| [39m            [34mexpect[39m([3
+4mvalidateDate[39m([35mnew[39m [33mDate[39m())
+)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[3
+9m
+    [90m   | [39m                   [31m^[39m
+    [90m 85| [39m            [34mexpect[39m([3
+4mvalidateDate[39m([35mnew[39m [33mDate[39m([
+32m'2026-01-27'[39m)))[33m.[39m[34mtoBe[39m([
+35mtrue[39m)[33m;[39m
+    [90m 86| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[60/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateRequired[2m > [22mshould validate 
+non-empty values
+[31m[1mTypeError[22m: validateRequired is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m91:20[22m[39m
+    [90m 89| [39m    [34mdescribe[39m([32m'val
+idateRequired'[39m[33m,[39m () [33m=>[39m {
+    [90m 90| [39m        
+[34mit[39m([32m'should validate non-empty 
+values'[39m[33m,[39m () [33m=>[39m {
+    [90m 91| [39m            [34mexpect[39m([3
+4mvalidateRequired[39m([32m'text'[39m))[33m.[3
+9m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 92| [39m            [34mexpect[39m([3
+4mvalidateRequired[39m([32m'123'[39m))[33m.[39
+m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m 93| [39m            
+[34mexpect[39m([34mvalidateRequired[39m([32m' 
+value '[39m))[33m.[39m[34mtoBe[39m([35mtrue[
+39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[61/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateRequired[2m > [22mshould reject 
+empty values
+[31m[1mTypeError[22m: validateRequired is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m97:20[22m[39m
+    [90m 95| [39m
+    [90m 96| [39m        
+[34mit[39m([32m'should reject empty 
+values'[39m[33m,[39m () [33m=>[39m {
+    [90m 97| [39m            [34mexpect[39m([3
+4mvalidateRequired[39m([32m''[39m))[33m.[39m[
+34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m 98| [39m            
+[34mexpect[39m([34mvalidateRequired[39m([32m' 
+  '[39m))[33m.[39m[34mtoBe[39m([35mfalse[39m
+)[33m;[39m
+    [90m 99| [39m            [34mexpect[39m([3
+4mvalidateRequired[39m([35mnull[39m))[33m.[39m
+[34mtoBe[39m([35mfalse[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[62/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateIBAN[2m > [22mshould validate 
+correct Spanish IBANs
+[31m[1mTypeError[22m: validateIBAN is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m106:20[22m[39m
+    [90m104| [39m    [34mdescribe[39m([32m'val
+idateIBAN'[39m[33m,[39m () [33m=>[39m {
+    [90m105| [39m        
+[34mit[39m([32m'should validate correct Spanish 
+IBANs'[39m[33m,[39m () [33m=>[39m {
+    [90m106| [39m            [34mexpect[39m([3
+4mvalidateIBAN[39m([32m'ES9121000418450200051332'
+[39m))[33m.[39m[34mtoBe[39m([35mtrue[39mÔÇª
+    [90m   | [39m                   [31m^[39m
+    [90m107| [39m            [34mexpect[39m([3
+4mvalidateIBAN[39m([32m'ES7921000813610123456789'
+[39m))[33m.[39m[34mtoBe[39m([35mtrue[39mÔÇª
+    [90m108| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[63/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateIBAN[2m > [22mshould validate IBANs 
+from other countries
+[31m[1mTypeError[22m: validateIBAN is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m111:20[22m[39m
+    [90m109| [39m
+    [90m110| [39m        
+[34mit[39m([32m'should validate IBANs from 
+other countries'[39m[33m,[39m () [33m=>[39m {
+    [90m111| [39m            [34mexpect[39m([3
+4mvalidateIBAN[39m([32m'GB29NWBK60161331926819'[
+39m))[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m
+;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m112| [39m            [34mexpect[39m([3
+4mvalidateIBAN[39m([32m'DE89370400440532013000'[
+39m))[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m
+;[39m
+    [90m113| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[64/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateIBAN[2m > [22mshould reject invalid 
+IBANs
+[31m[1mTypeError[22m: validateIBAN is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m116:20[22m[39m
+    [90m114| [39m
+    [90m115| [39m        
+[34mit[39m([32m'should reject invalid 
+IBANs'[39m[33m,[39m () [33m=>[39m {
+    [90m116| [39m            [34mexpect[39m([3
+4mvalidateIBAN[39m([32m'ES00000000000000000000'[
+39m))[33m.[39m[34mtoBe[39m([35mfalse[39m)[33
+m;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m117| [39m            [34mexpect[39m([3
+4mvalidateIBAN[39m([32m'INVALID'[39m))[33m.[39
+m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m118| [39m            [34mexpect[39m([3
+4mvalidateIBAN[39m([32m'ES12'[39m))[33m.[39m[
+34mtoBe[39m([35mfalse[39m)[33m;[39m [90m// 
+Too short[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[65/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateIBAN[2m > [22mshould handle IBANs 
+with spaces
+[31m[1mTypeError[22m: validateIBAN is not a 
+function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m123:20[22m[39m
+    [90m121| [39m
+    [90m122| [39m        
+[34mit[39m([32m'should handle IBANs with 
+spaces'[39m[33m,[39m () [33m=>[39m {
+    [90m123| [39m            
+[34mexpect[39m([34mvalidateIBAN[39m([32m'ES91 
+2100 0418 4502 0005 
+1332'[39m))[33m.[39m[34mtoBe[39mÔÇª
+    [90m   | [39m                   [31m^[39m
+    [90m124| [39m        })[33m;[39m
+    [90m125| [39m    })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[66/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateCadastralReference[2m > [22mshould 
+validate correct cadastral references
+[31m[1mTypeError[22m: 
+validateCadastralReference is not a function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m129:20[22m[39m
+    [90m127| [39m    [34mdescribe[39m([32m'val
+idateCadastralReference'[39m[33m,[39m () 
+[33m=>[39m {
+    [90m128| [39m        
+[34mit[39m([32m'should validate correct 
+cadastral references'[39m[33m,[39m () 
+[33m=>[39m {
+    [90m129| [39m            [34mexpect[39m([3
+4mvalidateCadastralReference[39m([32m'1234567AB12
+34C0001AB'[39m))ÔÇª
+    [90m   | [39m                   [31m^[39m
+    [90m130| [39m            [34mexpect[39m([3
+4mvalidateCadastralReference[39m([32m'9876543ZY98
+76D0002XY'[39m))ÔÇª
+    [90m131| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[67/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateCadastralReference[2m > [22mshould 
+reject invalid cadastral references
+[31m[1mTypeError[22m: 
+validateCadastralReference is not a function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m134:20[22m[39m
+    [90m132| [39m
+    [90m133| [39m        
+[34mit[39m([32m'should reject invalid cadastral 
+references'[39m[33m,[39m () [33m=>[39m {
+    [90m134| [39m            [34mexpect[39m([3
+4mvalidateCadastralReference[39m([32m'INVALID'[3
+9m))[33m.[39m[34mtoBe[39m([35mfalse[39m)[33m
+;[39m
+    [90m   | [39m                   [31m^[39m
+    [90m135| [39m            [34mexpect[39m([3
+4mvalidateCadastralReference[39m([32m'123'[39m))
+[33m.[39m[34mtoBe[39m([35mfalse[39m)[33m;[3
+9m [90m// [39mÔÇª
+    [90m136| [39m            [34mexpect[39m([3
+4mvalidateCadastralReference[39m([32m''[39m))[3
+3m.[39m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[68/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts[2m > 
+[22mvalidation utilities[2m > 
+[22mvalidateCadastralReference[2m > [22mshould 
+handle references with spaces or dashes
+[31m[1mTypeError[22m: 
+validateCadastralReference is not a function[39m
+[36m [2mÔØ»[22m utils/__tests__/validation.test.
+ts:[2m140:20[22m[39m
+    [90m138| [39m
+    [90m139| [39m        
+[34mit[39m([32m'should handle references with 
+spaces or dashes'[39m[33m,[39m () [33m=>[39m {
+    [90m140| [39m            [34mexpect[39m([3
+4mvalidateCadastralReference[39m([32m'1234567 
+AB1234 C0001 AB[39mÔÇª
+    [90m   | [39m                   [31m^[39m
+    [90m141| [39m            [34mexpect[39m([3
+4mvalidateCadastralReference[39m([32m'1234567-AB1
+234-C0001-AB[39mÔÇª
+    [90m142| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[69/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m components/dashb
+oard/__tests__/SmartInsightWidget.test.tsx[2m > 
+[22mSmartInsightWidget Component[2m > 
+[22mshould render widget with initial state
+[31m[1m[7m FAIL [27m[22m[39m components/dashb
+oard/__tests__/SmartInsightWidget.test.tsx[2m > 
+[22mSmartInsightWidget Component[2m > 
+[22mshould display loading state while generating 
+insights
+[31m[1m[7m FAIL [27m[22m[39m components/dashb
+oard/__tests__/SmartInsightWidget.test.tsx[2m > 
+[22mSmartInsightWidget Component[2m > 
+[22mshould display generated insight
+[31m[1m[7m FAIL [27m[22m[39m components/dashb
+oard/__tests__/SmartInsightWidget.test.tsx[2m > 
+[22mSmartInsightWidget Component[2m > 
+[22mshould handle navigation callback
+[31m[1m[7m FAIL [27m[22m[39m components/dashb
+oard/__tests__/SmartInsightWidget.test.tsx[2m > 
+[22mSmartInsightWidget Component[2m > 
+[22mshould handle error state gracefully
+[31m[1m[7m FAIL [27m[22m[39m components/dashb
+oard/__tests__/SmartInsightWidget.test.tsx[2m > 
+[22mSmartInsightWidget Component[2m > 
+[22mshould work with different languages
+[31m[1m[7m FAIL [27m[22m[39m components/dashb
+oard/__tests__/SmartInsightWidget.test.tsx[2m > 
+[22mSmartInsightWidget Component[2m > 
+[22mshould display predictive analysis when 
+available
+[31m[1mTypeError[22m: 
+useUserStore.mockReturnValue is not a function[39m
+[36m [2mÔØ»[22m components/dashboard/__tests__/S
+martInsightWidget.test.tsx:[2m52:31[22m[39m
+    [90m 50| [39m        
+vi[33m.[39m[34mclearAllMocks[39m()[33m;[39m
+    [90m 51| [39m
+    [90m 52| [39m        (useUserStore 
+[35mas[39m 
+any)[33m.[39m[34mmockReturnValue[39m({
+    [90m   | [39m                              
+[31m^[39m
+    [90m 53| [39m            language[33m:[39m 
+[32m'ES'[39m
+    [90m 54| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[70/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe renderizar el 
+componente correctamente
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe mostrar los 
+d├¡as de la semana
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe mostrar las 
+comidas del d├¡a (desayuno, almuerzo, cena)
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe mostrar las 
+recetas planificadas
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mNavegaci├│n 
+de Semanas[2m > [22mdebe tener botones para 
+navegar entre semanas
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mNavegaci├│n 
+de Semanas[2m > [22mdebe cambiar de semana al 
+hacer clic en siguiente
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mAgregar 
+Recetas al Plan[2m > [22mdebe permitir agregar 
+una receta r├ípidamente
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mDrag and 
+Drop[2m > [22mdebe permitir arrastrar recetas 
+entre d├¡as
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mCopiar y 
+Pegar D├¡as[2m > [22mdebe tener opci├│n para 
+copiar un d├¡a
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mCopiar y 
+Pegar D├¡as[2m > [22mdebe tener opci├│n para 
+pegar un d├¡a
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mLimpiar 
+D├¡a[2m > [22mdebe permitir limpiar todas las 
+comidas de un d├¡a
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mVer Detalles 
+de Receta[2m > [22mdebe abrir los detalles al 
+hacer clic en una receta
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mLista de 
+Compras[2m > [22mdebe tener bot├│n para generar 
+lista de compras
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mLista de 
+Compras[2m > [22mdebe calcular ingredientes 
+necesarios para la semana
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mGeneraci├│n 
+de Men├║ con IA[2m > [22mdebe tener bot├│n para 
+generar men├║ autom├íticamente
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mGeneraci├│n 
+de Men├║ con IA[2m > [22mdebe mostrar opciones 
+de preferencias para IA
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mEliminar 
+Recetas del Plan[2m > [22mdebe permitir eliminar 
+una receta del plan
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mCasos 
+Extremos[2m > [22mdebe manejar plan vac├¡o
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mCasos 
+Extremos[2m > [22mdebe manejar m├║ltiples 
+recetas en una comida
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/life/__tests__/MealPlanner.test.tsx[2m > 
+[22mMealPlanner Component[2m > [22mCasos 
+Extremos[2m > [22mdebe manejar recetas sin imagen
+[31m[1mError[22m: Element type is invalid: 
+expected a string (for built-in components) or a 
+class/function (for composite components) but got: 
+undefined. You likely forgot to export your 
+component from the file it's defined in, or you 
+might have mixed up default and named imports.[39m
+[90m [2mÔØ»[22m createFiberFromTypeAndProps node
+_modules/react-dom/cjs/react-dom-client.development
+.js:[2m5021:28[22m[39m
+[90m [2mÔØ»[22m createFiberFromElement node_modu
+les/react-dom/cjs/react-dom-client.development.js:
+[2m5035:14[22m[39m
+[90m [2mÔØ»[22m reconcileChildFibersImpl node_mo
+dules/react-dom/cjs/react-dom-client.development.js
+:[2m6920:31[22m[39m
+[90m [2mÔØ»[22m node_modules/react-dom/cjs/react
+-dom-client.development.js:[2m7098:33[22m[39m
+[90m [2mÔØ»[22m reconcileChildren node_modules/r
+eact-dom/cjs/react-dom-client.development.js:[2m97
+02:13[22m[39m
+[90m [2mÔØ»[22m beginWork node_modules/react-dom
+/cjs/react-dom-client.development.js:[2m11899:15[
+22m[39m
+[90m [2mÔØ»[22m runWithFiberInDEV node_modules/r
+eact-dom/cjs/react-dom-client.development.js:[2m87
+4:13[22m[39m
+[90m [2mÔØ»[22m performUnitOfWork node_modules/r
+eact-dom/cjs/react-dom-client.development.js:[2m17
+641:22[22m[39m
+[90m [2mÔØ»[22m workLoopSync node_modules/react-
+dom/cjs/react-dom-client.development.js:[2m17469:4
+1[22m[39m
+[90m [2mÔØ»[22m renderRootSync node_modules/reac
+t-dom/cjs/react-dom-client.development.js:[2m17450
+:11[22m[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[71/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe renderizar el 
+componente correctamente
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe mostrar los 
+presupuestos existentes
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe mostrar el 
+gr├ífico de presupuestos
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mC├ílculo de 
+Gastos[2m > [22mdebe calcular correctamente el 
+gasto en una categor├¡a
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mC├ílculo de 
+Gastos[2m > [22mdebe calcular el porcentaje de 
+uso del presupuesto
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mC├ílculo de 
+Gastos[2m > [22mdebe mostrar advertencia cuando 
+se supera el 80% del presupuesto
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mFormulario de 
+Nuevo Presupuesto[2m > [22mdebe mostrar el 
+formulario al hacer clic en "Nuevo Presupuesto"
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mFormulario de 
+Nuevo Presupuesto[2m > [22mdebe crear un 
+presupuesto fijo con datos v├ílidos
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mFormulario de 
+Nuevo Presupuesto[2m > [22mdebe validar que el 
+presupuesto de porcentaje incluya el porcentaje
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mEdici├│n de 
+Presupuestos[2m > [22mdebe abrir el formulario 
+de edici├│n
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mEdici├│n de 
+Presupuestos[2m > [22mdebe actualizar un 
+presupuesto existente
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mEliminaci├│n de 
+Presupuestos[2m > [22mdebe eliminar un 
+presupuesto al confirmar
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mEliminaci├│n de 
+Presupuestos[2m > [22mno debe eliminar si se 
+cancela la confirmaci├│n
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mVer 
+Transacciones[2m > [22mdebe llamar a 
+onViewTransactions al hacer clic en ver detalles
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mPresupuestos de 
+Porcentaje[2m > [22mdebe calcular el l├¡mite 
+efectivo basado en el porcentaje de ingresos
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mCasos 
+Extremos[2m > [22mdebe manejar lista vac├¡a de 
+presupuestos
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mCasos 
+Extremos[2m > [22mdebe manejar presupuesto sin 
+gastos
+[31m[1mTypeError[22m: Cannot read properties of 
+undefined (reading 'filter')[39m
+[36m [2mÔØ»[22m components/features/finance/Budg
+ets.tsx:[2m60:56[22m[39m
+    [90m 58| [39m    [35mconst[39m 
+[selectedYear[33m,[39m setSelectedYear] 
+[33m=[39m [34museState[39m([35mnew[39m 
+[33mDate[39m()[33m.[39m[34mgetFul[39mÔÇª
+    [90m 59| [39m
+    [90m 60| [39m    [35mconst[39m 
+expenseCategories [33m=[39m [34museMemo[39m(() 
+[33m=>[39m 
+categories[33m.[39m[34mfilter[39m(c 
+[33m=>[39m c[33m.[39mtÔÇª
+    [90m   | [39m                                
+                       [31m^[39m
+    [90m 61| [39m
+    [90m 62| [39m    [90m// Initialize 
+selection[39m
+[90m [2mÔØ»[22m mountMemo node_modules/react-dom
+/cjs/react-dom-client.development.js:[2m8777:23[2
+2m[39m
+[90m [2mÔØ»[22m Object.useMemo node_modules/reac
+t-dom/cjs/react-dom-client.development.js:[2m26216
+:18[22m[39m
+[90m [2mÔØ»[22m 
+Proxy.process.env.NODE_ENV.exports.useMemo node_mod
+ules/react/cjs/react.development.js:[2m1251:34[22
+m[39m
+[90m [2mÔØ»[22m Budgets components/features/fina
+nce/Budgets.tsx:[2m60:31[22m[39m
+[90m [2mÔØ»[22m Object.react_stack_bottom_frame 
+node_modules/react-dom/cjs/react-dom-client.develop
+ment.js:[2m25904:20[22m[39m
+[90m [2mÔØ»[22m renderWithHooks node_modules/rea
+ct-dom/cjs/react-dom-client.development.js:[2m7662
+:22[22m[39m
+[90m [2mÔØ»[22m updateFunctionComponent node_mod
+ules/react-dom/cjs/react-dom-client.development.js:
+[2m10166:19[22m[39m
+[90m [2mÔØ»[22m beginWork node_modules/react-dom
+/cjs/react-dom-client.development.js:[2m11778:18[
+22m[39m
+[90m [2mÔØ»[22m runWithFiberInDEV node_modules/r
+eact-dom/cjs/react-dom-client.development.js:[2m87
+4:13[22m[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[72/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Goals.test.tsx[2m > 
+[22mGoals Component[2m > [22mshould render 
+goals list
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Goals.test.tsx[2m > 
+[22mGoals Component[2m > [22mshould display 
+goal progress correctly
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Goals.test.tsx[2m > 
+[22mGoals Component[2m > [22mshould show 
+progress bar for each goal
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Goals.test.tsx[2m > 
+[22mGoals Component[2m > [22mshould display 
+remaining amount
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Goals.test.tsx[2m > 
+[22mGoals Component[2m > [22mshould show 
+deadline information
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Goals.test.tsx[2m > 
+[22mGoals Component[2m > [22mshould handle 
+completed goals
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Goals.test.tsx[2m > 
+[22mGoals Component[2m > [22mshould handle 
+empty goals list
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Goals.test.tsx[2m > 
+[22mGoals Component[2m > [22mshould calculate 
+days remaining to deadline
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Goals.test.tsx[2m > 
+[22mGoals Component[2m > [22mshould show 
+warning for overdue goals
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Goals.test.tsx[2m > 
+[22mGoals Component[2m > [22mshould display 
+multiple goals correctly
+[31m[1mTypeError[22m: 
+useFinanceStore.mockReturnValue is not a 
+function[39m
+[36m [2mÔØ»[22m components/features/finance/__te
+sts__/Goals.test.tsx:[2m57:34[22m[39m
+    [90m 55| [39m        
+vi[33m.[39m[34mclearAllMocks[39m()[33m;[39m
+    [90m 56| [39m
+    [90m 57| [39m        (useFinanceStore 
+[35mas[39m 
+any)[33m.[39m[34mmockReturnValue[39m({
+    [90m   | [39m                                
+ [31m^[39m
+    [90m 58| [39m            goals[33m:[39m 
+mockGoals[33m,[39m
+    [90m 59| [39m            addGoal[33m:[39m 
+vi[33m.[39m[34mfn[39m()[33m,[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[73/139]ÔÄ»[22m[39m
+
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe renderizar el 
+componente correctamente
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe mostrar las 
+transacciones existentes
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe mostrar los 
+montos formateados correctamente
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mFiltros[2m > [22mdebe aplicar filtros 
+iniciales cuando se proporcionan
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mFiltros[2m > [22mdebe limpiar filtros 
+cuando se llama onClearFilters
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mFormulario de Nueva Transacci├│n[2m > 
+[22mdebe mostrar el formulario cuando se hace 
+clic en "Nueva Transacci├│n"
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mFormulario de Nueva Transacci├│n[2m > 
+[22mdebe validar campos requeridos antes de enviar
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mFormulario de Nueva Transacci├│n[2m > 
+[22mdebe crear una nueva transacci├│n con datos 
+v├ílidos
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mEdici├│n de Transacciones[2m > [22mdebe 
+abrir el modal de edici├│n al hacer clic en editar
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mEdici├│n de Transacciones[2m > [22mdebe 
+actualizar una transacci├│n existente
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mEliminaci├│n de Transacciones[2m > [22mdebe 
+eliminar una transacci├│n al confirmar
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mEliminaci├│n de Transacciones[2m > [22mno 
+debe eliminar si se cancela la confirmaci├│n
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mEstad├¡sticas[2m > [22mdebe calcular y 
+mostrar el total de ingresos
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mEstad├¡sticas[2m > [22mdebe calcular y 
+mostrar el total de gastos
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mCasos Extremos[2m > [22mdebe manejar lista 
+vac├¡a de transacciones
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/transactions/__tests__/Transactions.tes
+t.tsx[2m > [22mTransactions Component[2m > 
+[22mCasos Extremos[2m > [22mdebe manejar montos 
+muy grandes
+[31m[1mTypeError[22m: Cannot read properties of 
+undefined (reading 'find')[39m
+[2m Test Files [22m [1m[31m15 failed[39m[22m[2m | [22m[1m[32m8 passed[39m[22m[90m (23)[39m
+[36m [2mÔØ»[22m TransactionFilters components/fe
+atures/finance/transactions/components/TransactionF
+ilters.tsx:[2m35:47[22m[39m
+[2m      Tests [22m [1m[31m138 failed[39m[22m[2m | [22m[1m[32m161 passed[39m[22m[90m (299)[39m
+[2m   Start at [22m 22:11:37
+[2m   Duration [22m 5.49s[2m (transform 4.19s, setup 8.30s, collect 9.65s, tests 1.12s, environment 32.29s, prepare 11.10s)[22m
+
+    [90m 33| [39m}) [33m=>[39m {
+    [90m 34| [39m
+    [90m 35| [39m    [35mconst[39m 
+availableSubCategories [33m=[39m 
+categories[33m.[39m[34mfind[39m(c [33m=>[39m 
+c[33m.[39mname [33m===[39m filÔÇª
+    [90m   | [39m                                
+              [31m^[39m
+    [90m 36| [39m
+    [90m 37| [39m    [35mreturn[39m (
+[90m [2mÔØ»[22m Object.react_stack_bottom_frame 
+node_modules/react-dom/cjs/react-dom-client.develop
+ment.js:[2m25904:20[22m[39m
+[90m [2mÔØ»[22m renderWithHooks node_modules/rea
+ct-dom/cjs/react-dom-client.development.js:[2m7662
+:22[22m[39m
+[90m [2mÔØ»[22m updateFunctionComponent node_mod
+ules/react-dom/cjs/react-dom-client.development.js:
+[2m10166:19[22m[39m
+[90m [2mÔØ»[22m beginWork node_modules/react-dom
+/cjs/react-dom-client.development.js:[2m11778:18[
+22m[39m
+[90m [2mÔØ»[22m runWithFiberInDEV node_modules/r
+eact-dom/cjs/react-dom-client.development.js:[2m87
+4:13[22m[39m
+[90m [2mÔØ»[22m performUnitOfWork node_modules/r
+eact-dom/cjs/react-dom-client.development.js:[2m17
+641:22[22m[39m
+[90m [2mÔØ»[22m workLoopSync node_modules/react-
+dom/cjs/react-dom-client.development.js:[2m17469:4
+1[22m[39m
+[90m [2mÔØ»[22m renderRootSync node_modules/reac
+t-dom/cjs/react-dom-client.development.js:[2m17450
+:11[22m[39m
+[90m [2mÔØ»[22m performWorkOnRoot node_modules/r
+eact-dom/cjs/react-dom-client.development.js:[2m16
+583:35[22m[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[74/139]ÔÄ»[22m[39m
+

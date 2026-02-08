@@ -1,0 +1,26 @@
+﻿
+> onyx-suite@1.0.1 type-check
+> tsc --noEmit
+
+services/__tests__/storageService.test.ts(2,10): error TS2305: Module '"../storageService"' has no exported member 'saveToLocalStorage'.
+services/__tests__/storageService.test.ts(2,30): error TS2305: Module '"../storageService"' has no exported member 'loadFromLocalStorage'.
+services/__tests__/storageService.test.ts(2,52): error TS2305: Module '"../storageService"' has no exported member 'clearLocalStorage'.
+services/__tests__/stripeService.test.ts(21,48): error TS2339: Property 'createCheckoutSession' does not exist on type '{ redirectToCheckout(priceId: string, userId: string): Promise<void>; redirectToCustomerPortal(customerId?: string): Promise<void>; getSubscriptionStatus(userId: string): Promise<...>; }'.
+services/__tests__/stripeService.test.ts(29,31): error TS2339: Property 'createCheckoutSession' does not exist on type '{ redirectToCheckout(priceId: string, userId: string): Promise<void>; redirectToCustomerPortal(customerId?: string): Promise<void>; getSubscriptionStatus(userId: string): Promise<...>; }'.
+services/__tests__/stripeService.test.ts(34,48): error TS2339: Property 'createCheckoutSession' does not exist on type '{ redirectToCheckout(priceId: string, userId: string): Promise<void>; redirectToCustomerPortal(customerId?: string): Promise<void>; getSubscriptionStatus(userId: string): Promise<...>; }'.
+services/__tests__/stripeService.test.ts(62,43): error TS2339: Property 'validateWebhook' does not exist on type '{ redirectToCheckout(priceId: string, userId: string): Promise<void>; redirectToCustomerPortal(customerId?: string): Promise<void>; getSubscriptionStatus(userId: string): Promise<...>; }'.
+services/__tests__/stripeService.test.ts(71,43): error TS2339: Property 'validateWebhook' does not exist on type '{ redirectToCheckout(priceId: string, userId: string): Promise<void>; redirectToCustomerPortal(customerId?: string): Promise<void>; getSubscriptionStatus(userId: string): Promise<...>; }'.
+services/monitoringService.ts(2,17): error TS2305: Module '"web-vitals"' has no exported member 'onFID'.
+services/monitoringService.ts(214,56): error TS2694: Namespace '"D:/Users/Josu\u00E9/Desktop/Onyx Suite 2026/node_modules/@sentry/react/build/types/index"' has no exported member 'Transaction'.
+services/monitoringService.ts(219,23): error TS2339: Property 'startTransaction' does not exist on type 'typeof import("D:/Users/Josu\u00E9/Desktop/Onyx Suite 2026/node_modules/@sentry/react/build/types/index")'.
+utils/__tests__/csvUtils.test.ts(2,10): error TS2305: Module '"../csvUtils"' has no exported member 'parseCSV'.
+utils/__tests__/csvUtils.test.ts(2,20): error TS2305: Module '"../csvUtils"' has no exported member 'detectCSVFormat'.
+utils/__tests__/csvUtils.test.ts(2,37): error TS2305: Module '"../csvUtils"' has no exported member 'mapCSVColumns'.
+utils/__tests__/formatters.test.ts(2,76): error TS2307: Cannot find module '../formatters' or its corresponding type declarations.
+utils/__tests__/validation.test.ts(3,5): error TS2305: Module '"../validation"' has no exported member 'validateEmail'.
+utils/__tests__/validation.test.ts(4,5): error TS2305: Module '"../validation"' has no exported member 'validatePassword'.
+utils/__tests__/validation.test.ts(5,5): error TS2305: Module '"../validation"' has no exported member 'validateAmount'.
+utils/__tests__/validation.test.ts(6,5): error TS2305: Module '"../validation"' has no exported member 'validateDate'.
+utils/__tests__/validation.test.ts(7,5): error TS2305: Module '"../validation"' has no exported member 'validateRequired'.
+utils/__tests__/validation.test.ts(8,5): error TS2305: Module '"../validation"' has no exported member 'validateIBAN'.
+utils/__tests__/validation.test.ts(9,5): error TS2305: Module '"../validation"' has no exported member 'validateCadastralReference'.

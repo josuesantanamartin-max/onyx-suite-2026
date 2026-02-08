@@ -67,8 +67,8 @@ export const useSync = () => {
                 if (cloudData.life.shoppingList.length > 0) {
                     lifeStore.setShoppingList(cloudData.life.shoppingList);
                 }
-                if (Object.keys(cloudData.life.weeklyPlan).length > 0) {
-                    lifeStore.setWeeklyPlan(cloudData.life.weeklyPlan);
+                if (cloudData.life.weeklyPlans && cloudData.life.weeklyPlans.length > 0) {
+                    lifeStore.setWeeklyPlans(cloudData.life.weeklyPlans);
                 }
                 if (cloudData.life.familyMembers.length > 0) {
                     lifeStore.setFamilyMembers(cloudData.life.familyMembers);

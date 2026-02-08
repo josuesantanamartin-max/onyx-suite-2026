@@ -17,6 +17,10 @@ import TermsOfService from '../../pages/TermsOfService';
 import { HouseholdManager } from '../collaboration/HouseholdManager';
 import { MemberManagement } from '../collaboration/MemberManagement';
 import { HouseholdChat } from '../collaboration/HouseholdChat';
+import PrivacySettings from './PrivacySettings';
+import { useSampleData } from '../../../hooks/useSampleData';
+import SampleDataSection from './SampleDataSection';
+import BackupSettings from './BackupSettings';
 
 interface SettingsModuleProps {
   onMenuClick?: () => void;
@@ -34,7 +38,9 @@ const TEXTS: any = {
       subscription: 'Suscripción',
       billing: 'Facturación',
       security: 'Seguridad',
-      personalization: 'Personalización'
+      personalization: 'Personalización',
+      privacy: 'Privacidad',
+      backups: 'Backups'
     },
     sections: {
       profileDesc: 'Gestiona tu identidad y los miembros de tu unidad familiar.',
@@ -95,7 +101,8 @@ const TEXTS: any = {
       subscription: 'Subscription',
       billing: 'Billing',
       security: 'Security',
-      personalization: 'Personalization'
+      personalization: 'Personalization',
+      privacy: 'Privacy'
     },
     sections: {
       profileDesc: 'Manage your identity and family unit members.',
@@ -156,7 +163,8 @@ const TEXTS: any = {
       subscription: 'Abonnement',
       billing: 'Facturation',
       security: 'Sécurité',
-      personalization: 'Personnalisation'
+      personalization: 'Personnalisation',
+      privacy: 'Confidentialité'
     },
     sections: {
       profileDesc: 'Gérez votre identité et les membres de la famille.',
@@ -233,7 +241,7 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({ onMenuClick }) => {
   // NEW: Calculate Stats for Profile
   const totalTransactions = useFinanceStore(state => state.transactions.length);
   const totalGoals = useFinanceStore(state => state.goals.length);
-  const totalRecipes = useLifeStore(state => Object.values(state.weeklyPlan).flat().length); // Approx activity
+  const totalRecipes = useLifeStore(state => state.weeklyPlans.reduce((acc, plan) => acc + plan.meals.length, 0)); // Approx activity
   const joinDate = userProfile?.id ? 'Enero 2025' : 'Oct 2024'; // Mock for now or from DB
 
   const handleExportData = () => {
@@ -251,7 +259,7 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({ onMenuClick }) => {
         pantryItems: useLifeStore.getState().pantryItems,
         shoppingList: useLifeStore.getState().shoppingList,
         familyMembers: useLifeStore.getState().familyMembers,
-        weeklyPlan: useLifeStore.getState().weeklyPlan,
+        weeklyPlans: useLifeStore.getState().weeklyPlans,
       },
       settings: {
         language: useUserStore.getState().language,
@@ -489,6 +497,7 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({ onMenuClick }) => {
           { id: 'profile', icon: User, label: t.menu.profile },
           { id: 'general', icon: Globe, label: t.menu.general },
           { id: 'personalization', icon: Layout, label: t.menu.personalization },
+          { id: 'privacy', icon: Lock, label: t.menu.privacy },
           { id: 'categories', icon: Layers, label: t.menu.categories },
           { id: 'automation', icon: Zap, label: t.menu.automation },
           { id: 'subscription', icon: Star, label: t.menu.subscription },
@@ -743,8 +752,14 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({ onMenuClick }) => {
                 </button>
               </div>
             </div>
+
+            {/* Sample Data Management */}
+            <SampleDataSection />
           </div>
         );
+
+      case 'privacy':
+        return <PrivacySettings />;
 
       case 'categories':
         return (
@@ -1006,6 +1021,8 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({ onMenuClick }) => {
             </div>
           </div>
         );
+
+      case 'subscription':
         return (
           <div className="max-w-4xl space-y-8 animate-fade-in">
             {subscription.plan === 'FREE' ? (
@@ -1048,7 +1065,7 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({ onMenuClick }) => {
 
                   <div className="flex flex-col sm:flex-row gap-4">
                     <button
-                      onClick={() => stripeService.redirectToCustomerPortal('cus_mock_123')}
+                      onClick={() => stripeService.createPortalSession()}
                       className="flex-1 bg-black text-white py-4 rounded-2xl font-bold hover:bg-gray-800 transition-all flex items-center justify-center gap-2"
                     >
                       Gestionar en Stripe <ExternalLink className="w-4 h-4" />

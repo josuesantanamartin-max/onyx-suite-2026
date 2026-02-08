@@ -8,9 +8,22 @@ interface DailyMenuWidgetProps {
 }
 
 const DailyMenuWidget: React.FC<DailyMenuWidgetProps> = ({ onNavigate }) => {
-    const { weeklyPlan } = useLifeStore();
+    const { weeklyPlans } = useLifeStore();
     const todayStr = new Date().toISOString().split('T')[0];
-    const todayMeals = weeklyPlan[todayStr] || { breakfast: [], lunch: [], dinner: [] };
+    const todayMealsObj = weeklyPlans
+        .flatMap(p => p.meals)
+        .filter(m => m.date === todayStr)
+        .reduce((acc, meal) => {
+            if (!acc[meal.type]) acc[meal.type] = [];
+            acc[meal.type].push({ ...meal, id: meal.recipeId, name: meal.recipeName });
+            return acc;
+        }, {} as Record<string, any[]>);
+
+    const todayMeals = {
+        breakfast: todayMealsObj.breakfast || [],
+        lunch: todayMealsObj.lunch || [],
+        dinner: todayMealsObj.dinner || []
+    };
 
     return (
         <div className="bg-white dark:bg-onyx-900 text-onyx-900 dark:text-white p-8 rounded-[2.5rem] relative overflow-hidden group border border-onyx-100 dark:border-onyx-800 shadow-sm hover:shadow-md transition-all h-full">

@@ -25,7 +25,7 @@ const GREETINGS = {
 };
 
 export const KitchenDashboard: React.FC<KitchenDashboardProps> = ({ onOpenAiPlanner, onViewChange, onOpenRecipe }) => {
-   const { weeklyPlan, pantryItems, shoppingList, widgets, setWidgets } = useLifeStore();
+   const { weeklyPlans, pantryItems, shoppingList, widgets, setWidgets } = useLifeStore();
    const { transactions } = useFinanceStore();
    const { setLifeActiveTab } = useUserStore();
 
@@ -73,7 +73,20 @@ export const KitchenDashboard: React.FC<KitchenDashboardProps> = ({ onOpenAiPlan
 
    // Missing variable needed for the Meal Planner card
    const todayStr = new Date().toISOString().split('T')[0];
-   const todayMeals = weeklyPlan[todayStr] || { breakfast: [], lunch: [], dinner: [] };
+   const todayMealsObj = weeklyPlans
+      .flatMap(p => p.meals)
+      .filter(m => m.date === todayStr)
+      .reduce((acc, meal) => {
+         if (!acc[meal.type]) acc[meal.type] = [];
+         acc[meal.type].push({ ...meal, id: meal.recipeId, name: meal.recipeName }); // Adapt structure
+         return acc;
+      }, {} as Record<string, any[]>);
+
+   const todayMeals = {
+      breakfast: todayMealsObj.breakfast || [],
+      lunch: todayMealsObj.lunch || [],
+      dinner: todayMealsObj.dinner || []
+   };
 
    return (
       <div className="space-y-8 animate-fade-in custom-scrollbar overflow-y-auto h-full pb-20 pr-1 relative">

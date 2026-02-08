@@ -1,6 +1,7 @@
 
 import { supabase } from './supabaseClient';
-import { Transaction, Account, Budget, Goal, Debt, Ingredient, Recipe, ShoppingItem, WeeklyPlanState, FamilyMember } from '../types';
+import { Transaction, Account, Budget, Goal, Debt, Ingredient, Recipe, ShoppingItem, FamilyMember } from '../types';
+import { WeeklyPlan } from '../types/life';
 import { AppError, ErrorCodes, handleError } from '../utils/errorHandler';
 
 export const syncService = {
@@ -187,20 +188,20 @@ export const syncService = {
     },
 
     async fetchWeeklyPlan() {
-        if (!supabase) return {};
+        if (!supabase) return [];
         const { data, error } = await supabase.from('life_weekly_plan').select('*').single();
         if (error && error.code !== 'PGRST116') throw error; // PGRST116 = no rows returned
-        return data?.plan_data || {};
+        return (data?.plan_data || []) as WeeklyPlan[];
     },
 
-    async saveWeeklyPlan(weeklyPlan: WeeklyPlanState) {
+    async saveWeeklyPlan(weeklyPlans: WeeklyPlan[]) {
         if (!supabase) return;
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) return;
 
         const { error } = await supabase.from('life_weekly_plan').upsert({
             user_id: user.id,
-            plan_data: weeklyPlan,
+            plan_data: weeklyPlans,
             updated_at: new Date().toISOString()
         });
         if (error) throw error;
@@ -240,7 +241,7 @@ export const syncService = {
         try {
             const [
                 accounts, transactions, budgets, goals, debts,
-                pantry, recipes, shoppingList, weeklyPlan, familyMembers
+                pantry, recipes, shoppingList, weeklyPlans, familyMembers
             ] = await Promise.all([
                 this.fetchAccounts(),
                 this.fetchTransactions(),
@@ -256,7 +257,7 @@ export const syncService = {
 
             return {
                 finance: { accounts, transactions, budgets, goals, debts },
-                life: { pantry, recipes, shoppingList, weeklyPlan, familyMembers }
+                life: { pantry, recipes, shoppingList, weeklyPlans, familyMembers }
             };
         } catch (error) {
             console.error('Error syncing from cloud:', error);
@@ -264,4 +265,3 @@ export const syncService = {
         }
     }
 };
-

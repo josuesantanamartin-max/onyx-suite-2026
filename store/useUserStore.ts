@@ -3,6 +3,19 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { Language, QuickAction, AutomationRule, DashboardWidget, SyncLog, DashboardLayout, UserPersona, FamilyMember } from '../types';
 import { DEFAULT_RULES, DEFAULT_WIDGETS, DEFAULT_LAYOUTS } from '../constants';
 
+export interface CookiePreferences {
+    essential: boolean;
+    analytics: boolean;
+    marketing: boolean;
+    timestamp: string;
+    version: string;
+}
+
+export interface AIPreferences {
+    enableRecommendations: boolean;
+    allowDataUsage: boolean;
+}
+
 interface UserState {
     isAuthenticated: boolean;
     isDemoMode: boolean;
@@ -49,6 +62,12 @@ interface UserState {
     };
     lastSyncTime: string | null;
     defaultShoppingAccount: string | null; // ID de cuenta preferida para compras de cocina
+
+    // Privacy Features
+    cookiePreferences: CookiePreferences | null;
+    aiPreferences: AIPreferences;
+    accountDeletionScheduled: string | null; // ISO timestamp
+    lastDataExport: string | null; // ISO timestamp
 }
 
 export interface SavedFilter {
@@ -99,6 +118,13 @@ interface UserActions {
     addSyncLog: (log: SyncLog) => void;
     setLastSyncTime: (time: string) => void;
     setDefaultShoppingAccount: (accountId: string | null) => void;
+
+    // Privacy Actions
+    setCookiePreferences: (prefs: CookiePreferences) => void;
+    setAIPreferences: (prefs: Partial<AIPreferences>) => void;
+    scheduleAccountDeletion: () => void;
+    cancelAccountDeletion: () => void;
+    setLastDataExport: (date: string) => void;
 }
 
 export const useUserStore = create<UserState & UserActions>()(
@@ -134,6 +160,15 @@ export const useUserStore = create<UserState & UserActions>()(
             subscription: { plan: 'FREE', status: 'NONE' },
             lastSyncTime: null,
             defaultShoppingAccount: null,
+
+            // Privacy Defaults
+            cookiePreferences: null,
+            aiPreferences: {
+                enableRecommendations: true,
+                allowDataUsage: true,
+            },
+            accountDeletionScheduled: null,
+            lastDataExport: null,
 
             setAuthenticated: (v) => set({ isAuthenticated: v }),
             setDemoMode: (v) => set({ isDemoMode: v }),
@@ -234,6 +269,17 @@ export const useUserStore = create<UserState & UserActions>()(
             })),
             setLastSyncTime: (lastSyncTime) => set({ lastSyncTime }),
             setDefaultShoppingAccount: (accountId) => set({ defaultShoppingAccount: accountId }),
+
+            // Privacy Actions
+            setCookiePreferences: (prefs) => set({ cookiePreferences: prefs }),
+            setAIPreferences: (prefs) => set((state) => ({
+                aiPreferences: { ...state.aiPreferences, ...prefs }
+            })),
+            scheduleAccountDeletion: () => set({
+                accountDeletionScheduled: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+            }),
+            cancelAccountDeletion: () => set({ accountDeletionScheduled: null }),
+            setLastDataExport: (date) => set({ lastDataExport: date }),
         }),
         {
             name: 'onyx_user_store',
@@ -254,6 +300,11 @@ export const useUserStore = create<UserState & UserActions>()(
                 userProfile: state.userProfile,
                 recentSearches: state.recentSearches,
                 savedFilters: state.savedFilters,
+                // Privacy state
+                cookiePreferences: state.cookiePreferences,
+                aiPreferences: state.aiPreferences,
+                accountDeletionScheduled: state.accountDeletionScheduled,
+                lastDataExport: state.lastDataExport,
             }),
         }
     )

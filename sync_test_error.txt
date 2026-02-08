@@ -1,0 +1,62 @@
+﻿
+> onyx-suite@1.0.1 test
+> vitest --run services/__tests__/syncService.test.ts
+
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mD:/Users/Josu├®/Desktop/Onyx Suite 2026[39m
+
+ [33mÔØ»[39m services/__tests__/syncService.test.ts [2m ([22m[2m0 test[22m[2m)[22m
+
+node.exe : [31mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1m[7m Failed 
+Suites 1 [27m[22mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[39m
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([31m 
+   ÔÄ»ÔÄ»ÔÄ»Ô...»ÔÄ»ÔÄ»ÔÄ»[39m:String) [], Remot  
+  eException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/syncService.test.ts [2m[ 
+services/__tests__/syncService.test.ts ][22m
+[31m[1mError[22m: [vitest] There was an error 
+when mocking a module. If you are using "vi.mock" 
+factory, make sure there are no top level 
+variables inside, since this call is hoisted to 
+top of the file. Read more: 
+https://vitest.dev/api/vi.html#vi-mock[39m
+[36m [2mÔØ»[22m 
+services/syncService.ts:[2m1:1[22m[39m
+    [90m  1| [39m
+    [90m   | [39m[31m^[39m
+    [90m  2| [39m[35mimport[39m { supabase } 
+[35mfrom[39m 
+[32m'./supabaseClient'[39m[33m;[39m
+    [90m  3| [39m[35mimport[39m { 
+[33mTransaction[39m[33m,[39m 
+[33mAccount[39m[33m,[39m 
+[33mBudget[39m[33m,[39m 
+[33mGoal[39m[33m,[39m 
+[33mDebt[39m[33m,[39m 
+[33mIngredient[39m[33m,[39m 
+[33mRecipe[39m[33m,[39mÔÇª
+
+[31m[1mCaused by: ReferenceError[22m: Cannot 
+access '__vi_import_2__' before initialization[39m
+[36m [2mÔØ»[22m services/__tests__/syncService.t
+est.ts:[2m3:13[22m[39m
+[90m [2mÔØ»[22m 
+services/syncService.ts:[2m1:1[22m[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1/1]ÔÄ»[22m[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [2mno tests[22m
+[2m   Start at [22m 22:21:38
+[2m   Duration [22m 1.75s[2m (transform 72ms, setup 228ms, collect 0ms, tests 0ms, environment 660ms, prepare 105ms)[22m
+

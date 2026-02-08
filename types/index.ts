@@ -6,3 +6,4 @@ export * from './dashboard';
 export * from './analytics';
 export * from './collaborative';
 export * from './shared';
+export * from './life';

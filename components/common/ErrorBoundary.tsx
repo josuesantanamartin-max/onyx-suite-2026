@@ -40,6 +40,18 @@ class ErrorBoundary extends Component<Props, State> {
         logError(appError, {
             componentStack: errorInfo.componentStack,
         });
+
+        // Send to Sentry with additional context
+        import('../../services/monitoringService').then(({ monitoringService }) => {
+            if (monitoringService.isInitialized()) {
+                monitoringService.captureError(error, {
+                    componentStack: errorInfo.componentStack,
+                    errorBoundary: true,
+                });
+            }
+        }).catch(err => {
+            console.error('[ErrorBoundary] Failed to send error to monitoring service:', err);
+        });
     }
 
     handleReset = () => {

@@ -1,0 +1,196 @@
+﻿
+> onyx-suite@1.0.1 test
+> vitest --run components/features/finance/__tests__/Budgets.test.tsx
+
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mD:/Users/Josu├®/Desktop/Onyx Suite 2026[39m
+
+ [33mÔØ»[39m components/features/finance/__tests__/Budgets.test.tsx [2m ([22m[2m17 tests[22m [2m|[22m [31m17 failed[39m[2m)[22m[90m 56[2mms[22m[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mRenderizaci├│n[2m > [22mdebe renderizar el componente correctamente[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mRenderizaci├│n[2m > [22mdebe mostrar los presupuestos existentes[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mRenderizaci├│n[2m > [22mdebe mostrar el gr├ífico de presupuestos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mC├ílculo de Gastos[2m > [22mdebe calcular correctamente el gasto en una categor├¡a[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mC├ílculo de Gastos[2m > [22mdebe calcular el porcentaje de uso del presupuesto[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mC├ílculo de Gastos[2m > [22mdebe mostrar advertencia cuando se supera el 80% del presupuesto[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mFormulario de Nuevo Presupuesto[2m > [22mdebe mostrar el formulario al hacer clic en "Nuevo Presupuesto"[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mFormulario de Nuevo Presupuesto[2m > [22mdebe crear un presupuesto fijo con datos v├ílidos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mFormulario de Nuevo Presupuesto[2m > [22mdebe validar que el presupuesto de porcentaje incluya el porcentaje[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mEdici├│n de Presupuestos[2m > [22mdebe abrir el formulario de edici├│n[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mEdici├│n de Presupuestos[2m > [22mdebe actualizar un presupuesto existente[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mEliminaci├│n de Presupuestos[2m > [22mdebe eliminar un presupuesto al confirmar[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mEliminaci├│n de Presupuestos[2m > [22mno debe eliminar si se cancela la confirmaci├│n[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mVer Transacciones[2m > [22mdebe llamar a onViewTransactions al hacer clic en ver detalles[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mPresupuestos de Porcentaje[2m > [22mdebe calcular el l├¡mite efectivo basado en el porcentaje de ingresos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mCasos Extremos[2m > [22mdebe manejar lista vac├¡a de presupuestos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+[31m   [33mÔØ»[31m components/features/finance/__tests__/Budgets.test.tsx[2m > [22mBudgets Component[2m > [22mCasos Extremos[2m > [22mdebe manejar presupuesto sin gastos[39m
+[31m     ÔåÆ Cannot read properties of undefined (reading 'filter')[39m
+
+node.exe : [31mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1m[7m Failed 
+Tests 17 [27m[22mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[39m
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([31m 
+   ÔÄ»ÔÄ»ÔÄ»Ô...»ÔÄ»ÔÄ»ÔÄ»[39m:String) [], Remot  
+  eException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe renderizar el 
+componente correctamente
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe mostrar los 
+presupuestos existentes
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > 
+[22mRenderizaci├│n[2m > [22mdebe mostrar el 
+gr├ífico de presupuestos
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mC├ílculo de 
+Gastos[2m > [22mdebe calcular correctamente el 
+gasto en una categor├¡a
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mC├ílculo de 
+Gastos[2m > [22mdebe calcular el porcentaje de 
+uso del presupuesto
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mC├ílculo de 
+Gastos[2m > [22mdebe mostrar advertencia cuando 
+se supera el 80% del presupuesto
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mFormulario de 
+Nuevo Presupuesto[2m > [22mdebe mostrar el 
+formulario al hacer clic en "Nuevo Presupuesto"
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mFormulario de 
+Nuevo Presupuesto[2m > [22mdebe crear un 
+presupuesto fijo con datos v├ílidos
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mFormulario de 
+Nuevo Presupuesto[2m > [22mdebe validar que el 
+presupuesto de porcentaje incluya el porcentaje
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mEdici├│n de 
+Presupuestos[2m > [22mdebe abrir el formulario 
+de edici├│n
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mEdici├│n de 
+Presupuestos[2m > [22mdebe actualizar un 
+presupuesto existente
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mEliminaci├│n de 
+Presupuestos[2m > [22mdebe eliminar un 
+presupuesto al confirmar
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mEliminaci├│n de 
+Presupuestos[2m > [22mno debe eliminar si se 
+cancela la confirmaci├│n
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mVer 
+Transacciones[2m > [22mdebe llamar a 
+onViewTransactions al hacer clic en ver detalles
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mPresupuestos de 
+Porcentaje[2m > [22mdebe calcular el l├¡mite 
+efectivo basado en el porcentaje de ingresos
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mCasos 
+Extremos[2m > [22mdebe manejar lista vac├¡a de 
+presupuestos
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx[2m > 
+[22mBudgets Component[2m > [22mCasos 
+Extremos[2m > [22mdebe manejar presupuesto sin 
+gastos
+[31m[1mTypeError[22m: Cannot read properties of 
+undefined (reading 'filter')[39m
+[36m [2mÔØ»[22m components/features/finance/Budg
+ets.tsx:[2m60:56[22m[39m
+    [90m 58| [39m    [35mconst[39m 
+[selectedYear[33m,[39m setSelectedYear] 
+[33m=[39m [34museState[39m([35mnew[39m 
+[33mDate[39m()[33m.[39m[34mgetFul[39mÔÇª
+    [90m 59| [39m
+    [90m 60| [39m    [35mconst[39m 
+expenseCategories [33m=[39m [34museMemo[39m(() 
+[33m=>[39m 
+categories[33m.[39m[34mfilter[39m(c 
+[33m=>[39m c[33m.[39mtÔÇª
+    [90m   | [39m                                
+                       [31m^[39m
+    [90m 61| [39m
+    [90m 62| [39m    [90m// Initialize 
+selection[39m
+[90m [2mÔØ»[22m mountMemo node_modules/react-dom
+/cjs/react-dom-client.development.js:[2m8777:23[2
+2m[39m
+[90m [2mÔØ»[22m Object.useMemo node_modules/reac
+t-dom/cjs/react-dom-client.development.js:[2m26216
+:18[22m[39m
+[90m [2mÔØ»[22m 
+Proxy.process.env.NODE_ENV.exports.useMemo node_mod
+ules/react/cjs/react.development.js:[2m1251:34[22
+m[39m
+[90m [2mÔØ»[22m Budgets components/features/fina
+nce/Budgets.tsx:[2m60:31[22m[39m
+[90m [2mÔØ»[22m Object.react_stack_bottom_frame 
+node_modules/react-dom/cjs/react-dom-client.develop
+ment.js:[2m25904:20[22m[39m
+[90m [2mÔØ»[22m renderWithHooks node_modules/rea
+ct-dom/cjs/react-dom-client.development.js:[2m7662
+:22[22m[39m
+[90m [2mÔØ»[22m updateFunctionComponent node_mod
+ules/react-dom/cjs/react-dom-client.development.js:
+[2m10166:19[22m[39m
+[90m [2mÔØ»[22m beginWork node_modules/react-dom
+/cjs/react-dom-client.development.js:[2m11778:18[
+22m[39m
+[90m [2mÔØ»[22m runWithFiberInDEV node_modules/r
+eact-dom/cjs/react-dom-client.development.js:[2m87
+4:13[22m[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1/17]ÔÄ»[22m[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m17 failed[39m[22m[90m (17)[39m
+[2m   Start at [22m 21:34:48
+[2m   Duration [22m 1.99s[2m (transform 158ms, setup 185ms, collect 304ms, tests 56ms, environment 725ms, prepare 107ms)[22m
+

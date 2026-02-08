@@ -1,5 +1,5 @@
 import React from 'react';
-import { LayoutDashboard, Wallet, Heart, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, Wallet, Heart, Settings, LogOut, HelpCircle } from 'lucide-react';
 import { useUserStore } from '../../store/useUserStore';
 import { Logo } from './Logo';
 
@@ -49,6 +49,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onLogout }) => {
     { id: 'dashboard', label: t.dashboard, icon: LayoutDashboard },
     { id: 'finance', label: t.finance, icon: Wallet },
     { id: 'life', label: t.life, icon: Heart },
+    { id: 'help', label: 'Ayuda', icon: HelpCircle },
   ];
 
   const handleLinkClick = (app: string) => {

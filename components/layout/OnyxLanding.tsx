@@ -7,6 +7,7 @@ import { LandingFooter } from './landing/LandingFooter';
 import { LandingHome } from './landing/LandingHome';
 import { LandingFinance } from './landing/LandingFinance';
 import { LandingLife } from './landing/LandingLife';
+import { LegalPage } from '../legal/LegalPage';
 
 interface OnyxLandingProps {
   onLogin: (method: 'DEMO' | 'GOOGLE' | 'APPLE' | 'EMAIL' | 'NOTION', data?: { email: string, password: string, isRegister: boolean }) => void;
@@ -21,6 +22,8 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [authLoading, setAuthLoading] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [showLegalModal, setShowLegalModal] = useState<'privacy' | 'terms' | null>(null);
 
   const t = LANDING_TEXTS[language];
 
@@ -37,13 +40,19 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
         <div className="space-y-3">
           <div className="flex bg-gray-100 p-1 rounded-xl mb-4">
             <button
-              onClick={() => setIsRegister(false)}
+              onClick={() => {
+                setIsRegister(false);
+                setAcceptedTerms(false);
+              }}
               className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${!isRegister ? 'bg-white shadow-sm text-black' : 'text-gray-500 hover:text-gray-700'}`}
             >
               INICIAR SESIÓN
             </button>
             <button
-              onClick={() => setIsRegister(true)}
+              onClick={() => {
+                setIsRegister(true);
+                setAcceptedTerms(false);
+              }}
               className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${isRegister ? 'bg-white shadow-sm text-black' : 'text-gray-500 hover:text-gray-700'}`}
             >
               REGISTRARSE
@@ -69,13 +78,51 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+
+            {/* Terms Acceptance Checkbox - Only shown during registration */}
+            {isRegister && (
+              <div className="flex items-start gap-2 py-2">
+                <input
+                  type="checkbox"
+                  id="terms-checkbox"
+                  checked={acceptedTerms}
+                  onChange={(e) => setAcceptedTerms(e.target.checked)}
+                  className="mt-1 w-4 h-4 rounded border-gray-300 text-black focus:ring-black cursor-pointer"
+                />
+                <label htmlFor="terms-checkbox" className="text-xs text-gray-600 leading-tight cursor-pointer">
+                  Acepto los{' '}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowLegalModal('terms');
+                    }}
+                    className="text-black font-semibold hover:underline"
+                  >
+                    Términos de Servicio
+                  </button>
+                  {' '}y la{' '}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowLegalModal('privacy');
+                    }}
+                    className="text-black font-semibold hover:underline"
+                  >
+                    Política de Privacidad
+                  </button>
+                </label>
+              </div>
+            )}
+
             <button
               onClick={async () => {
                 setAuthLoading(true);
                 await onLogin('EMAIL', { email, password, isRegister });
                 setAuthLoading(false);
               }}
-              disabled={authLoading || !email || !password}
+              disabled={authLoading || !email || !password || (isRegister && !acceptedTerms)}
               className="w-full py-4 rounded-xl bg-black text-white font-bold text-sm hover:bg-gray-800 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {authLoading ? 'Procesando...' : (isRegister ? 'Crear Cuenta' : 'Entrar con Email')}
@@ -116,6 +163,12 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
 
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 overflow-x-hidden selection:bg-black selection:text-white">
+      {showLegalModal && (
+        <LegalPage
+          document={showLegalModal}
+          onClose={() => setShowLegalModal(null)}
+        />
+      )}
       {showLoginModal && renderLoginModal()}
 
       <LandingHeader

@@ -28,7 +28,20 @@ interface FinanceActions {
 
     // Shortcuts for common operations to reduce logic in components
     addTransaction: (transaction: Transaction) => Promise<void>;
+    updateTransaction: (id: string, updates: Partial<Transaction>) => void;
+    deleteTransaction: (id: string) => void;
     addAccount: (account: Account) => Promise<void>;
+    updateAccount: (id: string, updates: Partial<Account>) => void;
+    deleteAccount: (id: string) => void;
+    addBudget: (budget: Budget) => void;
+    updateBudget: (id: string, updates: Partial<Budget>) => void;
+    deleteBudget: (id: string) => void;
+    addGoal: (goal: Goal) => void;
+    updateGoal: (id: string, updates: Partial<Goal>) => void;
+    deleteGoal: (id: string) => void;
+    addDebt: (debt: Debt) => void;
+    updateDebt: (id: string, updates: Partial<Debt>) => void;
+    deleteDebt: (id: string) => void;
     updateAccountBalance: (accountId: string, amount: number) => Promise<void>;
     loadFromCloud: () => Promise<void>;
 }
@@ -83,6 +96,75 @@ export const useFinanceStore = create<FinanceState & FinanceActions>()(
                 } catch (e) {
                     console.error("Failed to sync account:", e);
                 }
+            },
+            updateTransaction: (id, updates) => {
+                set((state) => ({
+                    transactions: state.transactions.map(tx =>
+                        tx.id === id ? { ...tx, ...updates } : tx
+                    )
+                }));
+            },
+            deleteTransaction: (id) => {
+                set((state) => ({
+                    transactions: state.transactions.filter(tx => tx.id !== id)
+                }));
+            },
+            updateAccount: (id, updates) => {
+                set((state) => ({
+                    accounts: state.accounts.map(acc =>
+                        acc.id === id ? { ...acc, ...updates } : acc
+                    )
+                }));
+            },
+            deleteAccount: (id) => {
+                set((state) => ({
+                    accounts: state.accounts.filter(acc => acc.id !== id)
+                }));
+            },
+            addBudget: (budget) => {
+                set((state) => ({ budgets: [...state.budgets, budget] }));
+            },
+            updateBudget: (id, updates) => {
+                set((state) => ({
+                    budgets: state.budgets.map(b =>
+                        b.id === id ? { ...b, ...updates } : b
+                    )
+                }));
+            },
+            deleteBudget: (id) => {
+                set((state) => ({
+                    budgets: state.budgets.filter(b => b.id !== id)
+                }));
+            },
+            addGoal: (goal) => {
+                set((state) => ({ goals: [...state.goals, goal] }));
+            },
+            updateGoal: (id, updates) => {
+                set((state) => ({
+                    goals: state.goals.map(g =>
+                        g.id === id ? { ...g, ...updates } : g
+                    )
+                }));
+            },
+            deleteGoal: (id) => {
+                set((state) => ({
+                    goals: state.goals.filter(g => g.id !== id)
+                }));
+            },
+            addDebt: (debt) => {
+                set((state) => ({ debts: [...state.debts, debt] }));
+            },
+            updateDebt: (id, updates) => {
+                set((state) => ({
+                    debts: state.debts.map(d =>
+                        d.id === id ? { ...d, ...updates } : d
+                    )
+                }));
+            },
+            deleteDebt: (id) => {
+                set((state) => ({
+                    debts: state.debts.filter(d => d.id !== id)
+                }));
             },
             updateAccountBalance: async (accountId, amount) => {
                 set((state) => {

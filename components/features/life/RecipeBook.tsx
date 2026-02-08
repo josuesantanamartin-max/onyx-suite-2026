@@ -158,32 +158,47 @@ export const RecipeBook: React.FC<RecipeBookProps> = ({ onNavigateToMealPlan, in
 
     // Handlers for new modals
     const handleAddToMealPlan = (recipe: Recipe, date: string, meal: 'breakfast' | 'lunch' | 'dinner') => {
-        const { weeklyPlan, setWeeklyPlan } = useLifeStore.getState();
+        const { weeklyPlans, setWeeklyPlans } = useLifeStore.getState();
+        const targetDate = new Date(date);
 
-        setWeeklyPlan((prev: WeeklyPlanState) => {
-            const newPlan = { ...prev };
-            if (!newPlan[date]) {
-                newPlan[date] = { breakfast: [], lunch: [], dinner: [] };
-            }
+        // Find start of week (Sunday or Monday, let's say Monday as per logic usually)
+        // Assuming week starts on Monday for consistency with other parts? 
+        // Or simplified: Just find a plan that covers this date or create one.
+        // Let's assume standard ISO week logic or simplify.
+        // Actually, simple approach: Find plan with same weekStart.
 
-            const newRecipe = { ...recipe, id: Math.random().toString(36).substr(2, 9) };
+        const day = targetDate.getDay();
+        const diff = targetDate.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+        const weekStart = new Date(targetDate.setDate(diff));
+        weekStart.setHours(0, 0, 0, 0);
+        const weekStartStr = weekStart.toISOString().split('T')[0];
 
-            // Auto-assign course type
-            if (meal !== 'breakfast') {
-                const existing = newPlan[date][meal] || [];
-                const hasStarter = existing.some(r => r.courseType === 'STARTER');
-                newRecipe.courseType = hasStarter ? 'MAIN' : 'STARTER';
-            } else {
-                newRecipe.courseType = 'MAIN';
-            }
+        const existingPlanIndex = weeklyPlans.findIndex(p => p.weekStart === weekStartStr);
+        let newPlans = [...weeklyPlans];
 
-            newPlan[date] = {
-                ...newPlan[date],
-                [meal]: [...(newPlan[date][meal] || []), newRecipe]
-            };
+        const newMeal = {
+            date: date,
+            dayOfWeek: day,
+            type: meal,
+            recipeId: recipe.id,
+            recipeName: recipe.name,
+            servings: recipe.baseServings,
+            completed: false
+        };
 
-            return newPlan;
-        });
+        if (existingPlanIndex >= 0) {
+            const plan = { ...newPlans[existingPlanIndex] };
+            plan.meals = [...plan.meals, newMeal];
+            newPlans[existingPlanIndex] = plan;
+        } else {
+            newPlans.push({
+                id: Math.random().toString(36).substr(2, 9),
+                weekStart: weekStartStr,
+                meals: [newMeal]
+            });
+        }
+
+        setWeeklyPlans(newPlans);
 
         alert(`${recipe.name} agregado al plan de comidas para ${meal === 'breakfast' ? 'desayuno' : meal === 'lunch' ? 'almuerzo' : 'cena'} el ${date}`);
 

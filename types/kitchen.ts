@@ -18,6 +18,7 @@ export interface Recipe {
     id: string;
     name: string;
     prepTime: number;
+    cookTime?: number;
     calories: number;
     tags: string[];
     rating: number;
@@ -26,6 +27,8 @@ export interface Recipe {
     courseType?: 'STARTER' | 'MAIN' | 'DESSERT' | 'SIDE' | 'DRINK';
     ingredients: RecipeIngredient[];
     instructions: string[];
+    timesUsed?: number;
+    difficulty?: 'Fácil' | 'Media' | 'Difícil';
 }
 
 export interface ShoppingItem {

@@ -1,10 +1,11 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { Ingredient, ShoppingItem, Recipe, Trip, FamilyMember, WeeklyPlanState, DashboardWidget } from '../types';
+import { Ingredient, ShoppingItem, Recipe, Trip, FamilyMember, DashboardWidget } from '../types';
+import { WeeklyPlan, Chore } from '../types/life';
 import { MOCK_PANTRY, MOCK_RECIPES, MOCK_TRIPS, MOCK_FAMILY, DEFAULT_KITCHEN_WIDGETS } from '../data/seeds/lifeSeed';
 
 interface LifeState {
-    weeklyPlan: WeeklyPlanState;
+    weeklyPlans: WeeklyPlan[];
     pantryItems: Ingredient[];
     shoppingList: ShoppingItem[];
     recipes: Recipe[];
@@ -17,7 +18,7 @@ interface LifeState {
 }
 
 interface LifeActions {
-    setWeeklyPlan: (updater: WeeklyPlanState | ((prev: WeeklyPlanState) => WeeklyPlanState)) => void;
+    setWeeklyPlans: (updater: WeeklyPlan[] | ((prev: WeeklyPlan[]) => WeeklyPlan[])) => void;
     setPantryItems: (updater: Ingredient[] | ((prev: Ingredient[]) => Ingredient[])) => void;
     setShoppingList: (updater: ShoppingItem[] | ((prev: ShoppingItem[]) => ShoppingItem[])) => void;
     setRecipes: (updater: Recipe[] | ((prev: Recipe[]) => Recipe[])) => void;
@@ -27,12 +28,32 @@ interface LifeActions {
     setVaultDocuments: (updater: any[] | ((prev: any[]) => any[])) => void;
     setHomeAssets: (updater: any[] | ((prev: any[]) => any[])) => void;
     setRecipeToOpen: (recipe: Recipe | null) => void;
+
+    // Helper methods for testing and easier component usage
+    addRecipe: (recipe: Recipe) => void;
+    updateRecipe: (id: string, updates: Partial<Recipe>) => void;
+    deleteRecipe: (id: string) => void;
+    addPantryItem: (item: Ingredient) => void;
+    updatePantryItem: (id: string, updates: Partial<Ingredient>) => void;
+    deletePantryItem: (id: string) => void;
+    addShoppingItem: (item: ShoppingItem) => void;
+    updateShoppingItem: (id: string, updates: Partial<ShoppingItem>) => void;
+    deleteShoppingItem: (id: string) => void;
+    addWeeklyPlan: (plan: WeeklyPlan) => void;
+    updateWeeklyPlan: (id: string, updates: Partial<WeeklyPlan>) => void;
+    deleteWeeklyPlan: (id: string) => void;
+    addTrip: (trip: Trip) => void;
+    updateTrip: (id: string, updates: Partial<Trip>) => void;
+    deleteTrip: (id: string) => void;
+    addFamilyMember: (member: FamilyMember) => void;
+    updateFamilyMember: (id: string, updates: Partial<FamilyMember>) => void;
+    deleteFamilyMember: (id: string) => void;
 }
 
 export const useLifeStore = create<LifeState & LifeActions>()(
     persist(
         (set) => ({
-            weeklyPlan: {},
+            weeklyPlans: [],
             pantryItems: MOCK_PANTRY,
             shoppingList: [],
             recipes: MOCK_RECIPES,
@@ -43,8 +64,8 @@ export const useLifeStore = create<LifeState & LifeActions>()(
             homeAssets: [],
             recipeToOpen: null,
 
-            setWeeklyPlan: (updater) => set((state) => ({
-                weeklyPlan: typeof updater === 'function' ? updater(state.weeklyPlan) : updater
+            setWeeklyPlans: (updater) => set((state) => ({
+                weeklyPlans: typeof updater === 'function' ? updater(state.weeklyPlans) : updater
             })),
             setPantryItems: (updater) => set((state) => ({
                 pantryItems: typeof updater === 'function' ? updater(state.pantryItems) : updater
@@ -71,6 +92,98 @@ export const useLifeStore = create<LifeState & LifeActions>()(
                 homeAssets: typeof updater === 'function' ? updater(state.homeAssets) : updater
             })),
             setRecipeToOpen: (recipe) => set({ recipeToOpen: recipe }),
+
+            // Helper method implementations
+            addRecipe: (recipe) => {
+                set((state) => ({ recipes: [...state.recipes, recipe] }));
+            },
+            updateRecipe: (id, updates) => {
+                set((state) => ({
+                    recipes: state.recipes.map(r =>
+                        r.id === id ? { ...r, ...updates } : r
+                    )
+                }));
+            },
+            deleteRecipe: (id) => {
+                set((state) => ({
+                    recipes: state.recipes.filter(r => r.id !== id)
+                }));
+            },
+            addPantryItem: (item) => {
+                set((state) => ({ pantryItems: [...state.pantryItems, item] }));
+            },
+            updatePantryItem: (id, updates) => {
+                set((state) => ({
+                    pantryItems: state.pantryItems.map(i =>
+                        i.id === id ? { ...i, ...updates } : i
+                    )
+                }));
+            },
+            deletePantryItem: (id) => {
+                set((state) => ({
+                    pantryItems: state.pantryItems.filter(i => i.id !== id)
+                }));
+            },
+            addShoppingItem: (item) => {
+                set((state) => ({ shoppingList: [...state.shoppingList, item] }));
+            },
+            updateShoppingItem: (id, updates) => {
+                set((state) => ({
+                    shoppingList: state.shoppingList.map(i =>
+                        i.id === id ? { ...i, ...updates } : i
+                    )
+                }));
+            },
+            deleteShoppingItem: (id) => {
+                set((state) => ({
+                    shoppingList: state.shoppingList.filter(i => i.id !== id)
+                }));
+            },
+            addWeeklyPlan: (plan) => {
+                set((state) => ({ weeklyPlans: [...state.weeklyPlans, plan] }));
+            },
+            updateWeeklyPlan: (id, updates) => {
+                set((state) => ({
+                    weeklyPlans: state.weeklyPlans.map(p =>
+                        p.id === id ? { ...p, ...updates } : p
+                    )
+                }));
+            },
+            deleteWeeklyPlan: (id) => {
+                set((state) => ({
+                    weeklyPlans: state.weeklyPlans.filter(p => p.id !== id)
+                }));
+            },
+            addTrip: (trip) => {
+                set((state) => ({ trips: [...state.trips, trip] }));
+            },
+            updateTrip: (id, updates) => {
+                set((state) => ({
+                    trips: state.trips.map(t =>
+                        t.id === id ? { ...t, ...updates } : t
+                    )
+                }));
+            },
+            deleteTrip: (id) => {
+                set((state) => ({
+                    trips: state.trips.filter(t => t.id !== id)
+                }));
+            },
+            addFamilyMember: (member) => {
+                set((state) => ({ familyMembers: [...state.familyMembers, member] }));
+            },
+            updateFamilyMember: (id, updates) => {
+                set((state) => ({
+                    familyMembers: state.familyMembers.map(m =>
+                        m.id === id ? { ...m, ...updates } : m
+                    )
+                }));
+            },
+            deleteFamilyMember: (id) => {
+                set((state) => ({
+                    familyMembers: state.familyMembers.filter(m => m.id !== id)
+                }));
+            },
         }),
         {
             name: 'onyx_life_store',

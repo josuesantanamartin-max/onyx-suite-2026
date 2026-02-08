@@ -150,7 +150,7 @@ export function handleError(error: unknown): AppError {
 }
 
 /**
- * Log errors to console (can be extended to send to monitoring service)
+ * Log errors to console and monitoring service
  */
 export function logError(error: AppError, context?: Record<string, any>) {
     const logData = {
@@ -168,10 +168,22 @@ export function logError(error: AppError, context?: Record<string, any>) {
         console.log('[LOW SEVERITY ERROR]', logData);
     }
 
-    // TODO: Send to monitoring service (e.g., Sentry, LogRocket)
-    // if (error.severity === 'high' || error.severity === 'medium') {
-    //   sendToMonitoring(logData);
-    // }
+    // Send to monitoring service (Sentry)
+    // Only send medium and high severity errors to avoid noise
+    if (error.severity === 'high' || error.severity === 'medium') {
+        // Dynamically import to avoid circular dependencies
+        import('../services/monitoringService').then(({ monitoringService }) => {
+            if (monitoringService.isInitialized()) {
+                monitoringService.captureError(error.originalError as Error || error, {
+                    ...context,
+                    errorCode: error.code,
+                    severity: error.severity,
+                });
+            }
+        }).catch(err => {
+            console.error('[Error Handler] Failed to send error to monitoring service:', err);
+        });
+    }
 }
 
 /**

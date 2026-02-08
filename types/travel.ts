@@ -38,8 +38,9 @@ export interface Trip {
     spent: number;
     status: 'UPCOMING' | 'CURRENT' | 'COMPLETED';
     image: string;
-    flights: Flight[];
-    accommodations: Accommodation[];
+    flights?: Flight[];
+    accommodations?: Accommodation[];
     itinerary: ItineraryItem[];
+    checklist?: { id: string; task: string; completed: boolean }[];
     linkedGoalId?: string;
 }

@@ -1,0 +1,110 @@
+﻿
+> onyx-suite@1.0.1 test
+> vitest --run --reporter=verbose
+
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mD:/Users/Josu├®/Desktop/Onyx Suite 2026[39m
+
+
+node.exe : [31mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1m[7m Failed 
+Suites 19 [27m[22mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[39m
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([31m 
+   ÔÄ»ÔÄ»ÔÄ»Ô...»ÔÄ»ÔÄ»ÔÄ»[39m:String) [], Remot  
+  eException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+[31m[1m[7m FAIL [27m[22m[39m 
+schemas/__tests__/budget.schema.test.ts [2m[ 
+schemas/__tests__/budget.schema.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+schemas/__tests__/transaction.schema.test.ts [2m[ 
+schemas/__tests__/transaction.schema.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/analyticsService.test.ts [2m[ 
+services/__tests__/analyticsService.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/dashboardSyncService.test.ts 
+[2m[ 
+services/__tests__/dashboardSyncService.test.ts 
+][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/geminiService.test.ts [2m[ 
+services/__tests__/geminiService.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/monitoringService.test.ts [2m[ 
+services/__tests__/monitoringService.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/performanceService.test.ts 
+[2m[ 
+services/__tests__/performanceService.test.ts 
+][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/storageService.test.ts [2m[ 
+services/__tests__/storageService.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/stripeService.test.ts [2m[ 
+services/__tests__/stripeService.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+services/__tests__/syncService.test.ts [2m[ 
+services/__tests__/syncService.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+store/__tests__/useFinanceStore.test.ts [2m[ 
+store/__tests__/useFinanceStore.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+store/__tests__/useUserStore.test.ts [2m[ 
+store/__tests__/useUserStore.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/csvUtils.test.ts [2m[ 
+utils/__tests__/csvUtils.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/formatters.test.ts [2m[ 
+utils/__tests__/formatters.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+utils/__tests__/validation.test.ts [2m[ 
+utils/__tests__/validation.test.ts ][22m
+[31m[1m[7m FAIL [27m[22m[39m 
+components/auth/__tests__/AuthGate.test.tsx [2m[ 
+components/auth/__tests__/AuthGate.test.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m components/dashb
+oard/__tests__/SmartInsightWidget.test.tsx [2m[ co
+mponents/dashboard/__tests__/SmartInsightWidget.tes
+t.tsx ][22m
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Budgets.test.tsx [2m[ compon
+ents/features/finance/__tests__/Budgets.test.tsx 
+][22m
+[31m[1m[7m FAIL [27m[22m[39m components/featu
+res/finance/__tests__/Goals.test.tsx [2m[ componen
+ts/features/finance/__tests__/Goals.test.tsx ][22m
+[31m[1mError[22m: Cannot find module 
+'@testing-library/dom'
+Require stack:
+- D:\Users\Josu├®\Desktop\Onyx Suite 2026\node_modu
+les\@testing-library\react\dist\pure.js[39m
+[90m [2mÔØ»[22m TracingChannel.traceSync 
+node:diagnostics_channel:[2m328:14[22m[39m
+[90m [2mÔØ»[22m Object.<anonymous> node_modules/
+@testing-library/react/dist/pure.js:[2m46:12[22m
+[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[2
+2m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 
+'MODULE_NOT_FOUND', requireStack: [ 
+'D:\Users\Josu├®\Desktop\Onyx Suite 2026\node_modul
+es\@testing-library\react\dist\pure.js' ] }[39m
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1/19]ÔÄ»[22m[39m
+
+[2m Test Files [22m [1m[31m19 failed[39m[22m[90m (19)[39m
+[2m      Tests [22m [2mno tests[22m
+[2m   Start at [22m 21:05:38
+[2m   Duration [22m 3.68s[2m (transform 142ms, setup 0ms, collect 0ms, tests 0ms, environment 26.24s, prepare 4.35s)[22m
+

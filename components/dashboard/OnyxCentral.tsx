@@ -33,7 +33,7 @@ const OnyxCentral: React.FC = () => {
 
     // Store Data
     const { transactions, accounts, debts, goals, categories, budgets } = useFinanceStore();
-    const { weeklyPlan, pantryItems, shoppingList, familyMembers } = useLifeStore();
+    const { weeklyPlans, pantryItems, shoppingList, familyMembers } = useLifeStore();
     const { setActiveApp, setFinanceActiveTab, setLifeActiveTab, language, currency, dashboardWidgets, setDashboardWidgets, theme, setTheme } = useUserStore();
 
     // Navigation Handler

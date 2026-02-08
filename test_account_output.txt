@@ -1,0 +1,64 @@
+﻿
+> onyx-suite@1.0.1 test
+> vitest --run schemas/__tests__/account.schema.test.ts
+
+
+[7m[1m[36m RUN [39m[22m[27m [36mv1.6.1[39m [90mD:/Users/Josu├®/Desktop/Onyx Suite 2026[39m
+
+ [33mÔØ»[39m schemas/__tests__/account.schema.test.ts [2m ([22m[2m29 tests[22m [2m|[22m [31m1 failed[39m[2m)[22m[90m 13[2mms[22m[39m
+[31m   [33mÔØ»[31m schemas/__tests__/account.schema.test.ts[2m > [22mAccount Schema[2m > [22mCuentas Inv├ílidas[2m > [22mdebe rechazar balance Infinity[39m
+[31m     ÔåÆ expected 'Invalid input: expected number, receiÔÇª' to contain 'valid number'[39m
+
+node.exe : [31mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1m[7m 
+Failed Tests 1 [27m[22mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[39m
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([31m 
+   ÔÄ»ÔÄ»ÔÄ»Ô...»ÔÄ»ÔÄ»ÔÄ»[39m:String) [], Remot  
+  eException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+[31m[1m[7m FAIL [27m[22m[39m 
+schemas/__tests__/account.schema.test.ts[2m > 
+[22mAccount Schema[2m > [22mCuentas 
+Inv├ílidas[2m > [22mdebe rechazar balance 
+Infinity
+[31m[1mAssertionError[22m: expected 'Invalid 
+input: expected number, receiÔÇª' to contain 
+'valid number'[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- valid number[39m
+[31m+ Invalid input: expected number, received 
+number[39m
+
+[36m [2mÔØ»[22m schemas/__tests__/account.schema
+.test.ts:[2m171:56[22m[39m
+    [90m169| [39m            [34mexpect[39m(res
+ult[33m.[39msuccess)[33m.[39m[34mtoBe[39m([3
+5mfalse[39m)[33m;[39m
+    [90m170| [39m            [35mif[39m 
+([33m![39mresult[33m.[39msuccess) {
+    [90m171| [39m                [34mexpect[39m
+(result[33m.[39merror[33m.[39missues[[34m0[39
+m][33m.[39mmessage)[33m.[39m[34mtoContain[39m
+([32m'vali[39mÔÇª
+    [90m   | [39m                                
+                       [31m^[39m
+    [90m172| [39m            }
+    [90m173| [39m        })[33m;[39m
+
+[31m[2mÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1/1]ÔÄ»[22m[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m28 passed[39m[22m[90m (29)[39m
+[2m   Start at [22m 21:22:55
+[2m   Duration [22m 1.17s[2m (transform 53ms, setup 127ms, collect 71ms, tests 13ms, environment 533ms, prepare 125ms)[22m
+

@@ -10,6 +10,7 @@ const FinanceModule = React.lazy(() => import('../features/finance/FinanceModule
 const LifeModule = React.lazy(() => import('../features/life/LifeModule'));
 const SettingsModule = React.lazy(() => import('../features/settings/SettingsModule'));
 const CustomizableDashboard = React.lazy(() => import('../dashboard/CustomizableDashboard'));
+const HelpCenter = React.lazy(() => import('../pages/HelpCenter'));
 
 const MainShell: React.FC = () => {
     const {
@@ -40,6 +41,7 @@ const MainShell: React.FC = () => {
                         case 'finance': return <FinanceModule onMenuClick={() => setSidebarOpen(true)} onNavigate={handleGlobalNavigate} />;
                         case 'life': return <LifeModule onMenuClick={() => setSidebarOpen(true)} />;
                         case 'settings': return <SettingsModule onMenuClick={() => setSidebarOpen(true)} />;
+                        case 'help': return <HelpCenter />;
                         default: return null;
                     }
                 })()}

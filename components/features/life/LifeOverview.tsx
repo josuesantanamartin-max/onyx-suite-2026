@@ -56,14 +56,16 @@ const TEXTS: any = {
 };
 
 export const LifeOverview: React.FC<LifeOverviewProps> = () => {
-    const { trips, familyMembers, weeklyPlan } = useLifeStore();
+    const { trips, familyMembers, weeklyPlans } = useLifeStore();
     const { language, setLifeActiveTab: setActiveTab } = useUserStore();
 
     const t = TEXTS[language as string] || TEXTS['ES'];
     const nextTrip = trips.length > 0 ? trips[0] : null;
     const today = new Date().toISOString().split('T')[0];
-    const todayMeals = weeklyPlan[today];
-    const mealCount = todayMeals ? (todayMeals.breakfast?.length || 0) + (todayMeals.lunch?.length || 0) + (todayMeals.dinner?.length || 0) : 0;
+    const todayMeals = weeklyPlans
+        .flatMap(p => p.meals)
+        .filter(m => m.date === today);
+    const mealCount = todayMeals.length;
 
     return (
         <div className="p-6 md:p-8 animate-fade-in pb-24 md:pb-8 h-full overflow-y-auto custom-scrollbar">

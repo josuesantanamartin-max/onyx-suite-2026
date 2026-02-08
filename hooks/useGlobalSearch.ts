@@ -32,7 +32,7 @@ export const useGlobalSearch = (isOpen: boolean, onClose: () => void) => {
     } = useUserStore();
 
     const { transactions, accounts } = useFinanceStore();
-    const { familyMembers, weeklyPlan, recipes, pantryItems, shoppingList, setRecipeToOpen, setShoppingList } = useLifeStore();
+    const { familyMembers, weeklyPlans, recipes, pantryItems, shoppingList, setRecipeToOpen, setShoppingList } = useLifeStore();
 
     // 1. NAVIGATION RESULTS
     const navigationResults: SearchResult[] = [

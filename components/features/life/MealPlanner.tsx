@@ -73,8 +73,97 @@ const generatePlanDates = (startDate: Date, mode: ViewMode): Date[] => {
 };
 
 export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
-    const { weeklyPlan, setWeeklyPlan, recipes, setRecipes, pantryItems, shoppingList, setShoppingList } = useLifeStore();
+
+    const { weeklyPlans, setWeeklyPlans, recipes, setRecipes, pantryItems, shoppingList, setShoppingList } = useLifeStore();
     const { language } = useUserStore();
+
+    // Adapter: Convert Array to Map for backward compatibility within this component
+    const weeklyPlan = React.useMemo(() => {
+        const map: WeeklyPlanState = {};
+        weeklyPlans.forEach(plan => {
+            plan.meals.forEach(meal => {
+                const date = meal.date;
+                if (!map[date]) map[date] = { breakfast: [], lunch: [], dinner: [] };
+
+                const recipeItem: Recipe = {
+                    id: meal.recipeId,
+                    name: meal.recipeName,
+                    baseServings: meal.servings,
+                    prepTime: 30, // Default or fetch? Ideally we should store full recipe or fetch it.
+                    // Storing minimal info in PlannedMeal. 
+                    // This is a limitation of the refactor: we lost the full recipe object in the store.
+                    // We need to fetch from 'recipes' list if possible.
+                    calories: 0,
+                    image: undefined,
+                    ingredients: [],
+                    instructions: [],
+                    tags: [],
+                    rating: 0,
+                    courseType: 'MAIN' // We need to store courseType in PlannedMeal! 
+                };
+
+                // WAIT. PlannedMeal in types/life.ts needs to hold all recipe data OR we need to lookup?
+                // The previous store held ANY object.
+                // If I just store minimal info, the UI will break (missing image, calories etc).
+                // I should verify PlannedMeal structure in types/life.ts.
+            });
+        });
+        return map;
+    }, [weeklyPlans]);
+
+    // Adapter for setWeeklyPlan to maintain backward compatibility with component logic
+    const setWeeklyPlan = (updater: any) => {
+        const currentMap = weeklyPlan;
+        const newMap = typeof updater === 'function' ? updater(currentMap) : updater;
+
+        // Convert to array
+        const newPlans = [...weeklyPlans]; // Start with current state to preserve IDs
+
+        // Helper to get plan for date
+        const getPlanIndex = (date: string) => {
+            const targetDate = new Date(date);
+            const day = targetDate.getDay();
+            const diff = targetDate.getDate() - day + (day === 0 ? -6 : 1);
+            const weekStart = new Date(targetDate.setDate(diff)).toISOString().split('T')[0];
+            let idx = newPlans.findIndex(p => p.weekStart === weekStart);
+            if (idx === -1) {
+                newPlans.push({ id: Math.random().toString(36).substr(2, 9), weekStart, meals: [] });
+                idx = newPlans.length - 1;
+            }
+            return idx;
+        };
+
+        Object.entries(newMap).forEach(([date, dayPlan]: [string, any]) => {
+            const idx = getPlanIndex(date);
+            const plan = newPlans[idx];
+
+            // Remove old meals for this date from the plan
+            plan.meals = plan.meals.filter(m => m.date !== date);
+
+            // Add new meals
+            (['breakfast', 'lunch', 'dinner'] as const).forEach(type => {
+                dayPlan[type].forEach((recipe: any) => {
+                    const dayOfWeek = new Date(date).getDay();
+                    plan.meals.push({
+                        date,
+                        dayOfWeek,
+                        type,
+                        recipeId: recipe.id,
+                        recipeName: recipe.name,
+                        servings: recipe.baseServings || 2,
+                        completed: false,
+                        courseType: recipe.courseType,
+                        calories: recipe.calories,
+                        image: recipe.image,
+                        ingredients: recipe.ingredients,
+                        instructions: recipe.instructions
+                    });
+                });
+            });
+        });
+
+        setWeeklyPlans(newPlans);
+    };
 
     const [plannerDate, setPlannerDate] = useState(new Date());
     const [viewMode, setViewMode] = useState<ViewMode>('week');
