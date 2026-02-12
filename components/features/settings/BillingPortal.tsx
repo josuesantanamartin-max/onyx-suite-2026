@@ -13,7 +13,7 @@ const BillingPortal: React.FC = () => {
         isActive,
         isCanceled,
         daysUntilRenewal,
-        upgradeToFamilia,
+        subscribeToPlan,
         manageBilling,
         cancelSubscription,
         reactivateSubscription
@@ -127,7 +127,7 @@ const BillingPortal: React.FC = () => {
     const handleUpgrade = async () => {
         setActionLoading(true);
         try {
-            await upgradeToFamilia(billingPeriod);
+            await subscribeToPlan('FAMILIA', billingPeriod);
         } catch (error) {
             console.error('Upgrade error:', error);
             alert('Error al mejorar el plan');
