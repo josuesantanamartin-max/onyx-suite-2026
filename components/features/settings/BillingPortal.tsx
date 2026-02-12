@@ -37,7 +37,7 @@ const BillingPortal: React.FC = () => {
             reactivate: 'Reactivar Suscripción',
             monthly: 'Mensual',
             annual: 'Anual',
-            save17: 'Ahorra 17%',
+            save48: 'Ahorra 48%',
             features: 'Características',
             usage: 'Uso Actual',
             unlimited: 'Ilimitado',
@@ -69,7 +69,7 @@ const BillingPortal: React.FC = () => {
             reactivate: 'Reactivate Subscription',
             monthly: 'Monthly',
             annual: 'Annual',
-            save17: 'Save 17%',
+            save48: 'Save 48%',
             features: 'Features',
             usage: 'Current Usage',
             unlimited: 'Unlimited',
@@ -101,7 +101,7 @@ const BillingPortal: React.FC = () => {
             reactivate: 'Réactiver l\'Abonnement',
             monthly: 'Mensuel',
             annual: 'Annuel',
-            save17: 'Économisez 17%',
+            save48: 'Économisez 48%',
             features: 'Fonctionnalités',
             usage: 'Utilisation Actuelle',
             unlimited: 'Illimité',
@@ -379,17 +379,18 @@ const BillingPortal: React.FC = () => {
                                 >
                                     {t.annual}
                                     <span className="ml-2 text-xs bg-yellow-400 text-yellow-900 px-2 py-0.5 rounded-full">
-                                        {t.save17}
+                                        {t.save48}
                                     </span>
                                 </button>
                             </div>
 
                             <div className="text-3xl font-bold mb-1">
-                                {billingPeriod === 'monthly' ? '4.99€' : '49.99€'}
+                                {billingPeriod === 'monthly' ? '2,99€' : '19,99€'}
                                 <span className="text-lg font-normal text-blue-100">
                                     {billingPeriod === 'monthly' ? t.perMonth : t.perYear}
                                 </span>
                             </div>
+                            <p className="text-sm text-blue-200 mb-2">Plan Familia: {billingPeriod === 'monthly' ? '3,99€' : '24,99€'}{billingPeriod === 'monthly' ? t.perMonth : t.perYear}</p>
                             <p className="text-sm text-blue-100">
                                 {billingPeriod === 'monthly' ? t.billedMonthly : t.billedAnnually}
                             </p>
@@ -403,38 +404,41 @@ const BillingPortal: React.FC = () => {
                         </button>
                     </div>
                 </div>
-            )}
+            )
+            }
 
             {/* Cancel Confirmation Modal */}
-            {showCancelConfirm && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-lg max-w-md w-full p-6">
-                        <div className="flex items-center gap-3 mb-4">
-                            <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
-                                <AlertCircle className="w-6 h-6 text-red-600" />
+            {
+                showCancelConfirm && (
+                    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+                        <div className="bg-white rounded-lg max-w-md w-full p-6">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
+                                    <AlertCircle className="w-6 h-6 text-red-600" />
+                                </div>
+                                <h3 className="text-lg font-semibold text-gray-900">{t.cancelWarning}</h3>
                             </div>
-                            <h3 className="text-lg font-semibold text-gray-900">{t.cancelWarning}</h3>
-                        </div>
-                        <p className="text-gray-600 mb-6">{t.cancelDesc}</p>
-                        <div className="flex gap-3">
-                            <button
-                                onClick={() => setShowCancelConfirm(false)}
-                                className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
-                            >
-                                {t.keepSub}
-                            </button>
-                            <button
-                                onClick={handleCancel}
-                                disabled={actionLoading}
-                                className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
-                            >
-                                {t.confirmCancel}
-                            </button>
+                            <p className="text-gray-600 mb-6">{t.cancelDesc}</p>
+                            <div className="flex gap-3">
+                                <button
+                                    onClick={() => setShowCancelConfirm(false)}
+                                    className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
+                                >
+                                    {t.keepSub}
+                                </button>
+                                <button
+                                    onClick={handleCancel}
+                                    disabled={actionLoading}
+                                    className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
+                                >
+                                    {t.confirmCancel}
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )
+            }
+        </div >
     );
 };
 

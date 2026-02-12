@@ -69,7 +69,7 @@ export interface VoiceState {
     error: string | null;
 }
 
-export type PlanType = 'FREE' | 'PRO' | 'BUSINESS';
+export type PlanType = 'FREE' | 'PERSONAL' | 'FAMILIA';
 
 export interface Subscription {
     id: string;

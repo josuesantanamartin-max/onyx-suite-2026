@@ -358,6 +358,15 @@ export const stripeService = {
                 backups: 3,
                 familyMembers: 1
             },
+            PERSONAL: {
+                transactions: null, // unlimited
+                budgets: null,
+                accounts: null,
+                recipes: null,
+                aiGenerations: null,
+                backups: 10,
+                familyMembers: 1
+            },
             FAMILIA: {
                 transactions: null, // unlimited
                 budgets: null,

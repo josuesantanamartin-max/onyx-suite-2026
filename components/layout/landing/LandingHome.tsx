@@ -22,6 +22,7 @@ export const LandingHome: React.FC<LandingHomeProps> = ({
     onNavigate
 }) => {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'annual'>('annual');
 
     const handleScrollToSection = (id: string) => {
         const element = document.getElementById(id);
@@ -70,14 +71,20 @@ export const LandingHome: React.FC<LandingHomeProps> = ({
 
     const comparisonFeatures = [
         { feature: 'Gestión de Transacciones', manual: true, other: true, onyx: true },
-        { feature: 'Presupuestos Inteligentes', manual: false, other: true, onyx: true },
-        { feature: 'Análisis con IA', manual: false, other: false, onyx: true },
-        { feature: 'Planificación de Menús', manual: false, other: false, onyx: true },
-        { feature: 'Gestión de Despensa', manual: false, other: false, onyx: true },
-        { feature: 'Conexión Finanzas-Vida', manual: false, other: false, onyx: true },
-        { feature: 'Calculadora de Deudas', manual: false, other: true, onyx: true },
-        { feature: 'Sincronización Multi-Dispositivo', manual: false, other: true, onyx: true },
-        { feature: 'Bóveda de Documentos', manual: false, other: false, onyx: true },
+        { feature: 'Presupuestos Inteligentes con IA', manual: false, other: true, onyx: true },
+        { feature: 'Análisis Predictivo con IA', manual: false, other: false, onyx: true },
+        { feature: 'Importación CSV / Extractos', manual: false, other: true, onyx: true },
+        { feature: 'Planificador de Menús con IA', manual: false, other: false, onyx: true },
+        { feature: 'Gestión de Despensa e Inventario', manual: false, other: false, onyx: true },
+        { feature: 'Conexión Finanzas ↔ Vida Real', manual: false, other: false, onyx: true },
+        { feature: 'Calculadora de Deudas (Avalancha/Bola)', manual: false, other: true, onyx: true },
+        { feature: 'Dashboard Personalizable (Drag & Drop)', manual: false, other: false, onyx: true },
+        { feature: 'Modo Colaborativo Familiar', manual: false, other: false, onyx: true },
+        { feature: 'Simulador de Jubilación', manual: false, other: false, onyx: true },
+        { feature: 'Bóveda Digital de Documentos', manual: false, other: false, onyx: true },
+        { feature: 'Planificador de Viajes con IA', manual: false, other: false, onyx: true },
+        { feature: 'Centro de Ayuda Multilingüe', manual: false, other: true, onyx: true },
+        { feature: 'Privacidad GDPR Completa', manual: false, other: false, onyx: true },
         { feature: 'Soporte Familiar (5 usuarios)', manual: false, other: false, onyx: true }
     ];
 
@@ -110,8 +117,8 @@ export const LandingHome: React.FC<LandingHomeProps> = ({
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {[
                             { value: '2 Módulos', label: 'Finanzas + Vida' },
-                            { value: '26+', label: 'Características' },
-                            { value: '100%', label: 'Seguro y Privado' },
+                            { value: '40+', label: 'Características' },
+                            { value: '100%', label: 'GDPR y Privacidad' },
                             { value: 'IA', label: 'Análisis Inteligente' }
                         ].map((stat, i) => (
                             <div key={i} className="text-center">
@@ -194,7 +201,9 @@ export const LandingHome: React.FC<LandingHomeProps> = ({
                                     {[
                                         { icon: Target, text: 'Metas de ahorro con progreso visual' },
                                         { icon: CreditCard, text: 'Eliminación de deudas estratégica' },
-                                        { icon: BarChart3, text: 'Análisis predictivo con IA' }
+                                        { icon: BarChart3, text: 'Análisis predictivo con IA' },
+                                        { icon: TrendingUp, text: 'Simulador de jubilación e inversiones' },
+                                        { icon: Calendar, text: 'Importación CSV y categorización IA' }
                                     ].map((item, i) => (
                                         <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
                                             <item.icon className="w-4 h-4 text-blue-600" />
@@ -215,8 +224,10 @@ export const LandingHome: React.FC<LandingHomeProps> = ({
                                 <ul className="space-y-2">
                                     {[
                                         { icon: Utensils, text: 'Planificador IA de menús semanales' },
-                                        { icon: ShoppingCart, text: 'Listas de compra automáticas' },
-                                        { icon: Archive, text: 'Bóveda segura de documentos' }
+                                        { icon: ShoppingCart, text: 'Listas de compra y despensa automáticas' },
+                                        { icon: Archive, text: 'Bóveda segura de documentos' },
+                                        { icon: Globe, text: 'Planificador de viajes con IA' },
+                                        { icon: Calendar, text: 'Calendario familiar integrado' }
                                     ].map((item, i) => (
                                         <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
                                             <item.icon className="w-4 h-4 text-purple-600" />
@@ -280,10 +291,14 @@ export const LandingHome: React.FC<LandingHomeProps> = ({
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {[
-                            { icon: Fingerprint, title: "Seguridad Biométrica", desc: "Tus datos financieros y documentos protegidos con la máxima encriptación." },
+                            { icon: Fingerprint, title: "Seguridad GDPR", desc: "Privacidad completa: consentimiento de cookies, exportación de datos y eliminación de cuenta con período de gracia." },
                             { icon: Cloud, title: "Multi-Dispositivo", desc: "Sincronización instantánea entre tu móvil, tablet y ordenador." },
-                            { icon: BarChart3, title: "IA Proactiva", desc: "No solo registra, analiza y te ayuda a tomar decisiones inteligentes." },
-                            { icon: Smartphone, title: "Diseño Nativo", desc: "Una experiencia fluida pensada para el uso diario e intuitivo." }
+                            { icon: BarChart3, title: "IA Proactiva", desc: "Presupuestos IA, análisis predictivo, categorización automática y simulador de jubilación." },
+                            { icon: Smartphone, title: "Diseño Nativo", desc: "Una experiencia fluida pensada para el uso diario e intuitivo." },
+                            { icon: Users, title: "Modo Colaborativo", desc: "Hasta 5 miembros familiares con roles y permisos personalizables." },
+                            { icon: LayoutDashboard, title: "Dashboard Personalizable", desc: "Drag & drop para organizar tus widgets. Smart Insights con IA integrada." },
+                            { icon: Globe, title: "Multilingüe", desc: "Disponible en Español, English y Français. Centro de Ayuda completo en 3 idiomas." },
+                            { icon: Shield, title: "Importación Flexible", desc: "Importa extractos bancarios CSV con vinculación automática a tus cuentas." }
                         ].map((benefit, i) => (
                             <div key={i} className="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:-translate-y-1 transition-all">
                                 <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mb-6 shadow-sm"><benefit.icon className="w-6 h-6 text-black" /></div>
@@ -324,37 +339,93 @@ export const LandingHome: React.FC<LandingHomeProps> = ({
             </section>
 
             {/* Pricing Section */}
+            {/* Pricing Section */}
             <section id="pricing" className="py-24 bg-white border-t border-gray-200">
                 <div className="max-w-7xl mx-auto px-6 text-center">
                     <h2 className="text-4xl font-bold mb-4 tracking-tight text-gray-900">{t.pricingTitle}</h2>
-                    <p className="text-gray-500 text-lg max-w-2xl mx-auto mb-12">{t.pricingSubtitle}</p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                        {/* Monthly Plan */}
+                    <p className="text-gray-500 text-lg max-w-2xl mx-auto mb-8">{t.pricingSubtitle}</p>
+
+                    {/* Billing Toggle */}
+                    <div className="flex items-center justify-center gap-4 mb-12">
+                        <span className={`text-sm font-bold ${billingPeriod === 'monthly' ? 'text-gray-900' : 'text-gray-500'}`}>{t.billingMonthly}</span>
+                        <button
+                            onClick={() => setBillingPeriod(prev => prev === 'monthly' ? 'annual' : 'monthly')}
+                            className="w-14 h-8 bg-black rounded-full p-1 relative transition-colors duration-300"
+                        >
+                            <div className={`w-6 h-6 bg-white rounded-full transition-transform duration-300 ${billingPeriod === 'annual' ? 'translate-x-6' : ''}`} />
+                        </button>
+                        <span className={`text-sm font-bold ${billingPeriod === 'annual' ? 'text-gray-900' : 'text-gray-500'}`}>
+                            {t.billingAnnual} <span className="text-emerald-500 text-xs ml-1">({t.savePercent})</span>
+                        </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+                        {/* TIER 1: TRIAL */}
                         <div className="bg-white rounded-3xl p-8 border border-gray-200 hover:shadow-xl transition-all flex flex-col text-left group">
-                            <span className="bg-gray-100 text-gray-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase mb-6 w-fit tracking-wider">{t.basicPlan}</span>
-                            <div className="flex items-center gap-2 mb-2"><h3 className="text-5xl font-bold text-gray-900">{t.basicPrice}</h3><span className="text-gray-400 font-bold">{t.perMonth}</span></div>
-                            <p className="text-gray-500 text-sm mb-8">{t.basicDesc}</p>
-                            <div className="space-y-4 mb-8 flex-1">
-                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-gray-900" /><span className="text-gray-700">{t.userSingle}</span></div>
-                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-gray-900" /><span className="text-gray-700">{t.accessAll}</span></div>
-                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-gray-900" /><span className="text-gray-700">{t.vaultBasic}</span></div>
+                            <span className="bg-blue-100 text-blue-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase mb-6 w-fit tracking-wider">{t.trialPeriod}</span>
+                            <h3 className="text-xl font-bold mb-2">{t.trialPlan}</h3>
+                            <div className="flex items-center gap-2 mb-2">
+                                <span className="text-5xl font-bold text-gray-900">{t.trialPrice}</span>
                             </div>
-                            <button onClick={() => setShowLoginModal(true)} className="w-full py-4 rounded-2xl border border-gray-300 font-bold hover:bg-gray-50 transition-all text-gray-900">{t.ctaStart}</button>
+                            <p className="text-gray-500 text-sm mb-8">{t.trialDesc}</p>
+                            <div className="space-y-4 mb-8 flex-1">
+                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-gray-900" /><span className="text-gray-700">{t.featUser1}</span></div>
+                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-gray-900" /><span className="text-gray-700">{t.featAccess}</span></div>
+                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-gray-900" /><span className="text-gray-700">14 días</span></div>
+                            </div>
+                            <button onClick={() => setShowLoginModal(true)} className="w-full py-4 rounded-2xl border border-gray-300 font-bold hover:bg-gray-50 transition-all text-gray-900">{t.trialCta}</button>
                         </div>
-                        {/* Annual Plan */}
-                        <div className="bg-black text-white rounded-3xl p-8 border border-black shadow-2xl flex flex-col text-left relative transform md:-translate-y-4 scale-105 z-10">
-                            <div className="absolute top-4 right-4 bg-white text-black text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">BEST VALUE</div>
-                            <span className="bg-gray-800 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase mb-6 w-fit tracking-wider">{t.proPlan}</span>
-                            <div className="flex items-center gap-2 mb-2"><h3 className="text-5xl font-bold">{t.proPrice}</h3><span className="text-gray-400 font-bold">{t.perYear}</span></div>
-                            <p className="text-gray-400 text-sm mb-8">{t.proDesc}</p>
-                            <div className="space-y-4 mb-8 flex-1">
-                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-emerald-400" /><span className="font-bold">{t.userFamily}</span></div>
-                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-emerald-400" /><span>{t.accessShared}</span></div>
-                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-emerald-400" /><span>{t.juniorFeat}</span></div>
-                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-emerald-400" /><span>Soporte Prioritario 24/7</span></div>
+
+                        {/* TIER 2: PERSONAL */}
+                        <div className="bg-white rounded-3xl p-8 border border-gray-200 hover:shadow-xl transition-all flex flex-col text-left group relative">
+                            {billingPeriod === 'annual' && (
+                                <div className="absolute top-0 right-0 bg-emerald-100 text-emerald-700 text-[10px] font-bold px-3 py-1 rounded-bl-2xl rounded-tr-2xl uppercase tracking-wider">
+                                    -45%
+                                </div>
+                            )}
+                            <span className="bg-gray-100 text-gray-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase mb-6 w-fit tracking-wider">{t.personalPlan}</span>
+                            <div className="flex items-center gap-2 mb-2">
+                                <h3 className="text-5xl font-bold text-gray-900">
+                                    {billingPeriod === 'monthly' ? t.personalPriceMonthly : t.personalPriceAnnual}
+                                </h3>
+                                <span className="text-gray-400 font-bold text-xs">
+                                    {billingPeriod === 'monthly' ? t.perMonth : t.perYear}
+                                </span>
                             </div>
-                            <button onClick={() => setShowLoginModal(true)} className="w-full py-4 rounded-2xl bg-white text-black font-bold hover:bg-gray-200 transition-all shadow-lg hover:scale-[1.02]">{t.ctaStart}</button>
-                            <p className="text-[10px] text-gray-500 text-center mt-4 uppercase tracking-widest font-bold">{t.singlePayment}</p>
+                            <p className="text-gray-500 text-sm mb-8">{t.personalDesc}</p>
+                            <div className="space-y-4 mb-8 flex-1">
+                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-gray-900" /><span className="text-gray-700">{t.featUser1}</span></div>
+                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-gray-900" /><span className="text-gray-700">{t.featAccess}</span></div>
+                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-gray-900" /><span className="text-gray-700">{t.featVault}</span></div>
+                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-gray-900" /><span className="text-gray-700">{t.featJunior}</span></div>
+                            </div>
+                            <button onClick={() => setShowLoginModal(true)} className="w-full py-4 rounded-2xl bg-gray-900 text-white font-bold hover:bg-gray-800 transition-all">{t.personalCta}</button>
+                        </div>
+
+                        {/* TIER 3: FAMILY */}
+                        <div className="bg-black text-white rounded-3xl p-8 border border-black shadow-xl flex flex-col text-left relative transform md:-translate-y-4 md:scale-105 z-10">
+                            <div className="absolute top-4 right-4 bg-white text-black text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">BEST VALUE</div>
+                            <span className="bg-gray-800 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase mb-6 w-fit tracking-wider">{t.familyPlan}</span>
+                            <div className="flex items-center gap-2 mb-2">
+                                <h3 className="text-5xl font-bold">
+                                    {billingPeriod === 'monthly' ? t.familyPriceMonthly : t.familyPriceAnnual}
+                                </h3>
+                                <span className="text-gray-400 font-bold text-xs">
+                                    {billingPeriod === 'monthly' ? t.perMonth : t.perYear}
+                                </span>
+                            </div>
+                            <p className="text-gray-400 text-sm mb-8">{t.familyDesc}</p>
+                            <div className="space-y-4 mb-8 flex-1">
+                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-emerald-400" /><span className="font-bold">{t.featUser5}</span></div>
+                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-emerald-400" /><span>{t.featShared}</span></div>
+                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-emerald-400" /><span>{t.featJunior}</span></div>
+                                <div className="flex items-center gap-3"><Check className="w-5 h-5 text-emerald-400" /><span>{t.featPriority}</span></div>
+                            </div>
+                            <button onClick={() => setShowLoginModal(true)} className="w-full py-4 rounded-2xl bg-white text-black font-bold hover:bg-gray-200 transition-all shadow-lg hover:scale-[1.02]">{t.familyCta}</button>
+                            {billingPeriod === 'annual' && (
+                                <p className="text-[10px] text-gray-500 text-center mt-4 uppercase tracking-widest font-bold">{t.singlePayment}</p>
+                            )}
                         </div>
                     </div>
                 </div>

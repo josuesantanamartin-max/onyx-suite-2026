@@ -56,7 +56,7 @@ interface UserState {
     onboardingStep: number;
 
     subscription: {
-        plan: 'FREE' | 'PRO' | 'BUSINESS';
+        plan: 'FREE' | 'PERSONAL' | 'FAMILIA';
         status: 'ACTIVE' | 'CANCELED' | 'PAST_DUE' | 'TRIAL' | 'NONE';
         expiryDate?: string;
     };

@@ -68,7 +68,7 @@ const TEXTS: any = {
       upgrade: 'Mejorar Plan',
       nextBill: 'Próxima renovación',
       manage: 'Gestionar Suscripción',
-      price: '4.99€',
+      price: '2,99€',
       freq: '/ mes',
       billDate: '12 Oct 2025'
     },
@@ -130,7 +130,7 @@ const TEXTS: any = {
       upgrade: 'Upgrade Plan',
       nextBill: 'Next renewal',
       manage: 'Manage Subscription',
-      price: '€4.99',
+      price: '€2.99',
       freq: '/ month',
       billDate: 'Oct 12, 2025'
     },
@@ -192,7 +192,7 @@ const TEXTS: any = {
       upgrade: 'Mettre à niveau',
       nextBill: 'Prochain renouvellement',
       manage: 'Gérer l\'abonnement',
-      price: '4,99€',
+      price: '2,99€',
       freq: '/ mois',
       billDate: '12 Oct 2025'
     },
@@ -1053,7 +1053,7 @@ const SettingsModule: React.FC<SettingsModuleProps> = ({ onMenuClick }) => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                     <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
                       <p className="text-[10px] font-black text-gray-400 uppercase mb-1">Próximo Cobro</p>
-                      <p className="font-bold text-gray-900">4.99€ <span className="text-xs text-gray-400">/mes</span></p>
+                      <p className="font-bold text-gray-900">2,99€ <span className="text-xs text-gray-400">/ mes (Personal)</span></p>
                     </div>
                     <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
                       <p className="text-[10px] font-black text-gray-400 uppercase mb-1">Método de Pago</p>

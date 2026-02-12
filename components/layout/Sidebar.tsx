@@ -13,6 +13,7 @@ const SIDEBAR_TEXTS = {
     finance: 'Finanzas',
     life: 'Vida',
     settings: 'Ajustes',
+    help: 'Ayuda',
     logout: 'Salir',
     suite: 'ONYX SUITE'
   },
@@ -21,6 +22,7 @@ const SIDEBAR_TEXTS = {
     finance: 'Finance',
     life: 'Life',
     settings: 'Settings',
+    help: 'Help',
     logout: 'Log Out',
     suite: 'ONYX SUITE'
   },
@@ -29,6 +31,7 @@ const SIDEBAR_TEXTS = {
     finance: 'Finances',
     life: 'Vie',
     settings: 'Paramètres',
+    help: 'Aide',
     logout: 'Quitter',
     suite: 'ONYX SUITE'
   }
@@ -49,7 +52,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onLogout }) => {
     { id: 'dashboard', label: t.dashboard, icon: LayoutDashboard },
     { id: 'finance', label: t.finance, icon: Wallet },
     { id: 'life', label: t.life, icon: Heart },
-    { id: 'help', label: 'Ayuda', icon: HelpCircle },
   ];
 
   const handleLinkClick = (app: string) => {
@@ -109,6 +111,13 @@ const Sidebar: React.FC<SidebarProps> = ({ onLogout }) => {
             >
               <Settings className={`w-5 h-5 transition-transform duration-500 group-hover:rotate-90 ${activeApp === 'settings' ? 'text-indigo-primary' : 'text-onyx-400'}`} />
               <span className="text-[13px] tracking-tight">{t.settings}</span>
+            </button>
+            <button
+              onClick={() => handleLinkClick('help')}
+              className={`w-full flex items-center gap-4 px-5 py-3.5 rounded-xl transition-all duration-300 group ${activeApp === 'help' ? 'text-onyx-950 dark:text-white font-bold bg-onyx-50 dark:bg-onyx-900 border border-onyx-100 dark:border-onyx-800 shadow-sm' : 'text-onyx-400 dark:text-onyx-500 hover:text-onyx-900 dark:hover:text-onyx-200 hover:bg-onyx-50/50 dark:hover:bg-onyx-900/50'}`}
+            >
+              <HelpCircle className={`w-5 h-5 transition-all duration-300 ${activeApp === 'help' ? 'text-indigo-primary' : 'text-onyx-400 group-hover:text-onyx-600'}`} />
+              <span className="text-[13px] tracking-tight">{t.help}</span>
             </button>
             <button
               onClick={onLogout}

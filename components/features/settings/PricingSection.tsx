@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
 import { Check, Zap, Rocket, Shield, Crown, Loader2 } from 'lucide-react';
 import { useUserStore } from '../../../store/useUserStore';
+import { useSubscription } from '../../../hooks/useSubscription';
 import { stripeService } from '../../../services/stripeService';
 import Toast from '../../common/Toast'; // Assuming Toast context or hook is available, or use alert for MVP
 
-const PRICE_ID_PRO = import.meta.env.VITE_STRIPE_PRO_PRICE_ID || 'price_123_test';
+
 
 const PricingSection: React.FC = () => {
     const { userProfile, subscription } = useUserStore();
+    const { subscribeToPlan } = useSubscription();
     const [isLoading, setIsLoading] = useState<string | null>(null);
 
     const plans = [
         {
-            name: 'Free',
+            name: 'Prueba Gratuita',
             price: '0€',
-            description: 'Para empezar a organizar tus finanzas personales.',
+            description: '14 días con acceso completo para que pruebes Onyx Suite.',
             features: [
+                'Acceso completo durante 14 días',
                 'Hasta 3 cuentas bancarias',
-                'Registro de transacciones ilimitado',
-                'Pantry básico',
-                'Sincronización manual',
-                'Un solo dispositivo'
+                'Hasta 500 transacciones',
+                'IA limitada (10 generaciones/mes)',
+                'Un solo usuario'
             ],
             icon: <Shield className="w-6 h-6 text-gray-400" />,
             buttonText: subscription.plan === 'FREE' ? 'Plan Actual' : 'Seleccionar',
@@ -28,64 +30,67 @@ const PricingSection: React.FC = () => {
             highlight: false
         },
         {
-            name: 'Pro',
-            price: '4.99€',
+            name: 'Personal',
+            price: '2,99€',
             period: '/mes',
-            description: 'Potenciado por IA para un control total de tu vida.',
+            annualPrice: '19,99€/año',
+            annualNote: 'Ahorra 45% con el pago anual',
+            description: 'Todo el poder de Onyx para un solo usuario.',
             features: [
-                'Cuentas ilimitadas',
-                'Onyx Intelligence (Analítica IA)',
-                'Escáner de tickets inteligente',
-                'Presupuestos compartidos',
-                'Sincronización automática cloud',
-                'Soporte prioritario'
+                'Cuentas y transacciones ilimitadas',
+                'Presupuestos y metas ilimitadas',
+                'Onyx Intelligence (IA ilimitada)',
+                'Dashboard Personalizable',
+                'Bóveda Digital Segura',
+                'Modo Offline',
+                'Soporte por email'
             ],
             icon: <Zap className="w-6 h-6 text-yellow-500" />,
-            buttonText: subscription.plan === 'PRO' ? 'Plan Actual' : 'Suscribirse Ahora',
-            disabled: subscription.plan === 'PRO',
+            buttonText: subscription.plan === 'PERSONAL' ? 'Plan Actual' : 'Suscribirse',
+            disabled: subscription.plan === 'PERSONAL',
             highlight: true
         },
         {
-            name: 'Business',
-            price: '9.99€',
+            name: 'Familia',
+            price: '3,99€',
             period: '/mes',
-            description: 'Para equipos y familias que necesitan lo mejor.',
+            annualPrice: '24,99€/año',
+            annualNote: 'Ahorra 48% con el pago anual',
+            description: 'Para familias que quieren gestionar juntos.',
             features: [
-                'Todo lo de Pro',
-                'Hasta 10 miembros familiares',
-                'Roles y permisos avanzados',
-                'Exportación de datos pro (Excel/PDF)',
-                'API Access (Beta)',
-                'Account Manager dedicado'
+                'Todo lo del plan Personal',
+                'Hasta 5 miembros familiares',
+                'Modo Colaborativo y Roles',
+                'Espacios compartidos en tiempo real',
+                'Modo Junior (Educación Financiera)',
+                'Soporte Prioritario (12h)',
+                '20 backups y 10 layouts de dashboard'
             ],
             icon: <Crown className="w-6 h-6 text-purple-500" />,
-            buttonText: subscription.plan === 'BUSINESS' ? 'Plan Actual' : 'Contactar Ventas',
-            disabled: subscription.plan === 'BUSINESS',
+            buttonText: subscription.plan === 'FAMILIA' ? 'Plan Actual' : 'Suscribirse',
+            disabled: subscription.plan === 'FAMILIA',
             highlight: false
         }
     ];
 
-    const handleSubscribe = async (planName: string) => {
+    const handleSubscribe = async (planName: string, billingPeriod: 'monthly' | 'annual' = 'monthly') => {
         if (!userProfile?.id) {
             alert("Por favor, inicia sesión para suscribirte.");
             return;
         }
 
-        if (planName === 'Pro') {
-            setIsLoading('Pro');
-            try {
-                await stripeService.createCheckoutSession({
-                    priceId: PRICE_ID_PRO,
-                    userId: userProfile.id
-                });
-            } catch (error) {
-                console.error(error);
-                alert("Error al iniciar el pago. Por favor intenta de nuevo.");
-            } finally {
-                setIsLoading(null);
+        setIsLoading(planName);
+        try {
+            if (planName === 'Personal') {
+                await subscribeToPlan('PERSONAL', billingPeriod);
+            } else if (planName === 'Familia') {
+                await subscribeToPlan('FAMILIA', billingPeriod);
             }
-        } else if (planName === 'Business') {
-            alert("Contacta con soporte para el plan Business.");
+        } catch (error) {
+            console.error(error);
+            alert("Error al iniciar el pago. Por favor intenta de nuevo.");
+        } finally {
+            setIsLoading(null);
         }
     };
 
@@ -123,6 +128,11 @@ const PricingSection: React.FC = () => {
                                 {plan.price}<span className="text-sm font-normal text-gray-400">{plan.period}</span>
                             </span>
                         </div>
+                        {plan.annualPrice && (
+                            <div className={`text-xs mb-2 px-3 py-1 rounded-full inline-block ${plan.highlight ? 'bg-yellow-400/20 text-yellow-300' : 'bg-green-50 text-green-600'}`}>
+                                o {plan.annualPrice} · {plan.annualNote}
+                            </div>
+                        )}
 
                         <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                         <p className={`text-sm mb-6 ${plan.highlight ? 'text-gray-300' : 'text-gray-500'}`}>

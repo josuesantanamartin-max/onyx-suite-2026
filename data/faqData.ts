@@ -44,9 +44,9 @@ export const faqData: FAQ[] = [
             FR: 'Quels sont les plans d\'abonnement disponibles?'
         },
         answer: {
-            ES: 'Onyx Suite ofrece dos planes: 1) Onyx Basic (Gratis) - Para uso individual con funciones básicas, y 2) Onyx Familia (4.99€/mes) - Hasta 5 usuarios, Onyx Vault compartido, espacios colaborativos, Onyx Junior, y soporte prioritario.',
-            EN: 'Onyx Suite offers two plans: 1) Onyx Basic (Free) - For individual use with basic features, and 2) Onyx Family (€4.99/month) - Up to 5 users, shared Onyx Vault, collaborative spaces, Onyx Junior, and priority support.',
-            FR: 'Onyx Suite propose deux plans: 1) Onyx Basic (Gratuit) - Pour usage individuel avec fonctionnalités de base, et 2) Onyx Famille (4,99€/mois) - Jusqu\'à 5 utilisateurs, Onyx Vault partagé, espaces collaboratifs, Onyx Junior, et support prioritaire.'
+            ES: 'Onyx Suite ofrece tres modalidades: 1) Prueba Gratuita (14 días) - Acceso total para probarla, 2) Onyx Personal (2.99€/mes) - Para uso individual con funciones avanzadas, y 3) Onyx Familia (3.99€/mes) - Hasta 5 usuarios, roles, colaboración en tiempo real y soporte prioritario.',
+            EN: 'Onyx Suite offers three options: 1) Free Trial (14 days) - Full access to try it out, 2) Onyx Personal (€2.99/month) - For individual use with advanced features, and 3) Onyx Family (€3.99/month) - Up to 5 users, roles, real-time collaboration, and priority support.',
+            FR: 'Onyx Suite propose trois options : 1) Essai Gratuit (14 jours) - Accès complet pour tester, 2) Onyx Personnel (2,99€/mois) - Pour usage individuel avec fonctionnalités avancées, et 3) Onyx Famille (3,99€/mois) - Jusqu\'à 5 utilisateurs, rôles, collaboration en temps réel et support prioritaire.'
         },
         category: 'account',
         tags: ['suscripción', 'planes', 'precio']

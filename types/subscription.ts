@@ -3,7 +3,7 @@
  * Defines subscription tiers, limits, and features
  */
 
-export type SubscriptionTier = 'FREE' | 'FAMILIA';
+export type SubscriptionTier = 'FREE' | 'PERSONAL' | 'FAMILIA';
 export type SubscriptionStatus = 'ACTIVE' | 'CANCELED' | 'PAST_DUE' | 'TRIAL' | 'NONE';
 
 export interface SubscriptionLimits {
@@ -171,6 +171,86 @@ export const SUBSCRIPTION_PLANS: Record<SubscriptionTier, SubscriptionPlan> = {
             }
         ]
     },
+    PERSONAL: {
+        tier: 'PERSONAL',
+        name: {
+            ES: 'Onyx Personal',
+            EN: 'Onyx Personal',
+            FR: 'Onyx Personnel'
+        },
+        description: {
+            ES: 'Todo el poder de Onyx para un solo usuario',
+            EN: 'All the power of Onyx for a single user',
+            FR: 'Toute la puissance d\'Onyx pour un seul utilisateur'
+        },
+        price: {
+            monthly: 2.99,
+            annual: 19.99 // ~45% discount vs monthly
+        },
+        stripePriceIds: {
+            monthly: 'price_personal_monthly', // Replace with actual Stripe Price ID
+            annual: 'price_personal_annual'    // Replace with actual Stripe Price ID
+        },
+        limits: {
+            maxTransactions: null, // unlimited
+            maxBudgets: null,
+            maxAccounts: null,
+            maxRecipes: null,
+            maxFamilyMembers: 1,
+            maxAIGenerations: null, // unlimited
+            maxBackups: 10,
+            maxDashboardLayouts: 5,
+            canExportData: true,
+            canUseAI: true,
+            canCollaborate: false,
+            canCustomizeDashboard: true,
+            prioritySupport: false,
+            offlineMode: true
+        },
+        features: [
+            {
+                id: 'unlimited',
+                name: { ES: 'Todo ilimitado', EN: 'Everything unlimited', FR: 'Tout illimité' },
+                description: { ES: 'Transacciones, presupuestos, cuentas y recetas sin límite', EN: 'Unlimited transactions, budgets, accounts and recipes', FR: 'Transactions, budgets, comptes et recettes illimités' },
+                included: true,
+                limit: '∞'
+            },
+            {
+                id: 'ai_unlimited',
+                name: { ES: 'IA ilimitada', EN: 'Unlimited AI', FR: 'IA illimitée' },
+                description: { ES: 'Generaciones ilimitadas con IA', EN: 'Unlimited AI generations', FR: 'Générations IA illimitées' },
+                included: true,
+                limit: '∞'
+            },
+            {
+                id: 'offline',
+                name: { ES: 'Modo offline', EN: 'Offline mode', FR: 'Mode hors ligne' },
+                description: { ES: 'Funciona sin conexión', EN: 'Works without connection', FR: 'Fonctionne sans connexion' },
+                included: true
+            },
+            {
+                id: 'dashboard',
+                name: { ES: 'Dashboard personalizable', EN: 'Customizable dashboard', FR: 'Dashboard personnalisable' },
+                description: { ES: 'Hasta 5 layouts', EN: 'Up to 5 layouts', FR: 'Jusqu\'à 5 layouts' },
+                included: true,
+                limit: '5'
+            },
+            {
+                id: 'backups',
+                name: { ES: 'Backups', EN: 'Backups', FR: 'Sauvegardes' },
+                description: { ES: 'Hasta 10 backups', EN: 'Up to 10 backups', FR: 'Jusqu\'à 10 sauvegardes' },
+                included: true,
+                limit: '10'
+            },
+            {
+                id: 'support',
+                name: { ES: 'Soporte estándar', EN: 'Standard support', FR: 'Support standard' },
+                description: { ES: 'Soporte por email', EN: 'Email support', FR: 'Support par email' },
+                included: true
+            }
+        ],
+        popular: true
+    },
     FAMILIA: {
         tier: 'FAMILIA',
         name: {
@@ -184,8 +264,8 @@ export const SUBSCRIPTION_PLANS: Record<SubscriptionTier, SubscriptionPlan> = {
             FR: 'Pour les familles qui veulent gérer ensemble'
         },
         price: {
-            monthly: 4.99,
-            annual: 49.99 // ~17% discount
+            monthly: 3.99,
+            annual: 24.99 // ~48% discount vs monthly
         },
         stripePriceIds: {
             monthly: 'price_familia_monthly', // Replace with actual Stripe Price ID
@@ -322,14 +402,20 @@ export const canUseFeature = (
 export const getUpgradeBenefits = (currentTier: SubscriptionTier): string[] => {
     if (currentTier === 'FAMILIA') return [];
 
-    return [
-        'Transacciones, presupuestos y cuentas ilimitadas',
+    if (currentTier === 'PERSONAL') return [
         'Hasta 5 miembros de familia',
-        'IA ilimitada para recetas y categorización',
         'Espacios compartidos y colaboración',
         'Modo Onyx Junior para niños',
         'Soporte prioritario (12h)',
+        'Hasta 20 backups',
+        '10 layouts de dashboard'
+    ];
+
+    return [
+        'Transacciones, presupuestos y cuentas ilimitadas',
+        'IA ilimitada para recetas y categorización',
+        'Dashboard personalizable',
         'Modo offline',
-        'Hasta 20 backups'
+        'Hasta 10 backups'
     ];
 };

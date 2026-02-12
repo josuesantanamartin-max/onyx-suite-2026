@@ -21,6 +21,7 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [betaCode, setBetaCode] = useState('');
   const [authLoading, setAuthLoading] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [showLegalModal, setShowLegalModal] = useState<'privacy' | 'terms' | null>(null);
@@ -79,6 +80,19 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
               />
             </div>
 
+            {/* Beta Code Input - Only shown during registration */}
+            {isRegister && (
+              <div className="relative mb-2">
+                <input
+                  type="text"
+                  placeholder="Código de Acceso Beta"
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black focus:ring-0 transition-all text-sm uppercase tracking-widest font-bold text-center"
+                  value={betaCode}
+                  onChange={(e) => setBetaCode(e.target.value.toUpperCase())}
+                />
+              </div>
+            )}
+
             {/* Terms Acceptance Checkbox - Only shown during registration */}
             {isRegister && (
               <div className="flex items-start gap-2 py-2">
@@ -118,11 +132,18 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
 
             <button
               onClick={async () => {
+                if (isRegister) {
+                  const validCodes = ['ONYX2026', 'BETA2026', 'FAMILIA'];
+                  if (!validCodes.includes(betaCode)) {
+                    alert('Código de acceso inválido. Por favor, contacta con nosotros para obtener una invitación.');
+                    return;
+                  }
+                }
                 setAuthLoading(true);
                 await onLogin('EMAIL', { email, password, isRegister });
                 setAuthLoading(false);
               }}
-              disabled={authLoading || !email || !password || (isRegister && !acceptedTerms)}
+              disabled={authLoading || !email || !password || (isRegister && (!acceptedTerms || !betaCode))}
               className="w-full py-4 rounded-xl bg-black text-white font-bold text-sm hover:bg-gray-800 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {authLoading ? 'Procesando...' : (isRegister ? 'Crear Cuenta' : 'Entrar con Email')}

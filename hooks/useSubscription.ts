@@ -35,12 +35,14 @@ export const useSubscription = () => {
         }
     };
 
-    const upgradeToFamilia = async (billingPeriod: 'monthly' | 'annual' = 'monthly') => {
+    const subscribeToPlan = async (tier: SubscriptionTier, billingPeriod: 'monthly' | 'annual' = 'monthly') => {
         if (!userProfile?.id) {
             throw new Error('User not logged in');
         }
 
-        const plan = SUBSCRIPTION_PLANS.FAMILIA;
+        if (tier === 'FREE') return;
+
+        const plan = SUBSCRIPTION_PLANS[tier];
         const priceId = plan.stripePriceIds[billingPeriod];
 
         try {
@@ -157,7 +159,7 @@ export const useSubscription = () => {
         isActive: isActive(),
         isCanceled: isCanceled(),
         daysUntilRenewal: daysUntilRenewal(),
-        upgradeToFamilia,
+        subscribeToPlan,
         manageBilling,
         cancelSubscription,
         reactivateSubscription,
