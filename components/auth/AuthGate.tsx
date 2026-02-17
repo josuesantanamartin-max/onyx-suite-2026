@@ -68,25 +68,33 @@ const AuthGate: React.FC<AuthGateProps> = ({ children }) => {
     }, [isDemoMode, setAuthenticated, setDemoMode, addSyncLog, setUserProfile, loadFromCloud]);
 
     const handleLogin = async (method: 'DEMO' | 'GOOGLE' | 'EMAIL' | 'NOTION', data?: { email: string, password: string, isRegister: boolean }) => {
+        console.log(`[AuthGate] handleLogin called with method: ${method}`);
+
         if (method === 'DEMO') {
             setDemoMode(true);
             setAuthenticated(true);
             addSyncLog({ message: "Modo Demo activado (Local)", timestamp: Date.now(), type: "SYSTEM" });
         } else if (method === 'GOOGLE' && supabase) {
             try {
+                console.log("[AuthGate] Initiating Google OAuth Login...");
                 const { error } = await supabase.auth.signInWithOAuth({
                     provider: 'google',
                     options: {
                         redirectTo: window.location.origin
                     }
                 });
-                if (error) throw error;
+                if (error) {
+                    console.error("[AuthGate] Google OAuth Error returned:", error);
+                    throw error;
+                }
+                console.log("[AuthGate] Google OAuth Redirect initiated successfully");
             } catch (error: any) {
+                console.error("[AuthGate] Caught Google Login Error:", error);
                 alert(`Error al iniciar sesión con Google: ${error.message}`);
-                console.error(error);
             }
         } else if (method === 'NOTION' && supabase) {
             try {
+                console.log("[AuthGate] Initiating Notion OAuth Login...");
                 const { error } = await supabase.auth.signInWithOAuth({
                     provider: 'notion',
                     options: {
@@ -100,6 +108,7 @@ const AuthGate: React.FC<AuthGateProps> = ({ children }) => {
             }
         } else if (method === 'EMAIL' && supabase && data) {
             try {
+                console.log(`[AuthGate] Attempting ${data.isRegister ? 'Signup' : 'Login'} with Email: ${data.email}`);
                 if (data.isRegister) {
                     const { error } = await supabase.auth.signUp({
                         email: data.email,
@@ -119,6 +128,7 @@ const AuthGate: React.FC<AuthGateProps> = ({ children }) => {
                 console.error(error);
             }
         } else if (!supabase) {
+            console.error("[AuthGate] Supabase client is not initialized!");
             alert("Para activar el login real, configura las claves de Supabase en tu entorno.");
         }
     };
