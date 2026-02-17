@@ -273,6 +273,11 @@ Onyx Suite 2026 ha alcanzado un nivel de madurez excepcional para lanzamiento be
   - Herramientas de verificación
   - Errores de IA y sincronización
 
+- ✅ **STRIPE_PORTAL_TEST_GUIDE.md** (100+ líneas)
+  - Guía completa de pruebas de Stripe
+  - Tarjetas de prueba y flujos de pago
+  - Gestión de portal y webhooks
+
 - ✅ **CONTRIBUTING.md** (400+ líneas)
   - Código de conducta
   - Configuración del entorno

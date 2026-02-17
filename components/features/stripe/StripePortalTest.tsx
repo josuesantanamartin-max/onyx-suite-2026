@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink, CreditCard, Check, AlertCircle } from 'lucide-react';
+import { ExternalLink, CreditCard, Check, AlertCircle, Info } from 'lucide-react';
 import { useSubscription } from '../../../hooks/useSubscription';
 
 /**
@@ -128,8 +128,8 @@ export const StripePortalTest: React.FC = () => {
                     onClick={handleOpenPortal}
                     disabled={isLoading || subscription?.tier === 'FREE'}
                     className={`w-full py-4 rounded-2xl font-bold text-white transition-all flex items-center justify-center gap-3 ${isLoading || subscription?.tier === 'FREE'
-                            ? 'bg-gray-400 cursor-not-allowed'
-                            : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl hover:scale-105'
+                        ? 'bg-gray-400 cursor-not-allowed'
+                        : 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl hover:scale-105'
                         }`}
                 >
                     {isLoading ? (
@@ -162,6 +162,25 @@ export const StripePortalTest: React.FC = () => {
                         </pre>
                     </details>
                 )}
+
+                <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800">
+                    <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-1 flex items-center gap-2">
+                        <Info className="w-4 h-4 text-blue-500" />
+                        Guía de Pruebas
+                    </h3>
+                    <p className="text-xs text-blue-700 dark:text-blue-300 mb-3">
+                        Aprende a probar el flujo de checkout, portal de cliente y webhooks paso a paso.
+                    </p>
+                    <a
+                        href="/docs/STRIPE_PORTAL_TEST_GUIDE.md"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-lg transition-colors shadow-sm"
+                    >
+                        <ExternalLink className="w-3 h-3" />
+                        Ver Guía de Pruebas
+                    </a>
+                </div>
             </div>
         </div>
     );

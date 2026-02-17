@@ -188,8 +188,8 @@ export const SUBSCRIPTION_PLANS: Record<SubscriptionTier, SubscriptionPlan> = {
             annual: 19.99 // ~45% discount vs monthly
         },
         stripePriceIds: {
-            monthly: 'price_personal_monthly', // Replace with actual Stripe Price ID
-            annual: 'price_personal_annual'    // Replace with actual Stripe Price ID
+            monthly: 'price_1T1atB3IoYNgqHKq1XoqDxcT',
+            annual: 'price_1T1atC3IoYNgqHKqQzV4QbRI'
         },
         limits: {
             maxTransactions: null, // unlimited
@@ -268,8 +268,8 @@ export const SUBSCRIPTION_PLANS: Record<SubscriptionTier, SubscriptionPlan> = {
             annual: 24.99 // ~48% discount vs monthly
         },
         stripePriceIds: {
-            monthly: 'price_familia_monthly', // Replace with actual Stripe Price ID
-            annual: 'price_familia_annual'    // Replace with actual Stripe Price ID
+            monthly: 'price_1T1atC3IoYNgqHKqk5IFpCDe',
+            annual: 'price_1T1atD3IoYNgqHKq5Rqk8byX'
         },
         limits: {
             maxTransactions: null, // unlimited

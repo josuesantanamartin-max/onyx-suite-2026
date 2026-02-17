@@ -24,6 +24,7 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
   const [betaCode, setBetaCode] = useState('');
   const [authLoading, setAuthLoading] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [isAgeVerified, setIsAgeVerified] = useState(false);
   const [showLegalModal, setShowLegalModal] = useState<'privacy' | 'terms' | null>(null);
 
   const t = LANDING_TEXTS[language];
@@ -44,6 +45,7 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
               onClick={() => {
                 setIsRegister(false);
                 setAcceptedTerms(false);
+                setIsAgeVerified(false);
               }}
               className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${!isRegister ? 'bg-white shadow-sm text-black' : 'text-gray-500 hover:text-gray-700'}`}
             >
@@ -53,6 +55,7 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
               onClick={() => {
                 setIsRegister(true);
                 setAcceptedTerms(false);
+                setIsAgeVerified(false);
               }}
               className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${isRegister ? 'bg-white shadow-sm text-black' : 'text-gray-500 hover:text-gray-700'}`}
             >
@@ -93,40 +96,55 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
               </div>
             )}
 
-            {/* Terms Acceptance Checkbox - Only shown during registration */}
+            {/* Terms Acceptance & Age Verification - Only shown during registration */}
             {isRegister && (
-              <div className="flex items-start gap-2 py-2">
-                <input
-                  type="checkbox"
-                  id="terms-checkbox"
-                  checked={acceptedTerms}
-                  onChange={(e) => setAcceptedTerms(e.target.checked)}
-                  className="mt-1 w-4 h-4 rounded border-gray-300 text-black focus:ring-black cursor-pointer"
-                />
-                <label htmlFor="terms-checkbox" className="text-xs text-gray-600 leading-tight cursor-pointer">
-                  Acepto los{' '}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setShowLegalModal('terms');
-                    }}
-                    className="text-black font-semibold hover:underline"
-                  >
-                    Términos de Servicio
-                  </button>
-                  {' '}y la{' '}
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setShowLegalModal('privacy');
-                    }}
-                    className="text-black font-semibold hover:underline"
-                  >
-                    Política de Privacidad
-                  </button>
-                </label>
+              <div className="space-y-2 py-2">
+                <div className="flex items-start gap-2">
+                  <input
+                    type="checkbox"
+                    id="terms-checkbox"
+                    checked={acceptedTerms}
+                    onChange={(e) => setAcceptedTerms(e.target.checked)}
+                    className="mt-1 w-4 h-4 rounded border-gray-300 text-black focus:ring-black cursor-pointer"
+                  />
+                  <label htmlFor="terms-checkbox" className="text-xs text-gray-600 leading-tight cursor-pointer">
+                    Acepto los{' '}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowLegalModal('terms');
+                      }}
+                      className="text-black font-semibold hover:underline"
+                    >
+                      Términos de Servicio
+                    </button>
+                    {' '}y la{' '}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowLegalModal('privacy');
+                      }}
+                      className="text-black font-semibold hover:underline"
+                    >
+                      Política de Privacidad
+                    </button>
+                  </label>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <input
+                    type="checkbox"
+                    id="age-checkbox"
+                    checked={isAgeVerified}
+                    onChange={(e) => setIsAgeVerified(e.target.checked)}
+                    className="mt-1 w-4 h-4 rounded border-gray-300 text-black focus:ring-black cursor-pointer"
+                  />
+                  <label htmlFor="age-checkbox" className="text-xs text-gray-600 leading-tight cursor-pointer">
+                    Confirmo que tengo 16 años o más.
+                  </label>
+                </div>
               </div>
             )}
 
@@ -143,7 +161,7 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
                 await onLogin('EMAIL', { email, password, isRegister });
                 setAuthLoading(false);
               }}
-              disabled={authLoading || !email || !password || (isRegister && (!acceptedTerms || !betaCode))}
+              disabled={authLoading || !email || !password || (isRegister && (!acceptedTerms || !betaCode || !isAgeVerified))}
               className="w-full py-4 rounded-xl bg-black text-white font-bold text-sm hover:bg-gray-800 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {authLoading ? 'Procesando...' : (isRegister ? 'Crear Cuenta' : 'Entrar con Email')}
@@ -155,12 +173,9 @@ const OnyxLanding: React.FC<OnyxLandingProps> = ({ onLogin, language, setLanguag
             <div className="relative flex justify-center text-[10px] uppercase font-bold tracking-widest"><span className="bg-white px-2 text-gray-400">Otras opciones</span></div>
           </div>
 
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 gap-2">
             <button onClick={() => onLogin('GOOGLE')} className="py-3 rounded-xl border border-gray-200 font-bold text-xs hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
               <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="w-4 h-4" alt="Google" />
-            </button>
-            <button onClick={() => onLogin('APPLE')} className="py-3 rounded-xl bg-gray-900 text-white font-bold text-xs hover:bg-black transition-all flex items-center justify-center gap-2 shadow-sm">
-              <img src="https://www.svgrepo.com/show/511330/apple-173.svg" className="w-4 h-4 invert" alt="Apple" />
             </button>
             <button onClick={() => onLogin('NOTION')} className="py-3 rounded-xl border border-gray-200 font-bold text-xs hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
               <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" className="w-4 h-4" alt="Notion" />

@@ -54,7 +54,7 @@ const AuthGate: React.FC<AuthGateProps> = ({ children }) => {
         }
     }, [isDemoMode, setAuthenticated, setDemoMode, addSyncLog, setUserProfile, loadFromCloud]);
 
-    const handleLogin = async (method: 'DEMO' | 'GOOGLE' | 'APPLE' | 'EMAIL' | 'NOTION', data?: { email: string, password: string, isRegister: boolean }) => {
+    const handleLogin = async (method: 'DEMO' | 'GOOGLE' | 'EMAIL' | 'NOTION', data?: { email: string, password: string, isRegister: boolean }) => {
         if (method === 'DEMO') {
             setDemoMode(true);
             setAuthenticated(true);
