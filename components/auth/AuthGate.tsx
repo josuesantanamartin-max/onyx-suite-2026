@@ -22,23 +22,34 @@ const AuthGate: React.FC<AuthGateProps> = ({ children }) => {
 
     // --- AUTH INITIALIZATION ---
     useEffect(() => {
-        // Handle Demo Mode
-        if (isDemoMode) {
-            setAuthenticated(true);
-            return;
-        }
+        console.log("[AuthGate] Initializing Auth...", { isDemoMode, isAuthenticated, hash: window.location.hash });
 
         if (supabase) {
-            supabase.auth.getSession().then(({ data: { session } }) => {
+            supabase.auth.getSession().then(({ data: { session }, error }) => {
+                if (error) {
+                    console.error("[AuthGate] Error getting session:", error);
+                    return;
+                }
+
                 if (session) {
+                    console.log("[AuthGate] Session found! Upgrading to real mode.", session.user.email);
                     setAuthenticated(true);
+                    setDemoMode(false); // Force exit demo mode if we have a real session
                     setUserProfile(session.user);
                     loadFromCloud();
                     addSyncLog({ message: "Conectado a Onyx Cloud (Supabase)", timestamp: Date.now(), type: "SYSTEM" });
+                } else {
+                    console.log("[AuthGate] No active session found.");
+                    // Only apply demo mode if NO real session exists
+                    if (isDemoMode) {
+                        console.log("[AuthGate] Falling back to Demo Mode.");
+                        setAuthenticated(true);
+                    }
                 }
             });
 
-            const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+                console.log("[AuthGate] Auth state changed:", event, session?.user?.email);
                 if (session) {
                     setAuthenticated(true);
                     setDemoMode(false);
@@ -51,6 +62,8 @@ const AuthGate: React.FC<AuthGateProps> = ({ children }) => {
             });
 
             return () => subscription.unsubscribe();
+        } else if (isDemoMode) {
+            setAuthenticated(true);
         }
     }, [isDemoMode, setAuthenticated, setDemoMode, addSyncLog, setUserProfile, loadFromCloud]);
 

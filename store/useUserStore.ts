@@ -285,6 +285,7 @@ export const useUserStore = create<UserState & UserActions>()(
             name: 'onyx_user_store',
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
+                isAuthenticated: state.isAuthenticated,
                 isDemoMode: state.isDemoMode,
                 language: state.language,
                 currency: state.currency,
