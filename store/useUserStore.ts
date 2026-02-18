@@ -114,6 +114,9 @@ interface UserActions {
     setEditMode: (enabled: boolean) => void;
     addWidgetToLayout: (widgetId: string) => void;
     removeWidgetFromLayout: (widgetId: string) => void;
+    toggleWidgetVisibility: (widgetId: string) => void;
+    duplicateLayout: (layoutId: string) => void;
+    renameLayout: (layoutId: string, newName: string) => void;
 
     addSyncLog: (log: SyncLog) => void;
     setLastSyncTime: (time: string) => void;
@@ -255,11 +258,55 @@ export const useUserStore = create<UserState & UserActions>()(
                 return {
                     dashboardLayouts: state.dashboardLayouts.map(l =>
                         l.id === state.activeLayoutId
-                            ? { ...l, widgets: l.widgets.filter(w => w.i !== widgetId) }
+                            ? { ...l, widgets: l.widgets.filter(w => w.i !== widgetId), updatedAt: new Date().toISOString() }
                             : l
                     )
                 };
             }),
+
+            toggleWidgetVisibility: (widgetId) => set((state) => {
+                const activeLayout = state.dashboardLayouts.find(l => l.id === state.activeLayoutId);
+                if (!activeLayout) return state;
+
+                return {
+                    dashboardLayouts: state.dashboardLayouts.map(l =>
+                        l.id === state.activeLayoutId
+                            ? {
+                                ...l,
+                                widgets: l.widgets.map(w =>
+                                    w.i === widgetId ? { ...w, visible: !w.visible } : w
+                                ),
+                                updatedAt: new Date().toISOString()
+                            }
+                            : l
+                    )
+                };
+            }),
+
+            duplicateLayout: (layoutId) => set((state) => {
+                const layout = state.dashboardLayouts.find(l => l.id === layoutId);
+                if (!layout) return state;
+
+                const newLayout: DashboardLayout = {
+                    ...layout,
+                    id: `${layout.id}-copy-${Date.now()}`,
+                    name: `${layout.name} (Copia)`,
+                    isDefault: false,
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString(),
+                };
+
+                return {
+                    dashboardLayouts: [...state.dashboardLayouts, newLayout],
+                    activeLayoutId: newLayout.id
+                };
+            }),
+
+            renameLayout: (layoutId, newName) => set((state) => ({
+                dashboardLayouts: state.dashboardLayouts.map(l =>
+                    l.id === layoutId ? { ...l, name: newName, updatedAt: new Date().toISOString() } : l
+                )
+            })),
 
             addSyncLog: (log) => set((state) => ({
                 syncLogs: [

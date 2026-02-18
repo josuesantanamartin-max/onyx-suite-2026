@@ -1,4 +1,5 @@
 import { Transaction } from '../types';
+import { MERCHANT_MAPPINGS } from '../config/merchantMappings';
 
 /**
  * Detect the delimiter used in a CSV file
@@ -280,17 +281,46 @@ export const getTransactionStats = (
 };
 
 /**
+ * Detect category and subcategory from description using merchant mappings
+ */
+export const detectCategoryFromDescription = (
+    description: string
+): { category: string; subCategory?: string } | null => {
+    if (!description) return null;
+
+    const cleanedDescription = description.toUpperCase();
+
+    for (const mapping of MERCHANT_MAPPINGS) {
+        if (mapping.keywords.some(keyword => cleanedDescription.includes(keyword))) {
+            return {
+                category: mapping.category,
+                subCategory: mapping.subCategory
+            };
+        }
+    }
+
+    return null;
+};
+
+/**
  * Map category from CSV to existing categories
  */
 export const mapCategory = (
     categoryStr: string | undefined | null,
-    availableCategories: { id: string; name: string; subCategories: string[] }[]
+    availableCategories: { id: string; name: string; subCategories: string[] }[],
+    description?: string // Added description parameter
 ): { category: string; subCategory?: string } => {
+    // 1. Try to detect by merchant description first (most accurate for bank CSVs)
+    if (description) {
+        const detected = detectCategoryFromDescription(description);
+        if (detected) return detected;
+    }
+
     if (!categoryStr) return { category: 'Otros' };
 
     const cleaned = categoryStr.trim().toLowerCase();
 
-    // Try exact match first
+    // 2. Try exact match
     for (const cat of availableCategories) {
         if (cat.name.toLowerCase() === cleaned) {
             return { category: cat.name };
@@ -304,7 +334,7 @@ export const mapCategory = (
         }
     }
 
-    // Try partial match
+    // 3. Try partial match
     for (const cat of availableCategories) {
         if (cleaned.includes(cat.name.toLowerCase()) || cat.name.toLowerCase().includes(cleaned)) {
             return { category: cat.name };

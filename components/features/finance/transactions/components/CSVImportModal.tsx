@@ -154,7 +154,7 @@ const CSVImportModal: React.FC<CSVImportModalProps> = ({ isOpen, onClose, onImpo
             let subCategoryVal: string | undefined;
 
             if (mapping.category && row[mapping.category]) {
-                const mapped = mapCategory(row[mapping.category], categories);
+                const mapped = mapCategory(row[mapping.category], categories, descriptionVal);
                 categoryVal = mapped.category;
                 subCategoryVal = mapped.subCategory;
             }
@@ -238,7 +238,8 @@ const CSVImportModal: React.FC<CSVImportModalProps> = ({ isOpen, onClose, onImpo
         // Update account balance if account was selected
         if (selectedAccount && balanceInfo) {
             const { updateAccountBalance } = useFinanceStore.getState();
-            updateAccountBalance(selectedAccount, balanceInfo.finalBalance);
+            // Use impact instead of finalBalance because updateAccountBalance adds the value
+            updateAccountBalance(selectedAccount, balanceInfo.impact);
         }
 
         onClose();

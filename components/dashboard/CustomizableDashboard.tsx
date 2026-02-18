@@ -56,7 +56,7 @@ const CustomizableDashboard: React.FC = () => {
 
     const [timeMode, setTimeMode] = useState<'MONTH' | 'YEAR'>('MONTH');
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-    const [tempLayout, setTempLayout] = useState<Layout>([]);
+    const [tempLayout, setTempLayout] = useState<any[]>([]);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [activeCategory, setActiveCategory] = useState<WidgetCategory>('ALL');
     const { hasCompletedOnboarding } = useUserStore();
@@ -148,19 +148,34 @@ const CustomizableDashboard: React.FC = () => {
             maxW: w.maxW,
             maxH: w.maxH,
             static: !isEditMode,
-        }));
+            visible: w.visible !== false,
+        })) as any[]; // Using any[] to bypass LayoutItem strictness with our custom field
     }, [activeLayout, isEditMode]);
 
     const filteredGridLayout = useMemo(() => {
         return gridLayout.filter(item => {
+            // In view mode, only show visible widgets
+            if (!isEditMode && item.visible === false) return false;
+
+            // Apply category filter
             if (activeCategory === 'ALL') return true;
             return getWidgetCategory(item.i) === activeCategory;
         });
-    }, [gridLayout, activeCategory]);
+    }, [gridLayout, activeCategory, isEditMode]);
 
     const handleLayoutChange = (newLayout: Layout) => {
         if (!isEditMode) return;
-        setTempLayout(newLayout);
+
+        // Merge the visibility property back into the temp layout
+        const mergedLayout = newLayout.map(item => {
+            const original = gridLayout.find(w => w.i === item.i);
+            return {
+                ...item,
+                visible: original?.visible ?? true
+            };
+        });
+
+        setTempLayout(mergedLayout);
     };
 
     const handleSaveLayout = () => {

@@ -22,6 +22,7 @@ export interface WidgetLayout {
     maxW?: number;          // Maximum width
     maxH?: number;          // Maximum height
     static?: boolean;       // Cannot be moved/resized
+    visible?: boolean;      // NEW: Visibility toggle
 }
 
 export interface DashboardLayout {

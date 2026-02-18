@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useFinanceStore } from '../../../../store/useFinanceStore';
 import { useUserStore } from '../../../../store/useUserStore';
 import { useFinanceControllers } from '../../../../hooks/useFinanceControllers';
-import { Transaction, QuickAction } from '@/types';
+import { Transaction, QuickAction } from '../../../../types';
 import {
   Plus, Database, FileUp, X, Upload, ArrowUpRight, ArrowDownRight, ArrowRightLeft, Repeat, Sparkles, Loader2
 } from 'lucide-react';
@@ -253,6 +253,7 @@ const Transactions: React.FC<TransactionsProps> = ({
 
     importedTransactions.forEach(t => {
       const transactionData = {
+        id: crypto.randomUUID(), // Generate unique ID
         type: t.type as 'INCOME' | 'EXPENSE',
         amount: t.amount || 0,
         date: t.date || new Date().toISOString().split('T')[0],
@@ -267,7 +268,8 @@ const Transactions: React.FC<TransactionsProps> = ({
       // Validate before adding
       const result = validateTransaction(transactionData);
       if (result.success) {
-        addTransaction(result.data as Omit<Transaction, 'id'>);
+        // Here result.data will include the id because it's in the input data
+        addTransaction(result.data as Transaction);
       }
     });
     setIsImportModalOpen(false);

@@ -7,6 +7,22 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [1.0.1] - 2026-02-18
+
+### ✨ Added
+- **Sistema de Invitaciones Beta**: Control de acceso granular para usuarios beta mediante códigos de invitación (XXXX-XXXX-XXXX).
+- **Admin Manager**: Panel de administración para gestión de códigos beta y estadísticas.
+- **Guía de Pruebas Stripe**: Documentación exhaustiva para validación de flujos de pago (`STRIPE_PORTAL_TEST_GUIDE.md`).
+
+### 🔧 Changed
+- **Auditoría de Precios**: Sincronización de precios entre Stripe, `subscription.ts` y UI (Personal: 2.99€/mes, Familia: 3.99€/mes).
+- **Refinamiento de Perfil**: Mejora en el mapeo de datos de usuario de Google y sincronización de suscripción desde Supabase.
+
+### 🗑️ Removed
+- **Apple Authentication**: Eliminado temporalmente para simplificar la infraestructura de lanzamiento.
+
+---
+
 ## [1.0.0] - 2026-02-06
 
 ### 🎉 Lanzamiento Inicial
