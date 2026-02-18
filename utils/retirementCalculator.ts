@@ -58,10 +58,12 @@ export const retirementCalculator = {
         } else if (monthlyRealRate === 0) {
             monthsOfFunding = totalSavings / targetMonthlyIncome;
         } else {
-            // If the return on capital is greater than withdrawal, it lasts forever (infinite)
             if (totalSavings * monthlyRealRate >= targetMonthlyIncome) {
+                // If interest generated is enough to cover withdrawal, capital lasts forever
                 monthsOfFunding = 999 * 12; // "Forever"
             } else {
+                // Standard NPER formula: considers that the remaining balance 
+                // continues to grow at 'monthlyRealRate' while withdrawals happen
                 monthsOfFunding = -Math.log(1 - (totalSavings * monthlyRealRate / targetMonthlyIncome)) / Math.log(1 + monthlyRealRate);
             }
         }

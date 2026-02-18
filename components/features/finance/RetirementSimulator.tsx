@@ -66,28 +66,30 @@ export const RetirementSimulator: React.FC = () => {
         for (let age = currentAge; age <= targetAge; age++) {
             years.push({
                 age,
-                balance: Math.round(balance),
-                phase: 'Accumulation'
+                accumulation: Math.round(balance),
+                drawdown: null,
+                phase: 'Acumulación'
             });
             // Add interest + contributions
             balance = balance * (1 + realAnnualRate) + (monthlyContribution * 12);
         }
 
         // Decumulation Phase (Drawdown)
-        let drawdownBalance = balance;
-        // Limit to 95 years old or when money runs out
-        for (let age = targetAge + 1; age <= 95; age++) {
-            // Subtract annual income needs
+        let drawdownBalance = years[years.length - 1].accumulation;
+        // Limit to 100 years old or when money runs out
+        for (let age = targetAge + 1; age <= 100; age++) {
+            // Subtract annual income needs, balance continues to grow
             drawdownBalance = drawdownBalance * (1 + realAnnualRate) - (targetMonthlyIncome * 12);
             if (drawdownBalance < 0) drawdownBalance = 0;
 
             years.push({
                 age,
-                balance: Math.round(drawdownBalance),
-                phase: 'Drawdown'
+                accumulation: null,
+                drawdown: Math.round(drawdownBalance),
+                phase: 'Retiro'
             });
 
-            if (drawdownBalance === 0 && age > targetAge) break;
+            if (drawdownBalance === 0) break;
         }
 
         setProjectionData(years);
@@ -176,7 +178,7 @@ export const RetirementSimulator: React.FC = () => {
                         <MetricCard
                             title="Años de Cobertura"
                             value={result?.yearsOfFunding > 50 ? "> 50 años" : `${result?.yearsOfFunding} años`}
-                            subtitle={`Cubriendo ${formData.targetMonthlyIncome}€/mes`}
+                            subtitle={`Extrayendo ${formData.targetMonthlyIncome}€/mes y reinvirtiendo el resto`}
                             icon={result?.yearsOfFunding < 20 ? <AlertCircle className="text-red-500" /> : <Save className="text-green-500" />}
                             highlight={result?.yearsOfFunding < 25}
                         />
@@ -188,20 +190,49 @@ export const RetirementSimulator: React.FC = () => {
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={projectionData}>
                                 <defs>
-                                    <linearGradient id="colorBalance" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="#4F46E5" stopOpacity={0.8} />
+                                    <linearGradient id="colorAccumulation" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor="#4F46E5" stopOpacity={0.3} />
                                         <stop offset="95%" stopColor="#4F46E5" stopOpacity={0} />
+                                    </linearGradient>
+                                    <linearGradient id="colorDrawdown" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="5%" stopColor="#F59E0B" stopOpacity={0.3} />
+                                        <stop offset="95%" stopColor="#F59E0B" stopOpacity={0} />
                                     </linearGradient>
                                 </defs>
                                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E7EB" />
                                 <XAxis dataKey="age" label={{ value: 'Edad', position: 'insideBottomRight', offset: -5 }} stroke="#9CA3AF" />
                                 <YAxis tickFormatter={(val) => `${val / 1000}k`} stroke="#9CA3AF" />
                                 <Tooltip
-                                    formatter={(val: number) => [`${val.toLocaleString()}€`, 'Balance']}
-                                    labelFormatter={(label) => `Edad: ${label}`}
+                                    formatter={(val: any, name: any) => [
+                                        `${(val || 0).toLocaleString()}€`,
+                                        name === 'accumulation' ? 'Ahorro Acumulado' : 'Capital en Retiro'
+                                    ]}
+                                    labelFormatter={(label, payload) => {
+                                        const phase = payload[0]?.payload?.phase;
+                                        return `Edad: ${label} (${phase})`;
+                                    }}
                                     contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                                 />
-                                <Area type="monotone" dataKey="balance" stroke="#4F46E5" fillOpacity={1} fill="url(#colorBalance)" />
+                                <Area
+                                    type="monotone"
+                                    dataKey="accumulation"
+                                    stroke="#4F46E5"
+                                    strokeWidth={3}
+                                    fillOpacity={1}
+                                    fill="url(#colorAccumulation)"
+                                    name="accumulation"
+                                    activeDot={{ r: 6 }}
+                                />
+                                <Area
+                                    type="monotone"
+                                    dataKey="drawdown"
+                                    stroke="#F59E0B"
+                                    strokeWidth={3}
+                                    fillOpacity={1}
+                                    fill="url(#colorDrawdown)"
+                                    name="drawdown"
+                                    activeDot={{ r: 6 }}
+                                />
                             </AreaChart>
                         </ResponsiveContainer>
                     </div>
