@@ -223,16 +223,18 @@ export const LandingLife: React.FC<LandingLifeProps> = ({ setShowLoginModal }) =
                 </div>
 
                 {/* CTA Section */}
-                <div className="bg-black text-white rounded-[3rem] p-12 text-center relative overflow-hidden">
+                <div className="bg-gradient-to-br from-violet-900 to-indigo-950 text-white rounded-[3rem] p-12 text-center relative overflow-hidden shadow-2xl shadow-violet-500/20">
+                    <div className="absolute top-0 left-1/4 w-[300px] h-[200px] bg-violet-500/20 rounded-full blur-[80px] pointer-events-none" />
+                    <div className="absolute bottom-0 right-1/4 w-[300px] h-[200px] bg-indigo-500/20 rounded-full blur-[80px] pointer-events-none" />
                     <div className="relative z-10">
                         <h2 className="text-4xl md:text-5xl font-bold mb-6">Diseña la vida que quieres vivir</h2>
-                        <p className="text-gray-400 max-w-2xl mx-auto mb-10 text-lg">
+                        <p className="text-violet-200 max-w-2xl mx-auto mb-10 text-lg">
                             Onyx Vida se encarga del caos logístico para que tú disfrutes de los momentos que realmente importan.
                         </p>
-                        <button onClick={() => setShowLoginModal(true)} className="bg-white text-black px-10 py-5 rounded-full font-bold text-lg hover:scale-105 transition-transform shadow-[0_0_40px_rgba(255,255,255,0.3)] inline-flex items-center gap-3">
+                        <button onClick={() => setShowLoginModal(true)} className="bg-white text-violet-900 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-violet-50 hover:-translate-y-1 transition-all shadow-xl inline-flex items-center gap-3">
                             Explorar Vida <ArrowRight className="w-5 h-5" />
                         </button>
-                        <p className="text-sm text-gray-500 mt-6">Prueba gratuita • Sin compromiso • Cancela cuando quieras</p>
+                        <p className="text-sm text-violet-400 mt-6">Prueba 14 días gratis • Después, desde 2,99€/mes • Cancela cuando quieras</p>
                     </div>
                 </div>
             </div>

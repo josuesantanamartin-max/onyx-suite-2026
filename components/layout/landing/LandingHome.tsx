@@ -127,7 +127,7 @@ export const LandingHome: React.FC<LandingHomeProps> = ({
                             Ver Cómo Funciona
                         </button>
                     </div>
-                    <p className="text-sm text-white/40 mt-6">Gratis para siempre • Sin tarjeta requerida • Configuración en 2 minutos</p>
+                    <p className="text-sm text-white/40 mt-6">14 días de prueba gratis • Sin compromiso • Después desde 2,99€/mes</p>
                 </div>
             </section>
 

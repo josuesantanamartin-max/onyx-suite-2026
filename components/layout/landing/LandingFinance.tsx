@@ -241,7 +241,7 @@ export const LandingFinance: React.FC<LandingFinanceProps> = ({ setShowLoginModa
                         <button onClick={() => setShowLoginModal(true)} className="bg-white text-indigo-900 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-indigo-50 hover:-translate-y-1 transition-all shadow-xl inline-flex items-center gap-3">
                             Comenzar Gratis <ArrowRight className="w-5 h-5" />
                         </button>
-                        <p className="text-sm text-indigo-400 mt-6">Sin tarjeta de crédito requerida • Configuración en 2 minutos</p>
+                        <p className="text-sm text-indigo-400 mt-6">Prueba 14 días gratis • Después, desde 2,99€/mes • Cancela cuando quieras</p>
                     </div>
                 </div>
             </div>
