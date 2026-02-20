@@ -1,13 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import GridLayout from 'react-grid-layout';
-import type { Layout } from 'react-grid-layout';
+import type { Layout, LayoutItem } from 'react-grid-layout';
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 import { useFinanceStore } from '../../store/useFinanceStore';
 import { useUserStore } from '../../store/useUserStore';
 import { useLifeStore } from '../../store/useLifeStore';
 import {
-    Settings, ChevronLeft, ChevronRight, Coffee, Sunset, Moon
+    Settings, ChevronLeft, ChevronRight, Coffee, Sunset, Moon, LayoutGrid
 } from 'lucide-react';
 import { DashboardLayout, WidgetCategory } from '../../types';
 
@@ -33,6 +33,8 @@ const GREETINGS = {
 const CustomizableDashboard: React.FC = () => {
     // Search State
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+    const [resizeTooltip, setResizeTooltip] = useState<{ w: number; h: number } | null>(null);
 
     const {
         dashboardLayouts,
@@ -65,7 +67,6 @@ const CustomizableDashboard: React.FC = () => {
     React.useEffect(() => {
         const hasSeenTour = localStorage.getItem('onyx_has_seen_tour');
         if (hasCompletedOnboarding && !hasSeenTour) {
-            // Small delay to ensure render
             setTimeout(() => {
                 import('./DashboardTour').then(mod => mod.startDashboardTour());
                 localStorage.setItem('onyx_has_seen_tour', 'true');
@@ -149,15 +150,12 @@ const CustomizableDashboard: React.FC = () => {
             maxH: w.maxH,
             static: !isEditMode,
             visible: w.visible !== false,
-        })) as any[]; // Using any[] to bypass LayoutItem strictness with our custom field
+        })) as any[];
     }, [activeLayout, isEditMode]);
 
     const filteredGridLayout = useMemo(() => {
         return gridLayout.filter(item => {
-            // In view mode, only show visible widgets
             if (!isEditMode && item.visible === false) return false;
-
-            // Apply category filter
             if (activeCategory === 'ALL') return true;
             return getWidgetCategory(item.i) === activeCategory;
         });
@@ -166,7 +164,6 @@ const CustomizableDashboard: React.FC = () => {
     const handleLayoutChange = (newLayout: Layout) => {
         if (!isEditMode) return;
 
-        // Merge the visibility property back into the temp layout
         const mergedLayout = newLayout.map(item => {
             const original = gridLayout.find(w => w.i === item.i);
             return {
@@ -178,14 +175,18 @@ const CustomizableDashboard: React.FC = () => {
         setTempLayout(mergedLayout);
     };
 
+    // Show resize tooltip briefly
+    const handleResizeStop = useCallback((_layout: readonly LayoutItem[], _oldItem: LayoutItem, newItem: LayoutItem | null) => {
+        if (!newItem) return;
+        setResizeTooltip({ w: newItem.w, h: newItem.h });
+        setTimeout(() => setResizeTooltip(null), 2000);
+    }, []);
+
     const handleSaveLayout = () => {
         if (!activeLayout) return;
 
-        // Create a map of updated items for faster lookup
         const updatedItemsMap = new Map(tempLayout.map(item => [item.i, item]));
 
-        // Update only the widgets that were present in the tempLayout (currently visible/filtered)
-        // Keep the others as they were
         const updatedWidgets = activeLayout.widgets.map(w => {
             const updatedItem = updatedItemsMap.get(w.i);
             if (updatedItem) {
@@ -206,11 +207,13 @@ const CustomizableDashboard: React.FC = () => {
         });
 
         setEditMode(false);
+        setIsGalleryOpen(false);
     };
 
     const handleCancelEdit = () => {
         setTempLayout([]);
         setEditMode(false);
+        setIsGalleryOpen(false);
     };
 
     // Crear layout personalizado
@@ -261,7 +264,6 @@ const CustomizableDashboard: React.FC = () => {
                 const text = await file.text();
                 const layout: DashboardLayout = JSON.parse(text);
 
-                // Generar nuevo ID para evitar conflictos
                 layout.id = `imported-${Date.now()}`;
                 layout.createdAt = new Date().toISOString();
                 layout.updatedAt = new Date().toISOString();
@@ -375,6 +377,7 @@ const CustomizableDashboard: React.FC = () => {
                                 <EditModeToolbar
                                     onSave={handleSaveLayout}
                                     onCancel={handleCancelEdit}
+                                    onAddWidget={() => setIsGalleryOpen(true)}
                                 />
                             )}
                         </div>
@@ -414,10 +417,27 @@ const CustomizableDashboard: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Widget Gallery (only in edit mode) */}
-                {isEditMode && <WidgetGallery />}
+                <div className="space-y-8 max-w-7xl mx-auto relative">
+                    {/* Edit Mode Banner */}
+                    {isEditMode && (
+                        <div className="flex items-center gap-3 p-4 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 rounded-2xl animate-fade-in-up">
+                            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-300">
+                                <LayoutGrid className="w-5 h-5 shrink-0" />
+                                <p className="text-sm font-semibold">
+                                    <span className="font-black">Modo Edición activo.</span>{' '}
+                                    Arrastra los widgets por la barra superior para reorganizarlos. Usa las esquinas para redimensionarlos.
+                                </p>
+                            </div>
+                            <button
+                                onClick={() => setIsGalleryOpen(true)}
+                                className="ml-auto shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-indigo-primary text-white text-xs font-bold rounded-xl hover:bg-indigo-600 transition-colors"
+                            >
+                                <LayoutGrid className="w-3.5 h-3.5" />
+                                Ver galería
+                            </button>
+                        </div>
+                    )}
 
-                <div className="space-y-8 max-w-7xl mx-auto">
                     {/* Smart Insight Widget (Always Visible) */}
                     <div id="smart-insight-widget" className="animate-fade-in-up">
                         <SmartInsightWidget onNavigate={(app, tab) => {
@@ -432,39 +452,53 @@ const CustomizableDashboard: React.FC = () => {
                     </div>
 
                     {/* Grid Layout */}
-                    <GridLayout
-                        className="layout"
-                        layout={filteredGridLayout}
-                        width={1200}
-                        gridConfig={{
-                            cols: 12,
-                            rowHeight: 80,
-                        }}
-                        dragConfig={{
-                            enabled: isEditMode,
-                            handle: ".drag-handle",
-                        }}
-                        resizeConfig={{
-                            enabled: isEditMode,
-                        }}
-                        onLayoutChange={handleLayoutChange}
-                    >
-                        {filteredGridLayout.map((item) => {
-                            const WidgetComponent = WIDGET_REGISTRY[(item as any).i];
-                            if (!WidgetComponent) return null;
+                    <div className={`relative dashboard-grid-container ${isEditMode ? 'edit-mode' : ''}`}>
+                        <GridLayout
+                            className="layout"
+                            layout={filteredGridLayout}
+                            width={1200}
+                            gridConfig={{
+                                cols: 12,
+                                rowHeight: 80,
+                            }}
+                            dragConfig={{
+                                enabled: isEditMode,
+                                handle: ".drag-handle",
+                            }}
+                            resizeConfig={{
+                                enabled: isEditMode,
+                            }}
+                            onLayoutChange={handleLayoutChange}
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            onResizeStop={handleResizeStop as any}
+                        >
+                            {filteredGridLayout.map((item) => {
+                                const WidgetComponent = WIDGET_REGISTRY[(item as any).i];
+                                if (!WidgetComponent) return null;
 
-                            return (
-                                <div key={(item as any).i}>
-                                    <WidgetWrapper
-                                        widgetId={(item as any).i}
-                                        isEditMode={isEditMode}
-                                    >
-                                        <WidgetComponent {...widgetProps} />
-                                    </WidgetWrapper>
-                                </div>
-                            );
-                        })}
-                    </GridLayout>
+                                return (
+                                    <div key={(item as any).i}>
+                                        <WidgetWrapper
+                                            widgetId={(item as any).i}
+                                            isEditMode={isEditMode}
+                                        >
+                                            <WidgetComponent {...widgetProps} />
+                                        </WidgetWrapper>
+                                    </div>
+                                );
+                            })}
+                        </GridLayout>
+
+                        {/* Resize Tooltip */}
+                        {resizeTooltip && (
+                            <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-4 py-2.5 bg-onyx-900 dark:bg-white text-white dark:text-onyx-900 rounded-2xl shadow-2xl text-sm font-bold animate-fade-in-up pointer-events-none">
+                                <span className="text-indigo-300 dark:text-indigo-600">{resizeTooltip.w}</span>
+                                <span className="text-onyx-400 dark:text-onyx-500 text-xs">col ×</span>
+                                <span className="text-indigo-300 dark:text-indigo-600">{resizeTooltip.h}</span>
+                                <span className="text-onyx-400 dark:text-onyx-500 text-xs">fil</span>
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 <GlobalSearch
@@ -472,9 +506,14 @@ const CustomizableDashboard: React.FC = () => {
                     onClose={() => setIsSearchOpen(false)}
                 />
             </div>
+
+            {/* Widget Gallery Panel */}
+            <WidgetGallery
+                isOpen={isGalleryOpen}
+                onClose={() => setIsGalleryOpen(false)}
+            />
         </div>
     );
 };
 
 export default CustomizableDashboard;
-

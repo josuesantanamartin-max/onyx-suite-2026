@@ -218,42 +218,60 @@ body {
   }
 }
 
+/* ── Resize Handles — Hidden by default ── */
 .react-resizable-handle {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   opacity: 0;
-  transition: opacity 200ms ease;
+  transition: opacity 150ms ease, transform 150ms ease;
+  z-index: 10;
 }
 
-.react-grid-item:hover .react-resizable-handle {
+/* Show handles only when the parent grid container is in edit-mode */
+.dashboard-grid-container.edit-mode .react-resizable-handle {
   opacity: 1;
 }
 
+/* SE handle — bottom-right corner */
 .react-resizable-handle-se {
-  bottom: 0;
-  right: 0;
+  bottom: 4px;
+  right: 4px;
   cursor: se-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgb(var(--color-indigo-primary) / 0.12);
+  backdrop-filter: blur(4px);
+  border: 1.5px solid rgb(var(--color-indigo-primary) / 0.3);
+  transition: opacity 150ms ease, transform 150ms ease, background 150ms ease, border-color 150ms ease;
 }
 
-.react-resizable-handle::after {
+.dashboard-grid-container.edit-mode .react-resizable-handle-se:hover {
+  background: rgb(var(--color-indigo-primary) / 0.25);
+  border-color: rgb(var(--color-indigo-primary) / 0.7);
+  transform: scale(1.2);
+}
+
+/* Corner arrow icon via ::after */
+.react-resizable-handle-se::after {
   content: "";
-  position: absolute;
-  right: 3px;
-  bottom: 3px;
-  width: 8px;
-  height: 8px;
-  border-right: 2px solid rgba(0, 0, 0, 0.4);
-  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
-  border-radius: 0 0 2px 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-right: 2.5px solid rgb(var(--color-indigo-primary));
+  border-bottom: 2.5px solid rgb(var(--color-indigo-primary));
+  border-radius: 0 0 3px 0;
+  margin: 2px 2px 0 0;
+  transition: border-color 150ms ease;
 }
 
-[data-theme='dark'] .react-resizable-handle::after {
-  border-right: 2px solid rgba(255, 255, 255, 0.4);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+.dashboard-grid-container.edit-mode .react-resizable-handle-se:hover::after {
+  border-color: rgb(var(--color-indigo-primary));
 }
 
-/* Smooth transitions for layout changes */
+/* ── Smooth transitions for layout changes ── */
 .react-grid-layout.layout-changing .react-grid-item {
   transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
