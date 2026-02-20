@@ -15,7 +15,7 @@ import {
 import { analyzeFinances } from '../../services/geminiService';
 
 // Widget Architecture
-import { WIDGET_REGISTRY, WIDGET_CONFIG, DashboardDataProps } from './WidgetRegistry';
+import { WIDGET_REGISTRY, WIDGET_CONFIG, DashboardDataProps, getColSpanClass } from './WidgetRegistry';
 import SmartInsightWidget from './SmartInsightWidget';
 
 // Widget category mapping (inline to avoid import issues)
@@ -402,7 +402,8 @@ const OnyxCentral: React.FC = () => {
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                         {visibleSorted.map((widget, idx) => {
                             const WidgetComponent = WIDGET_REGISTRY[widget.id];
-                            const config = WIDGET_CONFIG[widget.id] || { colSpan: 'col-span-12', label: widget.id };
+                            const config = WIDGET_CONFIG[widget.id];
+                            const colSpan = getColSpanClass(config?.size ?? 'full');
                             const cat = WIDGET_CATEGORIES[widget.id];
 
                             if (!WidgetComponent) return null;
@@ -413,7 +414,7 @@ const OnyxCentral: React.FC = () => {
                             return (
                                 <div
                                     key={widget.id}
-                                    className={`${config.colSpan} relative transition-all duration-200 ${isEditingLayout
+                                    className={`${colSpan} relative transition-all duration-200 ${isEditingLayout
                                         ? 'rounded-3xl ring-2 ring-indigo-primary/25 ring-dashed'
                                         : ''
                                         }`}

@@ -60,32 +60,53 @@ export const WIDGET_REGISTRY: Record<string, React.ComponentType<any>> = {
     'ACCOUNTS_SUMMARY': AccountsSummaryWidget,
 };
 
+/**
+ * Widget size categories:
+ *  kpi     → 3 cols  — Single metric card (number + trend)
+ *  half    → 6 cols  — Half-width card (goals, debts, health)
+ *  wide    → 8 cols  — Wide chart/card (net worth, projection)
+ *  sidebar → 4 cols  — Sidebar panel (agenda, menu, accounts)
+ *  full    → 12 cols — Full-width (tables, charts, explorer)
+ */
+export type WidgetSize = 'kpi' | 'half' | 'wide' | 'sidebar' | 'full';
+
+export function getColSpanClass(size: WidgetSize): string {
+    switch (size) {
+        case 'kpi': return 'col-span-12 sm:col-span-6 lg:col-span-3';
+        case 'half': return 'col-span-12 md:col-span-6';
+        case 'wide': return 'col-span-12 lg:col-span-8';
+        case 'sidebar': return 'col-span-12 md:col-span-6 lg:col-span-4';
+        case 'full': return 'col-span-12';
+        default: return 'col-span-12 md:col-span-6';
+    }
+}
+
 // Widget Layout Configuration
-export const WIDGET_CONFIG: Record<string, { colSpan: string; label: string }> = {
-    'NET_WORTH': { colSpan: 'col-span-12 lg:col-span-8', label: 'Patrimonio Neto' },
-    'MONTHLY_FLOW': { colSpan: 'col-span-12 lg:col-span-4', label: 'Flujo Mensual' },
-    'CATEGORY_CHART': { colSpan: 'col-span-12', label: 'Distribución Gastos' },
-    'EXPLORER': { colSpan: 'col-span-12', label: 'Explorador Transacciones' },
-    'ACTIVE_GOALS': { colSpan: 'col-span-12 lg:col-span-6', label: 'Metas Activas' },
-    'ACTIVE_DEBTS': { colSpan: 'col-span-12 lg:col-span-6', label: 'Deudas Activas' },
-    'SPENDING_FORECAST': { colSpan: 'col-span-12 lg:col-span-6', label: 'Previsión Gastos' },
-    'TODAY_MENU': { colSpan: 'col-span-12 lg:col-span-8', label: 'Menú de Hoy' },
-    'SHOPPING_LIST': { colSpan: 'col-span-12 lg:col-span-4', label: 'Despensa & Lista' },
-    'SHOPPING_LIST_FULL': { colSpan: 'col-span-12 lg:col-span-4', label: 'Lista de Compra Completa' },
-    'FAMILY_AGENDA': { colSpan: 'col-span-12 lg:col-span-4', label: 'Agenda Familiar' },
-    'BUDGET_STATUS': { colSpan: 'col-span-12', label: 'Estado Presupuestos' },
-    'PROJECTION_WIDGET': { colSpan: 'col-span-12 lg:col-span-8', label: 'Proyección Balance' },
-    'TIMELINE_EVOLUTION': { colSpan: 'col-span-12', label: 'Evolución Temporal' },
-    'FINANCIAL_HEALTH': { colSpan: 'col-span-12 lg:col-span-6', label: 'Salud Financiera' },
-    'UPCOMING_PAYMENTS': { colSpan: 'col-span-12 lg:col-span-6', label: 'Próximos Pagos' },
-    'ANNUAL_COMPARISON': { colSpan: 'col-span-12 lg:col-span-6', label: 'Comparativa Anual' },
-    'MONTHLY_GOALS': { colSpan: 'col-span-12 lg:col-span-6', label: 'Objetivos del Mes' },
-    'RECIPE_FAVORITES': { colSpan: 'col-span-12 lg:col-span-6', label: 'Recetas Favoritas' },
-    'WEEKLY_PLAN': { colSpan: 'col-span-12 lg:col-span-6', label: 'Plan Semanal' },
-    'UPCOMING_TRIPS': { colSpan: 'col-span-12 lg:col-span-6', label: 'Próximos Viajes' },
-    'FAMILY_TASKS': { colSpan: 'col-span-12 lg:col-span-6', label: 'Tareas Familiares' },
-    'CRITICAL_INVENTORY': { colSpan: 'col-span-12 lg:col-span-6', label: 'Inventario Crítico' },
-    'ACCOUNTS_SUMMARY': { colSpan: 'col-span-12 lg:col-span-4', label: 'Resumen Cuentas' },
+export const WIDGET_CONFIG: Record<string, { size: WidgetSize; label: string; category: string }> = {
+    'NET_WORTH': { size: 'wide', label: 'Patrimonio Neto', category: 'finance' },
+    'MONTHLY_FLOW': { size: 'sidebar', label: 'Flujo Mensual', category: 'finance' },
+    'CATEGORY_CHART': { size: 'full', label: 'Distribución Gastos', category: 'finance' },
+    'EXPLORER': { size: 'full', label: 'Explorador Transacciones', category: 'finance' },
+    'ACTIVE_GOALS': { size: 'half', label: 'Metas Activas', category: 'finance' },
+    'ACTIVE_DEBTS': { size: 'half', label: 'Deudas Activas', category: 'finance' },
+    'SPENDING_FORECAST': { size: 'half', label: 'Previsión Gastos', category: 'finance' },
+    'BUDGET_STATUS': { size: 'full', label: 'Estado Presupuestos', category: 'finance' },
+    'PROJECTION_WIDGET': { size: 'wide', label: 'Proyección Balance', category: 'finance' },
+    'TIMELINE_EVOLUTION': { size: 'full', label: 'Evolución Temporal', category: 'finance' },
+    'FINANCIAL_HEALTH': { size: 'half', label: 'Salud Financiera', category: 'finance' },
+    'UPCOMING_PAYMENTS': { size: 'half', label: 'Próximos Pagos', category: 'finance' },
+    'ANNUAL_COMPARISON': { size: 'half', label: 'Comparativa Anual', category: 'finance' },
+    'MONTHLY_GOALS': { size: 'half', label: 'Objetivos del Mes', category: 'finance' },
+    'ACCOUNTS_SUMMARY': { size: 'sidebar', label: 'Resumen Cuentas', category: 'finance' },
+    'TODAY_MENU': { size: 'wide', label: 'Menú de Hoy', category: 'life' },
+    'SHOPPING_LIST': { size: 'sidebar', label: 'Despensa & Lista', category: 'life' },
+    'SHOPPING_LIST_FULL': { size: 'half', label: 'Lista de Compra Completa', category: 'life' },
+    'FAMILY_AGENDA': { size: 'sidebar', label: 'Agenda Familiar', category: 'life' },
+    'RECIPE_FAVORITES': { size: 'half', label: 'Recetas Favoritas', category: 'life' },
+    'WEEKLY_PLAN': { size: 'full', label: 'Plan Semanal', category: 'life' },
+    'UPCOMING_TRIPS': { size: 'half', label: 'Próximos Viajes', category: 'life' },
+    'FAMILY_TASKS': { size: 'half', label: 'Tareas Familiares', category: 'life' },
+    'CRITICAL_INVENTORY': { size: 'half', label: 'Inventario Crítico', category: 'life' },
 };
 
 // Helper type for props passed to dynamic widgets

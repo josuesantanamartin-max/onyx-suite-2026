@@ -1,8 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import GridLayout, { noCompactor } from 'react-grid-layout';
-import type { Layout, LayoutItem } from 'react-grid-layout';
-import 'react-grid-layout/css/styles.css';
-import 'react-resizable/css/styles.css';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
 import { useFinanceStore } from '../../store/useFinanceStore';
 import { useUserStore } from '../../store/useUserStore';
 import { useLifeStore } from '../../store/useLifeStore';
@@ -11,7 +7,7 @@ import {
 } from 'lucide-react';
 import { DashboardLayout, WidgetCategory } from '../../types';
 
-import { WIDGET_REGISTRY, WIDGET_CONFIG, DashboardDataProps } from './WidgetRegistry';
+import { WIDGET_REGISTRY, WIDGET_CONFIG, DashboardDataProps, getColSpanClass } from './WidgetRegistry';
 import { getWidgetCategory } from './widgetCategories';
 import WidgetWrapper from './WidgetWrapper';
 import LayoutSelector from './LayoutSelector';
@@ -34,7 +30,12 @@ const CustomizableDashboard: React.FC = () => {
     // Search State
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-    const [resizeTooltip, setResizeTooltip] = useState<{ w: number; h: number } | null>(null);
+
+    // Drag-to-reorder state
+    const dragItem = useRef<string | null>(null);
+    const dragOverItem = useRef<string | null>(null);
+    const [draggingId, setDraggingId] = useState<string | null>(null);
+    const [dragOverId, setDragOverId] = useState<string | null>(null);
 
     const {
         dashboardLayouts,
@@ -58,7 +59,8 @@ const CustomizableDashboard: React.FC = () => {
 
     const [timeMode, setTimeMode] = useState<'MONTH' | 'YEAR'>('MONTH');
     const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-    const [tempLayout, setTempLayout] = useState<any[]>([]);
+    // Ordered widget IDs for current layout (drives drag-reorder)
+    const [widgetOrder, setWidgetOrder] = useState<string[]>([]);
     const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     const [activeCategory, setActiveCategory] = useState<WidgetCategory>('ALL');
     const { hasCompletedOnboarding } = useUserStore();
@@ -78,6 +80,13 @@ const CustomizableDashboard: React.FC = () => {
         () => dashboardLayouts.find(l => l.id === activeLayoutId),
         [dashboardLayouts, activeLayoutId]
     );
+
+    // Sync widgetOrder when layout changes or edit mode begins
+    React.useEffect(() => {
+        if (activeLayout) {
+            setWidgetOrder(activeLayout.widgets.map(w => w.i));
+        }
+    }, [activeLayout?.id, activeLayout?.widgets.length]);
 
     const hour = new Date().getHours();
     const timeOfDay = hour < 12 ? 'morning' : hour < 18 ? 'afternoon' : 'evening';
@@ -135,99 +144,65 @@ const CustomizableDashboard: React.FC = () => {
         setFinanceActiveTab('transactions');
     };
 
-    // Convert WidgetLayout[] to Layout[] for react-grid-layout
-    const gridLayout = useMemo(() => {
+    // Ordered + filtered widget list for rendering
+    const visibleWidgets = useMemo(() => {
         if (!activeLayout) return [];
-        return activeLayout.widgets.map(w => ({
-            i: w.i,
-            x: w.x,
-            y: w.y,
-            w: w.w,
-            h: w.h,
-            minW: w.minW,
-            minH: w.minH,
-            maxW: w.maxW,
-            maxH: w.maxH,
-            static: !isEditMode,
-            visible: w.visible !== false,
-        })) as any[];
-    }, [activeLayout, isEditMode]);
+        const widgetMap = new Map(activeLayout.widgets.map(w => [w.i, w]));
 
-    const filteredGridLayout = useMemo(() => {
-        return gridLayout.filter(item => {
-            if (!isEditMode && item.visible === false) return false;
-            if (activeCategory === 'ALL') return true;
-            return getWidgetCategory(item.i) === activeCategory;
-        });
-    }, [gridLayout, activeCategory, isEditMode]);
+        // Use current order (respects drag reorder), fall back to layout order
+        const ordered = widgetOrder.length > 0 ? widgetOrder : activeLayout.widgets.map(w => w.i);
 
-    const handleLayoutChange = (newLayout: Layout) => {
-        if (!isEditMode) return;
+        return ordered
+            .map(id => widgetMap.get(id))
+            .filter((w): w is NonNullable<typeof w> => {
+                if (!w) return false;
+                if (!isEditMode && w.visible === false) return false;
+                if (activeCategory !== 'ALL' && getWidgetCategory(w.i) !== activeCategory) return false;
+                return true;
+            });
+    }, [activeLayout, widgetOrder, isEditMode, activeCategory]);
 
-        // Map current tempLayout by id for fast lookup
-        const currentById = new Map(tempLayout.map(w => [w.i, w]));
-
-        // Detect if this change comes from ADDING a new widget
-        // (newLayout has more items than tempLayout)
-        const newIds = newLayout
-            .map(item => item.i)
-            .filter(id => !currentById.has(id));
-
-        if (newIds.length > 0) {
-            // New widget(s) added — preserve EXACT dimensions of existing widgets
-            // and only append the truly new items from newLayout
-            const preserved = tempLayout; // keep existing as-is
-            const newItems = newLayout
-                .filter(item => newIds.includes(item.i))
-                .map(item => ({
-                    ...item,
-                    visible: true,
-                }));
-            setTempLayout([...preserved, ...newItems]);
-            return;
-        }
-
-        // Normal drag/resize change — merge keeping visibility flag
-        const mergedLayout = newLayout.map(item => {
-            const original = currentById.get(item.i);
-            return {
-                ...item,
-                visible: original?.visible ?? true,
-            };
-        });
-
-        setTempLayout(mergedLayout);
-    };
-
-    // Show resize tooltip briefly
-    const handleResizeStop = useCallback((_layout: readonly LayoutItem[], _oldItem: LayoutItem, newItem: LayoutItem | null) => {
-        if (!newItem) return;
-        setResizeTooltip({ w: newItem.w, h: newItem.h });
-        setTimeout(() => setResizeTooltip(null), 2000);
+    // ── Drag-to-reorder handlers ──────────────────────────────────────────
+    const handleDragStart = useCallback((id: string) => {
+        dragItem.current = id;
+        setDraggingId(id);
     }, []);
 
+    const handleDragEnter = useCallback((id: string) => {
+        dragOverItem.current = id;
+        setDragOverId(id);
+    }, []);
+
+    const handleDragEnd = useCallback(() => {
+        if (dragItem.current && dragOverItem.current && dragItem.current !== dragOverItem.current) {
+            setWidgetOrder(prev => {
+                const items = [...prev];
+                const fromIdx = items.indexOf(dragItem.current!);
+                const toIdx = items.indexOf(dragOverItem.current!);
+                if (fromIdx === -1 || toIdx === -1) return prev;
+                items.splice(fromIdx, 1);
+                items.splice(toIdx, 0, dragItem.current!);
+                return items;
+            });
+        }
+        dragItem.current = null;
+        dragOverItem.current = null;
+        setDraggingId(null);
+        setDragOverId(null);
+    }, []);
+
+    // ── Save / Cancel ─────────────────────────────────────────────────────
     const handleSaveLayout = () => {
         if (!activeLayout) return;
 
-        const updatedItemsMap = new Map(tempLayout.map(item => [item.i, item]));
-
-        const updatedWidgets = activeLayout.widgets.map(w => {
-            const updatedItem = updatedItemsMap.get(w.i);
-            if (updatedItem) {
-                return {
-                    ...w,
-                    x: updatedItem.x,
-                    y: updatedItem.y,
-                    w: updatedItem.w,
-                    h: updatedItem.h,
-                };
-            }
-            return w;
-        });
+        // Apply current widget order back to the layout
+        const reordered = widgetOrder
+            .map(id => activeLayout.widgets.find(w => w.i === id))
+            .filter((w): w is NonNullable<typeof w> => !!w);
 
         saveLayout({
             ...activeLayout,
-            widgets: updatedWidgets,
+            widgets: reordered,
         });
 
         setEditMode(false);
@@ -235,7 +210,8 @@ const CustomizableDashboard: React.FC = () => {
     };
 
     const handleCancelEdit = () => {
-        setTempLayout([]);
+        // Reset order to saved layout
+        if (activeLayout) setWidgetOrder(activeLayout.widgets.map(w => w.i));
         setEditMode(false);
         setIsGalleryOpen(false);
     };
@@ -256,51 +232,6 @@ const CustomizableDashboard: React.FC = () => {
 
         saveLayout(newLayout);
         setActiveLayout(newLayout.id);
-    };
-
-    // Exportar layout
-    const handleExportLayout = () => {
-        if (!activeLayout) return;
-
-        const dataStr = JSON.stringify(activeLayout, null, 2);
-        const dataBlob = new Blob([dataStr], { type: 'application/json' });
-        const url = URL.createObjectURL(dataBlob);
-
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `${activeLayout.name.toLowerCase().replace(/\s+/g, '-')}.json`;
-        link.click();
-
-        URL.revokeObjectURL(url);
-    };
-
-    // Importar layout
-    const handleImportLayout = () => {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = '.json';
-
-        input.onchange = async (e) => {
-            const file = (e.target as HTMLInputElement).files?.[0];
-            if (!file) return;
-
-            try {
-                const text = await file.text();
-                const layout: DashboardLayout = JSON.parse(text);
-
-                layout.id = `imported-${Date.now()}`;
-                layout.createdAt = new Date().toISOString();
-                layout.updatedAt = new Date().toISOString();
-
-                saveLayout(layout);
-                setActiveLayout(layout.id);
-            } catch (error) {
-                console.error('Error importing layout:', error);
-                alert('Error al importar el layout. Verifica que el archivo sea válido.');
-            }
-        };
-
-        input.click();
     };
 
     const widgetProps: DashboardDataProps = {
@@ -449,7 +380,7 @@ const CustomizableDashboard: React.FC = () => {
                                 <LayoutGrid className="w-5 h-5 shrink-0" />
                                 <p className="text-sm font-semibold">
                                     <span className="font-black">Modo Edición activo.</span>{' '}
-                                    Arrastra los widgets por la barra superior para reorganizarlos. Usa las esquinas para redimensionarlos.
+                                    Arrastra los widgets por la barra superior para reordenarlos. Los tamaños se ajustan automáticamente.
                                 </p>
                             </div>
                             <button
@@ -475,54 +406,36 @@ const CustomizableDashboard: React.FC = () => {
                         }} />
                     </div>
 
-                    {/* Grid Layout */}
-                    <div className={`relative dashboard-grid-container ${isEditMode ? 'edit-mode' : ''}`}>
-                        <GridLayout
-                            className="layout"
-                            layout={filteredGridLayout}
-                            width={1200}
-                            gridConfig={{
-                                cols: 12,
-                                rowHeight: 80,
-                            }}
-                            dragConfig={{
-                                enabled: isEditMode,
-                                handle: ".drag-handle",
-                            }}
-                            resizeConfig={{
-                                enabled: isEditMode,
-                            }}
-                            compactor={noCompactor}
-                            onLayoutChange={handleLayoutChange}
-                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                            onResizeStop={handleResizeStop as any}
-                        >
-                            {filteredGridLayout.map((item) => {
-                                const WidgetComponent = WIDGET_REGISTRY[(item as any).i];
-                                if (!WidgetComponent) return null;
+                    {/* ── CSS Auto-Sizing Grid ───────────────────────────────────────── */}
+                    <div className="grid grid-cols-12 gap-4 auto-rows-auto">
+                        {visibleWidgets.map((item) => {
+                            const WidgetComponent = WIDGET_REGISTRY[item.i];
+                            if (!WidgetComponent) return null;
 
-                                return (
-                                    <div key={(item as any).i}>
-                                        <WidgetWrapper
-                                            widgetId={(item as any).i}
-                                            isEditMode={isEditMode}
-                                        >
-                                            <WidgetComponent {...widgetProps} />
-                                        </WidgetWrapper>
-                                    </div>
-                                );
-                            })}
-                        </GridLayout>
+                            const config = WIDGET_CONFIG[item.i];
+                            const colSpanClass = getColSpanClass(config?.size ?? 'half');
+                            const isDragging = draggingId === item.i;
+                            const isOver = dragOverId === item.i;
 
-                        {/* Resize Tooltip */}
-                        {resizeTooltip && (
-                            <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-4 py-2.5 bg-onyx-900 dark:bg-white text-white dark:text-onyx-900 rounded-2xl shadow-2xl text-sm font-bold animate-fade-in-up pointer-events-none">
-                                <span className="text-indigo-300 dark:text-indigo-600">{resizeTooltip.w}</span>
-                                <span className="text-onyx-400 dark:text-onyx-500 text-xs">col ×</span>
-                                <span className="text-indigo-300 dark:text-indigo-600">{resizeTooltip.h}</span>
-                                <span className="text-onyx-400 dark:text-onyx-500 text-xs">fil</span>
-                            </div>
-                        )}
+                            return (
+                                <div
+                                    key={item.i}
+                                    className={`${colSpanClass} transition-all duration-200 ${isDragging ? 'opacity-40 scale-95' : 'opacity-100'} ${isOver && isEditMode ? 'ring-2 ring-indigo-400 ring-offset-2 rounded-2xl' : ''}`}
+                                    draggable={isEditMode}
+                                    onDragStart={() => handleDragStart(item.i)}
+                                    onDragEnter={() => handleDragEnter(item.i)}
+                                    onDragEnd={handleDragEnd}
+                                    onDragOver={(e) => e.preventDefault()}
+                                >
+                                    <WidgetWrapper
+                                        widgetId={item.i}
+                                        isEditMode={isEditMode}
+                                    >
+                                        <WidgetComponent {...widgetProps} />
+                                    </WidgetWrapper>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
 
