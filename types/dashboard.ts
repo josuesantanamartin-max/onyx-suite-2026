@@ -22,7 +22,9 @@ export interface WidgetLayout {
     maxW?: number;          // Maximum width
     maxH?: number;          // Maximum height
     static?: boolean;       // Cannot be moved/resized
-    visible?: boolean;      // NEW: Visibility toggle
+    visible?: boolean;      // Visibility toggle
+    sizeOverride?: 'kpi' | 'half' | 'wide' | 'sidebar' | 'full'; // User-overridden size from drop zone
+
 }
 
 export interface DashboardLayout {

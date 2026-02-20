@@ -115,6 +115,8 @@ interface UserActions {
     addWidgetToLayout: (widgetId: string) => void;
     removeWidgetFromLayout: (widgetId: string) => void;
     toggleWidgetVisibility: (widgetId: string) => void;
+    changeWidgetSize: (widgetId: string, newSize: 'kpi' | 'half' | 'wide' | 'sidebar' | 'full') => void;
+
     duplicateLayout: (layoutId: string) => void;
     renameLayout: (layoutId: string, newName: string) => void;
 
@@ -284,6 +286,26 @@ export const useUserStore = create<UserState & UserActions>()(
                     )
                 };
             }),
+
+            changeWidgetSize: (widgetId, newSize) => set((state) => {
+                const activeLayout = state.dashboardLayouts.find(l => l.id === state.activeLayoutId);
+                if (!activeLayout) return state;
+
+                return {
+                    dashboardLayouts: state.dashboardLayouts.map(l =>
+                        l.id === state.activeLayoutId
+                            ? {
+                                ...l,
+                                widgets: l.widgets.map(w =>
+                                    w.i === widgetId ? { ...w, sizeOverride: newSize } : w
+                                ),
+                                updatedAt: new Date().toISOString()
+                            }
+                            : l
+                    )
+                };
+            }),
+
 
             duplicateLayout: (layoutId) => set((state) => {
                 const layout = state.dashboardLayouts.find(l => l.id === layoutId);
