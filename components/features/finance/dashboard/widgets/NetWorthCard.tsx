@@ -1,7 +1,8 @@
-
 import React from 'react';
-import { Account, Debt } from '@/types';
-import { Wallet, TrendingUp, TrendingDown, ArrowUpRight, ArrowDownRight, Coins } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Transaction, Account, Debt } from '../../../../../types';
+import { TrendingUp, TrendingDown, DollarSign, Wallet, ArrowUpRight, ArrowDownRight, Coins } from 'lucide-react';
+import { Card } from '../../../../ui/Card';
 
 interface NetWorthCardProps {
     accounts: Account[];
@@ -27,7 +28,7 @@ const NetWorthCard: React.FC<NetWorthCardProps> = ({ accounts, debts, monthlyInc
     const savingsRate = monthlyIncome > 0 ? (cashFlow / monthlyIncome) * 100 : 0;
 
     return (
-        <div onClick={() => onNavigate('finance', 'dashboard')} className="col-span-1 md:col-span-12 lg:col-span-8 bg-white dark:bg-onyx-900 p-10 rounded-onyx border border-onyx-100 dark:border-onyx-800 shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer group relative overflow-hidden">
+        <Card onClick={() => onNavigate('finance', 'dashboard')} className="col-span-1 md:col-span-12 lg:col-span-8 p-10 cursor-pointer group relative overflow-hidden transition-all duration-500">
             <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-50/30 rounded-full blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
 
             <div className="flex justify-between items-start mb-12 relative z-10">
@@ -76,7 +77,7 @@ const NetWorthCard: React.FC<NetWorthCardProps> = ({ accounts, debts, monthlyInc
                     <p className="text-2xl font-bold text-red-500 tracking-tight">-{formatEUR(totalDebt)}</p>
                 </div>
             </div>
-        </div>
+        </Card>
     );
 };
 

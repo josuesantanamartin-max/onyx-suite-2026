@@ -14,6 +14,7 @@ import CSVImportModal from './components/CSVImportModal';
 import { validateTransaction } from '../../../../schemas/transaction.schema';
 import { formatZodErrors } from '../../../../utils/validation';
 import { useErrorHandler } from '../../../../hooks/useErrorHandler';
+import { Button } from '../../../ui/Button';
 
 const formatEUR = (amount: number) => new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(amount);
 
@@ -334,20 +335,22 @@ const Transactions: React.FC<TransactionsProps> = ({
           <p className="text-xs font-bold text-onyx-400 mt-3 uppercase tracking-[0.2em]">Gestión detallada de tu flujo de caja</p>
         </div>
         <div className="flex items-center gap-6">
-          <button
+          <Button
+            variant="outline"
             onClick={() => setIsImportModalOpen(true)}
-            className="p-5 bg-white border border-onyx-100 text-onyx-400 rounded-2xl hover:text-indigo-primary hover:border-indigo-100 hover:bg-indigo-50/30 transition-all shadow-sm group relative"
+            className="p-5 group relative"
           >
             <Upload className="w-6 h-6" />
             <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-onyx-950 text-white text-[10px] uppercase font-bold px-4 py-2 rounded-xl opacity-0 group-hover:opacity-100 transition-all translate-x-3 group-hover:translate-x-0 whitespace-nowrap pointer-events-none shadow-2xl border border-onyx-800">Importar CSV</span>
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="primary"
             onClick={() => setIsFormOpen(true)}
-            className="flex items-center gap-4 bg-onyx-950 hover:bg-onyx-800 text-white px-10 py-5 rounded-2xl transition-all shadow-xl shadow-onyx-950/20 active:scale-95 group font-bold text-[11px] uppercase tracking-[0.2em]"
+            className="px-10 py-5 rounded-2xl group font-bold text-[11px] uppercase tracking-[0.2em] flex items-center gap-4"
           >
             <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
             Nueva Transacción
-          </button>
+          </Button>
         </div>
       </header>
 
@@ -399,12 +402,13 @@ const Transactions: React.FC<TransactionsProps> = ({
                 </h2>
                 <p className="text-[10px] font-bold text-onyx-400 uppercase tracking-widest mt-2 ml-16">Registro contable de flujos monetarios</p>
               </div>
-              <button
+              <Button
+                variant="ghost"
                 onClick={() => { setIsFormOpen(false); setIsEditModalOpen(false); }}
-                className="text-onyx-400 hover:text-onyx-950 transition-all p-2.5 hover:bg-onyx-50 rounded-xl"
+                className="p-2.5 rounded-xl"
               >
                 <X className="w-7 h-7" />
-              </button>
+              </Button>
             </div>
 
             <form onSubmit={isEditModalOpen ? handleUpdateTransaction : handleSubmit} className="p-10 space-y-10 overflow-y-auto custom-scrollbar">
@@ -520,15 +524,16 @@ const Transactions: React.FC<TransactionsProps> = ({
                       className="w-full p-5 bg-onyx-50 border border-onyx-100 rounded-2xl font-bold text-onyx-950 focus:bg-white focus:ring-4 focus:ring-indigo-primary/5 outline-none transition-all shadow-inner placeholder:text-onyx-200 pr-12"
                       placeholder="Ej: Compra mensual en Mercadona"
                     />
-                    <button
+                    <Button
+                      variant="ghost"
                       type="button"
                       onClick={handleSmartCategorization}
                       disabled={isSuggesting || !(isEditModalOpen ? editDescription : description)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-indigo-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2 disabled:opacity-50 disabled:cursor-not-allowed text-indigo-400"
                       title="Auto-detectar categoría con IA"
                     >
                       {isSuggesting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -560,13 +565,14 @@ const Transactions: React.FC<TransactionsProps> = ({
                 )}
               </div>
 
-              <button
+              <Button
+                variant="primary"
                 type="submit"
-                className="w-full bg-onyx-950 hover:bg-onyx-800 text-white py-6 rounded-3xl font-bold text-[11px] uppercase tracking-[0.3em] shadow-2xl shadow-onyx-950/20 transition-all active:scale-95 group relative overflow-hidden"
+                className="w-full py-6 rounded-3xl font-bold text-[11px] uppercase tracking-[0.3em] overflow-hidden group"
               >
                 <span className="relative z-10">{isEditModalOpen ? 'Actualizar Registro' : 'Confirmar Transacción'}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-indigo-primary/0 via-white/5 to-indigo-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-              </button>
+              </Button>
             </form>
           </div>
         </div>

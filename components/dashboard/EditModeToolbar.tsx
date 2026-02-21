@@ -1,5 +1,6 @@
 import React from 'react';
 import { Save, X, Plus, Pencil } from 'lucide-react';
+import { Button } from '../ui/Button';
 
 interface EditModeToolbarProps {
     onSave: () => void;
@@ -28,32 +29,35 @@ const EditModeToolbar: React.FC<EditModeToolbarProps> = ({
 
             {/* Add Widget */}
             {onAddWidget && (
-                <button
+                <Button
+                    variant="outline"
                     onClick={onAddWidget}
-                    className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-onyx-800 border border-indigo-200 dark:border-indigo-700 text-indigo-600 dark:text-indigo-300 rounded-xl font-bold text-sm hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all shadow-sm hover:shadow-md"
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm"
                 >
                     <Plus className="w-4 h-4" />
                     <span className="hidden sm:inline">Añadir</span>
-                </button>
+                </Button>
             )}
 
             {/* Save */}
-            <button
+            <Button
+                variant="primary"
                 onClick={onSave}
-                className="flex items-center gap-2 px-4 py-2 bg-indigo-primary text-white rounded-xl font-bold text-sm hover:bg-indigo-600 transition-all shadow-sm hover:shadow-md"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm"
             >
                 <Save className="w-4 h-4" />
                 <span className="hidden sm:inline">Guardar</span>
-            </button>
+            </Button>
 
             {/* Cancel */}
-            <button
+            <Button
+                variant="secondary"
                 onClick={onCancel}
-                className="flex items-center gap-2 px-3 py-2 bg-onyx-100 dark:bg-onyx-800 text-onyx-600 dark:text-onyx-300 rounded-xl font-bold text-sm hover:bg-onyx-200 dark:hover:bg-onyx-700 transition-all"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm"
             >
                 <X className="w-4 h-4" />
                 <span className="hidden sm:inline">Cancelar</span>
-            </button>
+            </Button>
         </div>
     );
 };

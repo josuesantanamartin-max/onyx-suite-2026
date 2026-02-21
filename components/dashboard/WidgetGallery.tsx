@@ -7,6 +7,8 @@ import { getWidgetCategory } from './widgetCategories';
 interface WidgetGalleryProps {
     isOpen: boolean;
     onClose: () => void;
+    onDragStart?: (id: string, source: 'gallery') => void;
+    onDragEnd?: () => void;
 }
 
 const CATEGORY_LABELS: Record<string, string> = {
@@ -15,10 +17,11 @@ const CATEGORY_LABELS: Record<string, string> = {
     LIFE: 'Vida',
 };
 
-const WidgetGallery: React.FC<WidgetGalleryProps> = ({ isOpen, onClose }) => {
+const WidgetGallery: React.FC<WidgetGalleryProps> = ({ isOpen, onClose, onDragStart, onDragEnd }) => {
     const { dashboardLayouts, activeLayoutId, addWidgetToLayout } = useUserStore();
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+    const [isDraggingLocal, setIsDraggingLocal] = useState(false);
 
     const activeLayout = dashboardLayouts.find(l => l.id === activeLayoutId);
     const activeWidgetIds = activeLayout?.widgets.map(w => w.i) || [];
@@ -43,7 +46,8 @@ const WidgetGallery: React.FC<WidgetGalleryProps> = ({ isOpen, onClose }) => {
             {/* Backdrop */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 z-40 bg-black/20 dark:bg-black/40 backdrop-blur-sm transition-opacity"
+                    className={`fixed inset-0 z-40 bg-black/20 dark:bg-black/40 backdrop-blur-sm transition-all duration-300 ${isDraggingLocal ? 'pointer-events-none opacity-0' : 'opacity-100'
+                        }`}
                     onClick={onClose}
                 />
             )}
@@ -95,8 +99,8 @@ const WidgetGallery: React.FC<WidgetGalleryProps> = ({ isOpen, onClose }) => {
                                 key={key}
                                 onClick={() => setSelectedCategory(key)}
                                 className={`flex-1 px-2 py-1.5 rounded-lg text-xs font-bold transition-all ${selectedCategory === key
-                                        ? 'bg-indigo-primary text-white shadow-sm'
-                                        : 'text-onyx-400 hover:text-onyx-700 dark:hover:text-onyx-200'
+                                    ? 'bg-indigo-primary text-white shadow-sm'
+                                    : 'text-onyx-400 hover:text-onyx-700 dark:hover:text-onyx-200'
                                     }`}
                             >
                                 {label}
@@ -111,6 +115,17 @@ const WidgetGallery: React.FC<WidgetGalleryProps> = ({ isOpen, onClose }) => {
                         <button
                             key={id}
                             onClick={() => handleAdd(id)}
+                            draggable={true}
+                            onDragStart={(e) => {
+                                setIsDraggingLocal(true);
+                                e.dataTransfer.setData('application/json', JSON.stringify({ source: 'gallery', widgetId: id }));
+                                e.dataTransfer.effectAllowed = 'copy';
+                                if (onDragStart) onDragStart(id, 'gallery');
+                            }}
+                            onDragEnd={() => {
+                                setIsDraggingLocal(false);
+                                if (onDragEnd) onDragEnd();
+                            }}
                             className="w-full flex items-center gap-3 p-3 bg-onyx-50 dark:bg-onyx-800 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 border border-transparent hover:border-indigo-200 dark:hover:border-indigo-800 rounded-xl text-left transition-all group"
                         >
                             <div className="w-9 h-9 bg-white dark:bg-onyx-700 rounded-xl flex items-center justify-center shadow-sm shrink-0 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/50 transition-colors">

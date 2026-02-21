@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Search, X, Mic, Command, ArrowRight, Clock, Star } from 'lucide-react';
 import { useGlobalSearch, SearchResult } from '../../hooks/useGlobalSearch';
 import { useUserStore } from '../../store/useUserStore';
+import { Button } from './Button';
 
 interface GlobalSearchProps {
     isOpen: boolean;
@@ -111,23 +112,25 @@ const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose }) => {
                     />
 
                     {query && (
-                        <button
+                        <Button
+                            variant="ghost"
                             onClick={handleSaveFilter}
                             className="p-2 text-gray-400 hover:text-yellow-500 hover:bg-yellow-50 rounded-lg transition-colors"
                             title="Guardar búsqueda"
                         >
                             <Star className="w-4 h-4" />
-                        </button>
+                        </Button>
                     )}
 
-                    <button
+                    <Button
+                        variant="ghost"
                         onClick={startListening}
                         className={`p-2 rounded-lg transition-colors ${isListening ? 'bg-red-100 text-red-600 animate-pulse' : 'text-gray-400 hover:bg-gray-100 dark:hover:bg-onyx-800'
                             }`}
                         title="Búsqueda por voz"
                     >
                         <Mic className="w-5 h-5" />
-                    </button>
+                    </Button>
 
                     <div className="hidden md:flex items-center gap-1 text-[10px] font-bold text-gray-400 bg-gray-100 dark:bg-onyx-800 px-2 py-1 rounded border border-gray-200 dark:border-onyx-700">
                         <span>ESC</span>
@@ -144,7 +147,7 @@ const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose }) => {
                                 <button
                                     key={i}
                                     onClick={() => setQuery(term)}
-                                    className="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-onyx-800 rounded-lg transition-colors"
+                                    className="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-onyx-800 rounded-lg transition-colors text-left"
                                 >
                                     <Clock className="w-4 h-4 text-gray-400" />
                                     {term}
@@ -158,8 +161,8 @@ const GlobalSearch: React.FC<GlobalSearchProps> = ({ isOpen, onClose }) => {
                             key={result.id}
                             onClick={() => handleSelect(result)}
                             className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all text-left group ${index === selectedIndex
-                                    ? 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-900 dark:text-indigo-100'
-                                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-onyx-800'
+                                ? 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-900 dark:text-indigo-100'
+                                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-onyx-800'
                                 }`}
                         >
                             <div className={`p-2 rounded-lg ${index === selectedIndex ? 'bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600' : 'bg-gray-100 dark:bg-onyx-800 text-gray-500'

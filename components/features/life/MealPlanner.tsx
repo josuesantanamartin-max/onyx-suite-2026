@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLifeStore } from '../../../store/useLifeStore';
 import { useUserStore } from '../../../store/useUserStore';
 import { Recipe, WeeklyPlanState, MealTime, Language } from '../../../types';
-import { ChevronLeft, ChevronRight, Wand2, Coffee, Sunset, Moon, X, Loader2, BookOpen, GripVertical, Search, ChefHat, MoreHorizontal, Plus, Copy, Trash2, ClipboardPaste, Clipboard, MoreVertical, PlusCircle, Calendar, LayoutGrid, List } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Wand2, Coffee, Sunset, Moon, X, Loader2, BookOpen, GripVertical, Search, ChefHat, MoreHorizontal, Plus, Copy, Trash2, ClipboardPaste, Clipboard, MoreVertical, PlusCircle, Calendar, LayoutGrid, List, ShoppingCart, Flame, Sparkles } from 'lucide-react';
 import { generateMealPlan, generateImage, getRecipeDetails } from '../../../services/geminiService';
 import { getIngredientCategory } from '../../../utils/foodUtils';
 
@@ -89,7 +89,7 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
                     id: meal.recipeId,
                     name: meal.recipeName,
                     baseServings: meal.servings,
-                    prepTime: 30, // Default or fetch? Ideally we should store full recipe or fetch it.
+                    prepTime: 30,
                     calories: meal.calories || 0,
                     image: meal.image,
                     ingredients: meal.ingredients || [],
@@ -98,11 +98,7 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
                     rating: 0,
                     courseType: meal.courseType,
                 };
-
-                // WAIT. PlannedMeal in types/life.ts needs to hold all recipe data OR we need to lookup?
-                // The previous store held ANY object.
-                // If I just store minimal info, the UI will break (missing image, calories etc).
-                // I should verify PlannedMeal structure in types/life.ts.
+                map[date][meal.type].push(recipeItem);
             });
         });
         return map;
@@ -139,23 +135,25 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
 
             // Add new meals
             (['breakfast', 'lunch', 'dinner'] as const).forEach(type => {
-                dayPlan[type].forEach((recipe: any) => {
-                    const dayOfWeek = new Date(date).getDay();
-                    plan.meals.push({
-                        date,
-                        dayOfWeek,
-                        type,
-                        recipeId: recipe.id,
-                        recipeName: recipe.name,
-                        servings: recipe.baseServings || 2,
-                        completed: false,
-                        courseType: recipe.courseType,
-                        calories: recipe.calories,
-                        image: recipe.image,
-                        ingredients: recipe.ingredients,
-                        instructions: recipe.instructions
+                if (dayPlan[type]) {
+                    dayPlan[type].forEach((recipe: any) => {
+                        const dayOfWeek = new Date(date).getDay();
+                        plan.meals.push({
+                            date,
+                            dayOfWeek,
+                            type,
+                            recipeId: recipe.id,
+                            recipeName: recipe.name,
+                            servings: recipe.baseServings || 2,
+                            completed: recipe.completed || false,
+                            courseType: recipe.courseType || 'MAIN',
+                            calories: recipe.calories,
+                            image: recipe.image,
+                            ingredients: recipe.ingredients || [],
+                            instructions: recipe.instructions || []
+                        });
                     });
-                });
+                }
             });
         });
 
@@ -166,6 +164,7 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
     const [viewMode, setViewMode] = useState<ViewMode>('week');
     const [isAiMenuOpen, setIsAiMenuOpen] = useState(false);
     const [isRecipeDrawerOpen, setIsRecipeDrawerOpen] = useState(false);
+    const [isSmartOptimizing, setIsSmartOptimizing] = useState(false);
     const [recipeSearch, setRecipeSearch] = useState('');
 
     const [aiGenerating, setAiGenerating] = useState(false);
@@ -181,6 +180,7 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
     const [openMenuId, setOpenMenuId] = useState<string | null>(null);
     const [openDayMenuId, setOpenDayMenuId] = useState<string | null>(null); // New state for day menu
     const [copiedDay, setCopiedDay] = useState<{ plan: any, date: string } | null>(null);
+    const [draggingItem, setDraggingItem] = useState<{ date: string, meal: MealTime, index: number } | null>(null);
     const [quickAddTarget, setQuickAddTarget] = useState<{ date: string, meal: MealTime } | null>(null);
     const [quickAddSearch, setQuickAddSearch] = useState('');
     const [dragOverSlot, setDragOverSlot] = useState<{ date: string; meal: MealTime } | null>(null);
@@ -308,7 +308,9 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
                 ...prev,
                 [targetDateKey]: JSON.parse(JSON.stringify(copiedDay.plan)) // Deep copy
             };
-            recalculateShoppingList(newPlan);
+            const items = recalculateShoppingList(newPlan);
+            setItemsToBuy(items);
+            setIsListGenerated(true);
             return newPlan;
         });
         setCopiedDay(null);
@@ -320,7 +322,9 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
             setWeeklyPlan((prev: WeeklyPlanState) => {
                 const newPlan = { ...prev };
                 delete newPlan[dateKey];
-                recalculateShoppingList(newPlan);
+                const items = recalculateShoppingList(newPlan);
+                setItemsToBuy(items);
+                setIsListGenerated(true);
                 return newPlan;
             });
         }
@@ -351,7 +355,9 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
             };
 
             // Trigger Smart Shopping List with the NEW plan
-            recalculateShoppingList(newPlan);
+            const items = recalculateShoppingList(newPlan);
+            setItemsToBuy(items);
+            setIsListGenerated(true);
 
             return newPlan;
         });
@@ -378,13 +384,25 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
 
     const handleDragStart = (e: React.DragEvent, recipe: Recipe, origin?: { date: string, meal: MealTime, index: number }) => {
         const data = JSON.stringify({ recipe, origin });
-        e.dataTransfer.setData('application/json', data);
+        e.dataTransfer.setData('text/plain', data);
         e.dataTransfer.effectAllowed = origin ? 'move' : 'copy';
+
+        if (origin) {
+            setDraggingItem(origin);
+        }
+    };
+
+    const handleDragEnd = (e: React.DragEvent) => {
+        setDraggingItem(null);
     };
 
     const handleDragOver = (e: React.DragEvent, targetDate: string, targetMeal: MealTime) => {
         e.preventDefault();
-        e.dataTransfer.dropEffect = 'copy';
+
+        // Determine drop effect
+        const isFromPlanner = !!draggingItem;
+        e.dataTransfer.dropEffect = isFromPlanner ? 'move' : 'copy';
+
         setDragOverSlot(prev =>
             prev?.date === targetDate && prev?.meal === targetMeal ? prev : { date: targetDate, meal: targetMeal }
         );
@@ -400,7 +418,9 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
     const handleDrop = (e: React.DragEvent, targetDateKey: string, targetMeal: MealTime) => {
         e.preventDefault();
         setDragOverSlot(null);
-        const data = e.dataTransfer.getData('application/json');
+        setDraggingItem(null);
+
+        const data = e.dataTransfer.getData('text/plain') || e.dataTransfer.getData('application/json');
         if (!data) return;
 
         try {
@@ -435,7 +455,9 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
                 targetDay[targetMeal] = [...(targetDay[targetMeal] || []), recipeToAdd];
                 newPlan[targetDateKey] = targetDay;
 
-                recalculateShoppingList(newPlan);
+                const items = recalculateShoppingList(newPlan);
+                setItemsToBuy(items);
+                setIsListGenerated(true);
 
                 return newPlan;
             });
@@ -463,11 +485,21 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
 
         const startDate = new Date().toISOString().split('T')[0];
         try {
+            const lowFreshness = pantryItems.filter(i => {
+                if (!i.expiryDate) return false;
+                const days = (new Date(i.expiryDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24);
+                return days < 3;
+            });
+
+            const smartGoal = isSmartOptimizing && lowFreshness.length > 0
+                ? `${aiCriteria.goal}. Priorizar y aprovechar los siguientes ingredientes que caducan pronto: ${lowFreshness.map(i => i.name).join(', ')}.`
+                : aiCriteria.goal;
+
             const result: any = await generateMealPlan({
                 startDate,
                 days: aiCriteria.days,
                 diet: aiCriteria.diet,
-                goal: aiCriteria.goal,
+                goal: smartGoal,
                 difficulty: aiCriteria.difficulty,
                 exclusions: aiCriteria.exclusions,
                 mealTypes: Object.keys(aiMealTypes).filter(k => aiMealTypes[k as keyof typeof aiMealTypes]),
@@ -712,7 +744,32 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
                         <button onClick={() => setViewMode('month')} className={`px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all ${viewMode === 'month' ? 'bg-white shadow-sm text-emerald-600' : 'text-gray-400 hover:text-gray-600'}`}>Mes</button>
                     </div>
 
-                    <button onClick={() => setIsAiMenuOpen(true)} className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:shadow-[0_8px_20px_rgba(147,51,234,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 shadow-md">
+                    <button
+                        onClick={() => {
+                            const lowFreshness = pantryItems.filter(i => {
+                                if (!i.expiryDate) return false;
+                                const days = (new Date(i.expiryDate).getTime() - new Date().getTime()) / (1000 * 3600 * 24);
+                                return days < 3;
+                            });
+                            if (lowFreshness.length === 0) {
+                                alert("¡Todo está fresco! No hay necesidad de optimizar por caducidad ahora mismo.");
+                                return;
+                            }
+                            setIsSmartOptimizing(true);
+                            setIsAiMenuOpen(true);
+                        }}
+                        className="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-100 px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-emerald-100 transition-all active:scale-95 shadow-sm"
+                    >
+                        <Sparkles className="w-3.5 h-3.5" /> Optimizar
+                    </button>
+
+                    <button
+                        onClick={() => {
+                            setIsSmartOptimizing(false);
+                            setIsAiMenuOpen(true);
+                        }}
+                        className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:shadow-[0_8px_20px_rgba(147,51,234,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 shadow-md"
+                    >
                         <Wand2 className="w-3.5 h-3.5" /> IA
                     </button>
                 </div>
@@ -720,6 +777,15 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
                 <button onClick={() => setIsRecipeDrawerOpen(!isRecipeDrawerOpen)} className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] transition-all active:scale-95 ${isRecipeDrawerOpen ? 'bg-emerald-600 text-white shadow-[0_8px_20px_rgba(16,185,129,0.25)]' : 'bg-white border border-gray-100 text-gray-500 hover:bg-gray-50 shadow-sm'}`}>
                     <BookOpen className="w-3.5 h-3.5" /> {isRecipeDrawerOpen ? 'Cerrar' : 'Recetario'}
                 </button>
+
+                {isListGenerated && itemsToBuy.length > 0 && (
+                    <button
+                        onClick={handleConfirmShoppingList}
+                        className="flex items-center gap-2 bg-emerald-500 text-white px-5 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-emerald-600 hover:shadow-lg transition-all active:scale-95 animate-bounce-slow shadow-md"
+                    >
+                        <ShoppingCart className="w-3.5 h-3.5" /> Sincronizar Lista ({itemsToBuy.length})
+                    </button>
+                )}
             </div>
 
             {aiGenerating && (
@@ -758,6 +824,22 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
                                                 {totalItems > 0 && viewMode === 'month' && <span className="text-[7px] font-bold bg-gray-100 text-gray-400 px-1.5 py-0.5 rounded-full">{totalItems}</span>}
                                             </div>
                                         </div>
+
+                                        {/* Daily Macros Summary (New Premium Feature) */}
+                                        {viewMode !== 'month' && (
+                                            <div className="hidden md:flex flex-col items-end opacity-60 group-hover/day:opacity-100 transition-opacity">
+                                                <div className="flex gap-2 text-[8px] font-black uppercase tracking-tighter">
+                                                    <span className="text-blue-600">{Math.round(Object.values(dayPlan).flat().reduce((s, r) => s + (r.macros?.protein || 0), 0))}g P</span>
+                                                    <span className="text-orange-600">{Math.round(Object.values(dayPlan).flat().reduce((s, r) => s + (r.macros?.carbs || 0), 0))}g C</span>
+                                                    <span className="text-emerald-600">{Math.round(Object.values(dayPlan).flat().reduce((s, r) => s + (r.macros?.fat || 0), 0))}g G</span>
+                                                </div>
+                                                <div className="mt-1 flex gap-1 items-center">
+                                                    <Flame className="w-2.5 h-2.5 text-orange-400" />
+                                                    <span className="text-[9px] font-black text-gray-400">{Math.round(Object.values(dayPlan).flat().reduce((s, r) => s + (r.calories || 0), 0))} Kcal</span>
+                                                </div>
+                                            </div>
+                                        )}
+
                                         <div className="relative">
                                             <button
                                                 onClick={(e) => { e.stopPropagation(); setOpenDayMenuId(openDayMenuId === dateKey ? null : dateKey); }}
@@ -818,7 +900,9 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
                                                             key={`${recipe.id}-${originalIndex}`}
                                                             draggable
                                                             onDragStart={(e) => handleDragStart(e, recipe, { date: dateKey, meal, index: originalIndex })}
+                                                            onDragEnd={handleDragEnd}
                                                             className={`bg-white rounded-xl border border-gray-100 group relative cursor-grab active:cursor-grabbing hover:shadow-md hover:scale-[1.02] transition-all select-none
+                                                                ${draggingItem?.date === dateKey && draggingItem?.meal === meal && draggingItem?.index === originalIndex ? 'opacity-20 grayscale border-dashed border-emerald-300 scale-95' : ''}
                                                                 ${viewMode === 'month' ? 'p-1' : 'p-2'}
                                                             `}
                                                         >

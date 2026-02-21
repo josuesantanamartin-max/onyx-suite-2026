@@ -4,6 +4,7 @@ import ModuleLoader from '../common/ui/ModuleLoader';
 import FloatingActionButton from '../common/ui/FloatingActionButton';
 import { useUserStore } from '../../store/useUserStore';
 import { supabase } from '../../services/supabaseClient';
+import { PageTransition } from '../common/animations/PageTransition';
 
 // Lazy loaded modules
 const FinanceModule = React.lazy(() => import('../features/finance/FinanceModule'));
@@ -35,16 +36,18 @@ const MainShell: React.FC = () => {
     const renderModule = () => {
         return (
             <Suspense fallback={<ModuleLoader />}>
-                {(() => {
-                    switch (activeApp) {
-                        case 'dashboard': return <CustomizableDashboard />;
-                        case 'finance': return <FinanceModule onMenuClick={() => setSidebarOpen(true)} onNavigate={handleGlobalNavigate} />;
-                        case 'life': return <LifeModule onMenuClick={() => setSidebarOpen(true)} />;
-                        case 'settings': return <SettingsModule onMenuClick={() => setSidebarOpen(true)} />;
-                        case 'help': return <HelpCenter />;
-                        default: return null;
-                    }
-                })()}
+                <PageTransition key={activeApp}>
+                    {(() => {
+                        switch (activeApp) {
+                            case 'dashboard': return <CustomizableDashboard />;
+                            case 'finance': return <FinanceModule onMenuClick={() => setSidebarOpen(true)} onNavigate={handleGlobalNavigate} />;
+                            case 'life': return <LifeModule onMenuClick={() => setSidebarOpen(true)} />;
+                            case 'settings': return <SettingsModule onMenuClick={() => setSidebarOpen(true)} />;
+                            case 'help': return <HelpCenter />;
+                            default: return null;
+                        }
+                    })()}
+                </PageTransition>
             </Suspense>
         );
     };

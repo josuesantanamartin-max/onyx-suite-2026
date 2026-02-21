@@ -47,9 +47,12 @@ class GeminiProxy {
             try {
                 const result = await this.directClient.models.generateContent({
                     model: request.model || this.model,
-                    contents: request.contents
+                    contents: request.contents,
+                    config: request.config
                 });
-                const text = (await result.response).text() || '';
+
+                // Using the new @google/genai SDK, the text is directly on the result object
+                const text = result.text || '';
 
                 if (this.isDevelopment) {
                     console.log('--- GEMINI RAW RESPONSE ---');

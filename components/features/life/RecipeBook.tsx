@@ -284,9 +284,19 @@ export const RecipeBook: React.FC<RecipeBookProps> = ({ onNavigateToMealPlan, in
                                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-2xl text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5 shadow-xl">
                                     <Clock className="w-3.5 h-3.5 text-emerald-600" /> {recipe.prepTime}m
                                 </div>
+                                {recipe.macros && (
+                                    <div className="absolute top-4 left-4 flex gap-1 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-75">
+                                        <div className="bg-blue-600/90 backdrop-blur-md text-white px-2 py-1 rounded-lg text-[8px] font-black uppercase tracking-tighter shadow-lg border border-blue-400/30">
+                                            {Math.round(recipe.macros.protein)}g P
+                                        </div>
+                                        <div className="bg-orange-600/90 backdrop-blur-md text-white px-2 py-1 rounded-lg text-[8px] font-black uppercase tracking-tighter shadow-lg border border-orange-400/30">
+                                            {Math.round(recipe.macros.carbs)}g C
+                                        </div>
+                                    </div>
+                                )}
                                 {recipe.calories > 0 && (
-                                    <div className="absolute bottom-4 left-4 bg-emerald-500 text-white px-3 py-1.5 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl transform -translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                                        {recipe.calories} kcal
+                                    <div className="absolute bottom-4 left-4 bg-emerald-500/90 backdrop-blur-md text-white px-3 py-1.5 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl transform -translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                                        {Math.round(recipe.calories)} kcal
                                     </div>
                                 )}
                             </div>
@@ -477,15 +487,16 @@ export const RecipeBook: React.FC<RecipeBookProps> = ({ onNavigateToMealPlan, in
                             <div className="flex-1 overflow-y-auto p-8 md:p-10 custom-scrollbar space-y-10">
 
                                 {/* Nutrition Grid */}
-                                <div className="grid grid-cols-3 gap-4">
+                                <div className="grid grid-cols-4 gap-3">
                                     {[
-                                        { label: 'CALORÍAS', value: viewRecipe.calories, sub: 'kcal', color: 'text-orange-600', bg: 'bg-orange-50' },
-                                        { label: 'PROTEÍNA', value: '24', sub: 'g', color: 'text-blue-600', bg: 'bg-blue-50' },
-                                        { label: 'COSTE EST.', value: '4.50', sub: '€', color: 'text-emerald-600', bg: 'bg-emerald-50' }
+                                        { label: 'CALORÍAS', value: Math.round(viewRecipe.calories || 0), sub: 'kcal', color: 'text-orange-600', bg: 'bg-orange-50' },
+                                        { label: 'PROTEÍNA', value: Math.round(viewRecipe.macros?.protein || 0), sub: 'g', color: 'text-blue-600', bg: 'bg-blue-50' },
+                                        { label: 'CARBOS', value: Math.round(viewRecipe.macros?.carbs || 0), sub: 'g', color: 'text-orange-500', bg: 'bg-orange-50/50' },
+                                        { label: 'GRASAS', value: Math.round(viewRecipe.macros?.fat || 0), sub: 'g', color: 'text-emerald-600', bg: 'bg-emerald-50' }
                                     ].map((stat, i) => (
-                                        <div key={i} className={`${stat.bg} p-4 rounded-[1.5rem] border border-white flex flex-col items-center text-center shadow-sm`}>
-                                            <span className="text-[8px] font-black text-gray-400 uppercase tracking-widest mb-1">{stat.label}</span>
-                                            <p className={`text-xl font-black ${stat.color}`}>{stat.value} <span className="text-[10px] font-bold opacity-60">{stat.sub}</span></p>
+                                        <div key={i} className={`${stat.bg} p-3 rounded-[1.25rem] border border-white flex flex-col items-center text-center shadow-sm`}>
+                                            <span className="text-[7px] font-black text-gray-400 uppercase tracking-widest mb-1">{stat.label}</span>
+                                            <p className={`text-lg font-black ${stat.color}`}>{stat.value}<span className="text-[8px] font-bold opacity-60 ml-0.5">{stat.sub}</span></p>
                                         </div>
                                     ))}
                                 </div>

@@ -10,8 +10,8 @@ import Budgets from './Budgets';
 import { Wallet, Menu, CreditCard, PieChart, Target, ReceiptEuro, Sparkles, Loader2, X } from 'lucide-react';
 
 import { RetirementSimulator } from './RetirementSimulator';
-
-// ... inside renderNav ...
+import { AnimatePresence } from 'framer-motion';
+import { PageTransition } from '../../common/animations/PageTransition';
 // <button onClick={() => setActiveTab('retirement')} ...>Jubilación</button>
 
 // ... inside renderContent ...
@@ -67,15 +67,23 @@ const FinanceModule: React.FC<FinanceModuleProps> = ({ onMenuClick }) => {
     );
 
     const renderContent = () => {
+        let content;
         switch (activeTab) {
-            case 'transactions': return <Transactions />;
-            case 'accounts': return <Accounts onViewTransactions={(id) => { setActiveTab('transactions'); }} />;
-            case 'budgets': return <Budgets onViewTransactions={(c, s) => { setActiveTab('transactions'); }} />;
-            case 'goals': return <Goals />;
-            case 'debts': return <Debts />;
-            case 'retirement': return <RetirementSimulator />;
-            default: return <Transactions />;
+            case 'transactions': content = <Transactions />; break;
+            case 'accounts': content = <Accounts onViewTransactions={(id) => { setActiveTab('transactions'); }} />; break;
+            case 'budgets': content = <Budgets onViewTransactions={(c, s) => { setActiveTab('transactions'); }} />; break;
+            case 'goals': content = <Goals />; break;
+            case 'debts': content = <Debts />; break;
+            case 'retirement': content = <RetirementSimulator />; break;
+            default: content = <Transactions />;
         }
+        return (
+            <AnimatePresence mode="wait">
+                <PageTransition key={activeTab}>
+                    {content}
+                </PageTransition>
+            </AnimatePresence>
+        );
     };
 
     return (

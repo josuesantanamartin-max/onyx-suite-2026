@@ -74,6 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         const result = await genAI.models.generateContent({
             model: model || 'gemini-2.0-flash-exp',
             contents,
+            config,
         });
 
         const text = result.text;

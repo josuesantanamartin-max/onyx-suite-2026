@@ -48,6 +48,7 @@ interface Props {
     onDragEnd: () => void;
     widgetProps: DashboardDataProps;
     onReorder: (from: string, to: string) => void;
+    onAddFromGallery?: (id: string, size: WidgetSize) => void;
 }
 
 const DropZoneGrid: React.FC<Props> = ({
@@ -59,6 +60,7 @@ const DropZoneGrid: React.FC<Props> = ({
     onDragEnd,
     widgetProps,
     onReorder,
+    onAddFromGallery,
 }) => {
     const { changeWidgetSize } = useUserStore();
     const [dragOverZone, setDragOverZone] = useState<string | null>(null);
@@ -88,12 +90,27 @@ const DropZoneGrid: React.FC<Props> = ({
     // Drop onto a zone → the widget adopts that zone's size
     const handleZoneDrop = useCallback((e: React.DragEvent, slot: DropZoneSlot) => {
         e.preventDefault();
-        if (draggingId) {
+        e.stopPropagation();
+
+        let source = '';
+        let widgetId = '';
+        try {
+            const data = JSON.parse(e.dataTransfer.getData('application/json'));
+            source = data.source;
+            widgetId = data.widgetId;
+        } catch (err) { }
+
+        const isFromGallery = (source === 'gallery' && widgetId) || (draggingId && draggingId.startsWith('gallery-'));
+        const finalWidgetId = widgetId || (draggingId && draggingId.startsWith('gallery-') ? draggingId.replace('gallery-', '') : '');
+
+        if (isFromGallery && finalWidgetId && onAddFromGallery) {
+            onAddFromGallery(finalWidgetId, slot.size);
+        } else if (draggingId && !draggingId.startsWith('gallery-')) {
             changeWidgetSize(draggingId, slot.size);
         }
         setDragOverZone(null);
         onDragEnd();
-    }, [draggingId, changeWidgetSize, onDragEnd]);
+    }, [draggingId, changeWidgetSize, onDragEnd, onAddFromGallery]);
 
     // ── Render ──────────────────────────────────────────────────────────────
 
@@ -113,13 +130,17 @@ const DropZoneGrid: React.FC<Props> = ({
                                 return (
                                     <div
                                         key={slot.id}
-                                        className={`${slot.colClass} h-16 flex items-center justify-center rounded-2xl border-2 border-dashed transition-all duration-150 ${isDraggingAny
+                                        className={`${slot.colClass} h-24 flex items-center justify-center rounded-2xl border-2 border-dashed transition-all duration-150 ${isDraggingAny
                                             ? isOver
-                                                ? 'border-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 scale-[1.02] shadow-md shadow-indigo-200 dark:shadow-indigo-900/30'
-                                                : 'border-indigo-200 dark:border-indigo-800 bg-indigo-50/50 dark:bg-indigo-950/20 cursor-copy'
+                                                ? 'border-indigo-500 bg-indigo-100/80 dark:bg-indigo-900/40 scale-[1.02] shadow-lg shadow-indigo-200 dark:shadow-indigo-900/50'
+                                                : 'border-indigo-300 dark:border-indigo-700 bg-indigo-50/50 dark:bg-indigo-950/20 cursor-copy'
                                             : 'border-onyx-200 dark:border-onyx-700/60 bg-onyx-50/60 dark:bg-onyx-800/30'
                                             }`}
-                                        onDragOver={(e) => { e.preventDefault(); setDragOverZone(slot.id); }}
+                                        onDragOver={(e) => {
+                                            e.preventDefault();
+                                            e.dataTransfer.dropEffect = draggingId?.startsWith('gallery-') ? 'copy' : 'move';
+                                            setDragOverZone(slot.id);
+                                        }}
                                         onDragLeave={() => setDragOverZone(null)}
                                         onDrop={(e) => handleZoneDrop(e, slot)}
                                     >
@@ -135,7 +156,38 @@ const DropZoneGrid: React.FC<Props> = ({
             )}
 
             {/* ── Widget Grid ───────────────────────────────────────────────── */}
-            <div className="grid grid-cols-12 gap-5">
+            <div
+                className="grid grid-cols-12 gap-5 min-h-[100px]"
+                onDragOver={(e) => {
+                    e.preventDefault();
+                    if (draggingId?.startsWith('gallery-')) e.dataTransfer.dropEffect = 'copy';
+                }}
+                onDrop={(e) => {
+                    // Bubble drop to the dashboard handler if it's from gallery
+                    // This div ensures that if you miss a zone but hit the grid area, it still works.
+                    // The event will bubble to CustomizableDashboard's onDrop unless we handle it here.
+                    // Let's explicitly handle it here to be safe.
+                    let source = '';
+                    let widgetId = '';
+                    try {
+                        const dataTransferData = e.dataTransfer.getData('application/json');
+                        if (dataTransferData) {
+                            const data = JSON.parse(dataTransferData);
+                            source = data.source;
+                            widgetId = data.widgetId;
+                        }
+                    } catch (err) { }
+
+                    const isFromGallery = (source === 'gallery' && widgetId) || (draggingId && draggingId.startsWith('gallery-'));
+                    const finalWidgetId = widgetId || (draggingId && draggingId.startsWith('gallery-') ? draggingId.replace('gallery-', '') : '');
+
+                    if (isFromGallery && finalWidgetId && onAddFromGallery) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        onAddFromGallery(finalWidgetId, 'wide'); // Default to wide if dropped on grid
+                    }
+                }}
+            >
                 {orderedIds.map((id) => {
                     const WidgetComponent = WIDGET_REGISTRY[id];
                     if (!WidgetComponent) return null;

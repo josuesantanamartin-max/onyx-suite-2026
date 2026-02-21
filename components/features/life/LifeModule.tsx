@@ -8,6 +8,8 @@ import { analyzeLife } from '../../../services/geminiService';
 import {
   Menu, Utensils, Plane, Lock, Baby, Home, Heart, Sparkles, Loader2, X
 } from 'lucide-react';
+import { AnimatePresence } from 'framer-motion';
+import { PageTransition } from '../../common/animations/PageTransition';
 import { Trip, Goal } from '../../../types';
 import { KitchenManager } from './KitchenManager';
 import TravelModule from './TravelModule';
@@ -182,16 +184,20 @@ const LifeModule: React.FC<LifeModuleProps> = ({ onMenuClick }) => {
       {renderNav()}
 
       <div className="flex-1 overflow-hidden relative">
-        {currentMainTab === 'kitchen' && (
-          <KitchenManager
-            view={activeTab.replace('kitchen-', '').toUpperCase()}
-            onViewChange={(newView) => setActiveTab(`kitchen-${newView.toLowerCase()}`)}
-          />
-        )}
-        {activeTab === 'spaces' && <SpacesManager />}
-        {activeTab === 'travel' && <TravelModule />}
-        {activeTab === 'vault' && <VaultManager />}
-        {activeTab === 'family' && <FamilyManager />}
+        <AnimatePresence mode="wait">
+          <PageTransition key={currentMainTab === 'kitchen' ? activeTab : activeTab}>
+            {currentMainTab === 'kitchen' && (
+              <KitchenManager
+                view={activeTab.replace('kitchen-', '').toUpperCase()}
+                onViewChange={(newView) => setActiveTab(`kitchen-${newView.toLowerCase()}`)}
+              />
+            )}
+            {activeTab === 'spaces' && <SpacesManager />}
+            {activeTab === 'travel' && <TravelModule />}
+            {activeTab === 'vault' && <VaultManager />}
+            {activeTab === 'family' && <FamilyManager />}
+          </PageTransition>
+        </AnimatePresence>
       </div>
 
       {/* AI ANALYSIS MODAL */}

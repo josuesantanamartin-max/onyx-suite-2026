@@ -22,7 +22,8 @@ export const MOCK_RECIPES: Recipe[] = [
             { name: 'Bacon', quantity: 100, unit: 'g' },
             { name: 'Parmesano', quantity: 50, unit: 'g' }
         ],
-        instructions: ['Hervir agua y cocer pasta', 'Freír bacon hasta que esté crujiente', 'Mezclar huevos con queso y pimienta', 'Mezclar todo fuera del fuego con un poco de agua de cocción']
+        instructions: ['Hervir agua y cocer pasta', 'Freír bacon hasta que esté crujiente', 'Mezclar huevos con queso y pimienta', 'Mezclar todo fuera del fuego con un poco de agua de cocción'],
+        macros: { protein: 25, carbs: 65, fat: 22 }
     },
     {
         id: '2', name: 'Bowl de Yogur con Frutas', prepTime: 5, calories: 250, tags: ['Breakfast', 'Healthy', 'Quick'], rating: 4.9, baseServings: 1,
@@ -34,7 +35,8 @@ export const MOCK_RECIPES: Recipe[] = [
             { name: 'Miel', quantity: 1, unit: 'cda' },
             { name: 'Nueces', quantity: 20, unit: 'g' }
         ],
-        instructions: ['Servir el yogur en un bol', 'Lavar y cortar las fresas', 'Añadir las frutas y nueces por encima', 'Rociar con miel al gusto']
+        instructions: ['Servir el yogur en un bol', 'Lavar y cortar las fresas', 'Añadir las frutas y nueces por encima', 'Rociar con miel al gusto'],
+        macros: { protein: 12, carbs: 35, fat: 8 }
     },
     {
         id: '3', name: 'Salmón al Horno con Verduras', prepTime: 35, calories: 450, tags: ['Dinner', 'Healthy', 'Fish'], rating: 4.5, baseServings: 2,
@@ -45,7 +47,8 @@ export const MOCK_RECIPES: Recipe[] = [
             { name: 'Limón', quantity: 1, unit: 'pcs' },
             { name: 'Aceite de Oliva', quantity: 10, unit: 'ml' }
         ],
-        instructions: ['Precalentar horno a 200°C', 'Colocar salmón y verduras en bandeja', 'Rociar con aceite y limón', 'Hornear 15-20 minutos']
+        instructions: ['Precalentar horno a 200°C', 'Colocar salmón y verduras en bandeja', 'Rociar con aceite y limón', 'Hornear 15-20 minutos'],
+        macros: { protein: 34, carbs: 12, fat: 28 }
     },
     {
         id: '4', name: 'Pollo al Curry con Arroz', prepTime: 40, calories: 600, tags: ['Lunch', 'Spicy', 'Asian'], rating: 4.7, baseServings: 4,
@@ -56,7 +59,8 @@ export const MOCK_RECIPES: Recipe[] = [
             { name: 'Arroz Basmati', quantity: 300, unit: 'g' },
             { name: 'Curry en polvo', quantity: 2, unit: 'cda' }
         ],
-        instructions: ['Cocer el arroz', 'Sofreír pollo troceado', 'Añadir curry y leche de coco', 'Cocinar a fuego lento 15 min y servir con arroz']
+        instructions: ['Cocer el arroz', 'Sofreír pollo troceado', 'Añadir curry y leche de coco', 'Cocinar a fuego lento 15 min y servir con arroz'],
+        macros: { protein: 42, carbs: 55, fat: 18 }
     },
     {
         id: '5', name: 'Ensalada César', prepTime: 15, calories: 380, tags: ['Lunch', 'Salad', 'Quick'], rating: 4.2, baseServings: 2,
@@ -68,7 +72,8 @@ export const MOCK_RECIPES: Recipe[] = [
             { name: 'Salsa César', quantity: 50, unit: 'ml' },
             { name: 'Queso Parmesano', quantity: 30, unit: 'g' }
         ],
-        instructions: ['Lavar y cortar lechuga', 'Hacer pollo a la plancha y cortar', 'Mezclar todo en un bol con la salsa y el queso']
+        instructions: ['Lavar y cortar lechuga', 'Hacer pollo a la plancha y cortar', 'Mezclar todo en un bol con la salsa y el queso'],
+        macros: { protein: 28, carbs: 15, fat: 22 }
     },
     {
         id: '6', name: 'Tortitas de Avena y Plátano', prepTime: 15, calories: 280, tags: ['Breakfast', 'Healthy', 'Kids'], rating: 4.9, baseServings: 2,
@@ -79,7 +84,8 @@ export const MOCK_RECIPES: Recipe[] = [
             { name: 'Huevos', quantity: 2, unit: 'pcs' },
             { name: 'Canela', quantity: 1, unit: 'cdta' }
         ],
-        instructions: ['Triturar todos los ingredientes', 'Calentar sartén antiadherente', 'Cocinar tortitas vuelta y vuelta', 'Servir con fruta o miel']
+        instructions: ['Triturar todos los ingredientes', 'Calentar sartén antiadherente', 'Cocinar tortitas vuelta y vuelta', 'Servir con fruta o miel'],
+        macros: { protein: 12, carbs: 45, fat: 6 }
     },
     {
         id: '7', name: 'Gazpacho Andaluz', prepTime: 20, calories: 150, tags: ['Lunch', 'Summer', 'Spanish'], rating: 4.6, baseServings: 4,
@@ -91,7 +97,8 @@ export const MOCK_RECIPES: Recipe[] = [
             { name: 'Ajo', quantity: 2, unit: 'dientes' },
             { name: 'Aceite de Oliva', quantity: 50, unit: 'ml' }
         ],
-        instructions: ['Lavar y trocear verduras', 'Triturar todo muy fino', 'Añadir aceite, vinagre y sal', 'Colar y enfriar en nevera']
+        instructions: ['Lavar y trocear verduras', 'Triturar todo muy fino', 'Añadir aceite, vinagre y sal', 'Colar y enfriar en nevera'],
+        macros: { protein: 3, carbs: 18, fat: 8 }
     },
     {
         id: '8', name: 'Tostada de Aguacate y Huevo', prepTime: 10, calories: 340, tags: ['Breakfast', 'Healthy', 'Quick'], rating: 4.8, baseServings: 1,
@@ -103,7 +110,8 @@ export const MOCK_RECIPES: Recipe[] = [
             { name: 'Limón', quantity: 0.5, unit: 'pcs' },
             { name: 'Chile en escamas', quantity: 1, unit: 'pizca' }
         ],
-        instructions: ['Tostar el pan', 'Machacar el aguacate con limón y sal', 'Escalfar o freír el huevo', 'Montar la tostada y decorar con chile']
+        instructions: ['Tostar el pan', 'Machacar el aguacate con limón y sal', 'Escalfar o freír el huevo', 'Montar la tostada y decorar con chile'],
+        macros: { protein: 14, carbs: 28, fat: 18 }
     },
     {
         id: '9', name: 'Tacos de Ternera', prepTime: 25, calories: 420, tags: ['Dinner', 'Mexican', 'Lunch'], rating: 4.7, baseServings: 3,
@@ -115,7 +123,8 @@ export const MOCK_RECIPES: Recipe[] = [
             { name: 'Cilantro', quantity: 1, unit: 'manojo' },
             { name: 'Lima', quantity: 2, unit: 'pcs' }
         ],
-        instructions: ['Sofreír la carne con especias', 'Calentar las tortillas', 'Picar cebolla y cilantro', 'Servir la carne en tortillas con guarnición y lima']
+        instructions: ['Sofreír la carne con especias', 'Calentar las tortillas', 'Picar cebolla y cilantro', 'Servir la carne en tortillas con guarnición y lima'],
+        macros: { protein: 32, carbs: 42, fat: 18 }
     },
     {
         id: '10', name: 'Salteado de Verduras y Tofu', prepTime: 20, calories: 290, tags: ['Lunch', 'Healthy', 'Asian', 'Vegan'], rating: 4.6, baseServings: 2,
@@ -127,7 +136,8 @@ export const MOCK_RECIPES: Recipe[] = [
             { name: 'Salsa de Soja', quantity: 30, unit: 'ml' },
             { name: 'Aceite de Sésamo', quantity: 10, unit: 'ml' }
         ],
-        instructions: ['Prensar y cortar el tofu en cubos', 'Saltear el tofu hasta que esté dorado', 'Añadir verduras troceadas y cocinar al dente', 'Añadir salsa de soja y aceite de sésamo']
+        instructions: ['Prensar y cortar el tofu en cubos', 'Saltear el tofu hasta que esté dorado', 'Añadir verduras troceadas y cocinar al dente', 'Añadir salsa de soja y aceite de sésamo'],
+        macros: { protein: 22, carbs: 18, fat: 12 }
     },
     {
         id: '11', name: 'Risotto de Setas', prepTime: 45, calories: 510, tags: ['Dinner', 'Italian'], rating: 4.9, baseServings: 4,
@@ -139,7 +149,8 @@ export const MOCK_RECIPES: Recipe[] = [
             { name: 'Vino Blanco', quantity: 100, unit: 'ml' },
             { name: 'Parmesano', quantity: 50, unit: 'g' }
         ],
-        instructions: ['Sofreír setas y reservar', 'Tostar el arroz y añadir vino', 'Añadir caldo caliente poco a poco removiendo', 'Mantecar con queso y añadir setas al final']
+        instructions: ['Sofreír setas y reservar', 'Tostar el arroz y añadir vino', 'Añadir caldo caliente poco a poco removiendo', 'Mantecar con queso y añadir setas al final'],
+        macros: { protein: 15, carbs: 75, fat: 16 }
     },
     {
         id: '12', name: 'Smoothie Bowl de Frutos Rojos', prepTime: 10, calories: 340, tags: ['Breakfast', 'Healthy', 'Summer'], rating: 4.8, baseServings: 1,
@@ -151,21 +162,130 @@ export const MOCK_RECIPES: Recipe[] = [
             { name: 'Granola', quantity: 30, unit: 'g' },
             { name: 'Semillas de Chía', quantity: 10, unit: 'g' }
         ],
-        instructions: ['Triturar frutas con yogur hasta tener textura cremosa', 'Servir en un bol', 'Decorar con granola, fruta fresca y semillas']
-    }
+        instructions: ['Triturar frutas con yogur hasta tener textura cremosa', 'Servir en un bol', 'Decorar con granola, fruta fresca y semillas'],
+        macros: { protein: 10, carbs: 55, fat: 9 }
+    },
 ];
 
 export const MOCK_TRIPS: Trip[] = [
     {
-        id: '1', destination: 'Tokio & Kioto', country: 'Japón', startDate: '2025-04-10', endDate: '2025-04-24',
-        budget: 3500, spent: 1200, status: 'UPCOMING', image: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=800&auto=format&fit=crop',
-        flights: [], accommodations: [], itinerary: []
+        id: 'trip-1',
+        destination: 'Costa Amalfitana',
+        country: 'Italia',
+        startDate: '2026-05-15',
+        endDate: '2026-05-22',
+        budget: 2500,
+        spent: 1250,
+        status: 'UPCOMING',
+        image: 'https://images.unsplash.com/photo-1533923055375-38c0ce986427?q=80&w=1200&auto=format&fit=crop',
+        flights: [
+            {
+                id: 'f-1',
+                airline: 'Iberia',
+                flightNumber: 'IB3250',
+                origin: 'MAD',
+                destination: 'NAP',
+                departureTime: '2026-05-15T10:00:00Z',
+                arrivalTime: '2026-05-15T12:30:00Z',
+                price: 180,
+                bookingUrl: 'https://www.iberia.com'
+            }
+        ],
+        accommodations: [
+            {
+                id: 'a-1',
+                name: 'Hotel Poseidon Positano',
+                address: 'Viale Pasitea, 148, 84017 Positano SA',
+                checkIn: '2026-05-15',
+                checkOut: '2026-05-22',
+                price: 1400,
+                bookingUrl: 'https://www.hotelposeidonpositano.it'
+            }
+        ],
+        itinerary: [
+            { id: 'i-1', time: '14:00', activity: 'Llegada a Positano y Check-in', location: 'Hotel Poseidon', type: 'TRANSPORT' },
+            { id: 'i-2', time: '17:00', activity: 'Aperitivo en Franco\'s Bar', location: 'Positano', type: 'FOOD' },
+            { id: 'i-3', time: '20:00', activity: 'Cena en Da Vincenzo', location: 'Positano', type: 'FOOD' },
+            { id: 'i-4', time: '09:00', activity: 'Senderismo: Sentiero degli Dei', location: 'Bomerano', type: 'ACTIVITY' },
+            { id: 'i-5', time: '13:00', activity: 'Almuerzo en La Tagliata', location: 'Montepertuso', type: 'FOOD' }
+        ],
+        checklist: [
+            { id: 'c-1', task: 'Pasaportes vigentes', completed: true },
+            { id: 'c-2', task: 'Seguro de viaje contratado', completed: true },
+            { id: 'c-3', task: 'Reserva de coche alquilado', completed: false },
+            { id: 'c-4', task: 'Adaptador de enchufes', completed: false }
+        ],
+        linkedGoalId: 'goal-travel-1'
     }
 ];
 
 export const MOCK_FAMILY: FamilyMember[] = [
-    { id: 'p1', name: 'Papá Josué', relationship: 'Padre', role: 'PARENT', avatar: '👨‍💼', balance: 0, weeklyAllowance: 0, growthHistory: [] },
-    { id: 'k1', name: 'Joel', relationship: 'Hijo', role: 'CHILD', avatar: '👦', balance: 45.50, weeklyAllowance: 10, birthDate: '2018-05-15', growthHistory: [] },
+    {
+        id: 'p1',
+        name: 'Josué',
+        relationship: 'Padre',
+        role: 'PARENT',
+        avatar: '👨‍💼',
+        balance: 1250.75,
+        weeklyAllowance: 0,
+        birthDate: '1990-06-25',
+        email: 'josue@example.com',
+        phone: '+34 600 000 000',
+        isEmergencyContact: true,
+        growthHistory: []
+    },
+    {
+        id: 'p2',
+        name: 'Elena',
+        relationship: 'Madre',
+        role: 'PARENT',
+        avatar: '👩‍💼',
+        balance: 980.20,
+        weeklyAllowance: 0,
+        birthDate: '1992-03-12',
+        email: 'elena@example.com',
+        phone: '+34 611 111 111',
+        isEmergencyContact: true,
+        growthHistory: []
+    },
+    {
+        id: 'k1',
+        name: 'Joel',
+        relationship: 'Hijo',
+        role: 'CHILD',
+        avatar: '👦',
+        balance: 45.50,
+        weeklyAllowance: 10,
+        birthDate: '2018-05-15',
+        email: '',
+        phone: '',
+        isEmergencyContact: false,
+        growthHistory: [
+            { date: '2023-01-15', height: 110, weight: 19.5 },
+            { date: '2023-04-15', height: 112, weight: 20.2 },
+            { date: '2023-07-15', height: 114, weight: 21.0 },
+            { date: '2023-10-15', height: 115, weight: 21.8 },
+            { date: '2024-01-15', height: 117, weight: 22.5 }
+        ]
+    },
+    {
+        id: 'k2',
+        name: 'Sofía',
+        relationship: 'Hija',
+        role: 'CHILD',
+        avatar: '👧',
+        balance: 15.00,
+        weeklyAllowance: 5,
+        birthDate: '2021-11-20',
+        email: '',
+        phone: '',
+        isEmergencyContact: false,
+        growthHistory: [
+            { date: '2023-01-20', height: 85, weight: 12.0 },
+            { date: '2023-07-20', height: 88, weight: 13.5 },
+            { date: '2024-01-20', height: 92, weight: 14.8 }
+        ]
+    }
 ];
 
 export const MOCK_CHORES: Chore[] = [

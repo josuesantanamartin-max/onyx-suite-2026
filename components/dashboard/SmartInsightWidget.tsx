@@ -3,7 +3,8 @@ import { useUserStore } from '../../store/useUserStore';
 import { useFinanceStore } from '../../store/useFinanceStore';
 import { useLifeStore } from '../../store/useLifeStore';
 import { generateSmartInsight, analyzePredictive } from '../../services/geminiService';
-import { Lightbulb, ArrowRight, Sparkles, ChefHat, AlertTriangle, TrendingUp } from 'lucide-react';
+import { Lightbulb, ArrowRight, Sparkles, ChefHat, AlertTriangle, TrendingUp, X } from 'lucide-react';
+import { Button } from '../ui/Button';
 
 interface SmartInsightWidgetProps {
     onNavigate?: (app: 'LIFE' | 'FINANCE', tab?: string, filter?: any) => void;
@@ -142,7 +143,9 @@ const SmartInsightWidget: React.FC<SmartInsightWidgetProps> = ({ onNavigate }) =
                             <h3 className="font-bold text-gray-900 dark:text-white text-lg leading-tight">{insight?.title}</h3>
                         </div>
                     </div>
-                    <button onClick={() => setDismissed(true)} className="text-gray-300 hover:text-gray-500">&times;</button>
+                    <Button variant="ghost" onClick={() => setDismissed(true)} className="p-1 rounded-full text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                        <X className="w-5 h-5" />
+                    </Button>
                 </div>
 
                 <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">
@@ -172,16 +175,20 @@ const SmartInsightWidget: React.FC<SmartInsightWidgetProps> = ({ onNavigate }) =
                         <span className="text-gray-400">{insight?.type === 'ANOMALY' ? (language === 'ES' ? 'Impacto' : 'Impact') : (language === 'ES' ? 'Ahorro est.' : 'Est. Savings')}</span>
                         <p className={`font-black ${insight?.type === 'ANOMALY' ? 'text-red-600' : 'text-emerald-600'} text-lg`}>{insight?.savingsEstimate || '-'}</p>
                     </div>
-                    <button onClick={() => {
-                        // Smart navigation based on insight content
-                        if (insight?.actionableRecipe && onNavigate) {
-                            onNavigate('LIFE', 'kitchen-recipes');
-                        } else if (onNavigate) {
-                            onNavigate('FINANCE', 'transactions');
-                        }
-                    }} className="text-xs font-bold bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-4 py-2 rounded-lg flex items-center gap-2 hover:opacity-90 transition-opacity">
+                    <Button
+                        variant="primary"
+                        onClick={() => {
+                            // Smart navigation based on insight content
+                            if (insight?.actionableRecipe && onNavigate) {
+                                onNavigate('LIFE', 'kitchen-recipes');
+                            } else if (onNavigate) {
+                                onNavigate('FINANCE', 'transactions');
+                            }
+                        }}
+                        className="px-4 py-2 rounded-lg text-xs flex items-center gap-2"
+                    >
                         {language === 'ES' ? 'Ver Detalles' : 'View Details'} <ArrowRight className="w-3 h-3" />
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>

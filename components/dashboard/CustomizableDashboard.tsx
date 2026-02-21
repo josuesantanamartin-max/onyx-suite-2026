@@ -18,6 +18,8 @@ import { useDashboardSync } from '../../hooks/useDashboardSync';
 import CreateLayoutModal from './CreateLayoutModal';
 import GlobalSearch from '../ui/GlobalSearch';
 import SampleDataBanner from '../common/SampleDataBanner';
+import { AnimatedList, AnimatedListItem } from '../common/animations/AnimatedList';
+import { Button } from '../ui/Button';
 
 const GREETINGS = {
     morning: { text: 'Buenos días', sub: 'Comienza el día con claridad.', icon: Coffee },
@@ -216,45 +218,51 @@ const CustomizableDashboard: React.FC = () => {
                         >Año</button>
                     </div>
                     <div className="flex items-center gap-1 bg-white dark:bg-onyx-800 border border-onyx-100 dark:border-onyx-700 rounded-xl px-1 shadow-sm">
-                        <button onClick={() => navigateTime('prev')} className="p-1.5 hover:bg-onyx-50 dark:hover:bg-onyx-700 rounded-lg transition-colors">
+                        <Button variant="ghost" onClick={() => navigateTime('prev')} className="p-1.5 rounded-lg">
                             <ChevronLeft className="w-3.5 h-3.5 text-onyx-400" />
-                        </button>
+                        </Button>
                         <span className="text-[11px] font-bold text-onyx-700 dark:text-onyx-200 capitalize px-2 min-w-[110px] text-center">
                             {getDateLabel()}
                         </span>
-                        <button onClick={() => navigateTime('next')} className="p-1.5 hover:bg-onyx-50 dark:hover:bg-onyx-700 rounded-lg transition-colors">
+                        <Button variant="ghost" onClick={() => navigateTime('next')} className="p-1.5 rounded-lg">
                             <ChevronRight className="w-3.5 h-3.5 text-onyx-400" />
-                        </button>
+                        </Button>
                     </div>
                 </div>
 
                 {/* Right: actions */}
                 <div className="flex items-center gap-1.5 shrink-0">
-                    <button
+                    <Button
+                        variant="ghost"
                         onClick={() => setIsSearchOpen(true)}
-                        className="p-2.5 rounded-xl text-onyx-400 hover:text-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all group"
+                        className="p-2.5 rounded-xl group"
                         title="Buscar"
                     >
                         <Search className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    </button>
-                    <button
+                    </Button>
+                    <Button
+                        variant="ghost"
                         id="theme-toggle"
                         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                        className="p-2.5 rounded-xl text-onyx-400 hover:text-onyx-700 dark:hover:text-onyx-200 hover:bg-onyx-100 dark:hover:bg-onyx-800 transition-all"
+                        className="p-2.5 rounded-xl"
                         title="Tema"
                     >
                         {theme === 'dark' ? <Sunset className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-                    </button>
+                    </Button>
                     <LayoutSelector />
                     {!isEditMode ? (
-                        <button
+                        <Button
+                            variant="primary"
                             id="edit-mode-btn"
-                            onClick={() => setEditMode(true)}
-                            className="flex items-center gap-1.5 px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold text-[12px] transition-colors shadow-md shadow-indigo-500/25"
+                            onClick={() => {
+                                setEditMode(true);
+                                setIsGalleryOpen(true);
+                            }}
+                            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[12px]"
                         >
                             <Settings className="w-3.5 h-3.5" />
                             <span className="hidden sm:inline">Personalizar</span>
-                        </button>
+                        </Button>
                     ) : (
                         <EditModeToolbar
                             onSave={handleSaveLayout}
@@ -265,66 +273,125 @@ const CustomizableDashboard: React.FC = () => {
                 </div>
             </div>
 
-            <div className="px-6 md:px-10 pt-8 pb-28 max-w-screen-2xl mx-auto">
+            <AnimatedList className="px-6 md:px-10 pt-8 pb-28 max-w-screen-2xl mx-auto" staggerDelay={0.08}>
                 {/* Category Filter — pill tabs */}
-                <div id="widget-filters" className="flex items-center gap-2 mb-7">
-                    {(['ALL', 'FINANCE', 'LIFE'] as WidgetCategory[]).map(cat => (
-                        <button
-                            key={cat}
-                            onClick={() => setActiveCategory(cat)}
-                            className={`px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all ${activeCategory === cat
-                                ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-300 dark:shadow-indigo-900'
-                                : 'text-onyx-400 dark:text-onyx-500 hover:text-onyx-700 dark:hover:text-onyx-300 hover:bg-onyx-100 dark:hover:bg-onyx-800'
-                                }`}
-                        >
-                            {cat === 'ALL' ? 'Todos' : cat === 'FINANCE' ? 'Finanzas' : 'Vida'}
-                        </button>
-                    ))}
-                </div>
+                <AnimatedListItem>
+                    <div id="widget-filters" className="flex items-center gap-2 mb-7">
+                        {(['ALL', 'FINANCE', 'LIFE'] as WidgetCategory[]).map(cat => (
+                            <button
+                                key={cat}
+                                onClick={() => setActiveCategory(cat)}
+                                className={`px-4 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all ${activeCategory === cat
+                                    ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-300 dark:shadow-indigo-900'
+                                    : 'text-onyx-400 dark:text-onyx-500 hover:text-onyx-700 dark:hover:text-onyx-300 hover:bg-onyx-100 dark:hover:bg-onyx-800'
+                                    }`}
+                            >
+                                {cat === 'ALL' ? 'Todos' : cat === 'FINANCE' ? 'Finanzas' : 'Vida'}
+                            </button>
+                        ))}
+                    </div>
+                </AnimatedListItem>
 
-                <div className="space-y-7">
+                <div
+                    className={`space-y-7 transition-all duration-300 ${isEditMode ? 'min-h-[600px] border-2 border-dashed border-transparent hover:border-indigo-200/50 dark:hover:border-indigo-800/20 rounded-3xl p-4 -m-4' : ''}`}
+                    onDragOver={(e) => {
+                        e.preventDefault();
+                        if (draggingId?.startsWith('gallery-')) {
+                            e.dataTransfer.dropEffect = 'copy';
+                        } else {
+                            e.dataTransfer.dropEffect = 'move';
+                        }
+                    }}
+                    onDrop={(e) => {
+                        let source = '';
+                        let widgetId = '';
+                        try {
+                            const dataTransferData = e.dataTransfer.getData('application/json');
+                            if (dataTransferData) {
+                                const data = JSON.parse(dataTransferData);
+                                source = data.source;
+                                widgetId = data.widgetId;
+                            }
+                        } catch (err) { }
+
+                        const isFromGallery = (source === 'gallery' && widgetId) || (draggingId && draggingId.startsWith('gallery-'));
+                        const finalWidgetId = widgetId || (draggingId && draggingId.startsWith('gallery-') ? draggingId.replace('gallery-', '') : '');
+
+                        if (isFromGallery && finalWidgetId) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setIsGalleryOpen(false);
+                            setDraggingId(null);
+                            useUserStore.getState().addWidgetToLayout(finalWidgetId);
+                        }
+                    }}
+                >
                     {/* Edit Mode Banner */}
                     {isEditMode && (
-                        <div className="flex items-center gap-3 p-3.5 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800/60 rounded-2xl animate-fade-in-up">
-                            <LayoutGrid className="w-4 h-4 text-indigo-500 shrink-0" />
-                            <p className="text-[12px] font-semibold text-indigo-700 dark:text-indigo-300">
-                                <span className="font-black">Modo Edición.</span>{' '}
-                                Arrastra widgets entre ellos para reordenar, o suéltalos en las zonas de abajo para cambiar su tamaño.
-                            </p>
-                            <button
-                                onClick={() => setIsGalleryOpen(true)}
-                                className="ml-auto shrink-0 flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 text-white text-[11px] font-bold rounded-xl hover:bg-indigo-700 transition-colors"
-                            >
-                                <LayoutGrid className="w-3 h-3" />
-                                Galería
-                            </button>
-                        </div>
+                        <AnimatedListItem>
+                            <div className="flex items-center gap-3 p-3.5 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800/60 rounded-2xl">
+                                <LayoutGrid className="w-4 h-4 text-indigo-500 shrink-0" />
+                                <p className="text-[12px] font-semibold text-indigo-700 dark:text-indigo-300">
+                                    <span className="font-black">Modo Edición.</span>{' '}
+                                    Arrastra widgets entre ellos para reordenar, o suéltalos en las zonas de abajo para cambiar su tamaño.
+                                </p>
+                                <Button
+                                    variant="primary"
+                                    onClick={() => setIsGalleryOpen(true)}
+                                    className="ml-auto flex items-center gap-1.5 px-3 py-1.5 text-[11px] rounded-xl"
+                                >
+                                    <LayoutGrid className="w-3 h-3" />
+                                    Galería
+                                </Button>
+                            </div>
+                        </AnimatedListItem>
                     )}
 
                     {/* Smart Insight */}
-                    <div id="smart-insight-widget" className="animate-fade-in-up">
-                        <SmartInsightWidget onNavigate={(app, tab) => {
-                            if (app === 'LIFE') { setActiveApp('life'); setLifeActiveTab(tab || 'kitchen-recipes'); }
-                            else if (app === 'FINANCE') { setActiveApp('finance'); setFinanceActiveTab(tab || 'transactions'); }
-                        }} />
-                    </div>
+                    <AnimatedListItem>
+                        <div id="smart-insight-widget">
+                            <SmartInsightWidget onNavigate={(app, tab) => {
+                                if (app === 'LIFE') { setActiveApp('life'); setLifeActiveTab(tab || 'kitchen-recipes'); }
+                                else if (app === 'FINANCE') { setActiveApp('finance'); setFinanceActiveTab(tab || 'transactions'); }
+                            }} />
+                        </div>
+                    </AnimatedListItem>
 
                     {/* Drop Zone Grid — widgets + zone targets */}
-                    <DropZoneGrid
-                        widgetItems={filteredItems}
-                        widgetOrder={filteredOrder}
-                        isEditMode={isEditMode}
-                        draggingId={draggingId}
-                        onDragStart={handleDragStart}
-                        onDragEnd={handleDragEnd}
-                        widgetProps={widgetProps}
-                        onReorder={handleReorder}
-                    />
+                    <AnimatedListItem>
+                        <DropZoneGrid
+                            widgetItems={filteredItems}
+                            widgetOrder={filteredOrder}
+                            isEditMode={isEditMode}
+                            draggingId={draggingId}
+                            onDragStart={handleDragStart}
+                            onDragEnd={handleDragEnd}
+                            widgetProps={widgetProps}
+                            onReorder={handleReorder}
+                            onAddFromGallery={(id, size) => {
+                                setIsGalleryOpen(false);
+                                setDraggingId(null);
+                                useUserStore.getState().addWidgetToLayout(id);
+                                setTimeout(() => {
+                                    useUserStore.getState().changeWidgetSize(id, size);
+                                }, 50); // Small delay to let the store register the addition first
+                            }}
+                        />
+                    </AnimatedListItem>
                 </div>
-            </div>
+            </AnimatedList>
 
             <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
-            <WidgetGallery isOpen={isGalleryOpen} onClose={() => setIsGalleryOpen(false)} />
+            <WidgetGallery
+                isOpen={isGalleryOpen}
+                onClose={() => setIsGalleryOpen(false)}
+                onDragStart={(id, source) => {
+                    if (source === 'gallery') {
+                        setDraggingId(`gallery-${id}`); // Using a prefix to denote it's from gallery
+                    }
+                }}
+                onDragEnd={() => setDraggingId(null)}
+            />
         </div>
     );
 };

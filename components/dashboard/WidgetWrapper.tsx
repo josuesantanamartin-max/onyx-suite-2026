@@ -1,7 +1,7 @@
 import React from 'react';
-import { GripVertical, X, Eye, EyeOff } from 'lucide-react';
+import { GripVertical, X, Eye, EyeOff, Square, Columns, Maximize2, Layout, StretchHorizontal } from 'lucide-react';
 import { useUserStore } from '../../store/useUserStore';
-import { WIDGET_CONFIG } from './WidgetRegistry';
+import { WIDGET_CONFIG, WidgetSize } from './WidgetRegistry';
 
 interface WidgetWrapperProps {
     widgetId: string;
@@ -14,7 +14,7 @@ const WidgetWrapper: React.FC<WidgetWrapperProps> = ({
     isEditMode,
     children,
 }) => {
-    const { removeWidgetFromLayout, toggleWidgetVisibility, dashboardLayouts, activeLayoutId } = useUserStore();
+    const { removeWidgetFromLayout, toggleWidgetVisibility, changeWidgetSize, dashboardLayouts, activeLayoutId } = useUserStore();
 
     const activeLayout = dashboardLayouts.find(l => l.id === activeLayoutId);
     const widgetLayout = activeLayout?.widgets.find(w => w.i === widgetId);
@@ -39,6 +39,38 @@ const WidgetWrapper: React.FC<WidgetWrapperProps> = ({
                         <span className="text-[10px] font-black text-indigo-600 dark:text-indigo-400 uppercase tracking-[0.12em] truncate">
                             {widgetLabel}
                         </span>
+                    </div>
+
+                    {/* Quick Resize Controls */}
+                    <div className="flex items-center gap-1 px-2 border-x border-indigo-200/50 dark:border-indigo-800/40 mx-2 overflow-hidden">
+                        {(['kpi', 'sidebar', 'half', 'wide', 'full'] as WidgetSize[]).map((size) => {
+                            const isCurrent = widgetLayout?.sizeOverride === size || (!widgetLayout?.sizeOverride && WIDGET_CONFIG[widgetId]?.size === size);
+
+                            let Icon = Square;
+                            if (size === 'sidebar') Icon = Columns;
+                            if (size === 'half') Icon = Layout;
+                            if (size === 'wide') Icon = Maximize2;
+                            if (size === 'full') Icon = StretchHorizontal;
+
+                            const label = size === 'kpi' ? 'KPI' :
+                                size === 'sidebar' ? 'Lateral' :
+                                    size === 'half' ? 'Mitad' :
+                                        size === 'wide' ? 'Ancho' : 'Completo';
+
+                            return (
+                                <button
+                                    key={size}
+                                    onClick={(e) => { e.stopPropagation(); changeWidgetSize(widgetId, size); }}
+                                    className={`p-1 rounded-md transition-all ${isCurrent
+                                            ? 'bg-indigo-600 text-white shadow-sm'
+                                            : 'text-indigo-400/70 hover:bg-indigo-100 hover:text-indigo-600 dark:text-indigo-500/50 dark:hover:bg-indigo-900/40 dark:hover:text-indigo-300'
+                                        }`}
+                                    title={`Cambiar a ${label}`}
+                                >
+                                    <Icon className="w-3 h-3" />
+                                </button>
+                            );
+                        })}
                     </div>
 
                     <div className="flex items-center gap-0.5 shrink-0">

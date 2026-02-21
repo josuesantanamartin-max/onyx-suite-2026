@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { LayoutDashboard, Wallet, Heart, Settings, LogOut, HelpCircle } from 'lucide-react';
 import { useUserStore } from '../../store/useUserStore';
 import { Logo } from './Logo';
@@ -85,7 +86,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onLogout }) => {
               const Icon = item.icon;
               const isActive = activeApp === item.id;
               return (
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.96 }}
                   key={item.id}
                   onClick={() => handleLinkClick(item.id)}
                   className={`w-full flex items-center gap-4 px-5 py-3.5 rounded-xl transition-all duration-300 relative group overflow-hidden ${isActive
@@ -95,43 +98,51 @@ const Sidebar: React.FC<SidebarProps> = ({ onLogout }) => {
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {isActive && (
-                    <div className="absolute left-0 w-1 h-6 bg-indigo-primary rounded-r-full" />
+                    <motion.div layoutId="activeScreenIndicator" className="absolute left-0 w-1 h-6 bg-indigo-primary rounded-r-full" />
                   )}
                   <Icon className={`w-5 h-5 transition-all duration-300 ${isActive ? 'text-indigo-primary scale-110' : 'text-onyx-400 group-hover:text-onyx-600 group-hover:scale-110'}`} />
                   <span className="text-[13px] tracking-tight">{item.label}</span>
-                </button>
+                </motion.button>
               );
             })}
           </nav>
 
           <div className="mt-auto space-y-2">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.96 }}
               onClick={() => handleLinkClick('settings')}
               className={`w-full flex items-center gap-4 px-5 py-3.5 rounded-xl transition-all duration-300 group ${activeApp === 'settings' ? 'text-onyx-950 dark:text-white font-bold bg-onyx-50 dark:bg-onyx-900 border border-onyx-100 dark:border-onyx-800 shadow-sm' : 'text-onyx-400 dark:text-onyx-500 hover:text-onyx-900 dark:hover:text-onyx-200 hover:bg-onyx-50/50 dark:hover:bg-onyx-900/50'}`}
             >
               <Settings className={`w-5 h-5 transition-transform duration-500 group-hover:rotate-90 ${activeApp === 'settings' ? 'text-indigo-primary' : 'text-onyx-400'}`} />
               <span className="text-[13px] tracking-tight">{t.settings}</span>
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.96 }}
               onClick={() => handleLinkClick('help')}
               className={`w-full flex items-center gap-4 px-5 py-3.5 rounded-xl transition-all duration-300 group ${activeApp === 'help' ? 'text-onyx-950 dark:text-white font-bold bg-onyx-50 dark:bg-onyx-900 border border-onyx-100 dark:border-onyx-800 shadow-sm' : 'text-onyx-400 dark:text-onyx-500 hover:text-onyx-900 dark:hover:text-onyx-200 hover:bg-onyx-50/50 dark:hover:bg-onyx-900/50'}`}
             >
               <HelpCircle className={`w-5 h-5 transition-all duration-300 ${activeApp === 'help' ? 'text-indigo-primary' : 'text-onyx-400 group-hover:text-onyx-600'}`} />
               <span className="text-[13px] tracking-tight">{t.help}</span>
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.96 }}
               onClick={onLogout}
               className="w-full flex items-center gap-4 px-5 py-3.5 rounded-xl text-onyx-400 hover:bg-red-50 hover:text-red-600 transition-all duration-300 group"
             >
               <LogOut className="w-5 h-5 transition-transform duration-300 group-hover:-translate-x-1" />
               <span className="text-[13px] tracking-tight">{t.logout}</span>
-            </button>
+            </motion.button>
           </div>
         </div>
 
         <div className="p-10 pt-0">
           <div className="h-px bg-onyx-100 dark:bg-onyx-800 w-full mb-8"></div>
-          <div
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.96 }}
             className="flex items-center gap-4 px-2 cursor-pointer group hover:bg-onyx-50 dark:hover:bg-onyx-900 p-2 rounded-xl transition-all"
             onClick={() => handleLinkClick('settings')}
           >
@@ -157,7 +168,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onLogout }) => {
                   subscription?.plan === 'PERSONAL' ? 'Pro' : 'Onyx Basic'}
               </span>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </>
