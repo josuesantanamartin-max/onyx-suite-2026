@@ -138,7 +138,7 @@ const SmartInsightWidget: React.FC<SmartInsightWidgetProps> = ({ onNavigate }) =
                             {insight?.type === 'ANOMALY' ? <AlertTriangle className="w-6 h-6" /> : <Lightbulb className="w-6 h-6" />}
                         </div>
                         <div>
-                            <span className={`text-[10px] font-black uppercase tracking-widest ${insight?.type === 'ANOMALY' ? 'text-red-500' : 'text-indigo-500'}`}>Onyx Insight</span>
+                            <span className={`text-[10px] font-black uppercase tracking-widest ${insight?.type === 'ANOMALY' ? 'text-red-500' : 'text-indigo-500'}`}>Onyx Insights</span>
                             <h3 className="font-bold text-gray-900 dark:text-white text-lg leading-tight">{insight?.title}</h3>
                         </div>
                     </div>
@@ -153,7 +153,7 @@ const SmartInsightWidget: React.FC<SmartInsightWidgetProps> = ({ onNavigate }) =
                     <div className="bg-gray-50 dark:bg-onyx-800 rounded-2xl p-4 flex flex-col gap-2 mb-4">
                         <h3 className="text-sm font-black text-onyx-950 uppercase tracking-[0.2em] flex items-center gap-2">
                             <Sparkles className="w-4 h-4 text-amber-500" />
-                            Onyx AI: Insights
+                            Onyx Insights
                         </h3>
                         <div className="flex items-center gap-4">
                             <div className="p-2 bg-white dark:bg-onyx-700 rounded-full shadow-sm">

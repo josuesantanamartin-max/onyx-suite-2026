@@ -48,8 +48,16 @@ class GeminiProxy {
                 const model = this.directClient.getGenerativeModel({ model: request.model || this.model });
                 const response = await model.generateContent(request.contents);
                 const result = await response.response;
+                const text = result.text() || '';
+
+                if (this.isDevelopment) {
+                    console.log('--- GEMINI RAW RESPONSE ---');
+                    console.log(text);
+                    console.log('---------------------------');
+                }
+
                 return {
-                    text: result.text() || '',
+                    text: text,
                 };
             } catch (error) {
                 console.error('Gemini API Error (Direct):', error);
@@ -86,6 +94,12 @@ class GeminiProxy {
             }
 
             const data = await response.json();
+
+            if (this.isDevelopment) {
+                console.log('--- GEMINI PROXY RESPONSE ---');
+                console.log(data.text);
+                console.log('-----------------------------');
+            }
 
             return {
                 text: data.text || '',

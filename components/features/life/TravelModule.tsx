@@ -398,7 +398,7 @@ const TravelModule: React.FC<TravelModuleProps> = () => {
                   <div className="px-8 pt-6 pb-2">
                      <div className="flex bg-gray-50 p-1 rounded-2xl border border-gray-100">
                         <button onClick={() => setCreateMode('MANUAL')} className={`flex-1 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${createMode === 'MANUAL' ? 'bg-white shadow-md text-gray-900' : 'text-gray-400 hover:text-gray-600'}`}>Manual</button>
-                        <button onClick={() => setCreateMode('AI')} className={`flex-1 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${createMode === 'AI' ? 'bg-white shadow-md text-purple-600' : 'text-gray-400 hover:text-gray-600'}`}><Wand2 className="w-3 h-3" /> Onyx AI: Viajes</button>
+                        <button onClick={() => setCreateMode('AI')} className={`flex-1 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${createMode === 'AI' ? 'bg-white shadow-md text-purple-600' : 'text-gray-400 hover:text-gray-600'}`}><Wand2 className="w-3 h-3" /> Onyx Insights</button>
                      </div>
                   </div>
 
@@ -406,7 +406,7 @@ const TravelModule: React.FC<TravelModuleProps> = () => {
                      <div className="p-8 space-y-6">
                         <div className="text-center mb-4">
                            <div className="w-16 h-16 bg-purple-50 rounded-full flex items-center justify-center mx-auto mb-4"><Sparkles className="w-8 h-8 text-purple-600" /></div>
-                           <h4 className="text-lg font-black text-gray-900">Onyx AI: Diseñador de Experiencias</h4>
+                           <h4 className="text-lg font-black text-gray-900">Onyx Insights: Diseñador de Experiencias</h4>
                            <p className="text-sm text-gray-500 mt-2">Describe tu viaje ideal y la IA se encargará de buscar vuelos reales, hoteles y crear tu agenda.</p>
                         </div>
                         <div>

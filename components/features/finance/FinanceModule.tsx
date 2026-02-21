@@ -61,7 +61,7 @@ const FinanceModule: React.FC<FinanceModuleProps> = ({ onMenuClick }) => {
             <button onClick={() => setActiveTab('retirement')} className={`flex items-center gap-2.5 px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all duration-300 ${activeTab === 'retirement' ? 'bg-onyx-950 text-white shadow-lg shadow-onyx-950/20 scale-105' : 'text-onyx-400 hover:text-onyx-900 hover:bg-onyx-50'}`}>Jubilación</button>
             <button onClick={handleGeminiAnalysis} disabled={isAnalyzing} className="flex items-center gap-2.5 px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all duration-300 bg-blue-950 text-white hover:bg-blue-900 shadow-lg ml-auto">
                 {isAnalyzing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4 text-yellow-300" />}
-                {isAnalyzing ? 'Analizando...' : 'Onyx AI: Análisis'}
+                {isAnalyzing ? 'Analizando...' : 'Onyx Insights'}
             </button>
         </div>
     );
@@ -107,7 +107,7 @@ const FinanceModule: React.FC<FinanceModuleProps> = ({ onMenuClick }) => {
                         <div className="px-6 py-4 border-b border-gray-100 dark:border-onyx-800 flex justify-between items-center bg-white dark:bg-onyx-900">
                             <h3 className="text-lg font-black text-blue-950 dark:text-blue-100 flex items-center gap-2">
                                 <Sparkles className="w-5 h-5 text-yellow-500" />
-                                {language === 'ES' ? 'Onyx AI: Análisis Financiero' : 'Onyx AI: Financial Analysis'}
+                                {language === 'ES' ? 'Onyx Insights: Análisis Financiero' : 'Onyx Insights: Financial Analysis'}
                             </h3>
                             <button onClick={() => setIsAnalysisVisible(false)} className="p-2 hover:bg-gray-100 dark:hover:bg-onyx-800 rounded-full transition-colors">
                                 <X className="w-5 h-5 text-gray-400" />

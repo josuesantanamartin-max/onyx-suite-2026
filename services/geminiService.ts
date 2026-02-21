@@ -68,16 +68,19 @@ const LANG_PROMPTS = {
 
 // Robust JSON Cleaner
 const cleanJSON = (text: string) => {
-  const firstOpen = text.indexOf('{');
-  const firstArray = text.indexOf('[');
+  // Remove markdown code blocks if present
+  let cleaned = text.replace(/```json\n?|```/g, '').trim();
+
+  const firstOpen = cleaned.indexOf('{');
+  const firstArray = cleaned.indexOf('[');
   let startIndex = -1;
 
   if (firstOpen > -1 && firstArray > -1) startIndex = Math.min(firstOpen, firstArray);
   else if (firstOpen > -1) startIndex = firstOpen;
   else if (firstArray > -1) startIndex = firstArray;
 
-  const lastClose = text.lastIndexOf('}');
-  const lastArray = text.lastIndexOf(']');
+  const lastClose = cleaned.lastIndexOf('}');
+  const lastArray = cleaned.lastIndexOf(']');
   let endIndex = -1;
 
   if (lastClose > -1 && lastArray > -1) endIndex = Math.max(lastClose, lastArray);
@@ -85,9 +88,9 @@ const cleanJSON = (text: string) => {
   else if (lastArray > -1) endIndex = lastArray;
 
   if (startIndex > -1 && endIndex > -1) {
-    return text.substring(startIndex, endIndex + 1);
+    return cleaned.substring(startIndex, endIndex + 1);
   }
-  return text; // Fallback
+  return cleaned; // Fallback
 };
 
 // --- OPTIMIZED IMAGE COMPRESSION (WebP) ---
@@ -670,6 +673,7 @@ export const analyzeLife = async (
 ): Promise<string> => {
   const ai = createGeminiClient();
 
+  // @ts-ignore
   if (!import.meta.env.VITE_GEMINI_API_KEY) {
     return language === 'ES'
       ? 'Error: No se ha encontrado la clave API de Gemini.'
@@ -860,7 +864,7 @@ export const processVoiceCommand = async (
   const today = new Date().toISOString().split('T')[0];
 
   const prompt = `
-    Act as a Virtual Onyx Assistant.
+    Act as a Virtual Onyx Insights Assistant.
     Current Date: ${today}
     User Voice Command: "${transcript}"
     
