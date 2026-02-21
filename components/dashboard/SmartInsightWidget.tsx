@@ -102,7 +102,7 @@ const SmartInsightWidget: React.FC<SmartInsightWidgetProps> = ({ onNavigate }) =
                             <span className="bg-white/20 backdrop-blur-md px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest">IA Native</span>
                         </div>
                         <h3 className="text-xl font-bold mb-1">
-                            {language === 'ES' ? 'Smart Insights' : 'Smart Insights'}
+                            {language === 'ES' ? 'Onyx Insights' : 'Onyx Insights'}
                         </h3>
                         <p className="text-white/80 text-sm max-w-sm">
                             {language === 'ES' ? 'Analizar mis finanzas y detectar patrones.' : 'Analyze my finances and detect patterns.'}

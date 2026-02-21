@@ -36,7 +36,7 @@ class GeminiProxy {
             // @ts-ignore
             const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
             if (apiKey) {
-                this.directClient = new GoogleGenAI(apiKey);
+                this.directClient = new GoogleGenAI({ apiKey });
             }
         }
     }
@@ -45,10 +45,11 @@ class GeminiProxy {
         // Development: Use direct API
         if (this.isDevelopment && this.directClient) {
             try {
-                const model = this.directClient.getGenerativeModel({ model: request.model || this.model });
-                const response = await model.generateContent(request.contents);
-                const result = await response.response;
-                const text = result.text() || '';
+                const result = await this.directClient.models.generateContent({
+                    model: request.model || this.model,
+                    contents: request.contents
+                });
+                const text = (await result.response).text() || '';
 
                 if (this.isDevelopment) {
                     console.log('--- GEMINI RAW RESPONSE ---');

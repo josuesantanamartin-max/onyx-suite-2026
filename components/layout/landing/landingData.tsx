@@ -255,7 +255,7 @@ export const PRODUCT_DETAILS_BY_LANG: Record<Language, Record<ProductKey, any>> 
             features: [
                 { title: "Mañana Inteligente", desc: "Resumen diario: qué pagar, qué comer y dónde ir." },
                 { title: "Dashboard Personalizable", desc: "Drag & drop para organizar widgets a tu gusto." },
-                { title: "Smart Insights IA", desc: "Análisis inteligente con recomendaciones proactivas." },
+                { title: "Onyx Insights", desc: "Análisis inteligente con recomendaciones proactivas." },
                 { title: "Modo Colaborativo", desc: "Hasta 5 miembros con roles y permisos personalizables." },
                 { title: "Teletransporte", desc: "Salta de revisar una factura a planear un viaje en 1 click." },
                 { title: "Onyx Brain", desc: "Insights proactivos: 'Gastas mucho en café este mes'." }
@@ -301,7 +301,7 @@ export const PRODUCT_DETAILS_BY_LANG: Record<Language, Record<ProductKey, any>> 
             features: [
                 { title: "Smart Morning", desc: "Daily digest: what to pay, what to eat, where to go." },
                 { title: "Customizable Dashboard", desc: "Drag & drop to organize widgets your way." },
-                { title: "Smart Insights AI", desc: "Intelligent analysis with proactive recommendations." },
+                { title: "Onyx Insights", desc: "Intelligent analysis with proactive recommendations." },
                 { title: "Collaborative Mode", desc: "Up to 5 members with custom roles and permissions." },
                 { title: "Teleport", desc: "Jump from checking a bill to planning a trip in 1 click." },
                 { title: "Onyx Brain", desc: "Proactive insights: 'High coffee spending this month'." }
@@ -347,7 +347,7 @@ export const PRODUCT_DETAILS_BY_LANG: Record<Language, Record<ProductKey, any>> 
             features: [
                 { title: "Matin Malin", desc: "Résumé : à payer, à manger, où aller." },
                 { title: "Dashboard Personnalisable", desc: "Glisser-déposer pour organiser vos widgets." },
-                { title: "Smart Insights IA", desc: "Analyse intelligente avec recommandations proactives." },
+                { title: "Onyx Insights", desc: "Analyse intelligente avec recommandations proactives." },
                 { title: "Mode Collaboratif", desc: "Jusqu'à 5 membres avec rôles personnalisables." },
                 { title: "Téléportation", desc: "Passez d'une facture à un voyage en 1 clic." },
                 { title: "Cerveau Onyx", desc: "Insights proactifs : 'Trop de café ce mois-ci'." }

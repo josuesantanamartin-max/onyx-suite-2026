@@ -388,7 +388,7 @@ El sistema sugiere:
 - 🏠 Tareas del Hogar
 
 **General**
-- 🤖 Smart Insights (IA)
+- 🤖 Onyx Insights (IA)
 - 📅 Calendario
 - 🔔 Notificaciones
 

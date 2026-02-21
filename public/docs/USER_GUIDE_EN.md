@@ -330,7 +330,7 @@ The system suggests:
 - 🏠 Home Tasks
 
 **General**
-- 🤖 Smart Insights (AI)
+- 🤖 Onyx Insights (AI)
 - 📅 Calendar
 - 🔔 Notifications
 

@@ -327,7 +327,7 @@ export const LandingHome: React.FC<LandingHomeProps> = ({
                             { icon: BarChart3, title: "IA Proactiva", desc: "Presupuestos IA, análisis predictivo, categorización automática y simulador de jubilación." },
                             { icon: Smartphone, title: "Diseño Nativo", desc: "Una experiencia fluida pensada para el uso diario e intuitivo." },
                             { icon: Users, title: "Modo Colaborativo", desc: "Hasta 5 miembros familiares con roles y permisos personalizables." },
-                            { icon: LayoutDashboard, title: "Dashboard Personalizable", desc: "Drag & drop para organizar tus widgets. Smart Insights con IA integrada." },
+                            { icon: LayoutDashboard, title: "Dashboard Personalizable", desc: "Drag & drop para organizar tus widgets. Onyx Insights con IA integrada." },
                             { icon: Globe, title: "Multilingüe", desc: "Disponible en Español, English y Français. Centro de Ayuda en 3 idiomas." },
                             { icon: Shield, title: "Importación Flexible", desc: "Importa extractos bancarios CSV con vinculación automática a tus cuentas." }
                         ].map((benefit, i) => (

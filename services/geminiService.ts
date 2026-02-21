@@ -581,7 +581,7 @@ export const askAI = async (prompt: string): Promise<string> => {
   }
 };
 
-// --- SMART INSIGHTS (Cross-Module Intelligence) ---
+// --- ONYX INSIGHTS (Cross-Module Intelligence) ---
 export const generateSmartInsight = async (
   financialContext: {
     topCategories: string[];
