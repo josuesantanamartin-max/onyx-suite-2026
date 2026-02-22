@@ -7,7 +7,7 @@ import { Transaction, Account, Debt, Ingredient, Trip, Budget, Goal, Recipe } fr
 // - 'gemini-2.5-flash' for Gemini 2.0 Flash (experimental, fast, works with current API)
 // - 'gemini-2.5-flash' for Gemini 1.5 Flash (stable, fast, cheaper)
 // Note: 'gemini-1.5-pro' is NOT supported in the current API version (v1beta)
-const GEMINI_MODEL = 'gemini-1.5-flash';
+const GEMINI_MODEL = 'gemini-2.5-flash';
 
 // Helper maps
 const CURRENCY_MAP = { EUR: '€', USD: '$', GBP: '£' };

@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { checkRateLimit } from './middleware/rateLimit';
 import { validateOrigin } from './middleware/validateOrigin';
 
@@ -68,20 +68,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         }
 
         // Initialize Gemini AI
-        const genAI = new GoogleGenAI({ apiKey: apiKey.trim() });
+        const genAI = new GoogleGenerativeAI(apiKey.trim());
+
+        // Use the requested model or fallback
+        const modelName = model || 'gemini-2.5-flash';
+        const genModel = genAI.getGenerativeModel({ model: modelName });
+
+        // Map contents if necessary (handle both parts array and parts wrapping)
+        let parts = Array.isArray(contents) ? contents : contents.parts || contents;
 
         // Make request to Gemini API
-        const result = await genAI.models.generateContent({
-            model: model || 'gemini-1.5-flash',
-            contents,
-            config,
-        });
-
-        const text = result.text;
+        const result = await genModel.generateContent(parts);
+        const responseText = result.response.text();
 
         // Return response
         return res.status(200).json({
-            text: text,
+            text: responseText,
             success: true,
         });
     } catch (error: any) {
