@@ -508,13 +508,20 @@ const TravelModule: React.FC<TravelModuleProps> = () => {
                                           <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{new Date(flight.arrivalTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
                                        </div>
                                     </div>
-                                    {flight.bookingUrl && (
-                                       <div className="flex justify-center mt-6">
-                                          <a href={flight.bookingUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest bg-rose-500 text-white px-4 py-2 rounded-xl hover:bg-rose-600 transition-colors shadow-lg active:scale-95">
-                                             <ExternalLink className="w-3 h-3" /> Ver Oferta / Reservar
-                                          </a>
+                                    <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-50">
+                                       <div className="text-xl font-black text-gray-900">
+                                          {flight.price ? formatCurrency(flight.price) : 'Precio no disponible'}
                                        </div>
-                                    )}
+                                       {flight.bookingUrl ? (
+                                          <a href={flight.bookingUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest bg-rose-500 text-white px-4 py-2 rounded-xl hover:bg-rose-600 transition-colors shadow-lg active:scale-95">
+                                             <ExternalLink className="w-3 h-3" /> Reservar
+                                          </a>
+                                       ) : (
+                                          <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400 bg-gray-50 px-3 py-1 rounded-lg">
+                                             Busca vía aerolínea
+                                          </span>
+                                       )}
+                                    </div>
                                  </div>
                               ))}
                            </div>
