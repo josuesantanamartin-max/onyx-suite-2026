@@ -7,7 +7,7 @@ import { Transaction, Account, Debt, Ingredient, Trip, Budget, Goal, Recipe } fr
 // - 'gemini-2.5-flash' for Gemini 2.0 Flash (experimental, fast, works with current API)
 // - 'gemini-2.5-flash' for Gemini 1.5 Flash (stable, fast, cheaper)
 // Note: 'gemini-1.5-pro' is NOT supported in the current API version (v1beta)
-const GEMINI_MODEL = 'gemini-2.5-flash';
+const GEMINI_MODEL = 'gemini-1.5-flash';
 
 // Helper maps
 const CURRENCY_MAP = { EUR: '€', USD: '$', GBP: '£' };
@@ -284,6 +284,12 @@ export const extractTravelParams = async (
     const response = await ai.models.generateContent({
       model: GEMINI_MODEL,
       contents: prompt,
+      config: {
+        generationConfig: {
+          maxOutputTokens: 500,
+          temperature: 0.2,
+        }
+      }
     });
 
     const text = response.text || '';
@@ -350,6 +356,12 @@ export const planTripWithAI = async (
     const response = await ai.models.generateContent({
       model: GEMINI_MODEL,
       contents: prompt,
+      config: {
+        generationConfig: {
+          maxOutputTokens: 4000, // Important to prevent truncation of long itineraries
+          temperature: 0.7,
+        }
+      }
     });
 
     const text = response.text || '';

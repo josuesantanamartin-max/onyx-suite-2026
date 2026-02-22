@@ -72,7 +72,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
         // Make request to Gemini API
         const result = await genAI.models.generateContent({
-            model: model || 'gemini-2.5-flash',
+            model: model || 'gemini-1.5-flash',
             contents,
             config,
         });
