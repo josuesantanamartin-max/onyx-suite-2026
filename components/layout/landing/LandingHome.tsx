@@ -329,7 +329,7 @@ export const LandingHome: React.FC<LandingHomeProps> = ({
                                                 {item.other ? (
                                                     <><CheckCircle2 className="w-5 h-5 text-gray-400 mx-auto" /><span className="sr-only">Sí</span></>
                                                 ) : (
-                                                    <><Minus className="w-5 h-5 text-gray-300 mx-auto" /><span className="sr-only">No</span></>
+                                                    <><X className="w-5 h-5 text-gray-300 mx-auto" /><span className="sr-only">No</span></>
                                                 )}
                                             </td>
                                             <td className="px-6 py-4 text-center bg-indigo-50/50">
