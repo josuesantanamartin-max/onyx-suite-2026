@@ -105,7 +105,7 @@ export const RecipeBook: React.FC<RecipeBookProps> = ({ onNavigateToMealPlan, in
         setIsGeneratingImage(true);
         try {
             const prompt = newRecipeName + " ";
-            const result = await generateImage(prompt);
+            const result = await generateImage(newRecipeName, "4:3", 'food');
             if (result.imageUrl) {
                 setNewRecipeImage(result.imageUrl);
             } else {

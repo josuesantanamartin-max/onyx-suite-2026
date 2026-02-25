@@ -526,7 +526,7 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
                             return await Promise.all((Array.isArray(list) ? list : []).map(async (r: any) => {
                                 let imgUrl = undefined;
                                 try {
-                                    const imgRes = await generateImage(r.name);
+                                    const imgRes = await generateImage(r.name, "4:3", 'food');
                                     imgUrl = imgRes.imageUrl;
                                 } catch (e) { }
 
@@ -599,7 +599,7 @@ export const MealPlanner: React.FC<MealPlannerProps> = ({ onOpenRecipe }) => {
 
         if (!updatedRecipe.image) {
             try {
-                const imgRes = await generateImage(updatedRecipe.name);
+                const imgRes = await generateImage(updatedRecipe.name, "4:3", 'food');
                 if (imgRes.imageUrl) {
                     updatedRecipe.image = imgRes.imageUrl;
                     hasUpdates = true;

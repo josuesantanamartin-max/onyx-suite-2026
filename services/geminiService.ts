@@ -374,19 +374,41 @@ export const planTripWithAI = async (
 };
 
 // --- IMAGE GENERATION (Suite Wide) ---
-// UPDATED: Uses URL-based generation to prevent memory crashes with Base64
-export const generateImage = async (prompt: string, aspectRatio: string = "4:3"): Promise<{ imageUrl?: string; error?: string }> => {
+// UPDATED: Supports category-based enhancements
+export type ImageCategory = 'food' | 'travel' | 'general' | 'portrait';
+
+export const generateImage = async (
+  prompt: string,
+  aspectRatio: string = "4:3",
+  category: ImageCategory = 'general'
+): Promise<{ imageUrl?: string; error?: string }> => {
   const seed = Math.floor(Math.random() * 1000000);
   const width = aspectRatio === "16:9" ? 1280 : aspectRatio === "9:16" ? 720 : 1024;
   const height = aspectRatio === "16:9" ? 720 : aspectRatio === "9:16" ? 1280 : 1024;
 
-  // Enhanced prompt for professional food photography
-  const enhancedPrompt = `${prompt}, professional food photography, award winning, studio soft lighting, appetizing, highly detailed, 8k, bokeh, cinematic composition, depth of field, vibrant colors, michelin star plating, editorial style`;
+  let enhancements = "";
+
+  switch (category) {
+    case 'food':
+      enhancements = "professional food photography, award winning, studio soft lighting, appetizing, highly detailed, 8k, bokeh, cinematic composition, depth of field, vibrant colors, michelin star plating, editorial style";
+      break;
+    case 'travel':
+      enhancements = "stunning travel photography, breathtaking landscape, cinematic wide shot, golden hour, national geographic style, highly detailed, 8k, vibrant colors, sharp focus, adventurous atmosphere";
+      break;
+    case 'portrait':
+      enhancements = "professional portrait photography, studio lighting, sharp focus on eyes, soft background, 8k, highly detailed, expressive, cinematic mood, elegant";
+      break;
+    case 'general':
+    default:
+      enhancements = "professional photography, highly detailed, 8k, cinematic lighting, sharp focus, clean composition, vibrant colors";
+      break;
+  }
+
+  const enhancedPrompt = `${prompt}, ${enhancements}`;
   const encodedPrompt = encodeURIComponent(enhancedPrompt);
 
   const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&nologo=true&seed=${seed}`;
 
-  // No artificial delay needed for URL construction
   return { imageUrl };
 };
 

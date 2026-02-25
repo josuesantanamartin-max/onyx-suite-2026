@@ -109,7 +109,7 @@ const TravelModule: React.FC<TravelModuleProps> = () => {
       if (!newDestination) return;
       setIsGeneratingImg(true);
       const prompt = `Beautiful travel photo of ${newDestination}, ${newCountry}. Landmarks, sunny weather.`;
-      const result = await generateImage(prompt, "16:9");
+      const result = await generateImage(prompt, "16:9", 'travel');
       if (result.imageUrl) {
          setNewImage(result.imageUrl);
       } else {
@@ -161,7 +161,7 @@ const TravelModule: React.FC<TravelModuleProps> = () => {
             if (tripPlan.destination) {
                setIsGeneratingImg(true);
                const prompt = tripPlan.imagePrompt || `Travel photo of ${tripPlan.destination}`;
-               generateImage(prompt, "16:9").then(res => {
+               generateImage(prompt, "16:9", 'travel').then(res => {
                   if (res.imageUrl) setNewImage(res.imageUrl);
                   setIsGeneratingImg(false);
                });
