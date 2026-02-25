@@ -9,8 +9,11 @@ import AccountsStep from './steps/AccountsStep';
 import ImportDataStep from './steps/ImportDataStep';
 
 const OnboardingWizard: React.FC = () => {
-    const { onboardingStep, userProfile } = useUserStore();
-    const isFamily = userProfile?.plan === 'FAMILIA' || userProfile?.plan === 'EMPRESA';
+    const { onboardingStep, userProfile, subscription } = useUserStore();
+
+    const isFamilyPlan = subscription.plan === 'FAMILIA';
+    const hasFamilyPersona = userProfile?.persona_type?.includes('FAMILY');
+    const isFamily = isFamilyPlan || hasFamilyPersona;
 
     // Calculate display step skipping the Family step for Personal users
     const displayStep = isFamily ? onboardingStep : (onboardingStep >= 3 ? onboardingStep - 1 : onboardingStep);
